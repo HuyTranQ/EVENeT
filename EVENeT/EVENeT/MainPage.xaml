@@ -1,0 +1,120 @@
+﻿<Page
+    x:Class="EVENeT.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:EVENeT"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource PageBackgroundThemeBrush}">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <local:PageHeader Grid.Row="0" Grid.ColumnSpan="2"></local:PageHeader>
+
+        <SplitView x:Name="navPane" DisplayMode="CompactInline" IsPaneOpen="False" PaneBackground="{ThemeResource NavigationPaneThemeBrush}" Grid.Row="1" Grid.Column="0" OpenPaneLength="240">
+            <SplitView.Pane>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <ListView x:Name="NavLinksList" Margin="0,12,0,0" SelectionMode="None" Grid.Row="0" VerticalAlignment="Stretch" IsItemClickEnabled="True"/>
+                    <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="12,24,24,12" >
+                        <SymbolIcon Symbol="Setting" Foreground="White" Width="24" Height="24"/>
+                        <TextBlock Text="Settings" Margin="16,0,0,0" VerticalAlignment="Center" Foreground="White"/>
+                    </StackPanel>
+                </Grid>
+            </SplitView.Pane>
+
+            <!-- Move these to another page -->
+            <ScrollViewer Height="Auto">
+                <StackPanel>
+                    <local:EventCard Grid.Row="1" Width="700" Height="Auto"
+                                     AvatarImageSource="/Assets/AC HCMC.jpg"
+                                     UserName="American Center HCMC"
+                                     EventDate="Nov. 5, 2015"
+                                     EventTime="5:30 PM"
+                                     EventImageSource="/Assets/original.jpg"
+                                     EventTitle="Understanding U.S. Elections: Presidential and Congressional Electoral Processes"
+                                     EventDescription="Did you know that the United States will select its next president in 2016? Come learn about the elections process in the United States through a series of talks with our consulate officers. Bring your friends!"
+                                     HorizontalAlignment="Center"
+                                     VerticalAlignment="Top"
+                                     Margin="0,48,0,16">
+                    </local:EventCard>
+
+                    <local:EventCard Grid.Row="1" Width="700" Height="Auto"
+                                     AvatarImageSource="/Assets/1.png"
+                                     UserName="Toàn-Anh Nguyễn"
+                                     EventDate="Nov. 5, 2015"
+                                     EventTime="5:30 PM"
+                                     EventImageSource="/Assets/SplashScreen.scale-200.png"
+                                     EventTitle="Understanding U.S. Elections: Presidential and Congressional Electoral Processes"
+                                     EventDescription="Did you know that the United States will select its next president in 2016? Come learn about the elections process in the United States through a series of talks with our consulate officers. Bring your friends!"
+                                     HorizontalAlignment="Center"
+                                     VerticalAlignment="Top"
+                                     Margin="0,16,0,16">
+                    </local:EventCard>
+
+                    <local:EventCard Grid.Row="1" Width="700" Height="Auto"
+                                     AvatarImageSource="/Assets/AC HCMC.jpg"
+                                     UserName="American Center HCMC"
+                                     EventDate="Nov. 5, 2015"
+                                     EventTime="5:30 PM"
+                                     EventImageSource="/Assets/SplashScreen.scale-200.png"
+                                     EventTitle="Understanding U.S. Elections: Presidential and Congressional Electoral Processes"
+                                     EventDescription="Did you know that the United States will select its next president in 2016? Come learn about the elections process in the United States through a series of talks with our consulate officers. Bring your friends!"
+                                     HorizontalAlignment="Center"
+                                     VerticalAlignment="Top"
+                                     Margin="0,16,0,64">
+                    </local:EventCard>
+                </StackPanel>
+            </ScrollViewer>
+            <!-- Move these to another page -->
+            
+        </SplitView>
+
+        <CalendarView x:Name="calendar"
+                      SelectionMode="Single"
+                      IsGroupLabelVisible="False"
+                      IsOutOfScopeEnabled="True"
+                      Language="en-US"
+                      CalendarIdentifier="GregorianCalendar"
+                      VerticalAlignment="Top"
+                      IsTextScaleFactorEnabled="True"
+                      Grid.Row="1" Grid.Column="1">
+        </CalendarView>
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="WideLayout">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger x:Name="WideLayoutTrigger" MinWindowWidth="1600" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="navPane.IsPaneOpen" Value="True"/>
+                    </VisualState.Setters>
+                </VisualState>
+
+                <VisualState x:Name="NarrowLayout">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="calendar.Visibility" Value="Collapsed" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        
+    </Grid>
+</Page>

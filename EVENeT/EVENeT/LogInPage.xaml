@@ -1,0 +1,44 @@
+﻿<Page
+    x:Class="EVENeT.LogInPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:EVENeT"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Image x:Name="appLogo"
+               Source="/Assets/Square150x150Logo.scale-200.png"
+               Width="150" Height="150"
+               Margin="0,0,0,64"
+               RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.AlignHorizontalCenterWithPanel="True"/>
+        <TextBlock x:Name="errorMessage"
+                   Width="300"
+                   Margin="0,4,0,4"
+                   Visibility="Collapsed"
+                   Foreground="Red"
+                   TextAlignment="Center"
+                   RelativePanel.Below="appLogo" RelativePanel.AlignHorizontalCenterWith="appLogo"/>
+        <TextBox x:Name="userName"
+                 Width="300"
+                 Margin="0,4,0,4"
+                 PlaceholderText="Username"
+                 RelativePanel.Below="errorMessage" RelativePanel.AlignHorizontalCenterWith="appLogo" LostFocus="userName_LostFocus"/>
+        <PasswordBox x:Name="password"
+                     Width="300"
+                     Margin="0,4,0,4"
+                     PlaceholderText="Password"
+                     RelativePanel.Below="userName" RelativePanel.AlignHorizontalCenterWith="appLogo"/>
+        <Button x:Name="signInButton"
+                Width="300"
+                Margin="0,4,0,4"
+                Content="Sign in"
+                RelativePanel.Below="password" RelativePanel.AlignHorizontalCenterWith="appLogo" Click="signInButton_Click"/>
+        <HyperlinkButton x:Name="signUpButton"
+                         Width="300"
+                         Margin="0,4,0,4"
+                         Content="Create a new account"
+                         RelativePanel.Below="signInButton" RelativePanel.AlignHorizontalCenterWith="appLogo"/>
+    </RelativePanel>
+</Page>

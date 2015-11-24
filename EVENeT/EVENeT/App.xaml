@@ -1,0 +1,139 @@
+﻿<Application
+    x:Class="EVENeT.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:EVENeT"
+    xmlns:common="using:EVENeT.Common"
+    RequestedTheme="Light">
+
+    <Application.Resources>
+
+        <ResourceDictionary>
+            <!-- Application Resources -->
+            <x:String x:Key="AppName">EVENeT</x:String>
+            
+            <common:StringToImageSourceConverter x:Key="stringToImageSourceConverter"/>
+            
+            <ControlTemplate x:Key="SplitViewTogglePaneButtonTemplate" TargetType="Button">
+                <Grid x:Name="RootGrid" Background="{TemplateBinding Background}">
+                    <VisualStateManager.VisualStateGroups>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal" />
+                            <VisualState x:Name="PointerOver">
+                                <VisualState.Setters>
+                                    <Setter Target="RootGrid.Background" Value="{ThemeResource SystemControlBackgroundBaseLowBrush}" />
+                                    <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SystemControlHighlightBaseMediumHighBrush}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Pressed">
+                                <VisualState.Setters>
+                                    <Setter Target="RootGrid.Background" Value="{ThemeResource SystemControlBackgroundBaseMediumLowBrush}" />
+                                    <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SystemControlHighlightBaseMediumBrush}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Disabled">
+                                <VisualState.Setters>
+                                    <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SystemControlForegroundBaseLowBrush}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateManager.VisualStateGroups>
+
+                    <ContentPresenter
+                                      x:Name="ContentPresenter"
+                                      Padding="{TemplateBinding Padding}"
+                                      BorderBrush="{TemplateBinding BorderBrush}"
+                                      BorderThickness="{TemplateBinding BorderThickness}"
+                                      HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                      VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                      AutomationProperties.AccessibilityView="Raw"
+                                      ContentTemplate="{TemplateBinding ContentTemplate}"
+                                      ContentTransitions="{TemplateBinding ContentTransitions}" />
+                </Grid>
+            </ControlTemplate>
+            
+            <Style x:Key="SplitViewTogglePaneButtonStyle" TargetType="Button">
+                <Setter Property="Background" Value="{ThemeResource NavigationPaneToggleButtonThemeBrush}" />
+                <Setter Property="Foreground" Value="{ThemeResource NavigationPaneForegroundThemeBrush}" />
+                <Setter Property="BorderBrush" Value="{ThemeResource SystemControlForegroundBaseHighBrush}" />
+                <Setter Property="BorderThickness" Value="0" />
+                <Setter Property="Padding" Value="0" />
+                <Setter Property="HorizontalAlignment" Value="Left" />
+                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                <Setter Property="VerticalAlignment" Value="Top" />
+                <Setter Property="VerticalContentAlignment" Value="Center" />
+                <Setter Property="UseSystemFocusVisuals" Value="True" />
+
+                <Setter Property="FontFamily" Value="{ThemeResource SymbolThemeFontFamily}" />
+                <Setter Property="Content" Value="&#xE700;" />
+                <Setter Property="Height" Value="48" />
+                <Setter Property="Width" Value="48" />
+
+                <Setter Property="FontWeight" Value="Normal" />
+                <Setter Property="FontSize" Value="20" />
+                <Setter Property="Template" Value="{StaticResource SplitViewTogglePaneButtonTemplate}" />
+            </Style>
+
+
+            <ControlTemplate x:Key="BackButtonTemplate" TargetType="Button">
+                <Grid x:Name="RootGrid">
+                    <VisualStateManager.VisualStateGroups>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal" />
+                            <VisualState x:Name="PointerOver">
+                                <VisualState.Setters>
+                                    <Setter Target="RootGrid.Background" Value="{ThemeResource SystemControlHighlightBaseLowBrush}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Pressed">
+                                <VisualState.Setters>
+                                    <Setter Target="RootGrid.Background" Value="{ThemeResource SystemControlHighlightBaseMediumLowBrush}" />
+                                </VisualState.Setters>
+                                <Storyboard>
+                                    <PointerDownThemeAnimation Storyboard.TargetName="RootGrid" />
+                                </Storyboard>
+                            </VisualState>
+                            <VisualState x:Name="Disabled">
+                                <VisualState.Setters>
+                                    <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SystemControlDisabledBaseLowBrush}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateManager.VisualStateGroups>
+                    <ContentPresenter x:Name="ContentPresenter"
+                                              Content="{TemplateBinding Content}"
+                                              ContentTransitions="{TemplateBinding ContentTransitions}"
+                                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                                              Margin="{TemplateBinding Padding}"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
+                                              AutomationProperties.AccessibilityView="Raw"/>
+                </Grid>
+            </ControlTemplate>
+
+            <Style x:Key="BackButtonStyle" TargetType="Button">
+                <Setter Property="Template" Value="{StaticResource BackButtonTemplate}" />
+            </Style>
+
+
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Default">
+                    <SolidColorBrush x:Key="BackButtonForegroundBrush" Color="Black" />
+                    <SolidColorBrush x:Key="ControlPageBackgroundBrush" Color="White" />
+                    <SolidColorBrush x:Key="ChromeHighBrush" Color="#FFF9F9F9" />
+                    <SolidColorBrush x:Key="BackgroundBrush" Color="#FFFFFFFF" />
+                    <SolidColorBrush x:Key="PageHeaderBackgroundBrush" Color="#FF90B8CC" />
+                    <SolidColorBrush x:Key="PageBackgroundThemeBrush" Color="#FFECF0F1"/>
+                    <SolidColorBrush x:Key="NavigationPaneThemeBrush" Color="#FF2C3E50"/>
+                    <SolidColorBrush x:Key="NavigationPaneToggleButtonThemeBrush" Color="#FF5e7b8e"/>
+                    <SolidColorBrush x:Key="NavigationPaneForegroundThemeBrush" Color="#FFFFFFFF"/>
+                </ResourceDictionary>
+                
+            </ResourceDictionary.ThemeDictionaries>
+
+        </ResourceDictionary>
+        
+        
+    </Application.Resources>
+    
+</Application>

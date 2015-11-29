@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Windows.Input;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Foundation.Metadata;
@@ -38,7 +39,19 @@ namespace EVENeT
             }
         }
 
+        private ICommand _goBackCommand;
 
+        public ICommand GoBackCommand
+        {
+            get
+            {
+                if (_goBackCommand == null)
+                {
+                    // TODO: handle relay command
+                }
+                return _goBackCommand;
+            }
+        }
 
         public PageHeader()
         {
@@ -49,6 +62,11 @@ namespace EVENeT
                 //Remove the backbutton because physical buttons are present
                 backButton.Visibility = Visibility.Collapsed;
             }
+        }
+
+        private void navPaneToggle_Click(object sender, RoutedEventArgs e)
+        {
+            Navigation.AppShell.NavPane.IsPaneOpen = !Navigation.AppShell.NavPane.IsPaneOpen;
         }
     }
 }

@@ -17,45 +17,71 @@
         </Grid.ColumnDefinitions>
 
         <Grid Grid.Column="0" Margin="0,0,12,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1"/>
+                <RowDefinition Height="96"/>
+                <RowDefinition Height="1"/>
+            </Grid.RowDefinitions>
+
+            <Border CornerRadius="6" BorderThickness="1" BorderBrush="#11999999"
+                    Width="Auto" Height="Auto" VerticalAlignment="Top" Grid.Row="1" Grid.RowSpan="2"
+                    Background="#66999999">
+                <Border CornerRadius="6" BorderThickness="1" BorderBrush="#22999999"
+                    Width="96" Height="96" VerticalAlignment="Top" Grid.Row="1" Grid.RowSpan="2"
+                    Background="Transparent">
+                </Border>
+            </Border>
+
             <Border x:Name="userAvatar" CornerRadius="5" BorderThickness="1" BorderBrush="Transparent"
-                    Width="96" Height="96" VerticalAlignment="Top">
+                    Width="96" Height="96" VerticalAlignment="Top" Grid.Row="0" Grid.RowSpan="2">
                 <Border.Background>
                     <ImageBrush ImageSource="{x:Bind AvatarImageSource, Converter={StaticResource stringToImageSourceConverter}, Mode=OneWay}" Stretch="UniformToFill"/>
                 </Border.Background>
             </Border>
+
         </Grid>
 
         <Grid Grid.Column="1">
-            <Border CornerRadius="5" BorderThickness="1" BorderBrush="#33090909">
-                <Border CornerRadius="5" BorderThickness="0" BorderBrush="#FFF9F9F9" Background="#FFF9F9F9">
-                    <Grid Background="Transparent">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="1"/>
+            </Grid.RowDefinitions>
 
-                        <ContentPresenter x:Name="userName" Content="{x:Bind UserName}" FontSize="18" FontWeight="SemiBold"
+            <Border CornerRadius="5" BorderThickness="1" BorderBrush="#33999999"
+                    VerticalAlignment="Top" Grid.Row="1" Grid.RowSpan="2"
+                    Background="#99999999">
+            </Border>
+
+
+            <Border CornerRadius="5" BorderThickness="1" BorderBrush="Transparent" Background="#FFF9F9F9" Grid.Row="0" Grid.RowSpan="2">
+                <Grid Background="Transparent">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <ContentPresenter x:Name="userName" Content="{x:Bind UserName}" FontSize="18" FontWeight="SemiBold"
                           IsHitTestVisible="false" TextWrapping="NoWrap" Margin="16,16,16,0" Height="24" VerticalContentAlignment="Center" Grid.Row="0"/>
-                        <StackPanel Orientation="Horizontal" Grid.Row="1">
-                            <TextBlock Text="&#xE163;" FontFamily="Segoe MDL2 Assets" FontSize="24" VerticalAlignment="Center"
+                    <StackPanel Orientation="Horizontal" Grid.Row="1">
+                        <TextBlock Text="&#xE163;" FontFamily="Segoe MDL2 Assets" FontSize="24" VerticalAlignment="Center"
                                        Margin="16,16,16,16"/>
-                            <ContentPresenter x:Name="eventDate" Content="{x:Bind EventDate}" FontSize="16" FontWeight="Light"
+                        <ContentPresenter x:Name="eventDate" Content="{x:Bind EventDate}" FontSize="16" FontWeight="Light"
                                               IsHitTestVisible="false" TextWrapping="NoWrap" Margin="0,16,16,16" Height="24" VerticalContentAlignment="Center"/>
-                            <TextBlock Text="&#xE121;" FontFamily="Segoe MDL2 Assets" FontSize="24" VerticalAlignment="Center"
+                        <TextBlock Text="&#xE121;" FontFamily="Segoe MDL2 Assets" FontSize="24" VerticalAlignment="Center"
                                        Margin="16,16,16,16"/>
-                            <ContentPresenter x:Name="eventTime" Content="{x:Bind EventTime}" FontSize="16" FontWeight="Light"
+                        <ContentPresenter x:Name="eventTime" Content="{x:Bind EventTime}" FontSize="16" FontWeight="Light"
                                               IsHitTestVisible="false" TextWrapping="NoWrap" Margin="0,16,16,16" Height="24" VerticalContentAlignment="Center"/>
-                        </StackPanel>
-                        <Image x:Name="eventImages" Source="{x:Bind EventImageSource, Converter={StaticResource stringToImageSourceConverter}, Mode=OneWay}" Stretch="UniformToFill" Height="300" Grid.Row="2"/>
-                        <ContentPresenter x:Name="eventTitle" Content="{x:Bind EventTitle}" FontSize="26" FontWeight="Light"
+                    </StackPanel>
+                    <Image x:Name="eventImages" Source="{x:Bind EventImageSource, Converter={StaticResource stringToImageSourceConverter}, Mode=OneWay}" Stretch="UniformToFill" Height="300" Grid.Row="2"/>
+                    <ContentPresenter x:Name="eventTitle" Content="{x:Bind EventTitle}" FontSize="26" FontWeight="Light"
                           IsHitTestVisible="false" TextWrapping="Wrap" Margin="16,8,16,0" Height="Auto" VerticalContentAlignment="Center" Grid.Row="3"/>
-                        <ContentPresenter x:Name="eventDescription" Content="{x:Bind EventDescription}" FontSize="16" FontWeight="Light"
+                    <ContentPresenter x:Name="eventDescription" Content="{x:Bind EventDescription}" FontSize="16" FontWeight="Light"
                           IsHitTestVisible="false" TextWrapping="Wrap" Margin="16,16,16,16" Height="Auto" VerticalContentAlignment="Center" Grid.Row="4"/>
-                    </Grid>
-                </Border>
+                </Grid>
             </Border>
         </Grid>
     </Grid>

@@ -1,13 +1,38 @@
 ﻿<Page
-    x:Class="EVENeT.MainPage"
+    x:Class="EVENeT.Navigation.AppShell"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:EVENeT"
+    xmlns:navigation="using:EVENeT.Navigation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource PageBackgroundThemeBrush}">
+    <Page.Resources>
+        <Style x:Key="NavPaneItemContainerStyle" TargetType="ListViewItem">
+            <Setter Property="MinWidth" Value="{StaticResource SplitViewCompactPaneThemeLength}"/>
+            <Setter Property="Height" Value="48"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+
+        <DataTemplate x:Key="NavPaneItemTemplate" x:DataType="navigation:NavPaneItem">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="48" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <!-- Showing a ToolTip and the Label is redundant.  We put the ToolTip on the icon.
+                     It appears when the user hovers over the icon, but not the label which provides
+                     value when the SplitView is 'Compact' while reducing the likelihood of showing
+                     redundant information when the label is shown.-->
+                <FontIcon x:Name="Glyph" FontSize="16" Glyph="{x:Bind SymbolAsChar}" VerticalAlignment="Center" HorizontalAlignment="Center" ToolTipService.ToolTip="{x:Bind Label}"/>
+                <TextBlock x:Name="Text" Grid.Column="1" Text="{x:Bind Label}" />
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
+
+    <Grid Background="{ThemeResource PageBackgroundThemeBrush}" RequestedTheme="Dark">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -21,14 +46,30 @@
 
         <local:PageHeader Grid.Row="0" Grid.ColumnSpan="2"></local:PageHeader>
 
-        <SplitView x:Name="navPane" DisplayMode="CompactInline" IsPaneOpen="False" PaneBackground="{ThemeResource NavigationPaneThemeBrush}" Grid.Row="1" Grid.Column="0" OpenPaneLength="240">
+        <SplitView x:Name="navPane"
+                   DisplayMode="CompactInline"
+                   IsPaneOpen="False"
+                   PaneBackground="{ThemeResource NavigationPaneThemeBrush}"
+                   IsTabStop="False"
+                   OpenPaneLength="256"
+                   CompactPaneLength="48"
+                   Grid.Row="1" Grid.Column="0">
             <SplitView.Pane>
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <ListView x:Name="NavLinksList" Margin="0,12,0,0" SelectionMode="None" Grid.Row="0" VerticalAlignment="Stretch" IsItemClickEnabled="True"/>
+
+                    <!-- A custom ListView to display the items in the pane.  The automation Name is set in the ContainerContentChanging event. -->
+                    <navigation:NavPaneListView
+                        x:Name="NavPaneList"
+                        TabIndex="3"
+                        ItemContainerStyle="{StaticResource NavPaneItemContainerStyle}"
+                        ItemTemplate="{StaticResource NavPaneItemTemplate}" ItemInvoked="NavPaneItemInvoked"
+                        />
+
+                     <!-- Dummy -->
                     <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="12,24,24,12" >
                         <SymbolIcon Symbol="Setting" Foreground="White" Width="24" Height="24"/>
                         <TextBlock Text="Settings" Margin="16,0,0,0" VerticalAlignment="Center" Foreground="White"/>
@@ -36,11 +77,25 @@
                 </Grid>
             </SplitView.Pane>
 
-            <!-- Move these to another page -->
-            <ScrollViewer Height="Auto">
-                <StackPanel>
-                    <local:EventCard Grid.Row="1" Width="700" Height="Auto"
-                                     AvatarImageSource="/Assets/AC HCMC.jpg"
+            <Frame x:Name="frame" 
+                   RequestedTheme="Light"
+                   Navigating="OnNavigatingToPage" 
+                   Navigated="OnNavigatedToPage">
+                <Frame.ContentTransitions>
+                    <TransitionCollection>
+                        <NavigationThemeTransition>
+                            <NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                                <EntranceNavigationTransitionInfo/>
+                            </NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                        </NavigationThemeTransition>
+                    </TransitionCollection>
+                </Frame.ContentTransitions>
+
+                <!-- Move these to another page -->
+                <!--<ScrollViewer Height="Auto">
+                    <StackPanel>
+                        <local:EventCard Grid.Row="1" Width="700" Height="Auto"
+                                     AvatarImageSource="/Assets/AC HCMC 256.jpg"
                                      UserName="American Center HCMC"
                                      EventDate="Nov. 5, 2015"
                                      EventTime="5:30 PM"
@@ -50,9 +105,9 @@
                                      HorizontalAlignment="Center"
                                      VerticalAlignment="Top"
                                      Margin="0,48,0,16">
-                    </local:EventCard>
+                        </local:EventCard>
 
-                    <local:EventCard Grid.Row="1" Width="700" Height="Auto"
+                        <local:EventCard Grid.Row="1" Width="700" Height="Auto"
                                      AvatarImageSource="/Assets/1.png"
                                      UserName="Toàn-Anh Nguyễn"
                                      EventDate="Nov. 5, 2015"
@@ -63,9 +118,9 @@
                                      HorizontalAlignment="Center"
                                      VerticalAlignment="Top"
                                      Margin="0,16,0,16">
-                    </local:EventCard>
+                        </local:EventCard>
 
-                    <local:EventCard Grid.Row="1" Width="700" Height="Auto"
+                        <local:EventCard Grid.Row="1" Width="700" Height="Auto"
                                      AvatarImageSource="/Assets/AC HCMC.jpg"
                                      UserName="American Center HCMC"
                                      EventDate="Nov. 5, 2015"
@@ -76,11 +131,12 @@
                                      HorizontalAlignment="Center"
                                      VerticalAlignment="Top"
                                      Margin="0,16,0,64">
-                    </local:EventCard>
-                </StackPanel>
-            </ScrollViewer>
-            <!-- Move these to another page -->
-            
+                        </local:EventCard>
+                    </StackPanel>
+                </ScrollViewer>-->
+                <!-- Move these to another page -->
+            </Frame>
+
         </SplitView>
 
         <CalendarView x:Name="calendar"
@@ -91,7 +147,8 @@
                       CalendarIdentifier="GregorianCalendar"
                       VerticalAlignment="Top"
                       IsTextScaleFactorEnabled="True"
-                      Grid.Row="1" Grid.Column="1">
+                      Grid.Row="1" Grid.Column="1"
+                      RequestedTheme="Light">
         </CalendarView>
 
         <VisualStateManager.VisualStateGroups>
@@ -115,6 +172,6 @@
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
-        
+
     </Grid>
 </Page>

@@ -26,13 +26,13 @@ namespace EVENeT
         {
             this.InitializeComponent();
         }
-        //afiuafga
+        
         private void signInButton_Click(object sender, RoutedEventArgs e)
         {
             if (UsernameExists(userName.Text) && CorrectUsernameAndPassword(userName.Text, password.Password))
             {
                 Frame frame = Window.Current.Content as Frame;
-                frame.Navigate(typeof(MainPage));
+                frame.Navigate(typeof(Navigation.AppShell));
                 Window.Current.Activate();
             }
         }

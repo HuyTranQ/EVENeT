@@ -1,0 +1,27 @@
+﻿<Page
+    x:Class="EVENeT.EventDetailPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:EVENeT"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <RelativePanel Background="{ThemeResource PageBackgroundThemeBrush}">
+        <!-- Example -->
+
+        <Grid>
+            <Image Source="/Assets/original.jpg"/>
+            <Grid Background="#99000000" Height="Auto" MinWidth="1"/>
+        </Grid>
+
+        <local:DisplayCard Width="320" Height="Auto" CardTitle="Ticket Info"
+                           RelativePanel.AlignHorizontalCenterWithPanel="True"
+                           >
+            <local:DisplayCard.PlaceHolder>
+                <TextBlock Text=""/>
+            </local:DisplayCard.PlaceHolder>
+        </local:DisplayCard>
+
+    </RelativePanel>
+</Page>

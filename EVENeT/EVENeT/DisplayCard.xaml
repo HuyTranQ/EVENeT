@@ -1,0 +1,40 @@
+﻿<UserControl
+    x:Class="EVENeT.DisplayCard"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:EVENeT"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400"
+    Name="control">
+
+    <UserControl.Resources>
+        <ControlTemplate x:Key="CardTemplate" TargetType="ContentControl">
+            <Border CornerRadius="5" BorderThickness="1" 
+                    BorderBrush="Black" Background="#FFF9F9F9">
+            </Border>
+        </ControlTemplate>
+    </UserControl.Resources>
+
+    <Border CornerRadius="5" BorderThickness="1" 
+                    BorderBrush="Black" Background="#FFF9F9F9">
+        <StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <FontIcon x:Name="Glyph" FontSize="18"
+                          Margin="16,0,8,0"
+                          FontFamily="FontAwesome"
+                          Glyph="{x:Bind SymbolGlyph}"
+                          VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <TextBlock Text="{x:Bind CardTitle}"
+                               FontSize="18"
+                               FontWeight="SemiBold"
+                               Margin="8,16,0,16"/>
+            </StackPanel>
+            <ContentControl Name="itemControl"
+                            Content="{Binding PlaceHolder, ElementName=control}"/>
+        </StackPanel>
+    </Border>
+
+</UserControl>

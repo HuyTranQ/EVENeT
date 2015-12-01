@@ -101,8 +101,14 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Common\StringToImageSourceConverter.cs" />
+    <Compile Include="DisplayCard.xaml.cs">
+      <DependentUpon>DisplayCard.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EventCard.xaml.cs">
       <DependentUpon>EventCard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EventDetailPage.xaml.cs">
+      <DependentUpon>EventDetailPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
@@ -148,7 +154,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="DisplayCard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="EventCard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EventDetailPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

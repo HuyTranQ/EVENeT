@@ -8,6 +8,6 @@
     mc:Ignorable="d">
 
     <ScrollViewer Background="{ThemeResource PageBackgroundThemeBrush}">
-        <TextBlock Text="ProfilePage"/>
+        <TextBlock Text="Profile Page"/>
     </ScrollViewer>
 </Page>

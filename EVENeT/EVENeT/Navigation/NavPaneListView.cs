@@ -87,7 +87,7 @@ namespace EVENeT.Navigation
         /// If the <paramref name="item"/> is null then everything is unselected.
         /// </summary>
         /// <param name="item"></param>
-        private void SetSelectedItem(ListViewItem item)
+        public void SetSelectedItem(ListViewItem item)
         {
             int index = -1;
             if (item != null)

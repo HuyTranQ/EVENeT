@@ -20,16 +20,11 @@ namespace EVENeT
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class EventDetailPage : Page
+    public sealed partial class CreateEventPage : Page
     {
-        public EventDetailPage()
+        public CreateEventPage()
         {
             this.InitializeComponent();
-        }
-
-        private void Organizer_Hyperlink_Click(Windows.UI.Xaml.Documents.Hyperlink sender, Windows.UI.Xaml.Documents.HyperlinkClickEventArgs args)
-        {
-            //Navigation.AppShell.RootFrame.Navigate(typeof(ProfilePage));
         }
     }
 }

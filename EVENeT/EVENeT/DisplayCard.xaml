@@ -21,17 +21,26 @@
     <Border CornerRadius="5" BorderThickness="1" 
                     BorderBrush="Black" Background="#FFF9F9F9">
         <StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <FontIcon x:Name="Glyph" FontSize="18"
-                          Margin="16,0,8,0"
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                
+                <FontIcon x:Name="Glyph" FontSize="{x:Bind TitleFontSize, Converter={StaticResource stringToDoubleConverter}, Mode=OneWay}"
+                          Grid.Column="0"
+                          Margin="16,0,0,0"
                           FontFamily="FontAwesome"
                           Glyph="{x:Bind SymbolGlyph}"
-                          VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                          VerticalAlignment="Center" HorizontalAlignment="Center"
+                          Visibility="Collapsed"/>
                 <TextBlock Text="{x:Bind CardTitle}"
-                               FontSize="18"
-                               FontWeight="SemiBold"
-                               Margin="8,16,0,16"/>
-            </StackPanel>
+                           FontSize="{x:Bind TitleFontSize, Converter={StaticResource stringToDoubleConverter}, Mode=OneWay}"
+                           Grid.Column="1"
+                           FontWeight="SemiBold"
+                           TextWrapping="WrapWholeWords"
+                           Margin="16,16,16,16"/>
+            </Grid>
             <ContentControl Name="itemControl"
                             Content="{Binding PlaceHolder, ElementName=control}"/>
         </StackPanel>

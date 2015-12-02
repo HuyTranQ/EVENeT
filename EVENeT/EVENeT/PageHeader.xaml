@@ -32,13 +32,12 @@
 
         <Button x:Name="navPaneToggle" Style="{StaticResource SplitViewTogglePaneButtonStyle}" Click="navPaneToggle_Click"/>
         <Button x:Name="backButton" Height="48" Width="48" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-                Command="{x:Bind GoBackCommand}"
                 Style="{StaticResource BackButtonStyle}"
                 VerticalAlignment="Top"
                 AutomationProperties.Name="Back"
                 AutomationProperties.AutomationId="BackButton"
                 AutomationProperties.ItemType="Navigation Button"
-                RelativePanel.RightOf="navPaneToggle" RelativePanel.AlignTopWith="navPaneToggle">
+                RelativePanel.RightOf="navPaneToggle" RelativePanel.AlignTopWith="navPaneToggle" Click="backButton_Click">
 
             <FontIcon x:Name="backButtonIcon" Glyph="&#xE72B;" />
         </Button>

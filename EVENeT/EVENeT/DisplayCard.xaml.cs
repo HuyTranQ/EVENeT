@@ -23,7 +23,7 @@ namespace EVENeT
         public object SymbolGlyph
         {
             get { return GetValue(SymbolGlyphProperty); }
-            set { SetValue(SymbolGlyphProperty, value); }
+            set { SetValue(SymbolGlyphProperty, value); Glyph.Visibility = Visibility.Visible; }
         }
 
         public static readonly DependencyProperty CardTitleProperty = DependencyProperty.Register("CardTitle", typeof(object), typeof(DisplayCard), new PropertyMetadata(null));
@@ -31,6 +31,13 @@ namespace EVENeT
         {
             get { return GetValue(CardTitleProperty); }
             set { SetValue(CardTitleProperty, value); }
+        }
+
+        public static readonly DependencyProperty TitleFontSizeProperty = DependencyProperty.Register("TitleFontSize", typeof(object), typeof(DisplayCard), new PropertyMetadata(null));
+        public object TitleFontSize
+        {
+            get { return GetValue(TitleFontSizeProperty); }
+            set { SetValue(TitleFontSizeProperty, value); }
         }
 
         public static readonly DependencyProperty PlaceHolderProperty = DependencyProperty.Register("PlaceHolder", typeof(object), typeof(DisplayCard), new PropertyMetadata(null));

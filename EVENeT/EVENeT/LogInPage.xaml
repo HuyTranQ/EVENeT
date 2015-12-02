@@ -5,9 +5,10 @@
     xmlns:local="using:EVENeT"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    RequestedTheme="Dark">
 
-    <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <RelativePanel Background="{ThemeResource NavigationPaneThemeBrush}">
         <Image x:Name="appLogo"
                Source="/Assets/Square150x150Logo.scale-200.png"
                Width="150" Height="150"

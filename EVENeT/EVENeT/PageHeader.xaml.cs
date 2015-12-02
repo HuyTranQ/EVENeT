@@ -14,6 +14,8 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using EVENeT.Common;
+using EVENeT.Navigation;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
@@ -28,6 +30,11 @@ namespace EVENeT
             set { SetValue(TitleProperty, value); }
         }
 
+        public ContentPresenter TitleControl
+        {
+            get { return pageTitle; }
+        }
+
         public static readonly DependencyProperty WideLayoutThresholdProperty = DependencyProperty.Register("WideLayoutThreshold", typeof(double), typeof(PageHeader), new PropertyMetadata(600));
         public double WideLayoutThreshold
         {
@@ -36,20 +43,6 @@ namespace EVENeT
             {
                 SetValue(WideLayoutThresholdProperty, value);
                 WideLayoutTrigger.MinWindowWidth = value;
-            }
-        }
-
-        private ICommand _goBackCommand;
-
-        public ICommand GoBackCommand
-        {
-            get
-            {
-                if (_goBackCommand == null)
-                {
-                    // TODO: handle relay command
-                }
-                return _goBackCommand;
             }
         }
 
@@ -66,7 +59,28 @@ namespace EVENeT
 
         private void navPaneToggle_Click(object sender, RoutedEventArgs e)
         {
-            Navigation.AppShell.NavPane.IsPaneOpen = !Navigation.AppShell.NavPane.IsPaneOpen;
+            AppShell.NavPane.IsPaneOpen = !AppShell.NavPane.IsPaneOpen;
+        }
+
+        private void backButton_Click(object sender, RoutedEventArgs e)
+        {
+            bool ignored = false;
+            this.BackRequested(ref ignored);
+        }
+
+        public void BackRequested(ref bool handled)
+        {
+            // Check if the frame is available
+            if (AppShell.RootFrame == null)
+                return;
+
+            // Check to see if this is the top-most page on the app back stack.
+            if (AppShell.RootFrame.CanGoBack && !handled)
+            {
+                // If not, set the event to handled and go back to the previous page in the app.
+                handled = true;
+                AppShell.RootFrame.GoBack();
+            }
         }
     }
 }

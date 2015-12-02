@@ -1,0 +1,26 @@
+﻿<Page
+    x:Class="EVENeT.CreateEventPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:EVENeT"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer Background="{ThemeResource PageBackgroundThemeBrush}">
+        <StackPanel Margin="16">
+            <TextBox x:Name="EventTitle" Header="Title"/>
+            <RichEditBox x:Name="EventDescription" Header="Description"
+                         Height="300"/>
+            <DatePicker x:Name="EventDate" Header="Date"/>
+            <TimePicker x:Name="EventTime" Header="Time"/>
+            <!--Location-->
+            <RichEditBox Header="Description"
+                         Height="300"/>
+            <RichEditBox Header="Description"
+                         Height="300"/>
+            <RichEditBox Header="Description"
+                         Height="300"/>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

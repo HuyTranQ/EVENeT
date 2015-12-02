@@ -13,6 +13,7 @@
             <x:String x:Key="AppName">EVENeT</x:String>
             
             <common:StringToImageSourceConverter x:Key="stringToImageSourceConverter"/>
+            <common:StringToDoubleConverter x:Key="stringToDoubleConverter"/>
             
             <ControlTemplate x:Key="SplitViewTogglePaneButtonTemplate" TargetType="Button">
                 <Grid x:Name="RootGrid" Background="{TemplateBinding Background}">
@@ -114,7 +115,6 @@
             <Style x:Key="BackButtonStyle" TargetType="Button">
                 <Setter Property="Template" Value="{StaticResource BackButtonTemplate}" />
             </Style>
-
 
             <ResourceDictionary.ThemeDictionaries>
                 <ResourceDictionary x:Key="Default">

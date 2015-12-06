@@ -32,7 +32,7 @@ namespace EVENeT
             if (UsernameExists(userName.Text) && CorrectUsernameAndPassword(userName.Text, password.Password))
             {
                 Frame frame = Window.Current.Content as Frame;
-                frame.Navigate(typeof(Navigation.AppShell));
+                frame.Navigate(typeof(Navigation.AppShell), userName.Text);
                 Window.Current.Activate();
             }
         }

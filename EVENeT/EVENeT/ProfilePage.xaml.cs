@@ -22,9 +22,17 @@ namespace EVENeT
     /// </summary>
     public sealed partial class ProfilePage : Page
     {
+        string userName;
+
         public ProfilePage()
         {
             this.InitializeComponent();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            userName = e.Parameter.ToString();
         }
     }
 }

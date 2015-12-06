@@ -65,6 +65,14 @@ namespace EVENeT.Navigation
             get { return Current.navPane; }
         }
 
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            string username = e.Parameter.ToString();
+            NavPaneItem profile = (from i in navList where i.Label == "Your Profile" select i).SingleOrDefault();
+            profile.Arguments = username;
+        }
+
         public AppShell()
         {
             this.InitializeComponent();

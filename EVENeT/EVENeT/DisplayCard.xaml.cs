@@ -17,6 +17,24 @@ using Windows.UI.Xaml.Navigation;
 
 namespace EVENeT
 {
+    /// <summary>
+    /// General-purpose display card. Contains a card header for the title and an optional icon to the left.
+    /// The size of the title and the icon can be changed via TitleFontSize
+    /// The card's content is placed inside PlaceHolder.
+    /// </summary>
+    /// <example>
+    /// An example of adding a DisplayCard dynamically.
+    /// <code>
+    /// DisplayCard displayCard = new DisplayCard();
+    /// displayCard.SymbolGlyph = "\uF073";
+    /// displayCard.CardTitle = "MyCard";
+    /// displayCard.TitleFontSize = 24;
+    /// TextBlock tbl = new TextBlock();
+    /// tbl.Text = "Hello, World!";
+    /// displayCard.PlaceHolder = tbl;
+    /// MainContainer.Children.Add(displayCard);
+    /// </code>
+    /// </example>
     public sealed partial class DisplayCard : UserControl
     {
         public static readonly DependencyProperty SymbolGlyphProperty = DependencyProperty.Register("SymbolGlyph", typeof(object), typeof(DisplayCard), new PropertyMetadata(null));
@@ -50,6 +68,7 @@ namespace EVENeT
         public DisplayCard()
         {
             this.InitializeComponent();
+            Margin = new Thickness(0, 16, 0, 16);
         }
     }
 }

@@ -7,20 +7,84 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <ScrollViewer Background="{ThemeResource PageBackgroundThemeBrush}">
-        <StackPanel Margin="16">
-            <TextBox x:Name="EventTitle" Header="Title"/>
-            <RichEditBox x:Name="EventDescription" Header="Description"
-                         Height="300"/>
-            <DatePicker x:Name="EventDate" Header="Date"/>
-            <TimePicker x:Name="EventTime" Header="Time"/>
-            <!--Location-->
-            <RichEditBox Header="Description"
-                         Height="300"/>
-            <RichEditBox Header="Description"
-                         Height="300"/>
-            <RichEditBox Header="Description"
-                         Height="300"/>
-        </StackPanel>
-    </ScrollViewer>
+    <Grid Background="{ThemeResource PageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <ScrollViewer Grid.Row="0">
+            <StackPanel Margin="24,16">
+
+                <!-- Basic Information -->
+                <StackPanel Margin="0,0,0,32">
+                    <TextBlock Text="Basic information" FontSize="24" Margin="0,0,0,16"/>
+                    <TextBox x:Name="EventTitle" Header="Title" Margin="0,0,0,16"/>
+                    <ComboBox x:Name="EventCategory" Header="Category" MinWidth="296" Margin="0,0,0,16"/>
+                    <RichEditBox x:Name="EventDescription" Height="280">
+                        <RichEditBox.Header>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="Description" Grid.Column="0" VerticalAlignment="Bottom"/>
+                                <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right">
+                                    <Button Background="Transparent" Content="&#xe19B;" FontFamily="Segoe MDL2 Assets" BorderBrush="Transparent" Click="Bold_Click"/>
+                                    <Button Background="Transparent" Content="&#xe199;" FontFamily="Segoe MDL2 Assets" BorderBrush="Transparent" Click="Bold_Click"/>
+                                    <Button Background="Transparent" Content="&#xe19A;" FontFamily="Segoe MDL2 Assets" BorderBrush="Transparent" Click="Bold_Click"/>
+                                    <!--<AppBarButton x:Name="Bold" Icon="Bold" Height="48" VerticalAlignment="Bottom" Click="Bold_Click"/>
+                                <AppBarButton x:Name="Italic" Icon="Italic" Height="48" VerticalAlignment="Bottom" Click="Italic_Click"/>
+                                <AppBarButton x:Name="Underline" Icon="Underline" Height="48" VerticalAlignment="Bottom" Click="Underline_Click"/>-->
+                                </StackPanel>
+                            </Grid>
+                        </RichEditBox.Header>
+                    </RichEditBox>
+                </StackPanel>
+
+                <!-- Date and Time -->
+                <StackPanel Margin="0,0,0,32">
+                    <TextBlock Text="Date and Time" FontSize="24" Margin="0,16"/>
+
+                    <TextBlock Text="Begin"/>
+                    <StackPanel x:Name="beginDateTime" Orientation="Horizontal">
+                        <DatePicker x:Name="EventBeginDate"/>
+                        <TimePicker x:Name="EventBeginTime" Width="296" Margin="24,0,0,0"/>
+                    </StackPanel>
+
+                    <TextBlock Text="End" Margin="0,16,0,0"/>
+                    <StackPanel x:Name="endDateTime" Orientation="Horizontal">
+                        <DatePicker x:Name="EventEndDate"/>
+                        <TimePicker x:Name="EventEndTime" Width="296" Margin="24,0,0,0"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <!-- Location -->
+                <StackPanel Margin="0,0,0,32">
+                    <TextBlock Text="Location" FontSize="24" Margin="0,16"/>
+                </StackPanel>
+
+                <!-- Tickets -->
+                <StackPanel Margin="0,0,0,32">
+                    <TextBlock Text="Tickets" FontSize="24" Margin="0,16"/>
+                </StackPanel>
+
+                <!-- Gallery -->
+                <StackPanel Margin="0,0,0,32">
+                    <TextBlock Text="Gallery" FontSize="24" Margin="0,16"/>
+                    <TextBlock Text="Choose album for your gallery (maximum 25 pictures)"/>
+                    <FlipView MaxHeight="300" MaxWidth="500" HorizontalAlignment="Left">
+                    </FlipView>
+                    <Button Content="Browse"/>
+                </StackPanel>
+
+                <!--<RichEditBox x:Name="tmp" Height="300" BorderBrush="{x:Null}" Background="{x:Null}" SelectionHighlightColor="#FF0078D7" IsEnabled="False">
+                </RichEditBox>-->
+            </StackPanel>
+        </ScrollViewer>
+
+        <Button Grid.Row="1" x:Name="CreateButton" Content="Create event" 
+                Click="CreateButton_Click" HorizontalAlignment="Right"
+                Margin="24, 16"/>
+    </Grid>
 </Page>

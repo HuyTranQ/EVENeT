@@ -27,14 +27,14 @@
                 <Grid Background="#99000000"/>
             </Grid>
 
-            <StackPanel Grid.Row="1" Grid.Column="1">
-                <local:DisplayCard Margin="0,32,0,0"
+            <StackPanel x:Name="MainContent" Grid.Row="1" Grid.Column="1">
+                <local:DisplayCard 
                                    SymbolGlyph="&#xF073;"
                                    CardTitle="Nov. 5, 2015 - 5:30 PM">
 
                 </local:DisplayCard>
 
-                <local:DisplayCard Margin="0,32,0,0"
+                <local:DisplayCard 
                                    TitleFontSize="28"
                                    CardTitle="Understanding U.S. Elections: Presidential and Congressional Electoral Processes">
                     <local:DisplayCard.PlaceHolder>
@@ -42,7 +42,7 @@
                             <StackPanel Orientation="Horizontal">
                                 <RichTextBlock Margin="16,-16,16,8">
                                     <Paragraph>
-                                        <Italic>by </Italic>
+                                        <Italic>by</Italic>
                                         <Hyperlink Click="Organizer_Hyperlink_Click">American Center HCMC</Hyperlink>
                                     </Paragraph>
                                 </RichTextBlock>
@@ -73,7 +73,7 @@
                     </local:DisplayCard.PlaceHolder>
                 </local:DisplayCard>
 
-                <local:DisplayCard Margin="0,32,0,0"
+                <local:DisplayCard 
                                    SymbolGlyph="&#xF145;"
                                    CardTitle="Ticket Information">
                     <local:DisplayCard.PlaceHolder>
@@ -82,7 +82,7 @@
                     </local:DisplayCard.PlaceHolder>
                 </local:DisplayCard>
 
-                <local:DisplayCard Margin="0,32,0,32"
+                <local:DisplayCard 
                                    SymbolGlyph="&#xF041;"
                                    CardTitle="The American Center HCMC - 8th Floor, Diamond Plaza. 34 Le Duan Blv., Ben Nghe Ward, District 1. Ho Chi Minh City VN">
                     <local:DisplayCard.PlaceHolder>

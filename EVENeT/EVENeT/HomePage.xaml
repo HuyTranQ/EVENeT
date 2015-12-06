@@ -8,6 +8,13 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource PageBackgroundThemeBrush}">
-        <TextBlock Text="Home Page"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel x:Name="MainContent" Margin="0,32" Grid.Column="1">
+        </StackPanel>
     </Grid>
 </Page>

@@ -23,6 +23,7 @@ namespace EVENeT
     public sealed partial class ProfilePage : Page
     {
         string userName;
+        int userType;
 
         public ProfilePage()
         {

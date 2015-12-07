@@ -22,12 +22,13 @@
             </Grid.ColumnDefinitions>
 
             <!-- Example -->
-            <Grid x:Name="imgGrid" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
-                <Image Source="/Assets/original.jpg" Stretch="UniformToFill"/>
+            <Grid x:Name="imgGrid"
+                  Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="1">
+                <Image Source="/Assets/original.jpg" Stretch="UniformToFill" VerticalAlignment="Center"/>
                 <Grid Background="#99000000"/>
             </Grid>
 
-            <StackPanel x:Name="MainContent" Grid.Row="1" Grid.Column="1">
+            <StackPanel x:Name="MainContent" Grid.Row="1" Grid.Column="1" Margin="0,16,0,0">
                 <local:DisplayCard 
                                    SymbolGlyph="&#xF073;"
                                    CardTitle="Nov. 5, 2015 - 5:30 PM">

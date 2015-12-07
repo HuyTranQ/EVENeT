@@ -23,8 +23,8 @@
             <!-- Example -->
             
             <!-- Cover photo -->
-            <Grid x:Name="imgGrid" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
-                <Image Source="/Assets/Cover.png" Stretch="UniformToFill"/>
+            <Grid x:Name="imgGrid" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="1">
+                <Image Source="/Assets/Cover.png" Stretch="UniformToFill" VerticalAlignment="Center"/>
                 <Grid Background="#99000000"/>
                 
                 <!-- Avatar -->
@@ -50,7 +50,14 @@
             <Pivot Grid.Row="1" Grid.Column="1" Margin="0,16,0,0">
                 <PivotItem Header="About">
                     <StackPanel>
-                        <local:DisplayCard CardTitle="ABC"/>
+                        <local:DisplayCard CardTitle="Basic information">
+                            <local:DisplayCard.PlaceHolder>
+                                <StackPanel Margin="16,0,16,16">
+                                    <TextBlock Text="Name: Toan-Anh Nguyen"/>
+                                    <TextBlock Text="Birthday: ??/??/????"/>
+                                </StackPanel>
+                            </local:DisplayCard.PlaceHolder>
+                        </local:DisplayCard>
                     </StackPanel>
                 </PivotItem>
                 <PivotItem Header="Following">

@@ -80,6 +80,9 @@ namespace EVENeT.Navigation
             Current = this;
             RootFrame = frame;
 
+            ((AppBarButton)Header.AppCommandBar.SecondaryCommands.Last()).Click += SignOut_Click;
+            //(from i in Header.AppCommandBar.SecondaryCommands where ((AppBarButton)i).Label == "Sign Out" select i).SingleOrDefault();
+
             SystemNavigationManager.GetForCurrentView().BackRequested += SystemNavigationManager_BackRequested;
 
             // Use the hardware back button instead of the back button in the header of the page.
@@ -97,6 +100,18 @@ namespace EVENeT.Navigation
             }
 
             NavPaneList.ItemsSource = navList;
+        }
+
+        private void SignOut_Click(object sender, RoutedEventArgs e)
+        {
+            // Perform any last change to resources.
+            //
+
+            Frame frame = Window.Current.Content as Frame;
+            while (frame != null && frame.BackStackDepth > 1)
+                frame.BackStack.RemoveAt(frame.BackStackDepth - 1);
+            if (frame != null && frame.CanGoBack)
+                frame.GoBack();
         }
 
         private void SystemNavigationManager_BackRequested(object sender, BackRequestedEventArgs e)

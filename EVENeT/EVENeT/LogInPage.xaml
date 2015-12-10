@@ -25,7 +25,7 @@
                  Width="300"
                  Margin="0,4,0,4"
                  PlaceholderText="Username"
-                 RelativePanel.Below="errorMessage" RelativePanel.AlignHorizontalCenterWith="appLogo" LostFocus="userName_LostFocus"/>
+                 RelativePanel.Below="errorMessage" RelativePanel.AlignHorizontalCenterWith="appLogo"/>
         <PasswordBox x:Name="password"
                      Width="300"
                      Margin="0,4,0,4"
@@ -40,6 +40,6 @@
                          Width="300"
                          Margin="0,4,0,4"
                          Content="Create a new account"
-                         RelativePanel.Below="signInButton" RelativePanel.AlignHorizontalCenterWith="appLogo"/>
+                         RelativePanel.Below="signInButton" RelativePanel.AlignHorizontalCenterWith="appLogo" Click="signUpButton_Click"/>
     </RelativePanel>
 </Page>

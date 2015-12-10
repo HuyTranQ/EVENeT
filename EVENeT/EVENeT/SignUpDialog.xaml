@@ -1,0 +1,29 @@
+﻿<ContentDialog
+    x:Class="EVENeT.SignUpDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:EVENeT"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Title="SIGN UP"
+    PrimaryButtonText="Sign up"
+    SecondaryButtonText="Cancel"
+    PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
+    SecondaryButtonClick="ContentDialog_SecondaryButtonClick">
+
+    <StackPanel>
+        <TextBox x:Name="userName" Header="Email" Margin="0,16,0,8" TextChanged="userName_TextChanged" LostFocus="userName_LostFocus" IsSpellCheckEnabled="False"/>
+
+        <PasswordBox x:Name="password" Header="Password" Margin="0,0,0,8" PasswordChanged="password_PasswordChanged"/>
+        
+        <PasswordBox x:Name="passwordConfirm" Header="Confirm password" Margin="0,0,0,16" PasswordChanged="passwordConfirm_PasswordChanged"/>
+        
+        <ComboBox x:Name="userType" Header="User type" SelectedIndex="0" HorizontalAlignment="Stretch" Margin="0,0,0,8">
+            <x:String>Individual</x:String>
+            <x:String>Organization</x:String>
+        </ComboBox>
+        
+        <TextBlock x:Name="error" Foreground="Red"/>
+    </StackPanel>
+</ContentDialog>

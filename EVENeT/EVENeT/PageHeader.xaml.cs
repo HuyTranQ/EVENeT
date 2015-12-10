@@ -35,6 +35,11 @@ namespace EVENeT
             get { return pageTitle; }
         }
 
+        public CommandBar AppCommandBar
+        {
+            get { return topCommandBar; }
+        }
+
         public static readonly DependencyProperty WideLayoutThresholdProperty = DependencyProperty.Register("WideLayoutThreshold", typeof(double), typeof(PageHeader), new PropertyMetadata(600));
         public double WideLayoutThreshold
         {

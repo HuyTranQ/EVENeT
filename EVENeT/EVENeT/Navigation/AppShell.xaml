@@ -90,51 +90,6 @@
                         </NavigationThemeTransition>
                     </TransitionCollection>
                 </Frame.ContentTransitions>
-
-                <!-- Move these to another page -->
-                <!--<ScrollViewer Height="Auto">
-                    <StackPanel>
-                        <local:EventCard Grid.Row="1" Width="700" Height="Auto"
-                                     AvatarImageSource="/Assets/AC HCMC 256.jpg"
-                                     UserName="American Center HCMC"
-                                     EventDate="Nov. 5, 2015"
-                                     EventTime="5:30 PM"
-                                     EventImageSource="/Assets/original.jpg"
-                                     EventTitle="Understanding U.S. Elections: Presidential and Congressional Electoral Processes"
-                                     EventDescription="Did you know that the United States will select its next president in 2016? Come learn about the elections process in the United States through a series of talks with our consulate officers. Bring your friends!"
-                                     HorizontalAlignment="Center"
-                                     VerticalAlignment="Top"
-                                     Margin="0,48,0,16">
-                        </local:EventCard>
-
-                        <local:EventCard Grid.Row="1" Width="700" Height="Auto"
-                                     AvatarImageSource="/Assets/1.png"
-                                     UserName="Toàn-Anh Nguyễn"
-                                     EventDate="Nov. 5, 2015"
-                                     EventTime="5:30 PM"
-                                     EventImageSource="/Assets/SplashScreen.scale-200.png"
-                                     EventTitle="Understanding U.S. Elections: Presidential and Congressional Electoral Processes"
-                                     EventDescription="Did you know that the United States will select its next president in 2016? Come learn about the elections process in the United States through a series of talks with our consulate officers. Bring your friends!"
-                                     HorizontalAlignment="Center"
-                                     VerticalAlignment="Top"
-                                     Margin="0,16,0,16">
-                        </local:EventCard>
-
-                        <local:EventCard Grid.Row="1" Width="700" Height="Auto"
-                                     AvatarImageSource="/Assets/AC HCMC.jpg"
-                                     UserName="American Center HCMC"
-                                     EventDate="Nov. 5, 2015"
-                                     EventTime="5:30 PM"
-                                     EventImageSource="/Assets/SplashScreen.scale-200.png"
-                                     EventTitle="Understanding U.S. Elections: Presidential and Congressional Electoral Processes"
-                                     EventDescription="Did you know that the United States will select its next president in 2016? Come learn about the elections process in the United States through a series of talks with our consulate officers. Bring your friends!"
-                                     HorizontalAlignment="Center"
-                                     VerticalAlignment="Top"
-                                     Margin="0,16,0,64">
-                        </local:EventCard>
-                    </StackPanel>
-                </ScrollViewer>-->
-                <!-- Move these to another page -->
             </Frame>
 
         </SplitView>

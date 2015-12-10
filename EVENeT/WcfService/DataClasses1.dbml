@@ -1,0 +1,465 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="EVENet" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=(local);Initial Catalog=EVENet;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="EVENetConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Admin" Member="Admins">
+    <Type Name="Admin">
+      <Column Name="username" Type="System.String" DbType="VarChar(32) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="User_Admin" Member="User" ThisKey="username" OtherKey="username" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.UserUser" Member="UserUsers">
+    <Type Name="UserUser">
+      <Column Name="username1" Type="System.String" DbType="VarChar(32) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="username2" Type="System.String" DbType="VarChar(32) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="User_UserUser" Member="User" ThisKey="username1" OtherKey="username" Type="User" IsForeignKey="true" />
+      <Association Name="User_UserUser1" Member="User1" ThisKey="username2" OtherKey="username" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Comment" Member="Comments">
+    <Type Name="Comment">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="content" Type="System.String" DbType="NVarChar(1024) NOT NULL" CanBeNull="false" />
+      <Column Name="eventId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="author" Type="System.String" DbType="VarChar(32)" CanBeNull="true" />
+      <Association Name="Event_Comment" Member="Event" ThisKey="eventId" OtherKey="id" Type="Event" IsForeignKey="true" />
+      <Association Name="User_Comment" Member="User" ThisKey="author" OtherKey="username" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Event" Member="Events">
+    <Type Name="Event">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="beginTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="endTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="NVarChar(1024) NOT NULL" CanBeNull="false" />
+      <Column Name="thumbnail" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="title" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
+      <Column Name="location" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="username" Type="System.String" DbType="VarChar(32) NOT NULL" CanBeNull="false" />
+      <Column Name="publishDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Event_Comment" Member="Comments" ThisKey="id" OtherKey="eventId" Type="Comment" />
+      <Association Name="Event_EventTag" Member="EventTags" ThisKey="id" OtherKey="event" Type="EventTag" />
+      <Association Name="Event_Notification" Member="Notifications" ThisKey="id" OtherKey="eventId" Type="Notification" />
+      <Association Name="Event_Photo" Member="Photos" ThisKey="id" OtherKey="eventId" Type="Photo" />
+      <Association Name="Event_UserEventAttendant" Member="UserEventAttendants" ThisKey="id" OtherKey="event" Type="UserEventAttendant" />
+      <Association Name="Location_Event" Member="Location1" ThisKey="location" OtherKey="id" Type="Location" IsForeignKey="true" />
+      <Association Name="User_Event" Member="User" ThisKey="username" OtherKey="username" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.EventTag" Member="EventTags">
+    <Type Name="EventTag">
+      <Column Name="event" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="tag" Type="System.String" DbType="VarChar(32) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Event_EventTag" Member="Event1" ThisKey="event" OtherKey="id" Type="Event" IsForeignKey="true" />
+      <Association Name="Tag_EventTag" Member="Tag1" ThisKey="tag" OtherKey="id" Type="Tag" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Individual" Member="Individuals">
+    <Type Name="Individual">
+      <Column Name="username" Type="System.String" DbType="VarChar(32) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="firstName" Type="System.String" DbType="NVarChar(16) NOT NULL" CanBeNull="false" />
+      <Column Name="midName" Type="System.String" DbType="NVarChar(16)" CanBeNull="true" />
+      <Column Name="lastName" Type="System.String" DbType="NVarChar(16) NOT NULL" CanBeNull="false" />
+      <Column Name="DOB" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="gender" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="Individual_IndividualInterest" Member="IndividualInterests" ThisKey="username" OtherKey="username" Type="IndividualInterest" />
+      <Association Name="User_Individual" Member="User" ThisKey="username" OtherKey="username" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.IndividualInterest" Member="IndividualInterests">
+    <Type Name="IndividualInterest">
+      <Column Name="username" Type="System.String" DbType="VarChar(32) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="interest" Type="System.String" DbType="NVarChar(32) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Individual_IndividualInterest" Member="Individual" ThisKey="username" OtherKey="username" Type="Individual" IsForeignKey="true" />
+      <Association Name="Interest_IndividualInterest" Member="Interest1" ThisKey="interest" OtherKey="name" Type="Interest" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Interest" Member="Interests">
+    <Type Name="Interest">
+      <Column Name="name" Type="System.String" DbType="NVarChar(32) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="NVarChar(1024)" CanBeNull="true" />
+      <Column Name="thumbnail" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="Interest_IndividualInterest" Member="IndividualInterests" ThisKey="name" OtherKey="interest" Type="IndividualInterest" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Location" Member="Locations">
+    <Type Name="Location">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="NVarChar(32) NOT NULL" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="NVarChar(1024)" CanBeNull="true" />
+      <Column Name="address" Type="System.String" DbType="NVarChar(64) NOT NULL" CanBeNull="false" />
+      <Column Name="longitude" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="latitude" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="thumbnail" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="Location_Event" Member="Events" ThisKey="id" OtherKey="location" Type="Event" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Notification" Member="Notifications">
+    <Type Name="Notification">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="receiver" Type="System.String" DbType="VarChar(32)" CanBeNull="true" />
+      <Column Name="sender" Type="System.String" DbType="VarChar(32)" CanBeNull="true" />
+      <Column Name="eventId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="typeInfo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Seen" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="timeSent" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Event_Notification" Member="Event" ThisKey="eventId" OtherKey="id" Type="Event" IsForeignKey="true" />
+      <Association Name="User_Notification" Member="User" ThisKey="receiver" OtherKey="username" Type="User" IsForeignKey="true" />
+      <Association Name="User_Notification1" Member="User1" ThisKey="sender" OtherKey="username" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Organization" Member="Organizations">
+    <Type Name="Organization">
+      <Column Name="username" Type="System.String" DbType="VarChar(32) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="type" Type="System.String" DbType="NVarChar(32) NOT NULL" CanBeNull="false" />
+      <Column Name="phone" Type="System.String" DbType="VarChar(16)" CanBeNull="true" />
+      <Column Name="website" Type="System.String" DbType="VarChar(256)" CanBeNull="true" />
+      <Association Name="Type_Organization" Member="Type1" ThisKey="type" OtherKey="name" Type="Type" IsForeignKey="true" />
+      <Association Name="User_Organization" Member="User" ThisKey="username" OtherKey="username" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Photo" Member="Photos">
+    <Type Name="Photo">
+      <Column Name="eventId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="[order]" Member="order" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="data" Type="System.Data.Linq.Binary" DbType="Image NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Association Name="Event_Photo" Member="Event" ThisKey="eventId" OtherKey="id" Type="Event" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Tag" Member="Tags">
+    <Type Name="Tag">
+      <Column Name="id" Type="System.String" DbType="VarChar(32) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="occurrence" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Tag_EventTag" Member="EventTags" ThisKey="id" OtherKey="tag" Type="EventTag" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Type" Member="Types">
+    <Type Name="Type">
+      <Column Name="name" Type="System.String" DbType="NVarChar(32) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Type_Organization" Member="Organizations" ThisKey="name" OtherKey="type" Type="Organization" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[User]" Member="Users">
+    <Type Name="User">
+      <Column Name="username" Type="System.String" DbType="VarChar(32) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="password" Type="System.String" DbType="VarChar(64) NOT NULL" CanBeNull="false" />
+      <Column Name="profilePicture" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="registerDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="userType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="User_Admin" Member="Admin" ThisKey="username" OtherKey="username" Type="Admin" Cardinality="One" />
+      <Association Name="User_UserUser" Member="UserUsers" ThisKey="username" OtherKey="username1" Type="UserUser" />
+      <Association Name="User_UserUser1" Member="UserUsers1" ThisKey="username" OtherKey="username2" Type="UserUser" />
+      <Association Name="User_Comment" Member="Comments" ThisKey="username" OtherKey="author" Type="Comment" />
+      <Association Name="User_Event" Member="Events" ThisKey="username" OtherKey="username" Type="Event" />
+      <Association Name="User_Individual" Member="Individual" ThisKey="username" OtherKey="username" Type="Individual" Cardinality="One" />
+      <Association Name="User_Notification" Member="Notifications" ThisKey="username" OtherKey="receiver" Type="Notification" />
+      <Association Name="User_Notification1" Member="Notifications1" ThisKey="username" OtherKey="sender" Type="Notification" />
+      <Association Name="User_Organization" Member="Organization" ThisKey="username" OtherKey="username" Type="Organization" Cardinality="One" />
+      <Association Name="User_UserEventAttendant" Member="UserEventAttendants" ThisKey="username" OtherKey="username" Type="UserEventAttendant" />
+    </Type>
+  </Table>
+  <Table Name="dbo.UserEventAttendants" Member="UserEventAttendants">
+    <Type Name="UserEventAttendant">
+      <Column Name="username" Type="System.String" DbType="VarChar(32) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="event" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="attend" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Event_UserEventAttendant" Member="Event1" ThisKey="event" OtherKey="id" Type="Event" IsForeignKey="true" />
+      <Association Name="User_UserEventAttendant" Member="User" ThisKey="username" OtherKey="username" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Function Name="dbo.addComennt" Method="addComennt">
+    <Parameter Name="eventId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="author" Type="System.String" DbType="VarChar(32)" />
+    <Parameter Name="content" Type="System.String" DbType="NVarChar(1024)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.unfollow" Method="unfollow">
+    <Parameter Name="this" Type="System.String" DbType="VarChar(32)" />
+    <Parameter Name="friend" Type="System.String" DbType="VarChar(32)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.attachInterest" Method="attachInterest">
+    <Parameter Name="username" Type="System.String" DbType="VarChar(32)" />
+    <Parameter Name="interest" Type="System.String" DbType="NVarChar(32)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.attachTag" Method="attachTag">
+    <Parameter Name="tag" Type="System.String" DbType="VarChar(32)" />
+    <Parameter Name="eventId" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.createEvent" Method="createEvent">
+    <Parameter Name="beginTime" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="endTime" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="description" Type="System.String" DbType="NVarChar(1024)" />
+    <Parameter Name="thumbnail" Type="System.Data.Linq.Binary" DbType="Image" />
+    <Parameter Name="title" Type="System.String" DbType="NVarChar(128)" />
+    <Parameter Name="location" Type="System.Int32" DbType="Int" />
+    <Parameter Name="currentUser" Type="System.String" DbType="VarChar(32)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.createIndividual" Method="createIndividual">
+    <Parameter Name="username" Type="System.String" DbType="VarChar(32)" />
+    <Parameter Name="password" Type="System.String" DbType="VarChar(64)" />
+    <Parameter Name="profilePicture" Type="System.Data.Linq.Binary" DbType="Image" />
+    <Parameter Name="firstName" Type="System.String" DbType="NVarChar(16)" />
+    <Parameter Name="midName" Type="System.String" DbType="NVarChar(16)" />
+    <Parameter Name="lastName" Type="System.String" DbType="NVarChar(16)" />
+    <Parameter Name="dob" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="gender" Type="System.Boolean" DbType="Bit" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.createInterest" Method="createInterest">
+    <Parameter Name="name" Type="System.String" DbType="NVarChar(32)" />
+    <Parameter Name="description" Type="System.String" DbType="NVarChar(1024)" />
+    <Parameter Name="thumbnail" Type="System.Data.Linq.Binary" DbType="Image" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.createLocation" Method="createLocation">
+    <Parameter Name="name" Type="System.String" DbType="NVarChar(32)" />
+    <Parameter Name="description" Type="System.String" DbType="NVarChar(1024)" />
+    <Parameter Name="address" Type="System.String" DbType="NVarChar(64)" />
+    <Parameter Name="long" Type="System.Single" DbType="Real" />
+    <Parameter Name="lat" Type="System.Single" DbType="Real" />
+    <Parameter Name="thumbnail" Type="System.Data.Linq.Binary" DbType="Image" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.createOrganization" Method="createOrganization">
+    <Parameter Name="username" Type="System.String" DbType="VarChar(32)" />
+    <Parameter Name="password" Type="System.String" DbType="VarChar(64)" />
+    <Parameter Name="profilePicture" Type="System.Data.Linq.Binary" DbType="Image" />
+    <Parameter Name="description" Type="System.String" DbType="NVarChar(1024)" />
+    <Parameter Name="type" Type="System.String" DbType="NVarChar(32)" />
+    <Parameter Name="phone" Type="System.String" DbType="VarChar(16)" />
+    <Parameter Name="website" Type="System.String" DbType="VarChar(256)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.createRoot" Method="createRoot">
+    <Parameter Name="username" Type="System.String" DbType="VarChar(32)" />
+    <Parameter Name="password" Type="System.String" DbType="VarChar(64)" />
+    <Parameter Name="profilePicture" Type="System.Data.Linq.Binary" DbType="Image" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.createTag" Method="createTag">
+    <Parameter Name="tagName" Type="System.String" DbType="VarChar(32)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.createType" Method="createType">
+    <Parameter Name="name" Type="System.String" DbType="NVarChar(32)" />
+    <Parameter Name="currentUser" Type="System.String" DbType="VarChar(32)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.createUser" Method="createUser">
+    <Parameter Name="username" Type="System.String" DbType="VarChar(32)" />
+    <Parameter Name="password" Type="System.String" DbType="VarChar(64)" />
+    <Parameter Name="profilePicture" Type="System.Data.Linq.Binary" DbType="Image" />
+    <Parameter Name="userType" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.decreaseTagOccurence" Method="decreaseTagOccurence">
+    <Parameter Name="tagName" Type="System.String" DbType="VarChar(32)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.deleteComment" Method="deleteComment">
+    <Parameter Name="currentUser" Type="System.String" DbType="VarChar(32)" />
+    <Parameter Name="commentId" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.deleteEvent" Method="deleteEvent">
+    <Parameter Name="id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="username" Type="System.String" DbType="VarChar(32)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.deleteInterest" Method="deleteInterest">
+    <Parameter Name="name" Type="System.String" DbType="NVarChar(32)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.detachTag" Method="detachTag">
+    <Parameter Name="tag" Type="System.String" DbType="VarChar(32)" />
+    <Parameter Name="eventId" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.dettachInterest" Method="dettachInterest">
+    <Parameter Name="username" Type="System.String" DbType="VarChar(32)" />
+    <Parameter Name="interest" Type="System.String" DbType="NVarChar(32)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.disinvite" Method="disinvite">
+    <Parameter Name="eventId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="username" Type="System.String" DbType="VarChar(32)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.editLocation" Method="editLocation">
+    <Parameter Name="eventId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="newLocation" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.follow" Method="follow">
+    <Parameter Name="this" Type="System.String" DbType="VarChar(32)" />
+    <Parameter Name="friend" Type="System.String" DbType="VarChar(32)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.followerList" Method="followerList">
+    <Parameter Name="this" Type="System.String" DbType="VarChar(32)" />
+    <ElementType Name="followerListResult">
+      <Column Name="username" Type="System.String" DbType="VarChar(32) NOT NULL" CanBeNull="false" />
+      <Column Name="profilePicture" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" />
+      <Column Name="userType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.followingList" Method="followingList">
+    <Parameter Name="this" Type="System.String" DbType="VarChar(32)" />
+    <ElementType Name="followingListResult">
+      <Column Name="username" Type="System.String" DbType="VarChar(32) NOT NULL" CanBeNull="false" />
+      <Column Name="profilePicture" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" />
+      <Column Name="userType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.getComments" Method="getComments">
+    <Parameter Name="eventId" Type="System.Int32" DbType="Int" />
+    <ElementType Name="getCommentsResult">
+      <Column Name="content" Type="System.String" DbType="NVarChar(1024) NOT NULL" CanBeNull="false" />
+      <Column Name="eventId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="author" Type="System.String" DbType="VarChar(32)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.getInterest" Method="getInterest">
+    <Parameter Name="name" Type="System.String" DbType="NVarChar(32)" />
+    <ElementType Name="getInterestResult">
+      <Column Name="name" Type="System.String" DbType="NVarChar(32) NOT NULL" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="NVarChar(1024)" CanBeNull="true" />
+      <Column Name="thumbnail" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.increaseTagOccurence" Method="increaseTagOccurence">
+    <Parameter Name="tagName" Type="System.String" DbType="VarChar(32)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.invite" Method="invite">
+    <Parameter Name="eventId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="username" Type="System.String" DbType="VarChar(32)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.listInvitedEvents" Method="listInvitedEvents">
+    <Parameter Name="user" Type="System.String" DbType="VarChar(32)" />
+    <Parameter Name="status" Type="System.Int32" DbType="Int" />
+    <ElementType Name="listInvitedEventsResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="beginTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="endTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="NVarChar(1024) NOT NULL" CanBeNull="false" />
+      <Column Name="thumbnail" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" />
+      <Column Name="title" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
+      <Column Name="location" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="username" Type="System.String" DbType="VarChar(32) NOT NULL" CanBeNull="false" />
+      <Column Name="publishDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.listInvitedPeople" Method="listInvitedPeople">
+    <Parameter Name="eventId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="status" Type="System.Int32" DbType="Int" />
+    <ElementType Name="listInvitedPeopleResult">
+      <Column Name="username" Type="System.String" DbType="VarChar(32) NOT NULL" CanBeNull="false" />
+      <Column Name="event" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="attend" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="username1" Type="System.String" DbType="VarChar(32) NOT NULL" CanBeNull="false" />
+      <Column Name="password" Type="System.String" DbType="VarChar(64) NOT NULL" CanBeNull="false" />
+      <Column Name="profilePicture" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" />
+      <Column Name="registerDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="userType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.respondInvitation" Method="respondInvitation">
+    <Parameter Name="user" Type="System.String" DbType="VarChar(32)" />
+    <Parameter Name="event" Type="System.Int32" DbType="Int" />
+    <Parameter Name="decision" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.searchInterestFromName" Method="searchInterestFromName">
+    <Parameter Name="name" Type="System.String" DbType="NVarChar(32)" />
+    <ElementType Name="searchInterestFromNameResult">
+      <Column Name="name" Type="System.String" DbType="NVarChar(32) NOT NULL" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="NVarChar(1024)" CanBeNull="true" />
+      <Column Name="thumbnail" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.searchTopTags" Method="searchTopTags">
+    <Parameter Name="tagName" Type="System.String" DbType="VarChar(32)" />
+    <Parameter Name="n" Type="System.Int32" DbType="Int" />
+    <ElementType Name="searchTopTagsResult">
+      <Column Name="id" Type="System.String" DbType="VarChar(32) NOT NULL" CanBeNull="false" />
+      <Column Name="occurrence" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.searchUserFromInterest" Method="searchUserFromInterest">
+    <Parameter Name="interest" Type="System.String" DbType="NVarChar(32)" />
+    <ElementType Name="searchUserFromInterestResult">
+      <Column Name="username" Type="System.String" DbType="VarChar(32) NOT NULL" CanBeNull="false" />
+      <Column Name="password" Type="System.String" DbType="VarChar(64) NOT NULL" CanBeNull="false" />
+      <Column Name="profilePicture" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" />
+      <Column Name="registerDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="userType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.setEvent" Method="setEvent">
+    <Parameter Name="id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="username" Type="System.String" DbType="NVarChar(32)" />
+    <Parameter Name="begintime" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="endtime" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="description" Type="System.String" DbType="NVarChar(1024)" />
+    <Parameter Name="thumbnail" Type="System.Data.Linq.Binary" DbType="Image" />
+    <Parameter Name="title" Type="System.String" DbType="NVarChar(128)" />
+    <Parameter Name="location" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.setPassword" Method="setPassword">
+    <Parameter Name="username" Type="System.String" DbType="VarChar(32)" />
+    <Parameter Name="oldPassword" Type="System.String" DbType="VarChar(64)" />
+    <Parameter Name="newPassword" Type="System.String" DbType="VarChar(64)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.setProfilePicture" Method="setProfilePicture">
+    <Parameter Name="username" Type="System.String" DbType="VarChar(32)" />
+    <Parameter Name="image" Type="System.Data.Linq.Binary" DbType="Image" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.auth" Method="auth" IsComposable="true">
+    <Parameter Name="username" Type="System.String" DbType="VarChar(32)" />
+    <Parameter Name="password" Type="System.String" DbType="VarChar(64)" />
+    <Return Type="System.Boolean" />
+  </Function>
+  <Function Name="dbo.isUserExisted" Method="isUserExisted" IsComposable="true">
+    <Parameter Name="username" Type="System.String" DbType="VarChar(32)" />
+    <Return Type="System.Boolean" />
+  </Function>
+  <Function Name="dbo.isAdmin" Method="isAdmin" IsComposable="true">
+    <Parameter Name="username" Type="System.String" DbType="VarChar(32)" />
+    <Return Type="System.Boolean" />
+  </Function>
+  <Function Name="dbo.isCommentAuthor" Method="isCommentAuthor" IsComposable="true">
+    <Parameter Name="username" Type="System.String" DbType="VarChar(32)" />
+    <Parameter Name="commentId" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Boolean" />
+  </Function>
+  <Function Name="dbo.isFollowing" Method="isFollowing" IsComposable="true">
+    <Parameter Name="this" Type="System.String" DbType="VarChar(32)" />
+    <Parameter Name="that" Type="System.String" DbType="VarChar(32)" />
+    <Return Type="System.Boolean" />
+  </Function>
+  <Function Name="dbo.isHost" Method="isHost" IsComposable="true">
+    <Parameter Name="username" Type="System.String" DbType="VarChar(32)" />
+    <Parameter Name="eventId" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Boolean" />
+  </Function>
+  <Function Name="dbo.isIndividual" Method="isIndividual" IsComposable="true">
+    <Parameter Name="username" Type="System.String" DbType="VarChar(32)" />
+    <Return Type="System.Boolean" />
+  </Function>
+  <Function Name="dbo.isTagExisted" Method="isTagExisted" IsComposable="true">
+    <Parameter Name="tagName" Type="System.String" DbType="VarChar(32)" />
+    <Return Type="System.Boolean" />
+  </Function>
+  <Function Name="dbo.isTypeExisted" Method="isTypeExisted" IsComposable="true">
+    <Parameter Name="name" Type="System.String" DbType="VarChar(32)" />
+    <Return Type="System.Boolean" />
+  </Function>
+</Database>

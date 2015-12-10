@@ -23,13 +23,13 @@
             <!-- Example -->
             
             <!-- Cover photo -->
-            <Grid x:Name="imgGrid" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="1">
+            <Grid x:Name="imgGrid" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
                 <Image Source="/Assets/Cover.png" Stretch="UniformToFill" VerticalAlignment="Center"/>
                 <Grid Background="#99000000"/>
                 
                 <!-- Avatar -->
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Border CornerRadius="64" BorderThickness="3" BorderBrush="#77FFFFFF"
+                    <Border CornerRadius="64" BorderThickness="3" BorderBrush="#77AAAAAA"
                             Width="128" Height="128" VerticalAlignment="Top" Grid.Row="1" Grid.RowSpan="2">
                         <Border.Background>
                             <ImageBrush ImageSource="Assets/1.png"/>
@@ -47,7 +47,7 @@
                 </StackPanel>
             </Grid>
 
-            <Pivot Grid.Row="1" Grid.Column="1" Margin="0,16,0,0">
+            <Pivot Grid.Row="1" Grid.Column="1" Margin="0,16,0,0" ScrollViewer.VerticalScrollBarVisibility="Disabled">
                 <PivotItem Header="About">
                     <StackPanel>
                         <local:DisplayCard CardTitle="Basic information">
@@ -61,7 +61,16 @@
                     </StackPanel>
                 </PivotItem>
                 <PivotItem Header="Following">
-                    <TextBlock Text="List of people you are following" />
+                    <!--<TextBlock Text="List of people you are following" />-->
+                    <local:ItemCard>
+                        <local:ItemCard.PictorialContent>
+                            <Image Source="Assets/1.png"/>
+                        </local:ItemCard.PictorialContent>
+                        
+                        <local:ItemCard.DescriptiveContent>
+                            <TextBlock Text="Myself" VerticalAlignment="Center"/>
+                        </local:ItemCard.DescriptiveContent>
+                    </local:ItemCard>
                 </PivotItem>
                 <PivotItem Header="Followers">
                     <TextBlock Text="List of your followers" />

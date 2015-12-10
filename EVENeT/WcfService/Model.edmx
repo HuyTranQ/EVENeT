@@ -1,0 +1,1656 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EVENetModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="username" />
+          </Key>
+          <Property Name="username" Type="varchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="content" Type="nvarchar" MaxLength="1024" Nullable="false" />
+          <Property Name="eventId" Type="int" />
+          <Property Name="author" Type="varchar" MaxLength="32" />
+        </EntityType>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="beginTime" Type="datetime" Nullable="false" />
+          <Property Name="endTime" Type="datetime" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="1024" Nullable="false" />
+          <Property Name="thumbnail" Type="image" />
+          <Property Name="title" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="location" Type="int" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="publishDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="EventTag">
+          <Key>
+            <PropertyRef Name="event" />
+            <PropertyRef Name="tag" />
+          </Key>
+          <Property Name="event" Type="int" Nullable="false" />
+          <Property Name="tag" Type="varchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Individual">
+          <Key>
+            <PropertyRef Name="username" />
+          </Key>
+          <Property Name="username" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="firstName" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="midName" Type="nvarchar" MaxLength="16" />
+          <Property Name="lastName" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="DOB" Type="date" Nullable="false" />
+          <Property Name="gender" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="IndividualInterest">
+          <Key>
+            <PropertyRef Name="username" />
+            <PropertyRef Name="interest" />
+          </Key>
+          <Property Name="username" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="interest" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Interest">
+          <Key>
+            <PropertyRef Name="name" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="1024" />
+          <Property Name="thumbnail" Type="image" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="1024" />
+          <Property Name="address" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="longitude" Type="real" />
+          <Property Name="latitude" Type="real" />
+          <Property Name="thumbnail" Type="image" />
+        </EntityType>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="receiver" Type="varchar" MaxLength="32" />
+          <Property Name="sender" Type="varchar" MaxLength="32" />
+          <Property Name="eventId" Type="int" />
+          <Property Name="typeInfo" Type="int" />
+          <Property Name="Seen" Type="bit" />
+          <Property Name="timeSent" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Organization">
+          <Key>
+            <PropertyRef Name="username" />
+          </Key>
+          <Property Name="username" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="type" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="phone" Type="varchar" MaxLength="16" />
+          <Property Name="website" Type="varchar" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="Photo">
+          <Key>
+            <PropertyRef Name="eventId" />
+            <PropertyRef Name="order" />
+          </Key>
+          <Property Name="eventId" Type="int" Nullable="false" />
+          <Property Name="order" Type="int" Nullable="false" />
+          <Property Name="data" Type="image" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tag">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="occurrence" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Type">
+          <Key>
+            <PropertyRef Name="name" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="username" />
+          </Key>
+          <Property Name="username" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="profilePicture" Type="image" />
+          <Property Name="registerDate" Type="datetime" Nullable="false" />
+          <Property Name="userType" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserEventAttendants">
+          <Key>
+            <PropertyRef Name="username" />
+            <PropertyRef Name="event" />
+          </Key>
+          <Property Name="username" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="event" Type="int" Nullable="false" />
+          <Property Name="attend" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserUser">
+          <Key>
+            <PropertyRef Name="username1" />
+            <PropertyRef Name="username2" />
+          </Key>
+          <Property Name="username1" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="username2" Type="varchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Admin_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Admin" Type="Self.Admin" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="Admin">
+              <PropertyRef Name="username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comment_Author">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="author" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comment_Event">
+          <End Role="Event" Type="Self.Event" Multiplicity="0..1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="eventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Event_Location">
+          <End Role="Location" Type="Self.Location" Multiplicity="1" />
+          <End Role="Event" Type="Self.Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="location" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Event_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Event" Type="Self.Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EventTag_Event">
+          <End Role="Event" Type="Self.Event" Multiplicity="1" />
+          <End Role="EventTag" Type="Self.EventTag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="EventTag">
+              <PropertyRef Name="event" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EventTag_Tag">
+          <End Role="Tag" Type="Self.Tag" Multiplicity="1" />
+          <End Role="EventTag" Type="Self.EventTag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tag">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="EventTag">
+              <PropertyRef Name="tag" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Individual_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Individual" Type="Self.Individual" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="Individual">
+              <PropertyRef Name="username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IndividualInterest_Interest">
+          <End Role="Interest" Type="Self.Interest" Multiplicity="1" />
+          <End Role="IndividualInterest" Type="Self.IndividualInterest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Interest">
+              <PropertyRef Name="name" />
+            </Principal>
+            <Dependent Role="IndividualInterest">
+              <PropertyRef Name="interest" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IndividualInterest_User">
+          <End Role="Individual" Type="Self.Individual" Multiplicity="1" />
+          <End Role="IndividualInterest" Type="Self.IndividualInterest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Individual">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="IndividualInterest">
+              <PropertyRef Name="username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notify_Event">
+          <End Role="Event" Type="Self.Event" Multiplicity="0..1" />
+          <End Role="Notification" Type="Self.Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="eventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notify_Receiver">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Notification" Type="Self.Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="receiver" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notify_Sender">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Notification" Type="Self.Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="sender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Organization_Type">
+          <End Role="Type" Type="Self.Type" Multiplicity="1" />
+          <End Role="Organization" Type="Self.Organization" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type">
+              <PropertyRef Name="name" />
+            </Principal>
+            <Dependent Role="Organization">
+              <PropertyRef Name="type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Organization_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Organization" Type="Self.Organization" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="Organization">
+              <PropertyRef Name="username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Photo_Event">
+          <End Role="Event" Type="Self.Event" Multiplicity="1" />
+          <End Role="Photo" Type="Self.Photo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Photo">
+              <PropertyRef Name="eventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserEventAttendants_Event">
+          <End Role="Event" Type="Self.Event" Multiplicity="1" />
+          <End Role="UserEventAttendants" Type="Self.UserEventAttendants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserEventAttendants">
+              <PropertyRef Name="event" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserEventAttendants_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserEventAttendants" Type="Self.UserEventAttendants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="UserEventAttendants">
+              <PropertyRef Name="username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserUser_User1">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserUser" Type="Self.UserUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="UserUser">
+              <PropertyRef Name="username1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserUser_User2">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserUser" Type="Self.UserUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="UserUser">
+              <PropertyRef Name="username2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="addComennt" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="eventId" Type="int" Mode="In" />
+          <Parameter Name="author" Type="varchar" Mode="In" />
+          <Parameter Name="content" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="attachInterest" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="username" Type="varchar" Mode="In" />
+          <Parameter Name="interest" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="attachTag" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tag" Type="varchar" Mode="In" />
+          <Parameter Name="eventId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="auth" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="bit">
+          <Parameter Name="username" Type="varchar" Mode="In" />
+          <Parameter Name="password" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="createEvent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="beginTime" Type="datetime" Mode="In" />
+          <Parameter Name="endTime" Type="datetime" Mode="In" />
+          <Parameter Name="description" Type="nvarchar" Mode="In" />
+          <Parameter Name="thumbnail" Type="image" Mode="In" />
+          <Parameter Name="title" Type="nvarchar" Mode="In" />
+          <Parameter Name="location" Type="int" Mode="In" />
+          <Parameter Name="currentUser" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="createIndividual" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="username" Type="varchar" Mode="In" />
+          <Parameter Name="password" Type="varchar" Mode="In" />
+          <Parameter Name="profilePicture" Type="image" Mode="In" />
+          <Parameter Name="firstName" Type="nvarchar" Mode="In" />
+          <Parameter Name="midName" Type="nvarchar" Mode="In" />
+          <Parameter Name="lastName" Type="nvarchar" Mode="In" />
+          <Parameter Name="dob" Type="date" Mode="In" />
+          <Parameter Name="gender" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="createInterest" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="nvarchar" Mode="In" />
+          <Parameter Name="description" Type="nvarchar" Mode="In" />
+          <Parameter Name="thumbnail" Type="image" Mode="In" />
+        </Function>
+        <Function Name="createLocation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="nvarchar" Mode="In" />
+          <Parameter Name="description" Type="nvarchar" Mode="In" />
+          <Parameter Name="address" Type="nvarchar" Mode="In" />
+          <Parameter Name="long" Type="real" Mode="In" />
+          <Parameter Name="lat" Type="real" Mode="In" />
+          <Parameter Name="thumbnail" Type="image" Mode="In" />
+        </Function>
+        <Function Name="createOrganization" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="username" Type="varchar" Mode="In" />
+          <Parameter Name="password" Type="varchar" Mode="In" />
+          <Parameter Name="profilePicture" Type="image" Mode="In" />
+          <Parameter Name="description" Type="nvarchar" Mode="In" />
+          <Parameter Name="type" Type="nvarchar" Mode="In" />
+          <Parameter Name="phone" Type="varchar" Mode="In" />
+          <Parameter Name="website" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="createRoot" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="username" Type="varchar" Mode="In" />
+          <Parameter Name="password" Type="varchar" Mode="In" />
+          <Parameter Name="profilePicture" Type="image" Mode="In" />
+        </Function>
+        <Function Name="createTag" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tagName" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="createType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="nvarchar" Mode="In" />
+          <Parameter Name="currentUser" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="createUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="username" Type="varchar" Mode="In" />
+          <Parameter Name="password" Type="varchar" Mode="In" />
+          <Parameter Name="profilePicture" Type="image" Mode="In" />
+          <Parameter Name="userType" Type="int" Mode="In" />
+        </Function>
+        <Function Name="decreaseTagOccurence" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tagName" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="deleteComment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="currentUser" Type="varchar" Mode="In" />
+          <Parameter Name="commentId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="deleteEvent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="username" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="deleteInterest" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="detachTag" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tag" Type="varchar" Mode="In" />
+          <Parameter Name="eventId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="dettachInterest" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="username" Type="varchar" Mode="In" />
+          <Parameter Name="interest" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="disinvite" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="eventId" Type="int" Mode="In" />
+          <Parameter Name="username" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="editLocation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="eventId" Type="int" Mode="In" />
+          <Parameter Name="newLocation" Type="int" Mode="In" />
+        </Function>
+        <Function Name="follow" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="this" Type="varchar" Mode="In" />
+          <Parameter Name="friend" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="followerList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="this" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="followingList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="this" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="getComments" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="eventId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="getInterest" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="increaseTagOccurence" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tagName" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="invite" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="eventId" Type="int" Mode="In" />
+          <Parameter Name="username" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="isAdmin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="bit">
+          <Parameter Name="username" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="isCommentAuthor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="bit">
+          <Parameter Name="username" Type="varchar" Mode="In" />
+          <Parameter Name="commentId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="isFollowing" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="bit">
+          <Parameter Name="this" Type="varchar" Mode="In" />
+          <Parameter Name="that" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="isHost" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="bit">
+          <Parameter Name="username" Type="varchar" Mode="In" />
+          <Parameter Name="eventId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="isIndividual" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="bit">
+          <Parameter Name="username" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="isTagExisted" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="bit">
+          <Parameter Name="tagName" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="isTypeExisted" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="bit">
+          <Parameter Name="name" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="isUserExisted" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="bit">
+          <Parameter Name="username" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="listInvitedEvents" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="user" Type="varchar" Mode="In" />
+          <Parameter Name="status" Type="int" Mode="In" />
+        </Function>
+        <Function Name="listInvitedPeople" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="eventId" Type="int" Mode="In" />
+          <Parameter Name="status" Type="int" Mode="In" />
+        </Function>
+        <Function Name="respondInvitation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="user" Type="varchar" Mode="In" />
+          <Parameter Name="event" Type="int" Mode="In" />
+          <Parameter Name="decision" Type="int" Mode="In" />
+        </Function>
+        <Function Name="searchInterestFromName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="searchTopTags" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tagName" Type="varchar" Mode="In" />
+          <Parameter Name="n" Type="int" Mode="In" />
+        </Function>
+        <Function Name="searchUserFromInterest" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="interest" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="setEvent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="username" Type="nvarchar" Mode="In" />
+          <Parameter Name="begintime" Type="datetime" Mode="In" />
+          <Parameter Name="endtime" Type="datetime" Mode="In" />
+          <Parameter Name="description" Type="nvarchar" Mode="In" />
+          <Parameter Name="thumbnail" Type="image" Mode="In" />
+          <Parameter Name="title" Type="nvarchar" Mode="In" />
+          <Parameter Name="location" Type="int" Mode="In" />
+        </Function>
+        <Function Name="setPassword" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="username" Type="varchar" Mode="In" />
+          <Parameter Name="oldPassword" Type="varchar" Mode="In" />
+          <Parameter Name="newPassword" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="setProfilePicture" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="username" Type="varchar" Mode="In" />
+          <Parameter Name="image" Type="image" Mode="In" />
+        </Function>
+        <Function Name="unfollow" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="this" Type="varchar" Mode="In" />
+          <Parameter Name="friend" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="EVENetModelStoreContainer">
+          <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Event" EntityType="Self.Event" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EventTag" EntityType="Self.EventTag" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Individual" EntityType="Self.Individual" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IndividualInterest" EntityType="Self.IndividualInterest" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Interest" EntityType="Self.Interest" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Notification" EntityType="Self.Notification" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Organization" EntityType="Self.Organization" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Photo" EntityType="Self.Photo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tag" EntityType="Self.Tag" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Type" EntityType="Self.Type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserEventAttendants" EntityType="Self.UserEventAttendants" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserUser" EntityType="Self.UserUser" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Admin_User" Association="Self.FK_Admin_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Admin" EntitySet="Admin" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comment_Author" Association="Self.FK_Comment_Author">
+            <End Role="User" EntitySet="User" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comment_Event" Association="Self.FK_Comment_Event">
+            <End Role="Event" EntitySet="Event" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Event_Location" Association="Self.FK_Event_Location">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="Event" EntitySet="Event" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Event_User" Association="Self.FK_Event_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Event" EntitySet="Event" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EventTag_Event" Association="Self.FK_EventTag_Event">
+            <End Role="Event" EntitySet="Event" />
+            <End Role="EventTag" EntitySet="EventTag" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EventTag_Tag" Association="Self.FK_EventTag_Tag">
+            <End Role="Tag" EntitySet="Tag" />
+            <End Role="EventTag" EntitySet="EventTag" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Individual_User" Association="Self.FK_Individual_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Individual" EntitySet="Individual" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IndividualInterest_Interest" Association="Self.FK_IndividualInterest_Interest">
+            <End Role="Interest" EntitySet="Interest" />
+            <End Role="IndividualInterest" EntitySet="IndividualInterest" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IndividualInterest_User" Association="Self.FK_IndividualInterest_User">
+            <End Role="Individual" EntitySet="Individual" />
+            <End Role="IndividualInterest" EntitySet="IndividualInterest" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notify_Event" Association="Self.FK_Notify_Event">
+            <End Role="Event" EntitySet="Event" />
+            <End Role="Notification" EntitySet="Notification" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notify_Receiver" Association="Self.FK_Notify_Receiver">
+            <End Role="User" EntitySet="User" />
+            <End Role="Notification" EntitySet="Notification" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notify_Sender" Association="Self.FK_Notify_Sender">
+            <End Role="User" EntitySet="User" />
+            <End Role="Notification" EntitySet="Notification" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Organization_Type" Association="Self.FK_Organization_Type">
+            <End Role="Type" EntitySet="Type" />
+            <End Role="Organization" EntitySet="Organization" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Organization_User" Association="Self.FK_Organization_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Organization" EntitySet="Organization" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Photo_Event" Association="Self.FK_Photo_Event">
+            <End Role="Event" EntitySet="Event" />
+            <End Role="Photo" EntitySet="Photo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserEventAttendants_Event" Association="Self.FK_UserEventAttendants_Event">
+            <End Role="Event" EntitySet="Event" />
+            <End Role="UserEventAttendants" EntitySet="UserEventAttendants" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserEventAttendants_User" Association="Self.FK_UserEventAttendants_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserEventAttendants" EntitySet="UserEventAttendants" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserUser_User1" Association="Self.FK_UserUser_User1">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserUser" EntitySet="UserUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserUser_User2" Association="Self.FK_UserUser_User2">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserUser" EntitySet="UserUser" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EVENetModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="username" />
+          </Key>
+          <Property Name="username" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Admin_User" FromRole="Admin" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="content" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="eventId" Type="Int32" />
+          <Property Name="author" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Comment_Author" FromRole="Comment" ToRole="User" />
+          <NavigationProperty Name="Event" Relationship="Self.FK_Comment_Event" FromRole="Comment" ToRole="Event" />
+        </EntityType>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="beginTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="endTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="description" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="thumbnail" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="title" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="location" Type="Int32" Nullable="false" />
+          <Property Name="username" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="publishDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Comments" Relationship="Self.FK_Comment_Event" FromRole="Event" ToRole="Comment" />
+          <NavigationProperty Name="Location1" Relationship="Self.FK_Event_Location" FromRole="Event" ToRole="Location" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Event_User" FromRole="Event" ToRole="User" />
+          <NavigationProperty Name="Notifications" Relationship="Self.FK_Notify_Event" FromRole="Event" ToRole="Notification" />
+          <NavigationProperty Name="Photos" Relationship="Self.FK_Photo_Event" FromRole="Event" ToRole="Photo" />
+          <NavigationProperty Name="UserEventAttendants" Relationship="Self.FK_UserEventAttendants_Event" FromRole="Event" ToRole="UserEventAttendants" />
+          <NavigationProperty Name="Tags" Relationship="Self.EventTag" FromRole="Event" ToRole="Tag" />
+        </EntityType>
+        <EntityType Name="Individual">
+          <Key>
+            <PropertyRef Name="username" />
+          </Key>
+          <Property Name="username" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="firstName" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="midName" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="lastName" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DOB" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="gender" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Individual_User" FromRole="Individual" ToRole="User" />
+          <NavigationProperty Name="Interests" Relationship="Self.IndividualInterest" FromRole="Individual" ToRole="Interest" />
+        </EntityType>
+        <EntityType Name="Interest">
+          <Key>
+            <PropertyRef Name="name" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Name="thumbnail" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Individuals" Relationship="Self.IndividualInterest" FromRole="Interest" ToRole="Individual" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Name="address" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="longitude" Type="Single" />
+          <Property Name="latitude" Type="Single" />
+          <Property Name="thumbnail" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Events" Relationship="Self.FK_Event_Location" FromRole="Location" ToRole="Event" />
+        </EntityType>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="receiver" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="sender" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="eventId" Type="Int32" />
+          <Property Name="typeInfo" Type="Int32" />
+          <Property Name="Seen" Type="Boolean" />
+          <Property Name="timeSent" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Event" Relationship="Self.FK_Notify_Event" FromRole="Notification" ToRole="Event" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Notify_Receiver" FromRole="Notification" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="Self.FK_Notify_Sender" FromRole="Notification" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Organization">
+          <Key>
+            <PropertyRef Name="username" />
+          </Key>
+          <Property Name="username" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="type" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="phone" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="website" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Type1" Relationship="Self.FK_Organization_Type" FromRole="Organization" ToRole="Type" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Organization_User" FromRole="Organization" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Photo">
+          <Key>
+            <PropertyRef Name="eventId" />
+            <PropertyRef Name="order" />
+          </Key>
+          <Property Name="eventId" Type="Int32" Nullable="false" />
+          <Property Name="order" Type="Int32" Nullable="false" />
+          <Property Name="data" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <NavigationProperty Name="Event" Relationship="Self.FK_Photo_Event" FromRole="Photo" ToRole="Event" />
+        </EntityType>
+        <EntityType Name="Tag">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="occurrence" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Events" Relationship="Self.EventTag" FromRole="Tag" ToRole="Event" />
+        </EntityType>
+        <EntityType Name="Type">
+          <Key>
+            <PropertyRef Name="name" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Organizations" Relationship="Self.FK_Organization_Type" FromRole="Type" ToRole="Organization" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="username" />
+          </Key>
+          <Property Name="username" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="profilePicture" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="registerDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="userType" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Admin" Relationship="Self.FK_Admin_User" FromRole="User" ToRole="Admin" />
+          <NavigationProperty Name="Comments" Relationship="Self.FK_Comment_Author" FromRole="User" ToRole="Comment" />
+          <NavigationProperty Name="Events" Relationship="Self.FK_Event_User" FromRole="User" ToRole="Event" />
+          <NavigationProperty Name="Individual" Relationship="Self.FK_Individual_User" FromRole="User" ToRole="Individual" />
+          <NavigationProperty Name="Notifications" Relationship="Self.FK_Notify_Receiver" FromRole="User" ToRole="Notification" />
+          <NavigationProperty Name="Notifications1" Relationship="Self.FK_Notify_Sender" FromRole="User" ToRole="Notification" />
+          <NavigationProperty Name="Organization" Relationship="Self.FK_Organization_User" FromRole="User" ToRole="Organization" />
+          <NavigationProperty Name="UserEventAttendants" Relationship="Self.FK_UserEventAttendants_User" FromRole="User" ToRole="UserEventAttendants" />
+          <NavigationProperty Name="User1" Relationship="Self.UserUser" FromRole="User" ToRole="User1" />
+          <NavigationProperty Name="Users" Relationship="Self.UserUser" FromRole="User1" ToRole="User" />
+        </EntityType>
+        <EntityType Name="UserEventAttendant">
+          <Key>
+            <PropertyRef Name="username" />
+            <PropertyRef Name="event" />
+          </Key>
+          <Property Name="username" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="event" Type="Int32" Nullable="false" />
+          <Property Name="attend" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Event1" Relationship="Self.FK_UserEventAttendants_Event" FromRole="UserEventAttendants" ToRole="Event" />
+          <NavigationProperty Name="User" Relationship="Self.FK_UserEventAttendants_User" FromRole="UserEventAttendants" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_Admin_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Admin" Type="Self.Admin" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="Admin">
+              <PropertyRef Name="username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comment_Author">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="author" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comment_Event">
+          <End Role="Event" Type="Self.Event" Multiplicity="0..1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="eventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Event_Location">
+          <End Role="Location" Type="Self.Location" Multiplicity="1" />
+          <End Role="Event" Type="Self.Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="location" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Event_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Event" Type="Self.Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notify_Event">
+          <End Role="Event" Type="Self.Event" Multiplicity="0..1" />
+          <End Role="Notification" Type="Self.Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="eventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Photo_Event">
+          <End Role="Event" Type="Self.Event" Multiplicity="1" />
+          <End Role="Photo" Type="Self.Photo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Photo">
+              <PropertyRef Name="eventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserEventAttendants_Event">
+          <End Role="Event" Type="Self.Event" Multiplicity="1" />
+          <End Role="UserEventAttendants" Type="Self.UserEventAttendant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserEventAttendants">
+              <PropertyRef Name="event" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Individual_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Individual" Type="Self.Individual" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="Individual">
+              <PropertyRef Name="username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notify_Receiver">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Notification" Type="Self.Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="receiver" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notify_Sender">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Notification" Type="Self.Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="sender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Organization_Type">
+          <End Role="Type" Type="Self.Type" Multiplicity="1" />
+          <End Role="Organization" Type="Self.Organization" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type">
+              <PropertyRef Name="name" />
+            </Principal>
+            <Dependent Role="Organization">
+              <PropertyRef Name="type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Organization_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Organization" Type="Self.Organization" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="Organization">
+              <PropertyRef Name="username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserEventAttendants_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserEventAttendants" Type="Self.UserEventAttendant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="UserEventAttendants">
+              <PropertyRef Name="username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EventTag">
+          <End Role="Event" Type="Self.Event" Multiplicity="*" />
+          <End Role="Tag" Type="Self.Tag" Multiplicity="*" />
+        </Association>
+        <Association Name="IndividualInterest">
+          <End Role="Interest" Type="Self.Interest" Multiplicity="*" />
+          <End Role="Individual" Type="Self.Individual" Multiplicity="*" />
+        </Association>
+        <Association Name="UserUser">
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <End Role="User1" Type="Self.User" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="EVENetEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Admins" EntityType="Self.Admin" />
+          <EntitySet Name="Comments" EntityType="Self.Comment" />
+          <EntitySet Name="Events" EntityType="Self.Event" />
+          <EntitySet Name="Individuals" EntityType="Self.Individual" />
+          <EntitySet Name="Interests" EntityType="Self.Interest" />
+          <EntitySet Name="Locations" EntityType="Self.Location" />
+          <EntitySet Name="Notifications" EntityType="Self.Notification" />
+          <EntitySet Name="Organizations" EntityType="Self.Organization" />
+          <EntitySet Name="Photos" EntityType="Self.Photo" />
+          <EntitySet Name="Tags" EntityType="Self.Tag" />
+          <EntitySet Name="Types" EntityType="Self.Type" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="UserEventAttendants" EntityType="Self.UserEventAttendant" />
+          <AssociationSet Name="FK_Admin_User" Association="Self.FK_Admin_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Admin" EntitySet="Admins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comment_Author" Association="Self.FK_Comment_Author">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Comment" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comment_Event" Association="Self.FK_Comment_Event">
+            <End Role="Event" EntitySet="Events" />
+            <End Role="Comment" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Event_Location" Association="Self.FK_Event_Location">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="Event" EntitySet="Events" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Event_User" Association="Self.FK_Event_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Event" EntitySet="Events" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notify_Event" Association="Self.FK_Notify_Event">
+            <End Role="Event" EntitySet="Events" />
+            <End Role="Notification" EntitySet="Notifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Photo_Event" Association="Self.FK_Photo_Event">
+            <End Role="Event" EntitySet="Events" />
+            <End Role="Photo" EntitySet="Photos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserEventAttendants_Event" Association="Self.FK_UserEventAttendants_Event">
+            <End Role="Event" EntitySet="Events" />
+            <End Role="UserEventAttendants" EntitySet="UserEventAttendants" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Individual_User" Association="Self.FK_Individual_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Individual" EntitySet="Individuals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notify_Receiver" Association="Self.FK_Notify_Receiver">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Notification" EntitySet="Notifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notify_Sender" Association="Self.FK_Notify_Sender">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Notification" EntitySet="Notifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Organization_Type" Association="Self.FK_Organization_Type">
+            <End Role="Type" EntitySet="Types" />
+            <End Role="Organization" EntitySet="Organizations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Organization_User" Association="Self.FK_Organization_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Organization" EntitySet="Organizations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserEventAttendants_User" Association="Self.FK_UserEventAttendants_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserEventAttendants" EntitySet="UserEventAttendants" />
+          </AssociationSet>
+          <AssociationSet Name="EventTag" Association="Self.EventTag">
+            <End Role="Event" EntitySet="Events" />
+            <End Role="Tag" EntitySet="Tags" />
+          </AssociationSet>
+          <AssociationSet Name="IndividualInterest" Association="Self.IndividualInterest">
+            <End Role="Interest" EntitySet="Interests" />
+            <End Role="Individual" EntitySet="Individuals" />
+          </AssociationSet>
+          <AssociationSet Name="UserUser" Association="Self.UserUser">
+            <End Role="User" EntitySet="Users" />
+            <End Role="User1" EntitySet="Users" />
+          </AssociationSet>
+          <FunctionImport Name="addComennt">
+            <Parameter Name="eventId" Mode="In" Type="Int32" />
+            <Parameter Name="author" Mode="In" Type="String" />
+            <Parameter Name="content" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="attachInterest">
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="interest" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="attachTag">
+            <Parameter Name="tag" Mode="In" Type="String" />
+            <Parameter Name="eventId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="createEvent">
+            <Parameter Name="beginTime" Mode="In" Type="DateTime" />
+            <Parameter Name="endTime" Mode="In" Type="DateTime" />
+            <Parameter Name="description" Mode="In" Type="String" />
+            <Parameter Name="thumbnail" Mode="In" Type="Binary" />
+            <Parameter Name="title" Mode="In" Type="String" />
+            <Parameter Name="location" Mode="In" Type="Int32" />
+            <Parameter Name="currentUser" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="createIndividual">
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+            <Parameter Name="profilePicture" Mode="In" Type="Binary" />
+            <Parameter Name="firstName" Mode="In" Type="String" />
+            <Parameter Name="midName" Mode="In" Type="String" />
+            <Parameter Name="lastName" Mode="In" Type="String" />
+            <Parameter Name="dob" Mode="In" Type="DateTime" />
+            <Parameter Name="gender" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="createInterest">
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="description" Mode="In" Type="String" />
+            <Parameter Name="thumbnail" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="createLocation">
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="description" Mode="In" Type="String" />
+            <Parameter Name="address" Mode="In" Type="String" />
+            <Parameter Name="long" Mode="In" Type="Single" />
+            <Parameter Name="lat" Mode="In" Type="Single" />
+            <Parameter Name="thumbnail" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="createOrganization">
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+            <Parameter Name="profilePicture" Mode="In" Type="Binary" />
+            <Parameter Name="description" Mode="In" Type="String" />
+            <Parameter Name="type" Mode="In" Type="String" />
+            <Parameter Name="phone" Mode="In" Type="String" />
+            <Parameter Name="website" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="createRoot">
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+            <Parameter Name="profilePicture" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="createTag">
+            <Parameter Name="tagName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="createType">
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="currentUser" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="createUser">
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+            <Parameter Name="profilePicture" Mode="In" Type="Binary" />
+            <Parameter Name="userType" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="decreaseTagOccurence">
+            <Parameter Name="tagName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="deleteComment">
+            <Parameter Name="currentUser" Mode="In" Type="String" />
+            <Parameter Name="commentId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="deleteEvent">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="username" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="deleteInterest">
+            <Parameter Name="name" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="detachTag">
+            <Parameter Name="tag" Mode="In" Type="String" />
+            <Parameter Name="eventId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="dettachInterest">
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="interest" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="disinvite">
+            <Parameter Name="eventId" Mode="In" Type="Int32" />
+            <Parameter Name="username" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="editLocation">
+            <Parameter Name="eventId" Mode="In" Type="Int32" />
+            <Parameter Name="newLocation" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="follow">
+            <Parameter Name="this" Mode="In" Type="String" />
+            <Parameter Name="friend" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="followerList" ReturnType="Collection(EVENetModel.followerList_Result)">
+            <Parameter Name="this" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="followingList" ReturnType="Collection(EVENetModel.followingList_Result)">
+            <Parameter Name="this" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="getComments" ReturnType="Collection(EVENetModel.getComments_Result)">
+            <Parameter Name="eventId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getInterest" ReturnType="Collection(EVENetModel.getInterest_Result)">
+            <Parameter Name="name" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="increaseTagOccurence">
+            <Parameter Name="tagName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="invite">
+            <Parameter Name="eventId" Mode="In" Type="Int32" />
+            <Parameter Name="username" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="listInvitedEvents" ReturnType="Collection(EVENetModel.listInvitedEvents_Result)">
+            <Parameter Name="user" Mode="In" Type="String" />
+            <Parameter Name="status" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="listInvitedPeople" ReturnType="Collection(EVENetModel.listInvitedPeople_Result)">
+            <Parameter Name="eventId" Mode="In" Type="Int32" />
+            <Parameter Name="status" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="respondInvitation">
+            <Parameter Name="user" Mode="In" Type="String" />
+            <Parameter Name="event" Mode="In" Type="Int32" />
+            <Parameter Name="decision" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="searchInterestFromName" ReturnType="Collection(EVENetModel.searchInterestFromName_Result)">
+            <Parameter Name="name" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="searchTopTags" ReturnType="Collection(EVENetModel.searchTopTags_Result)">
+            <Parameter Name="tagName" Mode="In" Type="String" />
+            <Parameter Name="n" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="searchUserFromInterest" ReturnType="Collection(EVENetModel.searchUserFromInterest_Result)">
+            <Parameter Name="interest" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="setEvent">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="begintime" Mode="In" Type="DateTime" />
+            <Parameter Name="endtime" Mode="In" Type="DateTime" />
+            <Parameter Name="description" Mode="In" Type="String" />
+            <Parameter Name="thumbnail" Mode="In" Type="Binary" />
+            <Parameter Name="title" Mode="In" Type="String" />
+            <Parameter Name="location" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="setPassword">
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="oldPassword" Mode="In" Type="String" />
+            <Parameter Name="newPassword" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="setProfilePicture">
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="image" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="unfollow">
+            <Parameter Name="this" Mode="In" Type="String" />
+            <Parameter Name="friend" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="followerList_Result">
+          <Property Type="String" Name="username" Nullable="false" MaxLength="32" />
+          <Property Type="Binary" Name="profilePicture" Nullable="true" MaxLength="Max" />
+          <Property Type="Int32" Name="userType" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="followingList_Result">
+          <Property Type="String" Name="username" Nullable="false" MaxLength="32" />
+          <Property Type="Binary" Name="profilePicture" Nullable="true" MaxLength="Max" />
+          <Property Type="Int32" Name="userType" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="getComments_Result">
+          <Property Type="String" Name="content" Nullable="false" MaxLength="1024" />
+          <Property Type="Int32" Name="eventId" Nullable="true" />
+          <Property Type="String" Name="author" Nullable="true" MaxLength="32" />
+        </ComplexType>
+        <ComplexType Name="getInterest_Result">
+          <Property Type="String" Name="name" Nullable="false" MaxLength="32" />
+          <Property Type="String" Name="description" Nullable="true" MaxLength="1024" />
+          <Property Type="Binary" Name="thumbnail" Nullable="true" MaxLength="Max" />
+        </ComplexType>
+        <ComplexType Name="listInvitedEvents_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="DateTime" Name="beginTime" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="endTime" Nullable="false" Precision="23" />
+          <Property Type="String" Name="description" Nullable="false" MaxLength="1024" />
+          <Property Type="Binary" Name="thumbnail" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="title" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="location" Nullable="false" />
+          <Property Type="String" Name="username" Nullable="false" MaxLength="32" />
+          <Property Type="DateTime" Name="publishDate" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="listInvitedPeople_Result">
+          <Property Type="String" Name="username" Nullable="false" MaxLength="32" />
+          <Property Type="Int32" Name="event" Nullable="false" />
+          <Property Type="Int32" Name="attend" Nullable="false" />
+          <Property Type="String" Name="username1" Nullable="false" MaxLength="32" />
+          <Property Type="String" Name="password" Nullable="false" MaxLength="64" />
+          <Property Type="Binary" Name="profilePicture" Nullable="true" MaxLength="Max" />
+          <Property Type="DateTime" Name="registerDate" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="userType" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="searchInterestFromName_Result">
+          <Property Type="String" Name="name" Nullable="false" MaxLength="32" />
+          <Property Type="String" Name="description" Nullable="true" MaxLength="1024" />
+          <Property Type="Binary" Name="thumbnail" Nullable="true" MaxLength="Max" />
+        </ComplexType>
+        <ComplexType Name="searchTopTags_Result">
+          <Property Type="String" Name="id" Nullable="false" MaxLength="32" />
+          <Property Type="Int32" Name="occurrence" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="searchUserFromInterest_Result">
+          <Property Type="String" Name="username" Nullable="false" MaxLength="32" />
+          <Property Type="String" Name="password" Nullable="false" MaxLength="64" />
+          <Property Type="Binary" Name="profilePicture" Nullable="true" MaxLength="Max" />
+          <Property Type="DateTime" Name="registerDate" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="userType" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EVENetModelStoreContainer" CdmEntityContainer="EVENetEntities">
+          <EntitySetMapping Name="Admins">
+            <EntityTypeMapping TypeName="EVENetModel.Admin">
+              <MappingFragment StoreEntitySet="Admin">
+                <ScalarProperty Name="username" ColumnName="username" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Comments">
+            <EntityTypeMapping TypeName="EVENetModel.Comment">
+              <MappingFragment StoreEntitySet="Comment">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="content" ColumnName="content" />
+                <ScalarProperty Name="eventId" ColumnName="eventId" />
+                <ScalarProperty Name="author" ColumnName="author" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Events">
+            <EntityTypeMapping TypeName="EVENetModel.Event">
+              <MappingFragment StoreEntitySet="Event">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="beginTime" ColumnName="beginTime" />
+                <ScalarProperty Name="endTime" ColumnName="endTime" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="thumbnail" ColumnName="thumbnail" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="location" ColumnName="location" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="publishDate" ColumnName="publishDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Individuals">
+            <EntityTypeMapping TypeName="EVENetModel.Individual">
+              <MappingFragment StoreEntitySet="Individual">
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="midName" ColumnName="midName" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Interests">
+            <EntityTypeMapping TypeName="EVENetModel.Interest">
+              <MappingFragment StoreEntitySet="Interest">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="thumbnail" ColumnName="thumbnail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Locations">
+            <EntityTypeMapping TypeName="EVENetModel.Location">
+              <MappingFragment StoreEntitySet="Location">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="longitude" ColumnName="longitude" />
+                <ScalarProperty Name="latitude" ColumnName="latitude" />
+                <ScalarProperty Name="thumbnail" ColumnName="thumbnail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Notifications">
+            <EntityTypeMapping TypeName="EVENetModel.Notification">
+              <MappingFragment StoreEntitySet="Notification">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="receiver" ColumnName="receiver" />
+                <ScalarProperty Name="sender" ColumnName="sender" />
+                <ScalarProperty Name="eventId" ColumnName="eventId" />
+                <ScalarProperty Name="typeInfo" ColumnName="typeInfo" />
+                <ScalarProperty Name="Seen" ColumnName="Seen" />
+                <ScalarProperty Name="timeSent" ColumnName="timeSent" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Organizations">
+            <EntityTypeMapping TypeName="EVENetModel.Organization">
+              <MappingFragment StoreEntitySet="Organization">
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="website" ColumnName="website" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Photos">
+            <EntityTypeMapping TypeName="EVENetModel.Photo">
+              <MappingFragment StoreEntitySet="Photo">
+                <ScalarProperty Name="eventId" ColumnName="eventId" />
+                <ScalarProperty Name="order" ColumnName="order" />
+                <ScalarProperty Name="data" ColumnName="data" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tags">
+            <EntityTypeMapping TypeName="EVENetModel.Tag">
+              <MappingFragment StoreEntitySet="Tag">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="occurrence" ColumnName="occurrence" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Types">
+            <EntityTypeMapping TypeName="EVENetModel.Type">
+              <MappingFragment StoreEntitySet="Type">
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="EVENetModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="profilePicture" ColumnName="profilePicture" />
+                <ScalarProperty Name="registerDate" ColumnName="registerDate" />
+                <ScalarProperty Name="userType" ColumnName="userType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserEventAttendants">
+            <EntityTypeMapping TypeName="EVENetModel.UserEventAttendant">
+              <MappingFragment StoreEntitySet="UserEventAttendants">
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="event" ColumnName="event" />
+                <ScalarProperty Name="attend" ColumnName="attend" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="EventTag" TypeName="EVENetModel.EventTag" StoreEntitySet="EventTag">
+            <EndProperty Name="Event">
+              <ScalarProperty Name="id" ColumnName="event" />
+            </EndProperty>
+            <EndProperty Name="Tag">
+              <ScalarProperty Name="id" ColumnName="tag" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="IndividualInterest" TypeName="EVENetModel.IndividualInterest" StoreEntitySet="IndividualInterest">
+            <EndProperty Name="Interest">
+              <ScalarProperty Name="name" ColumnName="interest" />
+            </EndProperty>
+            <EndProperty Name="Individual">
+              <ScalarProperty Name="username" ColumnName="username" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="UserUser" TypeName="EVENetModel.UserUser" StoreEntitySet="UserUser">
+            <EndProperty Name="User">
+              <ScalarProperty Name="username" ColumnName="username1" />
+            </EndProperty>
+            <EndProperty Name="User1">
+              <ScalarProperty Name="username" ColumnName="username2" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="addComennt" FunctionName="EVENetModel.Store.addComennt" />
+          <FunctionImportMapping FunctionImportName="attachInterest" FunctionName="EVENetModel.Store.attachInterest" />
+          <FunctionImportMapping FunctionImportName="attachTag" FunctionName="EVENetModel.Store.attachTag" />
+          <FunctionImportMapping FunctionImportName="createEvent" FunctionName="EVENetModel.Store.createEvent" />
+          <FunctionImportMapping FunctionImportName="createIndividual" FunctionName="EVENetModel.Store.createIndividual" />
+          <FunctionImportMapping FunctionImportName="createInterest" FunctionName="EVENetModel.Store.createInterest" />
+          <FunctionImportMapping FunctionImportName="createLocation" FunctionName="EVENetModel.Store.createLocation" />
+          <FunctionImportMapping FunctionImportName="createOrganization" FunctionName="EVENetModel.Store.createOrganization" />
+          <FunctionImportMapping FunctionImportName="createRoot" FunctionName="EVENetModel.Store.createRoot" />
+          <FunctionImportMapping FunctionImportName="createTag" FunctionName="EVENetModel.Store.createTag" />
+          <FunctionImportMapping FunctionImportName="createType" FunctionName="EVENetModel.Store.createType" />
+          <FunctionImportMapping FunctionImportName="createUser" FunctionName="EVENetModel.Store.createUser" />
+          <FunctionImportMapping FunctionImportName="decreaseTagOccurence" FunctionName="EVENetModel.Store.decreaseTagOccurence" />
+          <FunctionImportMapping FunctionImportName="deleteComment" FunctionName="EVENetModel.Store.deleteComment" />
+          <FunctionImportMapping FunctionImportName="deleteEvent" FunctionName="EVENetModel.Store.deleteEvent" />
+          <FunctionImportMapping FunctionImportName="deleteInterest" FunctionName="EVENetModel.Store.deleteInterest" />
+          <FunctionImportMapping FunctionImportName="detachTag" FunctionName="EVENetModel.Store.detachTag" />
+          <FunctionImportMapping FunctionImportName="dettachInterest" FunctionName="EVENetModel.Store.dettachInterest" />
+          <FunctionImportMapping FunctionImportName="disinvite" FunctionName="EVENetModel.Store.disinvite" />
+          <FunctionImportMapping FunctionImportName="editLocation" FunctionName="EVENetModel.Store.editLocation" />
+          <FunctionImportMapping FunctionImportName="follow" FunctionName="EVENetModel.Store.follow" />
+          <FunctionImportMapping FunctionImportName="followerList" FunctionName="EVENetModel.Store.followerList">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EVENetModel.followerList_Result">
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="profilePicture" ColumnName="profilePicture" />
+                <ScalarProperty Name="userType" ColumnName="userType" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="followingList" FunctionName="EVENetModel.Store.followingList">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EVENetModel.followingList_Result">
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="profilePicture" ColumnName="profilePicture" />
+                <ScalarProperty Name="userType" ColumnName="userType" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getComments" FunctionName="EVENetModel.Store.getComments">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EVENetModel.getComments_Result">
+                <ScalarProperty Name="content" ColumnName="content" />
+                <ScalarProperty Name="eventId" ColumnName="eventId" />
+                <ScalarProperty Name="author" ColumnName="author" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getInterest" FunctionName="EVENetModel.Store.getInterest">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EVENetModel.getInterest_Result">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="thumbnail" ColumnName="thumbnail" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="increaseTagOccurence" FunctionName="EVENetModel.Store.increaseTagOccurence" />
+          <FunctionImportMapping FunctionImportName="invite" FunctionName="EVENetModel.Store.invite" />
+          <FunctionImportMapping FunctionImportName="listInvitedEvents" FunctionName="EVENetModel.Store.listInvitedEvents">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EVENetModel.listInvitedEvents_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="beginTime" ColumnName="beginTime" />
+                <ScalarProperty Name="endTime" ColumnName="endTime" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="thumbnail" ColumnName="thumbnail" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="location" ColumnName="location" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="publishDate" ColumnName="publishDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="listInvitedPeople" FunctionName="EVENetModel.Store.listInvitedPeople">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EVENetModel.listInvitedPeople_Result">
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="event" ColumnName="event" />
+                <ScalarProperty Name="attend" ColumnName="attend" />
+                <ScalarProperty Name="username1" ColumnName="username1" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="profilePicture" ColumnName="profilePicture" />
+                <ScalarProperty Name="registerDate" ColumnName="registerDate" />
+                <ScalarProperty Name="userType" ColumnName="userType" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="respondInvitation" FunctionName="EVENetModel.Store.respondInvitation" />
+          <FunctionImportMapping FunctionImportName="searchInterestFromName" FunctionName="EVENetModel.Store.searchInterestFromName">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EVENetModel.searchInterestFromName_Result">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="thumbnail" ColumnName="thumbnail" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="searchTopTags" FunctionName="EVENetModel.Store.searchTopTags">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EVENetModel.searchTopTags_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="occurrence" ColumnName="occurrence" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="searchUserFromInterest" FunctionName="EVENetModel.Store.searchUserFromInterest">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EVENetModel.searchUserFromInterest_Result">
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="profilePicture" ColumnName="profilePicture" />
+                <ScalarProperty Name="registerDate" ColumnName="registerDate" />
+                <ScalarProperty Name="userType" ColumnName="userType" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="setEvent" FunctionName="EVENetModel.Store.setEvent" />
+          <FunctionImportMapping FunctionImportName="setPassword" FunctionName="EVENetModel.Store.setPassword" />
+          <FunctionImportMapping FunctionImportName="setProfilePicture" FunctionName="EVENetModel.Store.setProfilePicture" />
+          <FunctionImportMapping FunctionImportName="unfollow" FunctionName="EVENetModel.Store.unfollow" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

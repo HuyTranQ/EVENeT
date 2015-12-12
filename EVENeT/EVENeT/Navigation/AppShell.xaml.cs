@@ -111,7 +111,7 @@ namespace EVENeT.Navigation
             while (frame != null && frame.BackStackDepth > 1)
                 frame.BackStack.RemoveAt(frame.BackStackDepth - 1);
             if (frame != null && frame.CanGoBack)
-                frame.GoBack();
+                frame.Navigate(typeof(LogInPage), "SignOut");
         }
 
         private void SystemNavigationManager_BackRequested(object sender, BackRequestedEventArgs e)

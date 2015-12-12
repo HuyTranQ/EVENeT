@@ -14,13 +14,16 @@
                Width="150" Height="150"
                Margin="0,0,0,64"
                RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.AlignHorizontalCenterWithPanel="True"/>
+        <ProgressRing x:Name="loading" Visibility="Collapsed"
+                      IsActive="True"
+                      RelativePanel.Below="appLogo" RelativePanel.AlignHorizontalCenterWith="appLogo"/>
         <TextBlock x:Name="errorMessage"
                    Width="300"
                    Margin="0,4,0,4"
                    Visibility="Collapsed"
                    Foreground="Red"
                    TextAlignment="Center"
-                   RelativePanel.Below="appLogo" RelativePanel.AlignHorizontalCenterWith="appLogo"/>
+                   RelativePanel.Below="loading" RelativePanel.AlignHorizontalCenterWith="appLogo"/>
         <TextBox x:Name="userName"
                  Width="300"
                  Margin="0,4,0,4"
@@ -31,11 +34,15 @@
                      Margin="0,4,0,4"
                      PlaceholderText="Password"
                      RelativePanel.Below="userName" RelativePanel.AlignHorizontalCenterWith="appLogo"/>
+        <CheckBox Name="remember" Content="Remember me?"
+                     RelativePanel.Below="password" RelativePanel.AlignLeftWith="password"/>
+        
         <Button x:Name="signInButton"
                 Width="300"
                 Margin="0,4,0,4"
                 Content="Sign in"
-                RelativePanel.Below="password" RelativePanel.AlignHorizontalCenterWith="appLogo" Click="signInButton_Click"/>
+                RelativePanel.Below="remember" RelativePanel.AlignHorizontalCenterWith="appLogo" Click="signInButton_Click"/>
+       
         <HyperlinkButton x:Name="signUpButton"
                          Width="300"
                          Margin="0,4,0,4"

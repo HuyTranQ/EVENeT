@@ -38,6 +38,14 @@ namespace EVENeT
             {
                 Frame frame = Window.Current.Content as Frame;
 
+                if (remember.IsChecked.Value)
+                {
+                    var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+                    localSettings.Values["Username"] = userName.Text;
+                    localSettings.Values["Password"] = password.Password;
+                    localSettings.Values["Remember"] = "Checked";
+                }
+
                 if (await client.IndividualFullySetUpAsync(userName.Text))
                     frame.Navigate(typeof(AccountSetUpPage), userName.Text);
                 else
@@ -73,6 +81,36 @@ namespace EVENeT
                 // Navigate to set up page
                 Frame frame = Window.Current.Content as Frame;
                 frame.Navigate(typeof(AccountSetUpPage), dialogUsername.Text);
+            }
+        }
+
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+            var check = localSettings.Values["Remember"];
+            if (e != null && e.Parameter.ToString() == "SignOut" || check == null)
+                return;
+          
+            if (check != null && check.ToString() == "Checked")
+            {
+                userName.Visibility = Visibility.Collapsed;
+                password.Visibility = Visibility.Collapsed;
+                remember.Visibility = Visibility.Collapsed;
+                signInButton.Visibility = Visibility.Collapsed;
+                signUpButton.Visibility = Visibility.Collapsed;
+                loading.Visibility = Visibility.Visible;
+                await Task.Delay(2000);
+
+                Frame frame = Window.Current.Content as Frame;
+                if (await client.IndividualFullySetUpAsync(localSettings.Values["Username"].ToString())) 
+                    frame.Navigate(typeof(AccountSetUpPage), localSettings.Values["Username"].ToString());
+                else
+                {
+                    frame.Navigate(typeof(Navigation.AppShell), localSettings.Values["Username"].ToString());
+                }
+                Window.Current.Activate();
+                loading.Visibility = Visibility.Collapsed;
             }
         }
     }

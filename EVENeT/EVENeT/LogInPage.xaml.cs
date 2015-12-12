@@ -31,14 +31,19 @@ namespace EVENeT
             client = new ServiceClient();
         }
         
-        private void signInButton_Click(object sender, RoutedEventArgs e)
+        private async void signInButton_Click(object sender, RoutedEventArgs e)
         {
-            bool correct = client.CorrectUserNameAndPasswordAsync(userName.Text, password.Password).Result;
+            bool correct = await client.CorrectUserNameAndPasswordAsync(userName.Text, password.Password);
             if (correct)
             {
                 Frame frame = Window.Current.Content as Frame;
-                // TODO: Check if account is fully set up, if not, go to the set up page.
-                frame.Navigate(typeof(Navigation.AppShell), userName.Text);
+
+                if (await client.IndividualFullySetUpAsync(userName.Text))
+                    frame.Navigate(typeof(AccountSetUpPage), userName.Text);
+                else
+                {
+                    frame.Navigate(typeof(Navigation.AppShell), userName.Text);
+                }
                 Window.Current.Activate();
             }
             else
@@ -56,7 +61,7 @@ namespace EVENeT
             {
                 // Navigate to set up page
                 Frame frame = Window.Current.Content as Frame;
-                frame.Navigate(typeof(AccountSetUpPage), userName.Text);
+                frame.Navigate(typeof(AccountSetUpPage), ((TextBox)dialog.FindName("userName")).Text);
             }
         }
     }

@@ -30,7 +30,7 @@
       <Column Name="beginTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="endTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="description" Type="System.String" DbType="NVarChar(1024) NOT NULL" CanBeNull="false" />
-      <Column Name="thumbnail" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="thumbnail" Type="System.String" DbType="VarChar(256)" CanBeNull="true" />
       <Column Name="title" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
       <Column Name="location" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="username" Type="System.String" DbType="VarChar(32) NOT NULL" CanBeNull="false" />
@@ -76,7 +76,7 @@
     <Type Name="Interest">
       <Column Name="name" Type="System.String" DbType="NVarChar(32) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="description" Type="System.String" DbType="NVarChar(1024)" CanBeNull="true" />
-      <Column Name="thumbnail" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="thumbnail" Type="System.String" DbType="VarChar(256)" CanBeNull="true" />
       <Association Name="Interest_IndividualInterest" Member="IndividualInterests" ThisKey="name" OtherKey="interest" Type="IndividualInterest" />
     </Type>
   </Table>
@@ -88,7 +88,7 @@
       <Column Name="address" Type="System.String" DbType="NVarChar(64) NOT NULL" CanBeNull="false" />
       <Column Name="longitude" Type="System.Single" DbType="Real" CanBeNull="true" />
       <Column Name="latitude" Type="System.Single" DbType="Real" CanBeNull="true" />
-      <Column Name="thumbnail" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="thumbnail" Type="System.String" DbType="VarChar(256)" CanBeNull="true" />
       <Association Name="Location_Event" Member="Events" ThisKey="id" OtherKey="location" Type="Event" />
     </Type>
   </Table>
@@ -121,7 +121,7 @@
     <Type Name="Photo">
       <Column Name="eventId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="[order]" Member="order" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="data" Type="System.Data.Linq.Binary" DbType="Image NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="data" Type="System.String" DbType="VarChar(256) NOT NULL" CanBeNull="false" />
       <Association Name="Event_Photo" Member="Event" ThisKey="eventId" OtherKey="id" Type="Event" IsForeignKey="true" />
     </Type>
   </Table>
@@ -142,7 +142,8 @@
     <Type Name="User">
       <Column Name="username" Type="System.String" DbType="VarChar(32) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="password" Type="System.String" DbType="VarChar(64) NOT NULL" CanBeNull="false" />
-      <Column Name="profilePicture" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="profilePicture" Type="System.String" DbType="VarChar(256)" CanBeNull="true" />
+      <Column Name="coverPicture" Type="System.String" DbType="VarChar(256)" CanBeNull="true" />
       <Column Name="registerDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="userType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="User_Admin" Member="Admin" ThisKey="username" OtherKey="username" Type="Admin" Cardinality="One" />
@@ -191,7 +192,7 @@
     <Parameter Name="beginTime" Type="System.DateTime" DbType="DateTime" />
     <Parameter Name="endTime" Type="System.DateTime" DbType="DateTime" />
     <Parameter Name="description" Type="System.String" DbType="NVarChar(1024)" />
-    <Parameter Name="thumbnail" Type="System.Data.Linq.Binary" DbType="Image" />
+    <Parameter Name="thumbnail" Type="System.String" DbType="VarChar(256)" />
     <Parameter Name="title" Type="System.String" DbType="NVarChar(128)" />
     <Parameter Name="location" Type="System.Int32" DbType="Int" />
     <Parameter Name="currentUser" Type="System.String" DbType="VarChar(32)" />
@@ -200,7 +201,8 @@
   <Function Name="dbo.createIndividual" Method="createIndividual">
     <Parameter Name="username" Type="System.String" DbType="VarChar(32)" />
     <Parameter Name="password" Type="System.String" DbType="VarChar(64)" />
-    <Parameter Name="profilePicture" Type="System.Data.Linq.Binary" DbType="Image" />
+    <Parameter Name="profilePicture" Type="System.String" DbType="VarChar(256)" />
+    <Parameter Name="coverPicture" Type="System.String" DbType="VarChar(256)" />
     <Parameter Name="firstName" Type="System.String" DbType="NVarChar(16)" />
     <Parameter Name="midName" Type="System.String" DbType="NVarChar(16)" />
     <Parameter Name="lastName" Type="System.String" DbType="NVarChar(16)" />
@@ -211,7 +213,7 @@
   <Function Name="dbo.createInterest" Method="createInterest">
     <Parameter Name="name" Type="System.String" DbType="NVarChar(32)" />
     <Parameter Name="description" Type="System.String" DbType="NVarChar(1024)" />
-    <Parameter Name="thumbnail" Type="System.Data.Linq.Binary" DbType="Image" />
+    <Parameter Name="thumbnail" Type="System.String" DbType="VarChar(256)" />
     <Return Type="System.Int32" />
   </Function>
   <Function Name="dbo.createLocation" Method="createLocation">
@@ -220,13 +222,14 @@
     <Parameter Name="address" Type="System.String" DbType="NVarChar(64)" />
     <Parameter Name="long" Type="System.Single" DbType="Real" />
     <Parameter Name="lat" Type="System.Single" DbType="Real" />
-    <Parameter Name="thumbnail" Type="System.Data.Linq.Binary" DbType="Image" />
+    <Parameter Name="thumbnail" Type="System.String" DbType="VarChar(256)" />
     <Return Type="System.Int32" />
   </Function>
   <Function Name="dbo.createOrganization" Method="createOrganization">
     <Parameter Name="username" Type="System.String" DbType="VarChar(32)" />
     <Parameter Name="password" Type="System.String" DbType="VarChar(64)" />
-    <Parameter Name="profilePicture" Type="System.Data.Linq.Binary" DbType="Image" />
+    <Parameter Name="profilePicture" Type="System.String" DbType="VarChar(256)" />
+    <Parameter Name="coverPicture" Type="System.String" DbType="VarChar(256)" />
     <Parameter Name="description" Type="System.String" DbType="NVarChar(1024)" />
     <Parameter Name="type" Type="System.String" DbType="NVarChar(32)" />
     <Parameter Name="phone" Type="System.String" DbType="VarChar(16)" />
@@ -236,7 +239,7 @@
   <Function Name="dbo.createRoot" Method="createRoot">
     <Parameter Name="username" Type="System.String" DbType="VarChar(32)" />
     <Parameter Name="password" Type="System.String" DbType="VarChar(64)" />
-    <Parameter Name="profilePicture" Type="System.Data.Linq.Binary" DbType="Image" />
+    <Parameter Name="profilePicture" Type="System.String" DbType="VarChar(256)" />
     <Return Type="System.Int32" />
   </Function>
   <Function Name="dbo.createTag" Method="createTag">
@@ -251,7 +254,8 @@
   <Function Name="dbo.createUser" Method="createUser">
     <Parameter Name="username" Type="System.String" DbType="VarChar(32)" />
     <Parameter Name="password" Type="System.String" DbType="VarChar(64)" />
-    <Parameter Name="profilePicture" Type="System.Data.Linq.Binary" DbType="Image" />
+    <Parameter Name="profilePicture" Type="System.String" DbType="VarChar(256)" />
+    <Parameter Name="coverPicture" Type="System.String" DbType="VarChar(256)" />
     <Parameter Name="userType" Type="System.Int32" DbType="Int" />
     <Return Type="System.Int32" />
   </Function>
@@ -302,7 +306,7 @@
     <Parameter Name="this" Type="System.String" DbType="VarChar(32)" />
     <ElementType Name="followerListResult">
       <Column Name="username" Type="System.String" DbType="VarChar(32) NOT NULL" CanBeNull="false" />
-      <Column Name="profilePicture" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" />
+      <Column Name="profilePicture" Type="System.String" DbType="VarChar(256)" CanBeNull="true" />
       <Column Name="userType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
@@ -310,7 +314,7 @@
     <Parameter Name="this" Type="System.String" DbType="VarChar(32)" />
     <ElementType Name="followingListResult">
       <Column Name="username" Type="System.String" DbType="VarChar(32) NOT NULL" CanBeNull="false" />
-      <Column Name="profilePicture" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" />
+      <Column Name="profilePicture" Type="System.String" DbType="VarChar(256)" CanBeNull="true" />
       <Column Name="userType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
@@ -322,12 +326,23 @@
       <Column Name="author" Type="System.String" DbType="VarChar(32)" CanBeNull="true" />
     </ElementType>
   </Function>
+  <Function Name="dbo.getIndividual" Method="getIndividual">
+    <Parameter Name="id" Type="System.String" DbType="VarChar(32)" />
+    <ElementType Name="getIndividualResult">
+      <Column Name="username" Type="System.String" DbType="VarChar(32) NOT NULL" CanBeNull="false" />
+      <Column Name="firstName" Type="System.String" DbType="NVarChar(16) NOT NULL" CanBeNull="false" />
+      <Column Name="midName" Type="System.String" DbType="NVarChar(16)" CanBeNull="true" />
+      <Column Name="lastName" Type="System.String" DbType="NVarChar(16) NOT NULL" CanBeNull="false" />
+      <Column Name="DOB" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="gender" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
   <Function Name="dbo.getInterest" Method="getInterest">
     <Parameter Name="name" Type="System.String" DbType="NVarChar(32)" />
     <ElementType Name="getInterestResult">
       <Column Name="name" Type="System.String" DbType="NVarChar(32) NOT NULL" CanBeNull="false" />
       <Column Name="description" Type="System.String" DbType="NVarChar(1024)" CanBeNull="true" />
-      <Column Name="thumbnail" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" />
+      <Column Name="thumbnail" Type="System.String" DbType="VarChar(256)" CanBeNull="true" />
     </ElementType>
   </Function>
   <Function Name="dbo.increaseTagOccurence" Method="increaseTagOccurence">
@@ -347,7 +362,7 @@
       <Column Name="beginTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="endTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="description" Type="System.String" DbType="NVarChar(1024) NOT NULL" CanBeNull="false" />
-      <Column Name="thumbnail" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" />
+      <Column Name="thumbnail" Type="System.String" DbType="VarChar(256)" CanBeNull="true" />
       <Column Name="title" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
       <Column Name="location" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="username" Type="System.String" DbType="VarChar(32) NOT NULL" CanBeNull="false" />
@@ -363,7 +378,8 @@
       <Column Name="attend" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="username1" Type="System.String" DbType="VarChar(32) NOT NULL" CanBeNull="false" />
       <Column Name="password" Type="System.String" DbType="VarChar(64) NOT NULL" CanBeNull="false" />
-      <Column Name="profilePicture" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" />
+      <Column Name="profilePicture" Type="System.String" DbType="VarChar(256)" CanBeNull="true" />
+      <Column Name="coverPicture" Type="System.String" DbType="VarChar(256)" CanBeNull="true" />
       <Column Name="registerDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="userType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </ElementType>
@@ -379,7 +395,7 @@
     <ElementType Name="searchInterestFromNameResult">
       <Column Name="name" Type="System.String" DbType="NVarChar(32) NOT NULL" CanBeNull="false" />
       <Column Name="description" Type="System.String" DbType="NVarChar(1024)" CanBeNull="true" />
-      <Column Name="thumbnail" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" />
+      <Column Name="thumbnail" Type="System.String" DbType="VarChar(256)" CanBeNull="true" />
     </ElementType>
   </Function>
   <Function Name="dbo.searchTopTags" Method="searchTopTags">
@@ -395,7 +411,8 @@
     <ElementType Name="searchUserFromInterestResult">
       <Column Name="username" Type="System.String" DbType="VarChar(32) NOT NULL" CanBeNull="false" />
       <Column Name="password" Type="System.String" DbType="VarChar(64) NOT NULL" CanBeNull="false" />
-      <Column Name="profilePicture" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" />
+      <Column Name="profilePicture" Type="System.String" DbType="VarChar(256)" CanBeNull="true" />
+      <Column Name="coverPicture" Type="System.String" DbType="VarChar(256)" CanBeNull="true" />
       <Column Name="registerDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="userType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </ElementType>
@@ -406,9 +423,18 @@
     <Parameter Name="begintime" Type="System.DateTime" DbType="DateTime" />
     <Parameter Name="endtime" Type="System.DateTime" DbType="DateTime" />
     <Parameter Name="description" Type="System.String" DbType="NVarChar(1024)" />
-    <Parameter Name="thumbnail" Type="System.Data.Linq.Binary" DbType="Image" />
+    <Parameter Name="thumbnail" Type="System.String" DbType="VarChar(256)" />
     <Parameter Name="title" Type="System.String" DbType="NVarChar(128)" />
     <Parameter Name="location" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.setIndividual" Method="setIndividual">
+    <Parameter Name="id" Type="System.String" DbType="VarChar(32)" />
+    <Parameter Name="firstName" Type="System.String" DbType="NVarChar(16)" />
+    <Parameter Name="midName" Type="System.String" DbType="NVarChar(16)" />
+    <Parameter Name="lastName" Type="System.String" DbType="NVarChar(16)" />
+    <Parameter Name="dob" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="gender" Type="System.Boolean" DbType="Bit" />
     <Return Type="System.Int32" />
   </Function>
   <Function Name="dbo.setPassword" Method="setPassword">
@@ -419,7 +445,7 @@
   </Function>
   <Function Name="dbo.setProfilePicture" Method="setProfilePicture">
     <Parameter Name="username" Type="System.String" DbType="VarChar(32)" />
-    <Parameter Name="image" Type="System.Data.Linq.Binary" DbType="Image" />
+    <Parameter Name="imageprofile" Type="System.String" DbType="VarChar(256)" />
     <Return Type="System.Int32" />
   </Function>
   <Function Name="dbo.auth" Method="auth" IsComposable="true">
@@ -430,6 +456,10 @@
   <Function Name="dbo.isUserExisted" Method="isUserExisted" IsComposable="true">
     <Parameter Name="username" Type="System.String" DbType="VarChar(32)" />
     <Return Type="System.Boolean" />
+  </Function>
+  <Function Name="dbo.getUserType" Method="getUserType" IsComposable="true">
+    <Parameter Name="username" Type="System.String" DbType="VarChar(32)" />
+    <Return Type="System.Int32" />
   </Function>
   <Function Name="dbo.isAdmin" Method="isAdmin" IsComposable="true">
     <Parameter Name="username" Type="System.String" DbType="VarChar(32)" />
@@ -451,6 +481,10 @@
     <Return Type="System.Boolean" />
   </Function>
   <Function Name="dbo.isIndividual" Method="isIndividual" IsComposable="true">
+    <Parameter Name="username" Type="System.String" DbType="VarChar(32)" />
+    <Return Type="System.Boolean" />
+  </Function>
+  <Function Name="dbo.isIndividualFullySetUp" Method="isIndividualFullySetUp" IsComposable="true">
     <Parameter Name="username" Type="System.String" DbType="VarChar(32)" />
     <Return Type="System.Boolean" />
   </Function>

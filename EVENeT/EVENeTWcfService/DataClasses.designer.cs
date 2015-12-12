@@ -267,42 +267,42 @@ namespace EVENeTWcfService
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.createEvent")]
-		public int createEvent([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="DateTime")] System.Nullable<System.DateTime> beginTime, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="DateTime")] System.Nullable<System.DateTime> endTime, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(1024)")] string description, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Image")] System.Data.Linq.Binary thumbnail, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(128)")] string title, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> location, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string currentUser)
+		public int createEvent([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="DateTime")] System.Nullable<System.DateTime> beginTime, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="DateTime")] System.Nullable<System.DateTime> endTime, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(1024)")] string description, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(256)")] string thumbnail, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(128)")] string title, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> location, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string currentUser)
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), beginTime, endTime, description, thumbnail, title, location, currentUser);
 			return ((int)(result.ReturnValue));
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.createIndividual")]
-		public int createIndividual([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string username, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(64)")] string password, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Image")] System.Data.Linq.Binary profilePicture, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(16)")] string firstName, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(16)")] string midName, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(16)")] string lastName, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Date")] System.Nullable<System.DateTime> dob, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Bit")] System.Nullable<bool> gender)
+		public int createIndividual([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string username, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(64)")] string password, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(256)")] string profilePicture, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(256)")] string coverPicture, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(16)")] string firstName, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(16)")] string midName, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(16)")] string lastName, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Date")] System.Nullable<System.DateTime> dob, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Bit")] System.Nullable<bool> gender)
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), username, password, profilePicture, firstName, midName, lastName, dob, gender);
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), username, password, profilePicture, coverPicture, firstName, midName, lastName, dob, gender);
 			return ((int)(result.ReturnValue));
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.createInterest")]
-		public int createInterest([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(32)")] string name, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(1024)")] string description, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Image")] System.Data.Linq.Binary thumbnail)
+		public int createInterest([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(32)")] string name, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(1024)")] string description, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(256)")] string thumbnail)
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), name, description, thumbnail);
 			return ((int)(result.ReturnValue));
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.createLocation")]
-		public int createLocation([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(32)")] string name, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(1024)")] string description, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(64)")] string address, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="long", DbType="Real")] System.Nullable<float> @long, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Real")] System.Nullable<float> lat, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Image")] System.Data.Linq.Binary thumbnail)
+		public int createLocation([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(32)")] string name, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(1024)")] string description, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(64)")] string address, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="long", DbType="Real")] System.Nullable<float> @long, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Real")] System.Nullable<float> lat, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(256)")] string thumbnail)
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), name, description, address, @long, lat, thumbnail);
 			return ((int)(result.ReturnValue));
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.createOrganization")]
-		public int createOrganization([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string username, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(64)")] string password, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Image")] System.Data.Linq.Binary profilePicture, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(1024)")] string description, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(32)")] string type, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(16)")] string phone, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(256)")] string website)
+		public int createOrganization([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string username, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(64)")] string password, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(256)")] string profilePicture, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(256)")] string coverPicture, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(1024)")] string description, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(32)")] string type, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(16)")] string phone, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(256)")] string website)
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), username, password, profilePicture, description, type, phone, website);
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), username, password, profilePicture, coverPicture, description, type, phone, website);
 			return ((int)(result.ReturnValue));
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.createRoot")]
-		public int createRoot([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string username, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(64)")] string password, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Image")] System.Data.Linq.Binary profilePicture)
+		public int createRoot([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string username, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(64)")] string password, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(256)")] string profilePicture)
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), username, password, profilePicture);
 			return ((int)(result.ReturnValue));
@@ -323,9 +323,9 @@ namespace EVENeTWcfService
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.createUser")]
-		public int createUser([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string username, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(64)")] string password, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Image")] System.Data.Linq.Binary profilePicture, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> userType)
+		public int createUser([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string username, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(64)")] string password, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(256)")] string profilePicture, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(256)")] string coverPicture, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> userType)
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), username, password, profilePicture, userType);
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), username, password, profilePicture, coverPicture, userType);
 			return ((int)(result.ReturnValue));
 		}
 		
@@ -413,6 +413,13 @@ namespace EVENeTWcfService
 			return ((ISingleResult<getCommentsResult>)(result.ReturnValue));
 		}
 		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getIndividual")]
+		public ISingleResult<getIndividualResult> getIndividual([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string id)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), id);
+			return ((ISingleResult<getIndividualResult>)(result.ReturnValue));
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getInterest")]
 		public ISingleResult<getInterestResult> getInterest([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(32)")] string name)
 		{
@@ -477,9 +484,16 @@ namespace EVENeTWcfService
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.setEvent")]
-		public int setEvent([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(32)")] string username, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="DateTime")] System.Nullable<System.DateTime> begintime, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="DateTime")] System.Nullable<System.DateTime> endtime, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(1024)")] string description, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Image")] System.Data.Linq.Binary thumbnail, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(128)")] string title, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> location)
+		public int setEvent([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(32)")] string username, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="DateTime")] System.Nullable<System.DateTime> begintime, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="DateTime")] System.Nullable<System.DateTime> endtime, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(1024)")] string description, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(256)")] string thumbnail, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(128)")] string title, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> location)
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), id, username, begintime, endtime, description, thumbnail, title, location);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.setIndividual")]
+		public int setIndividual([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(16)")] string firstName, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(16)")] string midName, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(16)")] string lastName, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Date")] System.Nullable<System.DateTime> dob, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Bit")] System.Nullable<bool> gender)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), id, firstName, midName, lastName, dob, gender);
 			return ((int)(result.ReturnValue));
 		}
 		
@@ -491,9 +505,9 @@ namespace EVENeTWcfService
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.setProfilePicture")]
-		public int setProfilePicture([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string username, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Image")] System.Data.Linq.Binary image)
+		public int setProfilePicture([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string username, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(256)")] string imageprofile)
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), username, image);
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), username, imageprofile);
 			return ((int)(result.ReturnValue));
 		}
 		
@@ -507,6 +521,12 @@ namespace EVENeTWcfService
 		public System.Nullable<bool> isUserExisted([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string username)
 		{
 			return ((System.Nullable<bool>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), username).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getUserType", IsComposable=true)]
+		public System.Nullable<int> getUserType([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string username)
+		{
+			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), username).ReturnValue));
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.isAdmin", IsComposable=true)]
@@ -535,6 +555,12 @@ namespace EVENeTWcfService
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.isIndividual", IsComposable=true)]
 		public System.Nullable<bool> isIndividual([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string username)
+		{
+			return ((System.Nullable<bool>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), username).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.isIndividualFullySetUp", IsComposable=true)]
+		public System.Nullable<bool> isIndividualFullySetUp([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string username)
 		{
 			return ((System.Nullable<bool>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), username).ReturnValue));
 		}
@@ -1053,7 +1079,7 @@ namespace EVENeTWcfService
 		
 		private string _description;
 		
-		private System.Data.Linq.Binary _thumbnail;
+		private string _thumbnail;
 		
 		private string _title;
 		
@@ -1089,7 +1115,7 @@ namespace EVENeTWcfService
     partial void OnendTimeChanged();
     partial void OndescriptionChanging(string value);
     partial void OndescriptionChanged();
-    partial void OnthumbnailChanging(System.Data.Linq.Binary value);
+    partial void OnthumbnailChanging(string value);
     partial void OnthumbnailChanged();
     partial void OntitleChanging(string value);
     partial void OntitleChanged();
@@ -1193,8 +1219,8 @@ namespace EVENeTWcfService
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_thumbnail", DbType="Image", UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary thumbnail
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_thumbnail", DbType="VarChar(256)")]
+		public string thumbnail
 		{
 			get
 			{
@@ -2112,7 +2138,7 @@ namespace EVENeTWcfService
 		
 		private string _description;
 		
-		private System.Data.Linq.Binary _thumbnail;
+		private string _thumbnail;
 		
 		private EntitySet<IndividualInterest> _IndividualInterests;
 		
@@ -2124,7 +2150,7 @@ namespace EVENeTWcfService
     partial void OnnameChanged();
     partial void OndescriptionChanging(string value);
     partial void OndescriptionChanged();
-    partial void OnthumbnailChanging(System.Data.Linq.Binary value);
+    partial void OnthumbnailChanging(string value);
     partial void OnthumbnailChanged();
     #endregion
 		
@@ -2174,8 +2200,8 @@ namespace EVENeTWcfService
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_thumbnail", DbType="Image", UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary thumbnail
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_thumbnail", DbType="VarChar(256)")]
+		public string thumbnail
 		{
 			get
 			{
@@ -2258,7 +2284,7 @@ namespace EVENeTWcfService
 		
 		private System.Nullable<float> _latitude;
 		
-		private System.Data.Linq.Binary _thumbnail;
+		private string _thumbnail;
 		
 		private EntitySet<Event> _Events;
 		
@@ -2278,7 +2304,7 @@ namespace EVENeTWcfService
     partial void OnlongitudeChanged();
     partial void OnlatitudeChanging(System.Nullable<float> value);
     partial void OnlatitudeChanged();
-    partial void OnthumbnailChanging(System.Data.Linq.Binary value);
+    partial void OnthumbnailChanging(string value);
     partial void OnthumbnailChanged();
     #endregion
 		
@@ -2408,8 +2434,8 @@ namespace EVENeTWcfService
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_thumbnail", DbType="Image", UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary thumbnail
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_thumbnail", DbType="VarChar(256)")]
+		public string thumbnail
 		{
 			get
 			{
@@ -3053,7 +3079,7 @@ namespace EVENeTWcfService
 		
 		private int _order;
 		
-		private System.Data.Linq.Binary _data;
+		private string _data;
 		
 		private EntityRef<Event> _Event;
 		
@@ -3065,7 +3091,7 @@ namespace EVENeTWcfService
     partial void OneventIdChanged();
     partial void OnorderChanging(int value);
     partial void OnorderChanged();
-    partial void OndataChanging(System.Data.Linq.Binary value);
+    partial void OndataChanging(string value);
     partial void OndataChanged();
     #endregion
 		
@@ -3119,8 +3145,8 @@ namespace EVENeTWcfService
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_data", DbType="Image NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary data
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_data", DbType="VarChar(256) NOT NULL", CanBeNull=false)]
+		public string data
 		{
 			get
 			{
@@ -3408,7 +3434,9 @@ namespace EVENeTWcfService
 		
 		private string _password;
 		
-		private System.Data.Linq.Binary _profilePicture;
+		private string _profilePicture;
+		
+		private string _coverPicture;
 		
 		private System.DateTime _registerDate;
 		
@@ -3442,8 +3470,10 @@ namespace EVENeTWcfService
     partial void OnusernameChanged();
     partial void OnpasswordChanging(string value);
     partial void OnpasswordChanged();
-    partial void OnprofilePictureChanging(System.Data.Linq.Binary value);
+    partial void OnprofilePictureChanging(string value);
     partial void OnprofilePictureChanged();
+    partial void OncoverPictureChanging(string value);
+    partial void OncoverPictureChanged();
     partial void OnregisterDateChanging(System.DateTime value);
     partial void OnregisterDateChanged();
     partial void OnuserTypeChanging(int value);
@@ -3505,8 +3535,8 @@ namespace EVENeTWcfService
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_profilePicture", DbType="Image", UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary profilePicture
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_profilePicture", DbType="VarChar(256)")]
+		public string profilePicture
 		{
 			get
 			{
@@ -3521,6 +3551,26 @@ namespace EVENeTWcfService
 					this._profilePicture = value;
 					this.SendPropertyChanged("profilePicture");
 					this.OnprofilePictureChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_coverPicture", DbType="VarChar(256)")]
+		public string coverPicture
+		{
+			get
+			{
+				return this._coverPicture;
+			}
+			set
+			{
+				if ((this._coverPicture != value))
+				{
+					this.OncoverPictureChanging(value);
+					this.SendPropertyChanging();
+					this._coverPicture = value;
+					this.SendPropertyChanged("coverPicture");
+					this.OncoverPictureChanged();
 				}
 			}
 		}
@@ -4045,7 +4095,7 @@ namespace EVENeTWcfService
 		
 		private string _username;
 		
-		private System.Data.Linq.Binary _profilePicture;
+		private string _profilePicture;
 		
 		private int _userType;
 		
@@ -4069,8 +4119,8 @@ namespace EVENeTWcfService
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_profilePicture", DbType="Image")]
-		public System.Data.Linq.Binary profilePicture
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_profilePicture", DbType="VarChar(256)")]
+		public string profilePicture
 		{
 			get
 			{
@@ -4107,7 +4157,7 @@ namespace EVENeTWcfService
 		
 		private string _username;
 		
-		private System.Data.Linq.Binary _profilePicture;
+		private string _profilePicture;
 		
 		private int _userType;
 		
@@ -4131,8 +4181,8 @@ namespace EVENeTWcfService
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_profilePicture", DbType="Image")]
-		public System.Data.Linq.Binary profilePicture
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_profilePicture", DbType="VarChar(256)")]
+		public string profilePicture
 		{
 			get
 			{
@@ -4226,6 +4276,122 @@ namespace EVENeTWcfService
 		}
 	}
 	
+	public partial class getIndividualResult
+	{
+		
+		private string _username;
+		
+		private string _firstName;
+		
+		private string _midName;
+		
+		private string _lastName;
+		
+		private System.DateTime _DOB;
+		
+		private bool _gender;
+		
+		public getIndividualResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_username", DbType="VarChar(32) NOT NULL", CanBeNull=false)]
+		public string username
+		{
+			get
+			{
+				return this._username;
+			}
+			set
+			{
+				if ((this._username != value))
+				{
+					this._username = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_firstName", DbType="NVarChar(16) NOT NULL", CanBeNull=false)]
+		public string firstName
+		{
+			get
+			{
+				return this._firstName;
+			}
+			set
+			{
+				if ((this._firstName != value))
+				{
+					this._firstName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_midName", DbType="NVarChar(16)")]
+		public string midName
+		{
+			get
+			{
+				return this._midName;
+			}
+			set
+			{
+				if ((this._midName != value))
+				{
+					this._midName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_lastName", DbType="NVarChar(16) NOT NULL", CanBeNull=false)]
+		public string lastName
+		{
+			get
+			{
+				return this._lastName;
+			}
+			set
+			{
+				if ((this._lastName != value))
+				{
+					this._lastName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DOB", DbType="Date NOT NULL")]
+		public System.DateTime DOB
+		{
+			get
+			{
+				return this._DOB;
+			}
+			set
+			{
+				if ((this._DOB != value))
+				{
+					this._DOB = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_gender", DbType="Bit NOT NULL")]
+		public bool gender
+		{
+			get
+			{
+				return this._gender;
+			}
+			set
+			{
+				if ((this._gender != value))
+				{
+					this._gender = value;
+				}
+			}
+		}
+	}
+	
 	public partial class getInterestResult
 	{
 		
@@ -4233,7 +4399,7 @@ namespace EVENeTWcfService
 		
 		private string _description;
 		
-		private System.Data.Linq.Binary _thumbnail;
+		private string _thumbnail;
 		
 		public getInterestResult()
 		{
@@ -4271,8 +4437,8 @@ namespace EVENeTWcfService
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_thumbnail", DbType="Image")]
-		public System.Data.Linq.Binary thumbnail
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_thumbnail", DbType="VarChar(256)")]
+		public string thumbnail
 		{
 			get
 			{
@@ -4299,7 +4465,7 @@ namespace EVENeTWcfService
 		
 		private string _description;
 		
-		private System.Data.Linq.Binary _thumbnail;
+		private string _thumbnail;
 		
 		private string _title;
 		
@@ -4377,8 +4543,8 @@ namespace EVENeTWcfService
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_thumbnail", DbType="Image")]
-		public System.Data.Linq.Binary thumbnail
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_thumbnail", DbType="VarChar(256)")]
+		public string thumbnail
 		{
 			get
 			{
@@ -4471,7 +4637,9 @@ namespace EVENeTWcfService
 		
 		private string _password;
 		
-		private System.Data.Linq.Binary _profilePicture;
+		private string _profilePicture;
+		
+		private string _coverPicture;
 		
 		private System.DateTime _registerDate;
 		
@@ -4561,8 +4729,8 @@ namespace EVENeTWcfService
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_profilePicture", DbType="Image")]
-		public System.Data.Linq.Binary profilePicture
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_profilePicture", DbType="VarChar(256)")]
+		public string profilePicture
 		{
 			get
 			{
@@ -4573,6 +4741,22 @@ namespace EVENeTWcfService
 				if ((this._profilePicture != value))
 				{
 					this._profilePicture = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_coverPicture", DbType="VarChar(256)")]
+		public string coverPicture
+		{
+			get
+			{
+				return this._coverPicture;
+			}
+			set
+			{
+				if ((this._coverPicture != value))
+				{
+					this._coverPicture = value;
 				}
 			}
 		}
@@ -4617,7 +4801,7 @@ namespace EVENeTWcfService
 		
 		private string _description;
 		
-		private System.Data.Linq.Binary _thumbnail;
+		private string _thumbnail;
 		
 		public searchInterestFromNameResult()
 		{
@@ -4655,8 +4839,8 @@ namespace EVENeTWcfService
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_thumbnail", DbType="Image")]
-		public System.Data.Linq.Binary thumbnail
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_thumbnail", DbType="VarChar(256)")]
+		public string thumbnail
 		{
 			get
 			{
@@ -4723,7 +4907,9 @@ namespace EVENeTWcfService
 		
 		private string _password;
 		
-		private System.Data.Linq.Binary _profilePicture;
+		private string _profilePicture;
+		
+		private string _coverPicture;
 		
 		private System.DateTime _registerDate;
 		
@@ -4765,8 +4951,8 @@ namespace EVENeTWcfService
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_profilePicture", DbType="Image")]
-		public System.Data.Linq.Binary profilePicture
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_profilePicture", DbType="VarChar(256)")]
+		public string profilePicture
 		{
 			get
 			{
@@ -4777,6 +4963,22 @@ namespace EVENeTWcfService
 				if ((this._profilePicture != value))
 				{
 					this._profilePicture = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_coverPicture", DbType="VarChar(256)")]
+		public string coverPicture
+		{
+			get
+			{
+				return this._coverPicture;
+			}
+			set
+			{
+				if ((this._coverPicture != value))
+				{
+					this._coverPicture = value;
 				}
 			}
 		}

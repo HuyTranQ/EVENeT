@@ -34,7 +34,10 @@ namespace EVENeT
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
             ServiceClient client = new ServiceClient();
-            client.CreateUserAsync(userName.Text, password.Password, null, userType.SelectedIndex + 1);
+            if (userType.SelectedIndex == 0)
+                client.CreateIndividualAsync(userName.Text, password.Password, "", "", "", "", "", new DateTime(1900, 1, 1), false);
+            else
+                client.CreateOrganizationAsync(userName.Text, password.Password, "", "", "", "", "", "");
         }
 
         private void ContentDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)

@@ -13,15 +13,21 @@ namespace EVENeTWcfService
     public interface IService
     {
         [OperationContract]
-        bool UsernameExisted(string username);
+        bool UsernameExists(string username);
 
         [OperationContract]
         bool CorrectUserNameAndPassword(string username, string password);
 
         [OperationContract]
-        void CreateUser(string username, string password, Binary profilePic, int type);
+        bool IndividualFullySetUp(string username);
 
         [OperationContract]
-        void CreateIndividual(string username, string password, Binary profilePic, string firstName, string midName, string lastName, DateTime dob, bool gender);
+        int UserType(string username);
+
+        [OperationContract]
+        void CreateIndividual(string username, string password, string profilePic, string cover, string firstName, string midName, string lastName, DateTime dob, bool gender);
+
+        [OperationContract]
+        void CreateOrganization(string username, string password, string logo, string cover, string description, string type, string phone, string website);
     }
 }

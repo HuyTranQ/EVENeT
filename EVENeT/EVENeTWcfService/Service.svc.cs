@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Linq;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
@@ -20,24 +21,39 @@ namespace EVENeTWcfService
             Data = new DataClassesDataContext(@"Data Source=(local);Initial Catalog=EVENet;Integrated Security=True");
         }
 
-        public bool UsernameExisted(string username)
+        public bool UsernameExists(string username)
         {
             return (bool)Data.isUserExisted(username);
         }
 
-        public void CreateUser(string username, string password, Binary profilePic, int type)
+        public void CreateIndividual(string username, string password, string profilePic, string cover, string firstName, string midName, string lastName, DateTime dob, bool gender)
         {
-            Data.createUser(username, password, profilePic, type);
-        }
-
-        public void CreateIndividual(string username, string password, Binary profilePic, string firstName, string midName, string lastName, DateTime dob, bool gender)
-        {
-            Data.createIndividual(username, password, profilePic, firstName, midName, lastName, dob, gender);
+            Data.createIndividual(username, password, profilePic, cover, firstName, midName, lastName, dob, gender);
         }
 
         public bool CorrectUserNameAndPassword(string username, string password)
         {
-            return (bool)Data.auth(username, password);
+            bool result = (bool)Data.auth(username, password);
+            return result;
+        }
+
+        public void CreateOrganization(string username, string password, string logo, string cover, string description, string type, string phone, string website)
+        {
+            Data.createOrganization(username, password, logo, cover, description, type, phone, website);
+        }
+
+        public bool IndividualFullySetUp(string username)
+        {
+            return (bool)Data.isIndividualFullySetUp(username);
+        }
+
+        public int UserType(string username)
+        {
+            var tmp = Data.getUserType(username);
+            if (tmp == null)
+                return -1;
+            else
+                return (int)tmp;
         }
     }
 }

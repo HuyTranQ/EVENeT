@@ -109,9 +109,6 @@
     <None Include="Service References\EVENeTServiceReference\Service1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\EVENeTServiceReference\Service2.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <PRIResource Include="Strings\en-US\Resources.resw" />
   </ItemGroup>
   <ItemGroup>

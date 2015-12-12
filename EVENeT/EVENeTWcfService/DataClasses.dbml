@@ -19,7 +19,7 @@
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="content" Type="System.String" DbType="NVarChar(1024) NOT NULL" CanBeNull="false" />
       <Column Name="eventId" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="author" Type="System.String" DbType="VarChar(32)" CanBeNull="true" />
+      <Column Name="author" Type="System.String" DbType="VarChar(32) NOT NULL" CanBeNull="false" />
       <Association Name="Event_Comment" Member="Event" ThisKey="eventId" OtherKey="id" Type="Event" IsForeignKey="true" />
       <Association Name="User_Comment" Member="User" ThisKey="author" OtherKey="username" Type="User" IsForeignKey="true" />
     </Type>
@@ -95,8 +95,8 @@
   <Table Name="dbo.Notification" Member="Notifications">
     <Type Name="Notification">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="receiver" Type="System.String" DbType="VarChar(32)" CanBeNull="true" />
-      <Column Name="sender" Type="System.String" DbType="VarChar(32)" CanBeNull="true" />
+      <Column Name="receiver" Type="System.String" DbType="VarChar(32) NOT NULL" CanBeNull="false" />
+      <Column Name="sender" Type="System.String" DbType="VarChar(32) NOT NULL" CanBeNull="false" />
       <Column Name="eventId" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="typeInfo" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Seen" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
@@ -323,7 +323,7 @@
     <ElementType Name="getCommentsResult">
       <Column Name="content" Type="System.String" DbType="NVarChar(1024) NOT NULL" CanBeNull="false" />
       <Column Name="eventId" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="author" Type="System.String" DbType="VarChar(32)" CanBeNull="true" />
+      <Column Name="author" Type="System.String" DbType="VarChar(32) NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
   <Function Name="dbo.getIndividual" Method="getIndividual">
@@ -417,6 +417,11 @@
       <Column Name="userType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
+  <Function Name="dbo.setCoverPictureUser" Method="setCoverPictureUser">
+    <Parameter Name="id" Type="System.String" DbType="VarChar(32)" />
+    <Parameter Name="cover" Type="System.String" DbType="VarChar(256)" />
+    <Return Type="System.Int32" />
+  </Function>
   <Function Name="dbo.setEvent" Method="setEvent">
     <Parameter Name="id" Type="System.Int32" DbType="Int" />
     <Parameter Name="username" Type="System.String" DbType="NVarChar(32)" />
@@ -435,6 +440,14 @@
     <Parameter Name="lastName" Type="System.String" DbType="NVarChar(16)" />
     <Parameter Name="dob" Type="System.DateTime" DbType="Date" />
     <Parameter Name="gender" Type="System.Boolean" DbType="Bit" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.setOrganization" Method="setOrganization">
+    <Parameter Name="id" Type="System.String" DbType="VarChar(32)" />
+    <Parameter Name="description" Type="System.String" DbType="NVarChar(1024)" />
+    <Parameter Name="type" Type="System.String" DbType="NVarChar(32)" />
+    <Parameter Name="phone" Type="System.String" DbType="VarChar(16)" />
+    <Parameter Name="website" Type="System.String" DbType="VarChar(256)" />
     <Return Type="System.Int32" />
   </Function>
   <Function Name="dbo.setPassword" Method="setPassword">

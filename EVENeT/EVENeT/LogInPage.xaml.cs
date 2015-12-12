@@ -59,9 +59,20 @@ namespace EVENeT
             ContentDialogResult result = await dialog.ShowAsync();
             if (result == ContentDialogResult.Primary)
             {
+                ServiceClient client = new ServiceClient();
+
+                TextBox dialogUsername = ((TextBox)dialog.FindName("userName"));
+                PasswordBox dialogPassword = ((PasswordBox)dialog.FindName("password"));
+                ComboBox dialogUserType = ((ComboBox)dialog.FindName("userType"));
+
+                if (dialogUserType.SelectedIndex == 0)
+                    await client.CreateIndividualAsync(dialogUsername.Text, dialogPassword.Password, "", "", "", "", "", new DateTime(1900, 1, 1), false);
+                else
+                    await client.CreateOrganizationAsync(dialogUsername.Text, dialogPassword.Password, "", "", "", "", "", "");
+
                 // Navigate to set up page
                 Frame frame = Window.Current.Content as Frame;
-                frame.Navigate(typeof(AccountSetUpPage), ((TextBox)dialog.FindName("userName")).Text);
+                frame.Navigate(typeof(AccountSetUpPage), dialogUsername.Text);
             }
         }
     }

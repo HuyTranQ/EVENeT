@@ -27,6 +27,15 @@ namespace EVENeT.EVENeTServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/IndividualFullySetUp", ReplyAction="http://tempuri.org/IService/IndividualFullySetUpResponse")]
         System.Threading.Tasks.Task<bool> IndividualFullySetUpAsync(string username);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/SetIndividualInfo", ReplyAction="http://tempuri.org/IService/SetIndividualInfoResponse")]
+        System.Threading.Tasks.Task SetIndividualInfoAsync(string username, string firstName, string midName, string lastName, System.DateTime dob, bool gender);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/SetProfilePicture", ReplyAction="http://tempuri.org/IService/SetProfilePictureResponse")]
+        System.Threading.Tasks.Task SetProfilePictureAsync(string username, string imagePath);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/SetCoverPicture", ReplyAction="http://tempuri.org/IService/SetCoverPictureResponse")]
+        System.Threading.Tasks.Task SetCoverPictureAsync(string username, string imagePath);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/UserType", ReplyAction="http://tempuri.org/IService/UserTypeResponse")]
         System.Threading.Tasks.Task<int> UserTypeAsync(string username);
         
@@ -90,6 +99,18 @@ namespace EVENeT.EVENeTServiceReference {
         
         public System.Threading.Tasks.Task<bool> IndividualFullySetUpAsync(string username) {
             return base.Channel.IndividualFullySetUpAsync(username);
+        }
+        
+        public System.Threading.Tasks.Task SetIndividualInfoAsync(string username, string firstName, string midName, string lastName, System.DateTime dob, bool gender) {
+            return base.Channel.SetIndividualInfoAsync(username, firstName, midName, lastName, dob, gender);
+        }
+        
+        public System.Threading.Tasks.Task SetProfilePictureAsync(string username, string imagePath) {
+            return base.Channel.SetProfilePictureAsync(username, imagePath);
+        }
+        
+        public System.Threading.Tasks.Task SetCoverPictureAsync(string username, string imagePath) {
+            return base.Channel.SetCoverPictureAsync(username, imagePath);
         }
         
         public System.Threading.Tasks.Task<int> UserTypeAsync(string username) {

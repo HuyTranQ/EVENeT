@@ -30,6 +30,7 @@ namespace EVENeT
     {
         string username;
         int userType;
+        string profile, cover;
         ServiceClient client = null;
         bool informationFilled = false;
 
@@ -53,12 +54,14 @@ namespace EVENeT
             await dialog.ShowAsync();
         }
 
-        private void continueBtn_Click(object sender, RoutedEventArgs e)
+        private async void continueBtn_Click(object sender, RoutedEventArgs e)
         {
             CheckForError();
             if (informationFilled)
             {
-                // 
+                await client.SetIndividualInfoAsync(username, FirstNameTbx.Text, MidNameTbx.Text, LastnameTbx.Text, BirthdayPicker.Date.Date, GenderCbx.SelectedIndex == 0);
+                await client.SetProfilePictureAsync(username, profile);
+                await client.SetCoverPictureAsync(username, cover);
                 Frame frame = Window.Current.Content as Frame;
                 frame.Navigate(typeof(AppShell), username);
                 Window.Current.Activate();
@@ -94,6 +97,7 @@ namespace EVENeT
             openPicker.FileTypeFilter.Add(".bmp");
 
             StorageFile file = await openPicker.PickSingleFileAsync();
+            profile = file.Path;
             // Some magic, because I can only display the files directly on computer
             if (file != null)
             {
@@ -112,6 +116,7 @@ namespace EVENeT
             openPicker.FileTypeFilter.Add(".bmp");
 
             StorageFile file = await openPicker.PickSingleFileAsync();
+            cover = file.Path;
             // Some magic, because I can only display the files directly on computer
             if (file != null)
             {

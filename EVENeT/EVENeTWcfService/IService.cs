@@ -22,6 +22,15 @@ namespace EVENeTWcfService
         bool IndividualFullySetUp(string username);
 
         [OperationContract]
+        void SetIndividualInfo(string username, string firstName, string midName, string lastName, DateTime dob, bool gender);
+
+        [OperationContract]
+        void SetProfilePicture(string username, string imagePath);
+
+        [OperationContract]
+        void SetCoverPicture(string username, string imagePath);
+
+        [OperationContract]
         int UserType(string username);
 
         [OperationContract]

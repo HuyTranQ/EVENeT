@@ -34,7 +34,7 @@
                         <TextBox x:Name="LastnameTbx" Header="Lastname*" Margin="0,0,0,16" ToolTipService.ToolTip="Your lastname. This field is required"/>
                         <DatePicker x:Name="BirthdayPicker" Header="Birthday" Margin="0,0,0,16" ToolTipService.ToolTip="Your birthday. Please enter your real birthday, or at least a reasonable one"
                                     MinWidth="300"/>
-                        <ComboBox x:Name="GenderCbx" Header="Gender" MinWidth="300">
+                        <ComboBox x:Name="GenderCbx" Header="Gender*" MinWidth="300" ToolTipService.ToolTip="Your gender. This field is required">
                             <x:String>Male</x:String>
                             <x:String>Female</x:String>
                         </ComboBox>
@@ -44,7 +44,7 @@
                     <StackPanel Margin="0,0,0,32">
                         <TextBlock Text="Profile Photo" FontSize="24" FontWeight="Light" Margin="0,0,0,16"/>
                         <Button x:Name="ChooseAvatarBtn" Content="Choose your avatar" Click="ChooseAvatarBtn_Click"/>
-                        <Image x:Name="indAvatar" Width="300" Height="300" HorizontalAlignment="Left"/>
+                        <Image x:Name="indAvatar" Width="200" Height="200" HorizontalAlignment="Left" Margin="0,0,0,16"/>
                         <Button x:Name="ChooseCoverBtn" Content="Choose your cover photo" Click="ChooseCoverBtn_Click"/>
                         <Image x:Name="indCover" Height="300" HorizontalAlignment="Left"/>
                         <!-- Interests -->
@@ -76,7 +76,7 @@
                     </StackPanel>
                 </StackPanel>
 
-                <Button x:Name="continueBtn" Background="{ThemeResource PageHeaderBackgroundBrush}"
+                <Button x:Name="continueBtn" Background="{ThemeResource PageHeaderBackgroundBrush}" HorizontalAlignment="Right"
                     Content="Continue to EVENeT" Click="continueBtn_Click"/>
             </StackPanel>
 

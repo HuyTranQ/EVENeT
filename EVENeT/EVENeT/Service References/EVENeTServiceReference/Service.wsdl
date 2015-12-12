@@ -24,6 +24,24 @@
   <wsdl:message name="IService_IndividualFullySetUp_OutputMessage">
     <wsdl:part name="parameters" element="tns:IndividualFullySetUpResponse" />
   </wsdl:message>
+  <wsdl:message name="IService_SetIndividualInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetIndividualInfo" />
+  </wsdl:message>
+  <wsdl:message name="IService_SetIndividualInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetIndividualInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_SetProfilePicture_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetProfilePicture" />
+  </wsdl:message>
+  <wsdl:message name="IService_SetProfilePicture_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetProfilePictureResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_SetCoverPicture_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetCoverPicture" />
+  </wsdl:message>
+  <wsdl:message name="IService_SetCoverPicture_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetCoverPictureResponse" />
+  </wsdl:message>
   <wsdl:message name="IService_UserType_InputMessage">
     <wsdl:part name="parameters" element="tns:UserType" />
   </wsdl:message>
@@ -54,6 +72,18 @@
     <wsdl:operation name="IndividualFullySetUp">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/IndividualFullySetUp" message="tns:IService_IndividualFullySetUp_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService/IndividualFullySetUpResponse" message="tns:IService_IndividualFullySetUp_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetIndividualInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/SetIndividualInfo" message="tns:IService_SetIndividualInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/SetIndividualInfoResponse" message="tns:IService_SetIndividualInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetProfilePicture">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/SetProfilePicture" message="tns:IService_SetProfilePicture_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/SetProfilePictureResponse" message="tns:IService_SetProfilePicture_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetCoverPicture">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/SetCoverPicture" message="tns:IService_SetCoverPicture_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/SetCoverPictureResponse" message="tns:IService_SetCoverPicture_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="UserType">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/UserType" message="tns:IService_UserType_InputMessage" />
@@ -90,6 +120,33 @@
     </wsdl:operation>
     <wsdl:operation name="IndividualFullySetUp">
       <soap:operation soapAction="http://tempuri.org/IService/IndividualFullySetUp" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetIndividualInfo">
+      <soap:operation soapAction="http://tempuri.org/IService/SetIndividualInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetProfilePicture">
+      <soap:operation soapAction="http://tempuri.org/IService/SetProfilePicture" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetCoverPicture">
+      <soap:operation soapAction="http://tempuri.org/IService/SetCoverPicture" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

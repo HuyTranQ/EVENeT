@@ -483,6 +483,13 @@ namespace EVENeTWcfService
 			return ((ISingleResult<searchUserFromInterestResult>)(result.ReturnValue));
 		}
 		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.setCoverPictureUser")]
+		public int setCoverPictureUser([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(256)")] string cover)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), id, cover);
+			return ((int)(result.ReturnValue));
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.setEvent")]
 		public int setEvent([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(32)")] string username, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="DateTime")] System.Nullable<System.DateTime> begintime, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="DateTime")] System.Nullable<System.DateTime> endtime, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(1024)")] string description, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(256)")] string thumbnail, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(128)")] string title, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> location)
 		{
@@ -494,6 +501,13 @@ namespace EVENeTWcfService
 		public int setIndividual([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(16)")] string firstName, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(16)")] string midName, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(16)")] string lastName, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Date")] System.Nullable<System.DateTime> dob, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Bit")] System.Nullable<bool> gender)
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), id, firstName, midName, lastName, dob, gender);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.setOrganization")]
+		public int setOrganization([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(1024)")] string description, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(32)")] string type, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(16)")] string phone, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(256)")] string website)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), id, description, type, phone, website);
 			return ((int)(result.ReturnValue));
 		}
 		
@@ -952,7 +966,7 @@ namespace EVENeTWcfService
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_author", DbType="VarChar(32)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_author", DbType="VarChar(32) NOT NULL", CanBeNull=false)]
 		public string author
 		{
 			get
@@ -2574,7 +2588,7 @@ namespace EVENeTWcfService
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_receiver", DbType="VarChar(32)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_receiver", DbType="VarChar(32) NOT NULL", CanBeNull=false)]
 		public string receiver
 		{
 			get
@@ -2598,7 +2612,7 @@ namespace EVENeTWcfService
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_sender", DbType="VarChar(32)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_sender", DbType="VarChar(32) NOT NULL", CanBeNull=false)]
 		public string sender
 		{
 			get
@@ -4259,7 +4273,7 @@ namespace EVENeTWcfService
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_author", DbType="VarChar(32)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_author", DbType="VarChar(32) NOT NULL", CanBeNull=false)]
 		public string author
 		{
 			get

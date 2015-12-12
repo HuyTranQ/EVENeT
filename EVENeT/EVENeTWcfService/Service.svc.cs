@@ -47,6 +47,11 @@ namespace EVENeTWcfService
             return (bool)Data.isIndividualFullySetUp(username);
         }
 
+        public void SetIndividualInfo(string username, string firstName, string midName, string lastName, DateTime dob, bool gender)
+        {
+            Data.setIndividual(username, firstName, midName, lastName, dob, gender);
+        }
+
         public int UserType(string username)
         {
             var tmp = Data.getUserType(username);
@@ -54,6 +59,16 @@ namespace EVENeTWcfService
                 return -1;
             else
                 return (int)tmp;
+        }
+
+        public void SetProfilePicture(string username, string imagePath)
+        {
+            Data.setProfilePicture(username, imagePath);
+        }
+
+        public void SetCoverPicture(string username, string imagePath)
+        {
+            Data.setCoverPictureUser(username, imagePath);
         }
     }
 }

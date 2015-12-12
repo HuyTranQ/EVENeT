@@ -33,11 +33,6 @@ namespace EVENeT
 
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
-            ServiceClient client = new ServiceClient();
-            if (userType.SelectedIndex == 0)
-                client.CreateIndividualAsync(userName.Text, password.Password, "", "", "", "", "", new DateTime(1900, 1, 1), false);
-            else
-                client.CreateOrganizationAsync(userName.Text, password.Password, "", "", "", "", "", "");
         }
 
         private void ContentDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
@@ -71,7 +66,7 @@ namespace EVENeT
         private bool ShouldEnablePrimaryButton()
         {
             return !string.IsNullOrEmpty(userName.Text) && IsEmailValid() && 
-                !string.IsNullOrEmpty(password.Password) &&
+                !string.IsNullOrEmpty(password.Password) && password.Password.Length > 7 &&
                 !string.IsNullOrEmpty(passwordConfirm.Password) &&
                 password.Password == passwordConfirm.Password;
         }

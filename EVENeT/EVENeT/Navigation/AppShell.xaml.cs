@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Navigation;
 using Windows.Foundation.Metadata;
 using EVENeT.Navigation;
 using Windows.UI.Core;
+using System.Diagnostics;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -28,7 +29,7 @@ namespace EVENeT.Navigation
         public static AppShell Current;
         public static Frame RootFrame = null;
 
-        private List<NavPaneItem> navList = new List<NavPaneItem>(
+        public static List<NavPaneItem> navList = new List<NavPaneItem>(
             new[]
             {
                 new NavPaneItem()
@@ -54,8 +55,8 @@ namespace EVENeT.Navigation
 
                 new NavPaneItem()
                 {
-                    Symbol = Symbol.Bookmarks, 
-                    Label = "Events", 
+                    Symbol = Symbol.Bookmarks,
+                    Label = "Events",
                     DestPage = typeof(EventDetailPage)
                 }
             });
@@ -84,7 +85,7 @@ namespace EVENeT.Navigation
             //(from i in Header.AppCommandBar.SecondaryCommands where ((AppBarButton)i).Label == "Sign Out" select i).SingleOrDefault();
 
             SystemNavigationManager.GetForCurrentView().BackRequested += SystemNavigationManager_BackRequested;
-
+            PageHeader.selectedItemChangeEvent += new EventHandler(selectedItemHandler);
             // Use the hardware back button instead of the back button in the header of the page.
             // The back button in the header of the page is hidden in this case, of course.
             if (ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons"))
@@ -114,6 +115,16 @@ namespace EVENeT.Navigation
                 frame.Navigate(typeof(LogInPage), "SignOut");
         }
 
+        private void selectedItemHandler(object sender, EventArgs e)
+        {
+            PageHeader.MyEventArgs parameter = e as PageHeader.MyEventArgs;
+            int index = parameter.MyEventInt;
+            NavPaneList.IsEnabled = true;
+            Debug.WriteLine("Check selectedindex: " + NavPaneList.SelectedIndex);
+            NavPaneList.SelectedIndex = index;
+        }
+
+
         private void SystemNavigationManager_BackRequested(object sender, BackRequestedEventArgs e)
         {
             bool handled = e.Handled;
@@ -129,31 +140,31 @@ namespace EVENeT.Navigation
         /// <param name="e"></param>
         private void OnNavigatingToPage(object sender, NavigatingCancelEventArgs e)
         {
-            if (e.NavigationMode == NavigationMode.Back)
-            {
-                NavPaneItem item = (from p in navList where p.DestPage == e.SourcePageType select p).SingleOrDefault();
-                if (item != null && RootFrame.BackStackDepth > 0)
-                {
-                    // In cases where a page drills into sub-pages then we'll highlight the most recent
-                    // navigation menu item that appears in the BackStack
-                    foreach (var entry in RootFrame.BackStack.Reverse())
-                    {
-                        item = (from p in navList where p.DestPage == entry.SourcePageType select p).SingleOrDefault();
-                        if (item != null)
-                            break;
-                    }
+            //if (e.NavigationMode == NavigationMode.Back)
+            //{
+            //    NavPaneItem item = (from p in navList where p.DestPage == e.SourcePageType select p).SingleOrDefault();
+            //    if (item != null && RootFrame.BackStackDepth > 0)
+            //    {
+            //        // In cases where a page drills into sub-pages then we'll highlight the most recent
+            //        // navigation menu item that appears in the BackStack
+            //        foreach (var entry in RootFrame.BackStack.Reverse())
+            //        {
+            //            item = (from p in navList where p.DestPage == entry.SourcePageType select p).SingleOrDefault();
+            //            if (item != null)
+            //                break;
+            //        }
 
-                    ListViewItem container = (ListViewItem)NavPaneList.ContainerFromItem(item);
+            //        ListViewItem container = (ListViewItem)NavPaneList.ContainerFromItem(item);
 
-                    // While updating the selection state of the item prevent it from taking keyboard focus.  If a
-                    // user is invoking the back button via the keyboard causing the selected nav menu item to change
-                    // then focus will remain on the back button.
-                    if (container != null) container.IsTabStop = false;
-                    NavPaneList.SetSelectedItem(container);
-                    Header.TitleControl.Content = item.Label;
-                    if (container != null) container.IsTabStop = true;
-                }
-            }
+            //        // While updating the selection state of the item prevent it from taking keyboard focus.  If a
+            //        // user is invoking the back button via the keyboard causing the selected nav menu item to change
+            //        // then focus will remain on the back button.
+            //        if (container != null) container.IsTabStop = false;
+            //        NavPaneList.SetSelectedItem(container);
+            //        Header.TitleControl.Content = item.Label;
+            //        if (container != null) container.IsTabStop = true;
+            //    }
+            //}
         }
 
         private void OnNavigatedToPage(object sender, NavigationEventArgs e)
@@ -187,6 +198,7 @@ namespace EVENeT.Navigation
         {
             this.frame.Navigate(typeof(HomePage));
             Header.TitleControl.Content = "Home";
+            NavPaneList.SelectedIndex = 0;
         }
     }
 }

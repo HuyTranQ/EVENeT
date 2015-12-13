@@ -10,7 +10,7 @@ using Windows.UI.Xaml.Media.Animation;
 
 namespace EVENeT.Navigation
 {
-    class NavPaneListView : ListView
+  public  class NavPaneListView : ListView
     {
         private SplitView splitViewHost;
 

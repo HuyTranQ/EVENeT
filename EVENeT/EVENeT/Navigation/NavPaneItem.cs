@@ -10,7 +10,7 @@ namespace EVENeT.Navigation
     /// <summary>
     /// Data to represent an item in the nav pane.
     /// </summary>
-    class NavPaneItem
+   public class NavPaneItem
     {
         public string Label { get; set; }
         public Symbol Symbol { get; set; }

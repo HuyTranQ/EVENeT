@@ -23,6 +23,9 @@ namespace EVENeT
 {
     public sealed partial class PageHeader : UserControl
     {
+
+        public static event EventHandler selectedItemChangeEvent;
+
         public static readonly DependencyProperty TitleProperty = DependencyProperty.Register("Title", typeof(object), typeof(PageHeader), new PropertyMetadata(null));
         public object Title
         {
@@ -83,8 +86,25 @@ namespace EVENeT
             if (AppShell.RootFrame.CanGoBack && !handled)
             {
                 // If not, set the event to handled and go back to the previous page in the app.
+                PageStackEntry pageStack = AppShell.RootFrame.BackStack.Last();
+                int index = AppShell.navList.FindIndex(x => x.DestPage == pageStack.SourcePageType);
+                selectedItemChangeEvent(this, new MyEventArgs(index));
+
                 handled = true;
                 AppShell.RootFrame.GoBack();
+            }
+        }
+
+
+
+
+        public class MyEventArgs : EventArgs
+        {
+            public int MyEventInt { get; set; }
+
+            public MyEventArgs(int index)
+            {
+                this.MyEventInt = index;
             }
         }
     }

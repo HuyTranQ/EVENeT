@@ -64,6 +64,7 @@
                     <!-- A custom ListView to display the items in the pane.  The automation Name is set in the ContainerContentChanging event. -->
                     <navigation:NavPaneListView
                         x:Name="NavPaneList"
+                     
                         TabIndex="3"
                         ItemContainerStyle="{StaticResource NavPaneItemContainerStyle}"
                         ItemTemplate="{StaticResource NavPaneItemTemplate}" ItemInvoked="NavPaneItemInvoked"

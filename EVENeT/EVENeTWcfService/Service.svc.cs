@@ -37,9 +37,9 @@ namespace EVENeTWcfService
             return result;
         }
 
-        public void CreateOrganization(string username, string password, string logo, string cover, string description, string type, string phone, string website)
+        public void CreateOrganization(string username, string password, string name, string logo, string cover, string description, string type, string phone, string website)
         {
-            Data.createOrganization(username, password, logo, cover, description, type, phone, website);
+            Data.createOrganization(username, password, name, logo, cover, description, type, phone, website);
         }
 
         public bool IndividualFullySetUp(string username)
@@ -69,6 +69,65 @@ namespace EVENeTWcfService
         public void SetCoverPicture(string username, string imagePath)
         {
             Data.setCoverPictureUser(username, imagePath);
+        }
+
+        public void SetOrganizationInfo(string username, string name, string description, string type, string phone, string website)
+        {
+            Data.setOrganization(username, name, description, type, phone, website);
+        }
+
+        public bool CreateEvent(DateTime beginTime, DateTime endTime, string description, string thumbnail, string title, int ticket, int locationId, string currentUser)
+        {
+            try
+            {
+                Data.createEvent(beginTime, endTime, description, thumbnail, title, ticket, locationId, currentUser);
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+
+        public int GetLocationFromAddress(string address)
+        {
+            var result = Data.getLocationFromAddress(address);
+            if (result != null)
+                return (int)result;
+            return -1;
+        }
+
+        public void CreateLocation(string name, string description, string address, double longitude, double latitude, string thumbnail)
+        {
+            Data.createLocation(name, description, address, longitude, latitude, thumbnail);
+        }
+
+        public void GetIndividual(string username, out string FirstName, out string MiddleName, out string LastName, out DateTime DOB, out bool Gender, out string ProfilePic, out string CoverPic)
+        {
+            ISingleResult<getIndividualResult> result1 = Data.getIndividual(username);
+            ISingleResult<getUserResult> result2 = Data.getUser(username);
+            if (result1 != null && result2 != null)
+            {
+                getIndividualResult i = result1.First();
+                getUserResult u = result2.First();
+                FirstName = i.firstName;
+                MiddleName = i.midName;
+                LastName = i.lastName;
+                DOB = i.DOB;
+                Gender = i.gender;
+                ProfilePic = u.profilePicture;
+                CoverPic = u.coverPicture;
+            }
+            else
+            {
+                FirstName = "";
+                MiddleName = "";
+                LastName = "";
+                DOB = DateTime.MinValue;
+                Gender = false;
+                ProfilePic = "";
+                CoverPic = "";
+            }
         }
     }
 }

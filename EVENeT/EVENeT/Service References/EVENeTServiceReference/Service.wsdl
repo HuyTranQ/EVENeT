@@ -30,6 +30,12 @@
   <wsdl:message name="IService_SetIndividualInfo_OutputMessage">
     <wsdl:part name="parameters" element="tns:SetIndividualInfoResponse" />
   </wsdl:message>
+  <wsdl:message name="IService_SetOrganizationInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetOrganizationInfo" />
+  </wsdl:message>
+  <wsdl:message name="IService_SetOrganizationInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetOrganizationInfoResponse" />
+  </wsdl:message>
   <wsdl:message name="IService_SetProfilePicture_InputMessage">
     <wsdl:part name="parameters" element="tns:SetProfilePicture" />
   </wsdl:message>
@@ -60,6 +66,30 @@
   <wsdl:message name="IService_CreateOrganization_OutputMessage">
     <wsdl:part name="parameters" element="tns:CreateOrganizationResponse" />
   </wsdl:message>
+  <wsdl:message name="IService_CreateEvent_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateEvent" />
+  </wsdl:message>
+  <wsdl:message name="IService_CreateEvent_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateEventResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_CreateLocation_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateLocation" />
+  </wsdl:message>
+  <wsdl:message name="IService_CreateLocation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateLocationResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetLocationFromAddress_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetLocationFromAddress" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetLocationFromAddress_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetLocationFromAddressResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetIndividual_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetIndividual" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetIndividual_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetIndividualResponse" />
+  </wsdl:message>
   <wsdl:portType name="IService">
     <wsdl:operation name="UsernameExists">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/UsernameExists" message="tns:IService_UsernameExists_InputMessage" />
@@ -76,6 +106,10 @@
     <wsdl:operation name="SetIndividualInfo">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/SetIndividualInfo" message="tns:IService_SetIndividualInfo_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService/SetIndividualInfoResponse" message="tns:IService_SetIndividualInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetOrganizationInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/SetOrganizationInfo" message="tns:IService_SetOrganizationInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/SetOrganizationInfoResponse" message="tns:IService_SetOrganizationInfo_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="SetProfilePicture">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/SetProfilePicture" message="tns:IService_SetProfilePicture_InputMessage" />
@@ -96,6 +130,22 @@
     <wsdl:operation name="CreateOrganization">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/CreateOrganization" message="tns:IService_CreateOrganization_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService/CreateOrganizationResponse" message="tns:IService_CreateOrganization_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateEvent">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/CreateEvent" message="tns:IService_CreateEvent_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/CreateEventResponse" message="tns:IService_CreateEvent_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateLocation">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/CreateLocation" message="tns:IService_CreateLocation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/CreateLocationResponse" message="tns:IService_CreateLocation_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLocationFromAddress">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/GetLocationFromAddress" message="tns:IService_GetLocationFromAddress_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/GetLocationFromAddressResponse" message="tns:IService_GetLocationFromAddress_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetIndividual">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/GetIndividual" message="tns:IService_GetIndividual_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/GetIndividualResponse" message="tns:IService_GetIndividual_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IService" type="tns:IService">
@@ -129,6 +179,15 @@
     </wsdl:operation>
     <wsdl:operation name="SetIndividualInfo">
       <soap:operation soapAction="http://tempuri.org/IService/SetIndividualInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetOrganizationInfo">
+      <soap:operation soapAction="http://tempuri.org/IService/SetOrganizationInfo" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -174,6 +233,42 @@
     </wsdl:operation>
     <wsdl:operation name="CreateOrganization">
       <soap:operation soapAction="http://tempuri.org/IService/CreateOrganization" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateEvent">
+      <soap:operation soapAction="http://tempuri.org/IService/CreateEvent" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateLocation">
+      <soap:operation soapAction="http://tempuri.org/IService/CreateLocation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLocationFromAddress">
+      <soap:operation soapAction="http://tempuri.org/IService/GetLocationFromAddress" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIndividual">
+      <soap:operation soapAction="http://tempuri.org/IService/GetIndividual" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

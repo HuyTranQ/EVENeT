@@ -17,36 +17,35 @@
         <ProgressRing x:Name="loading" Visibility="Collapsed"
                       IsActive="True"
                       RelativePanel.Below="appLogo" RelativePanel.AlignHorizontalCenterWith="appLogo"/>
-        <TextBlock x:Name="errorMessage"
+        <StackPanel x:Name="LogInPane" RelativePanel.Below="loading" RelativePanel.AlignHorizontalCenterWith="appLogo">
+            <TextBlock x:Name="errorMessage"
                    Width="300"
                    Margin="0,4,0,4"
                    Visibility="Collapsed"
                    Foreground="Red"
-                   TextAlignment="Center"
-                   RelativePanel.Below="loading" RelativePanel.AlignHorizontalCenterWith="appLogo"/>
-        <TextBox x:Name="userName"
+                   TextAlignment="Center"/>
+            <TextBox x:Name="userName"
                  Width="300"
                  Margin="0,4,0,4"
-                 PlaceholderText="Username"
-                 RelativePanel.Below="errorMessage" RelativePanel.AlignHorizontalCenterWith="appLogo"/>
-        <PasswordBox x:Name="password"
+                 PlaceholderText="Username"/>
+            <PasswordBox x:Name="password"
                      Width="300"
                      Margin="0,4,0,4"
-                     PlaceholderText="Password"
-                     RelativePanel.Below="userName" RelativePanel.AlignHorizontalCenterWith="appLogo"/>
-        <CheckBox Name="remember" Content="Remember me?"
+                     PlaceholderText="Password"/>
+            <CheckBox Name="remember" Content="Remember me"
                      RelativePanel.Below="password" RelativePanel.AlignLeftWith="password"/>
-        
-        <Button x:Name="signInButton"
+
+            <Button x:Name="signInButton"
                 Width="300"
                 Margin="0,4,0,4"
                 Content="Sign in"
                 RelativePanel.Below="remember" RelativePanel.AlignHorizontalCenterWith="appLogo" Click="signInButton_Click"/>
-       
-        <HyperlinkButton x:Name="signUpButton"
+
+            <HyperlinkButton x:Name="signUpButton"
                          Width="300"
                          Margin="0,4,0,4"
                          Content="Create a new account"
                          RelativePanel.Below="signInButton" RelativePanel.AlignHorizontalCenterWith="appLogo" Click="signUpButton_Click"/>
+        </StackPanel>
     </RelativePanel>
 </Page>

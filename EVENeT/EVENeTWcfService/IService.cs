@@ -25,6 +25,9 @@ namespace EVENeTWcfService
         void SetIndividualInfo(string username, string firstName, string midName, string lastName, DateTime dob, bool gender);
 
         [OperationContract]
+        void SetOrganizationInfo(string username, string name, string description, string type, string phone, string website);
+
+        [OperationContract]
         void SetProfilePicture(string username, string imagePath);
 
         [OperationContract]
@@ -37,6 +40,18 @@ namespace EVENeTWcfService
         void CreateIndividual(string username, string password, string profilePic, string cover, string firstName, string midName, string lastName, DateTime dob, bool gender);
 
         [OperationContract]
-        void CreateOrganization(string username, string password, string logo, string cover, string description, string type, string phone, string website);
+        void CreateOrganization(string username, string password, string name, string logo, string cover, string description, string type, string phone, string website);
+
+        [OperationContract]
+        bool CreateEvent(DateTime beginTime, DateTime endTime, string description, string thumbnail, string title, int ticket, int locationId, string currentUser);
+
+        [OperationContract]
+        void CreateLocation(string name, string description, string address, double longitude, double latitude, string thumbnail);
+
+        [OperationContract]
+        int GetLocationFromAddress(string address);
+
+        [OperationContract]
+        void GetIndividual(string username, out string FirstName, out string MiddleName, out string LastName, out DateTime DOB, out bool Gender, out string ProfilePic, out string CoverPic);
     }
 }

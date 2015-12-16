@@ -24,29 +24,31 @@ namespace EVENeT
     /// </summary>
     public sealed partial class LogInPage : Page
     {
-        ServiceClient client;
         public LogInPage()
         {
             this.InitializeComponent();
-            client = new ServiceClient();
+            DatabaseHelper.Initialize();
         }
         
         private async void signInButton_Click(object sender, RoutedEventArgs e)
         {
-            bool correct = await client.CorrectUserNameAndPasswordAsync(userName.Text, password.Password);
+            bool correct = await DatabaseHelper.Client.CorrectUserNameAndPasswordAsync(userName.Text, password.Password);
             if (correct)
             {
                 Frame frame = Window.Current.Content as Frame;
+                DatabaseHelper.CurrentUser = userName.Text;
+                DatabaseHelper.CurrentUserType = await DatabaseHelper.Client.UserTypeAsync(userName.Text);
 
                 if (remember.IsChecked.Value)
                 {
                     var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+                    localSettings.Values["Autologin"] = "true";
                     localSettings.Values["Username"] = userName.Text;
                     localSettings.Values["Password"] = password.Password;
                     localSettings.Values["Remember"] = "Checked";
                 }
 
-                if (await client.IndividualFullySetUpAsync(userName.Text))
+                if (await DatabaseHelper.Client.IndividualFullySetUpAsync(userName.Text))
                     frame.Navigate(typeof(AccountSetUpPage), userName.Text);
                 else
                 {
@@ -67,16 +69,14 @@ namespace EVENeT
             ContentDialogResult result = await dialog.ShowAsync();
             if (result == ContentDialogResult.Primary)
             {
-                ServiceClient client = new ServiceClient();
-
                 TextBox dialogUsername = ((TextBox)dialog.FindName("userName"));
                 PasswordBox dialogPassword = ((PasswordBox)dialog.FindName("password"));
                 ComboBox dialogUserType = ((ComboBox)dialog.FindName("userType"));
 
                 if (dialogUserType.SelectedIndex == 0)
-                    await client.CreateIndividualAsync(dialogUsername.Text, dialogPassword.Password, "", "", "", "", "", new DateTime(1900, 1, 1), false);
+                    await DatabaseHelper.Client.CreateIndividualAsync(dialogUsername.Text, dialogPassword.Password, "", "", "", "", "", new DateTime(1900, 1, 1), false);
                 else
-                    await client.CreateOrganizationAsync(dialogUsername.Text, dialogPassword.Password, "", "", "", "", "", "");
+                    await DatabaseHelper.Client.CreateOrganizationAsync(dialogUsername.Text, dialogPassword.Password, "", "", "", "", "", "", "");
 
                 // Navigate to set up page
                 Frame frame = Window.Current.Content as Frame;
@@ -88,28 +88,40 @@ namespace EVENeT
         {
             base.OnNavigatedTo(e);
             var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
-            var check = localSettings.Values["Remember"];
-            if (e != null && e.Parameter.ToString() == "SignOut" || check == null)
-                return;
-          
-            if (check != null && check.ToString() == "Checked")
-            {
-                userName.Visibility = Visibility.Collapsed;
-                password.Visibility = Visibility.Collapsed;
-                remember.Visibility = Visibility.Collapsed;
-                signInButton.Visibility = Visibility.Collapsed;
-                signUpButton.Visibility = Visibility.Collapsed;
-                loading.Visibility = Visibility.Visible;
-                await Task.Delay(2000);
+            var check = localSettings.Values["Autologin"];
+            var rememberChecked = localSettings.Values["Remember"];
 
-                Frame frame = Window.Current.Content as Frame;
-                if (await client.IndividualFullySetUpAsync(localSettings.Values["Username"].ToString())) 
-                    frame.Navigate(typeof(AccountSetUpPage), localSettings.Values["Username"].ToString());
+            if (check == null)
+                return;
+
+            if (rememberChecked != null && rememberChecked.ToString() == "Checked")
+                remember.IsChecked = true;
+          
+            if (check != null && check.ToString() == "true")
+            {
+                LogInPane.Visibility = Visibility.Collapsed;
+                loading.Visibility = Visibility.Visible;
+                //await Task.Delay(2000);
+
+
+                string sUsername = localSettings.Values["Username"].ToString();
+                string sPassword = localSettings.Values["Password"].ToString();
+                DatabaseHelper.CurrentUser = sUsername;
+                if (await DatabaseHelper.Client.CorrectUserNameAndPasswordAsync(sUsername, sPassword))
+                {
+                    Frame frame = Window.Current.Content as Frame;
+                    if (await DatabaseHelper.Client.IndividualFullySetUpAsync(sUsername))
+                        frame.Navigate(typeof(AccountSetUpPage), sUsername);
+                    else
+                        frame.Navigate(typeof(Navigation.AppShell), sUsername);
+                    Window.Current.Activate();
+                }
                 else
                 {
-                    frame.Navigate(typeof(Navigation.AppShell), localSettings.Values["Username"].ToString());
+                    LogInPane.Visibility = Visibility.Visible;
+                    errorMessage.Text = "Error";
+                    errorMessage.Visibility = Visibility.Visible;
                 }
-                Window.Current.Activate();
                 loading.Visibility = Visibility.Collapsed;
             }
         }

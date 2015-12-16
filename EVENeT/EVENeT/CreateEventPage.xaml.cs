@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.Devices.Geolocation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Services.Maps;
+using Windows.UI.Popups;
 using Windows.UI.Text;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Maps;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Documents;
@@ -25,11 +29,49 @@ namespace EVENeT
     public sealed partial class CreateEventPage : Page
     {
         List<ITextRange> m_highlightedWords = null;
+        MapLocation location;
+        bool infoFilled = false;
 
         public CreateEventPage()
         {
             this.InitializeComponent();
             m_highlightedWords = new List<ITextRange>();
+            LocationMap.Loaded += LocationMap_Loaded;
+            LocationMap.MapTapped += LocationMap_MapTapped;
+        }
+
+        private async void LocationMap_MapTapped(MapControl sender, MapInputEventArgs args)
+        {
+            //MapIcon icon = new MapIcon();
+            //icon.Location = args.Location;
+            //icon.NormalizedAnchorPoint = new Point(0.5, 1.0);
+
+            //MapLocationFinderResult result = await MapLocationFinder.FindLocationsAtAsync(args.Location);
+            //if (result.Status == MapLocationFinderStatus.Success)
+            //{
+            //    icon.Title = result.Locations[0].Address.FormattedAddress;
+            //}
+
+            //LocationMap.MapElements.Clear();
+            //LocationMap.MapElements.Add(icon);
+        }
+
+        private void LocationMap_Loaded(object sender, RoutedEventArgs e)
+        {
+            LocationMap.Center = new Geopoint(new BasicGeoposition()
+            {
+                Latitude = 10.762689,
+                Longitude = 106.6823399
+            });
+
+            LocationMap.ZoomLevel = 15;
+            LocationMap.LandmarksVisible = true;
+
+            MapIcon icon = new MapIcon();
+            icon.Location = LocationMap.Center;
+            icon.NormalizedAnchorPoint = new Point(0.5, 1.0);
+            icon.Title = "University of Science, Ho Chi Minh City";
+            LocationMap.MapElements.Add(icon);
         }
 
         private void Bold_Click(object sender, RoutedEventArgs e)
@@ -63,11 +105,67 @@ namespace EVENeT
             EventDescription.Focus(FocusState.Programmatic);
         }
 
-        private void CreateButton_Click(object sender, RoutedEventArgs e)
+        private async void CreateButton_Click(object sender, RoutedEventArgs e)
         {
-            //string value;
-            //EventDescription.Document.GetText(TextGetOptions.FormatRtf, out value);
-            //tmp.Document.SetText(TextSetOptions.FormatRtf, value);
+            // Check if all informations are filled
+            InformationFilled();
+            if (infoFilled)
+            {
+                DateTime beginDate = EventBeginDate.Date.Date.Add(EventBeginTime.Time);
+                DateTime endDate = EventEndDate.Date.Date.Add(EventEndTime.Time);
+
+                string description;
+                EventDescription.Document.GetText(TextGetOptions.FormatRtf, out description);
+                int locationId = await DatabaseHelper.Client.GetLocationFromAddressAsync(location.Address.FormattedAddress);
+                if (locationId == -1)
+                {
+                    await DatabaseHelper.Client.CreateLocationAsync("", "", location.Address.FormattedAddress, location.Point.Position.Longitude, location.Point.Position.Latitude, "");
+                    locationId = await DatabaseHelper.Client.GetLocationFromAddressAsync(location.Address.FormattedAddress);
+                }
+                if (await DatabaseHelper.Client.CreateEventAsync(beginDate, endDate, description, "", EventTitle.Text, 10000, locationId, DatabaseHelper.CurrentUser))
+                {
+                    MessageDialog dialog = new MessageDialog("Event created successfully!");
+                    await dialog.ShowAsync();
+                }
+            }
+        }
+
+        private void InformationFilled()
+        {
+            string tmp;
+            EventDescription.Document.GetText(TextGetOptions.None, out tmp);
+            if (!string.IsNullOrEmpty(EventTitle.Text) &&
+                !string.IsNullOrEmpty(tmp) &&
+                EventBeginDate.Date <= EventEndDate.Date &&
+                DateTime.Now <= EventBeginDate.Date && 
+                location != null)
+                infoFilled = true;
+            else
+            {
+                infoFilled = false;
+                // raise error
+            }
+        }
+
+        private async void AddressTbx_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
+        {
+            MapLocationFinderResult result = await MapLocationFinder.FindLocationsAsync(args.QueryText, new Geopoint(new BasicGeoposition() {
+                Latitude = 10.762689,
+                Longitude = 106.6823399
+            }), 1);
+
+            if (result.Status == MapLocationFinderStatus.Success)
+            {
+                MapIcon icon = new MapIcon();
+                icon.Location = result.Locations[0].Point;
+                icon.NormalizedAnchorPoint = new Point(0.5, 1.0);
+                icon.Title = result.Locations[0].Address.FormattedAddress;
+                location = result.Locations[0];
+
+                LocationMap.MapElements.Clear();
+                LocationMap.MapElements.Add(icon);
+                LocationMap.Center = result.Locations[0].Point;
+            }
         }
     }
 }

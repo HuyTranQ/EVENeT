@@ -5,6 +5,7 @@
     xmlns:local="using:EVENeT"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:map="using:Windows.UI.Xaml.Controls.Maps"
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource PageBackgroundThemeBrush}">
@@ -46,13 +47,13 @@
                 <StackPanel Margin="0,0,0,32">
                     <TextBlock Text="Date and Time" FontSize="24" Margin="0,16" FontWeight="Light"/>
 
-                    <TextBlock Text="Begin"/>
+                    <TextBlock Text="Begin" Margin="0,0,0,8"/>
                     <StackPanel x:Name="beginDateTime" Orientation="Horizontal">
                         <DatePicker x:Name="EventBeginDate"/>
                         <TimePicker x:Name="EventBeginTime" Width="296" Margin="24,0,0,0"/>
                     </StackPanel>
 
-                    <TextBlock Text="End" Margin="0,16,0,0"/>
+                    <TextBlock Text="End" Margin="0,16,0,8"/>
                     <StackPanel x:Name="endDateTime" Orientation="Horizontal">
                         <DatePicker x:Name="EventEndDate"/>
                         <TimePicker x:Name="EventEndTime" Width="296" Margin="24,0,0,0"/>
@@ -62,6 +63,10 @@
                 <!-- Location -->
                 <StackPanel Margin="0,0,0,32">
                     <TextBlock Text="Location" FontSize="24" Margin="0,16" FontWeight="Light"/>
+                    <AutoSuggestBox x:Name="AddressTbx" PlaceholderText="Address" QueryIcon="Find" QuerySubmitted="AddressTbx_QuerySubmitted"/>
+                    <map:MapControl x:Name="LocationMap"
+                                    Height="500"
+                                    MapServiceToken="cF5vwMLQ8ukFA2enusXa~GdmHipMl9oFpQ5c1jEWMcQ~Akenn-HkeYxYhDE38ERKCc6JmitwAX2KRaHp2K3SfP6-Ib_HnvDDKtu3iOCD9VLd"/>
                 </StackPanel>
 
                 <!-- Tickets -->

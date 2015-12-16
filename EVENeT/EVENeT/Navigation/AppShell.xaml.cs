@@ -109,10 +109,18 @@ namespace EVENeT.Navigation
             //
 
             Frame frame = Window.Current.Content as Frame;
+
+            // Pop all pages excetp the one at the bottom of the stack
             while (frame != null && frame.BackStackDepth > 1)
                 frame.BackStack.RemoveAt(frame.BackStackDepth - 1);
+
+            // Set autologin to false
+            var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+            localSettings.Values["Autologin"] = "false";
+
+            // Go back to the login page
             if (frame != null && frame.CanGoBack)
-                frame.Navigate(typeof(LogInPage), "SignOut");
+                frame.GoBack();
         }
 
         private void selectedItemHandler(object sender, EventArgs e)

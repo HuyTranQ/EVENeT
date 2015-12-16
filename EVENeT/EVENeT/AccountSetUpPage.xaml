@@ -58,10 +58,12 @@
                     <StackPanel Margin="0,0,0,32">
                         <TextBlock Text="Company information" FontSize="24" FontWeight="Light" Margin="0,0,0,16"/>
                         <TextBox x:Name="CompanyName" Header="Company name" Margin="0,0,0,16"/>
-                        <TextBox x:Name="CompanySlogan" Header="Slogan" Margin="0,0,0,16"/>
+                        <TextBox x:Name="CompanyDescription" Header="Company description" Margin="0,0,0,16"/>
+                        <TextBox x:Name="CompanyType" Header="Company type" Margin="0,0,0,16"/>
+                        <!--<TextBox x:Name="CompanySlogan" Header="Slogan" Margin="0,0,0,16"/>-->
                         <TextBox x:Name="CompanyPhone" Header="Phone" Margin="0,0,0,16"/>
-                        <TextBox x:Name="CompanyEmail" Header="Contact Email" Margin="0,0,0,16"/>
-                        <TextBox x:Name="CompanyFax" Header="Fax" Margin="0,0,0,16"/>
+                        <!--<TextBox x:Name="CompanyEmail" Header="Contact Email" Margin="0,0,0,16"/>-->
+                        <!--<TextBox x:Name="CompanyFax" Header="Fax" Margin="0,0,0,16"/>-->
                         <TextBox x:Name="CompanySite" Header="Web page" Margin="0,0,0,16"/>
                     </StackPanel>
 

@@ -32,6 +32,7 @@
       <Column Name="description" Type="System.String" DbType="NVarChar(1024) NOT NULL" CanBeNull="false" />
       <Column Name="thumbnail" Type="System.String" DbType="VarChar(256)" CanBeNull="true" />
       <Column Name="title" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
+      <Column Name="ticket" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="location" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="username" Type="System.String" DbType="VarChar(32) NOT NULL" CanBeNull="false" />
       <Column Name="publishDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
@@ -86,8 +87,8 @@
       <Column Name="name" Type="System.String" DbType="NVarChar(32) NOT NULL" CanBeNull="false" />
       <Column Name="description" Type="System.String" DbType="NVarChar(1024)" CanBeNull="true" />
       <Column Name="address" Type="System.String" DbType="NVarChar(64) NOT NULL" CanBeNull="false" />
-      <Column Name="longitude" Type="System.Single" DbType="Real" CanBeNull="true" />
-      <Column Name="latitude" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="latitude" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="longitude" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
       <Column Name="thumbnail" Type="System.String" DbType="VarChar(256)" CanBeNull="true" />
       <Association Name="Location_Event" Member="Events" ThisKey="id" OtherKey="location" Type="Event" />
     </Type>
@@ -109,6 +110,7 @@
   <Table Name="dbo.Organization" Member="Organizations">
     <Type Name="Organization">
       <Column Name="username" Type="System.String" DbType="VarChar(32) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="NVarChar(64) NOT NULL" CanBeNull="false" />
       <Column Name="description" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
       <Column Name="type" Type="System.String" DbType="NVarChar(32) NOT NULL" CanBeNull="false" />
       <Column Name="phone" Type="System.String" DbType="VarChar(16)" CanBeNull="true" />
@@ -183,6 +185,11 @@
     <Parameter Name="interest" Type="System.String" DbType="NVarChar(32)" />
     <Return Type="System.Int32" />
   </Function>
+  <Function Name="dbo.attachLocation" Method="attachLocation">
+    <Parameter Name="eventId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="newLocation" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
   <Function Name="dbo.attachTag" Method="attachTag">
     <Parameter Name="tag" Type="System.String" DbType="VarChar(32)" />
     <Parameter Name="eventId" Type="System.Int32" DbType="Int" />
@@ -194,6 +201,7 @@
     <Parameter Name="description" Type="System.String" DbType="NVarChar(1024)" />
     <Parameter Name="thumbnail" Type="System.String" DbType="VarChar(256)" />
     <Parameter Name="title" Type="System.String" DbType="NVarChar(128)" />
+    <Parameter Name="ticket" Type="System.Int32" DbType="Int" />
     <Parameter Name="location" Type="System.Int32" DbType="Int" />
     <Parameter Name="currentUser" Type="System.String" DbType="VarChar(32)" />
     <Return Type="System.Int32" />
@@ -220,14 +228,15 @@
     <Parameter Name="name" Type="System.String" DbType="NVarChar(32)" />
     <Parameter Name="description" Type="System.String" DbType="NVarChar(1024)" />
     <Parameter Name="address" Type="System.String" DbType="NVarChar(64)" />
-    <Parameter Name="long" Type="System.Single" DbType="Real" />
-    <Parameter Name="lat" Type="System.Single" DbType="Real" />
+    <Parameter Name="latitude" Type="System.Double" DbType="Float" />
+    <Parameter Name="longitude" Type="System.Double" DbType="Float" />
     <Parameter Name="thumbnail" Type="System.String" DbType="VarChar(256)" />
     <Return Type="System.Int32" />
   </Function>
   <Function Name="dbo.createOrganization" Method="createOrganization">
     <Parameter Name="username" Type="System.String" DbType="VarChar(32)" />
     <Parameter Name="password" Type="System.String" DbType="VarChar(64)" />
+    <Parameter Name="name" Type="System.String" DbType="NVarChar(64)" />
     <Parameter Name="profilePicture" Type="System.String" DbType="VarChar(256)" />
     <Parameter Name="coverPicture" Type="System.String" DbType="VarChar(256)" />
     <Parameter Name="description" Type="System.String" DbType="NVarChar(1024)" />
@@ -292,11 +301,6 @@
     <Parameter Name="username" Type="System.String" DbType="VarChar(32)" />
     <Return Type="System.Int32" />
   </Function>
-  <Function Name="dbo.editLocation" Method="editLocation">
-    <Parameter Name="eventId" Type="System.Int32" DbType="Int" />
-    <Parameter Name="newLocation" Type="System.Int32" DbType="Int" />
-    <Return Type="System.Int32" />
-  </Function>
   <Function Name="dbo.follow" Method="follow">
     <Parameter Name="this" Type="System.String" DbType="VarChar(32)" />
     <Parameter Name="friend" Type="System.String" DbType="VarChar(32)" />
@@ -345,6 +349,29 @@
       <Column Name="thumbnail" Type="System.String" DbType="VarChar(256)" CanBeNull="true" />
     </ElementType>
   </Function>
+  <Function Name="dbo.getLocationFromId" Method="getLocationFromId">
+    <Parameter Name="id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="getLocationFromIdResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="NVarChar(32) NOT NULL" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="NVarChar(1024)" CanBeNull="true" />
+      <Column Name="address" Type="System.String" DbType="NVarChar(64) NOT NULL" CanBeNull="false" />
+      <Column Name="latitude" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="longitude" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="thumbnail" Type="System.String" DbType="VarChar(256)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.getUser" Method="getUser">
+    <Parameter Name="username" Type="System.String" DbType="VarChar(32)" />
+    <ElementType Name="getUserResult">
+      <Column Name="username" Type="System.String" DbType="VarChar(32) NOT NULL" CanBeNull="false" />
+      <Column Name="password" Type="System.String" DbType="VarChar(64) NOT NULL" CanBeNull="false" />
+      <Column Name="profilePicture" Type="System.String" DbType="VarChar(256)" CanBeNull="true" />
+      <Column Name="coverPicture" Type="System.String" DbType="VarChar(256)" CanBeNull="true" />
+      <Column Name="registerDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="userType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
   <Function Name="dbo.increaseTagOccurence" Method="increaseTagOccurence">
     <Parameter Name="tagName" Type="System.String" DbType="VarChar(32)" />
     <Return Type="System.Int32" />
@@ -364,6 +391,7 @@
       <Column Name="description" Type="System.String" DbType="NVarChar(1024) NOT NULL" CanBeNull="false" />
       <Column Name="thumbnail" Type="System.String" DbType="VarChar(256)" CanBeNull="true" />
       <Column Name="title" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
+      <Column Name="ticket" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="location" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="username" Type="System.String" DbType="VarChar(32) NOT NULL" CanBeNull="false" />
       <Column Name="publishDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
@@ -430,6 +458,7 @@
     <Parameter Name="description" Type="System.String" DbType="NVarChar(1024)" />
     <Parameter Name="thumbnail" Type="System.String" DbType="VarChar(256)" />
     <Parameter Name="title" Type="System.String" DbType="NVarChar(128)" />
+    <Parameter Name="ticket" Type="System.Int32" DbType="Int" />
     <Parameter Name="location" Type="System.Int32" DbType="Int" />
     <Return Type="System.Int32" />
   </Function>
@@ -442,8 +471,19 @@
     <Parameter Name="gender" Type="System.Boolean" DbType="Bit" />
     <Return Type="System.Int32" />
   </Function>
+  <Function Name="dbo.setLocation" Method="setLocation">
+    <Parameter Name="id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="name" Type="System.String" DbType="NVarChar(32)" />
+    <Parameter Name="description" Type="System.String" DbType="NVarChar(1024)" />
+    <Parameter Name="address" Type="System.String" DbType="NVarChar(64)" />
+    <Parameter Name="latitude" Type="System.Double" DbType="Float" />
+    <Parameter Name="longitude" Type="System.Double" DbType="Float" />
+    <Parameter Name="thumbnail" Type="System.String" DbType="VarChar(256)" />
+    <Return Type="System.Int32" />
+  </Function>
   <Function Name="dbo.setOrganization" Method="setOrganization">
     <Parameter Name="id" Type="System.String" DbType="VarChar(32)" />
+    <Parameter Name="name" Type="System.String" DbType="NVarChar(64)" />
     <Parameter Name="description" Type="System.String" DbType="NVarChar(1024)" />
     <Parameter Name="type" Type="System.String" DbType="NVarChar(32)" />
     <Parameter Name="phone" Type="System.String" DbType="VarChar(16)" />
@@ -469,6 +509,14 @@
   <Function Name="dbo.isUserExisted" Method="isUserExisted" IsComposable="true">
     <Parameter Name="username" Type="System.String" DbType="VarChar(32)" />
     <Return Type="System.Boolean" />
+  </Function>
+  <Function Name="dbo.getLocationFromAddress" Method="getLocationFromAddress" IsComposable="true">
+    <Parameter Name="address" Type="System.String" DbType="NVarChar(64)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.getNumberOfTicket" Method="getNumberOfTicket" IsComposable="true">
+    <Parameter Name="eventId" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
   </Function>
   <Function Name="dbo.getUserType" Method="getUserType" IsComposable="true">
     <Parameter Name="username" Type="System.String" DbType="VarChar(32)" />

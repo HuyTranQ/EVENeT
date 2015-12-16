@@ -31,20 +31,18 @@ namespace EVENeT
         string username;
         int userType;
         string profile, cover;
-        ServiceClient client = null;
         bool informationFilled = false;
 
         public AccountSetUpPage()
         {
             this.InitializeComponent();
-            client = new ServiceClient();
         }
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
             username = e.Parameter.ToString();
-            userType = await client.UserTypeAsync(username);
+            userType = await DatabaseHelper.Client.UserTypeAsync(username);
             if (userType == 2)
                 IndividualPanel.Visibility = Visibility.Collapsed;
             else if (userType == 1)
@@ -59,9 +57,13 @@ namespace EVENeT
             CheckForError();
             if (informationFilled)
             {
-                await client.SetIndividualInfoAsync(username, FirstNameTbx.Text, MidNameTbx.Text, LastnameTbx.Text, BirthdayPicker.Date.Date, GenderCbx.SelectedIndex == 0);
-                await client.SetProfilePictureAsync(username, profile);
-                await client.SetCoverPictureAsync(username, cover);
+                if (userType == 1)
+                    await DatabaseHelper.Client.SetIndividualInfoAsync(username, FirstNameTbx.Text, MidNameTbx.Text, LastnameTbx.Text, BirthdayPicker.Date.Date, GenderCbx.SelectedIndex == 0);
+                else if (userType == 2)
+                    await DatabaseHelper.Client.SetOrganizationInfoAsync(username, CompanyName.Text, CompanyDescription.Text, CompanyType.Text, CompanyPhone.Text, CompanySite.Text);
+
+                await DatabaseHelper.Client.SetProfilePictureAsync(username, profile);
+                await DatabaseHelper.Client.SetCoverPictureAsync(username, cover);
                 Frame frame = Window.Current.Content as Frame;
                 frame.Navigate(typeof(AppShell), username);
                 Window.Current.Activate();

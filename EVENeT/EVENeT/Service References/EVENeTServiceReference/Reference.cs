@@ -30,6 +30,9 @@ namespace EVENeT.EVENeTServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/SetIndividualInfo", ReplyAction="http://tempuri.org/IService/SetIndividualInfoResponse")]
         System.Threading.Tasks.Task SetIndividualInfoAsync(string username, string firstName, string midName, string lastName, System.DateTime dob, bool gender);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/SetOrganizationInfo", ReplyAction="http://tempuri.org/IService/SetOrganizationInfoResponse")]
+        System.Threading.Tasks.Task SetOrganizationInfoAsync(string username, string name, string description, string type, string phone, string website);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/SetProfilePicture", ReplyAction="http://tempuri.org/IService/SetProfilePictureResponse")]
         System.Threading.Tasks.Task SetProfilePictureAsync(string username, string imagePath);
         
@@ -43,7 +46,76 @@ namespace EVENeT.EVENeTServiceReference {
         System.Threading.Tasks.Task CreateIndividualAsync(string username, string password, string profilePic, string cover, string firstName, string midName, string lastName, System.DateTime dob, bool gender);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/CreateOrganization", ReplyAction="http://tempuri.org/IService/CreateOrganizationResponse")]
-        System.Threading.Tasks.Task CreateOrganizationAsync(string username, string password, string logo, string cover, string description, string type, string phone, string website);
+        System.Threading.Tasks.Task CreateOrganizationAsync(string username, string password, string name, string logo, string cover, string description, string type, string phone, string website);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/CreateEvent", ReplyAction="http://tempuri.org/IService/CreateEventResponse")]
+        System.Threading.Tasks.Task<bool> CreateEventAsync(System.DateTime beginTime, System.DateTime endTime, string description, string thumbnail, string title, int ticket, int locationId, string currentUser);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/CreateLocation", ReplyAction="http://tempuri.org/IService/CreateLocationResponse")]
+        System.Threading.Tasks.Task CreateLocationAsync(string name, string description, string address, double longitude, double latitude, string thumbnail);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetLocationFromAddress", ReplyAction="http://tempuri.org/IService/GetLocationFromAddressResponse")]
+        System.Threading.Tasks.Task<int> GetLocationFromAddressAsync(string address);
+        
+        // CODEGEN: Generating message contract since the operation has multiple return values.
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetIndividual", ReplyAction="http://tempuri.org/IService/GetIndividualResponse")]
+        System.Threading.Tasks.Task<EVENeT.EVENeTServiceReference.GetIndividualResponse> GetIndividualAsync(EVENeT.EVENeTServiceReference.GetIndividualRequest request);
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetIndividual", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class GetIndividualRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        public string username;
+        
+        public GetIndividualRequest() {
+        }
+        
+        public GetIndividualRequest(string username) {
+            this.username = username;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetIndividualResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class GetIndividualResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        public string FirstName;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=1)]
+        public string MiddleName;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=2)]
+        public string LastName;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=3)]
+        public System.DateTime DOB;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=4)]
+        public bool Gender;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=5)]
+        public string ProfilePic;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=6)]
+        public string CoverPic;
+        
+        public GetIndividualResponse() {
+        }
+        
+        public GetIndividualResponse(string FirstName, string MiddleName, string LastName, System.DateTime DOB, bool Gender, string ProfilePic, string CoverPic) {
+            this.FirstName = FirstName;
+            this.MiddleName = MiddleName;
+            this.LastName = LastName;
+            this.DOB = DOB;
+            this.Gender = Gender;
+            this.ProfilePic = ProfilePic;
+            this.CoverPic = CoverPic;
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -105,6 +177,10 @@ namespace EVENeT.EVENeTServiceReference {
             return base.Channel.SetIndividualInfoAsync(username, firstName, midName, lastName, dob, gender);
         }
         
+        public System.Threading.Tasks.Task SetOrganizationInfoAsync(string username, string name, string description, string type, string phone, string website) {
+            return base.Channel.SetOrganizationInfoAsync(username, name, description, type, phone, website);
+        }
+        
         public System.Threading.Tasks.Task SetProfilePictureAsync(string username, string imagePath) {
             return base.Channel.SetProfilePictureAsync(username, imagePath);
         }
@@ -121,8 +197,24 @@ namespace EVENeT.EVENeTServiceReference {
             return base.Channel.CreateIndividualAsync(username, password, profilePic, cover, firstName, midName, lastName, dob, gender);
         }
         
-        public System.Threading.Tasks.Task CreateOrganizationAsync(string username, string password, string logo, string cover, string description, string type, string phone, string website) {
-            return base.Channel.CreateOrganizationAsync(username, password, logo, cover, description, type, phone, website);
+        public System.Threading.Tasks.Task CreateOrganizationAsync(string username, string password, string name, string logo, string cover, string description, string type, string phone, string website) {
+            return base.Channel.CreateOrganizationAsync(username, password, name, logo, cover, description, type, phone, website);
+        }
+        
+        public System.Threading.Tasks.Task<bool> CreateEventAsync(System.DateTime beginTime, System.DateTime endTime, string description, string thumbnail, string title, int ticket, int locationId, string currentUser) {
+            return base.Channel.CreateEventAsync(beginTime, endTime, description, thumbnail, title, ticket, locationId, currentUser);
+        }
+        
+        public System.Threading.Tasks.Task CreateLocationAsync(string name, string description, string address, double longitude, double latitude, string thumbnail) {
+            return base.Channel.CreateLocationAsync(name, description, address, longitude, latitude, thumbnail);
+        }
+        
+        public System.Threading.Tasks.Task<int> GetLocationFromAddressAsync(string address) {
+            return base.Channel.GetLocationFromAddressAsync(address);
+        }
+        
+        public System.Threading.Tasks.Task<EVENeT.EVENeTServiceReference.GetIndividualResponse> GetIndividualAsync(EVENeT.EVENeTServiceReference.GetIndividualRequest request) {
+            return base.Channel.GetIndividualAsync(request);
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync() {

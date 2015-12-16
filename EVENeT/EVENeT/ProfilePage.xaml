@@ -24,7 +24,7 @@
             
             <!-- Cover photo -->
             <Grid x:Name="imgGrid" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
-                <Image Source="/Assets/Cover.png" Stretch="UniformToFill" VerticalAlignment="Center"/>
+                <Image x:Name="CoverImage" Stretch="UniformToFill" VerticalAlignment="Center"/>
                 <Grid Background="#99000000"/>
                 
                 <!-- Avatar -->
@@ -32,15 +32,17 @@
                     <Border CornerRadius="64" BorderThickness="3" BorderBrush="#77AAAAAA"
                             Width="128" Height="128" VerticalAlignment="Top" Grid.Row="1" Grid.RowSpan="2">
                         <Border.Background>
-                            <ImageBrush ImageSource="Assets/1.png"/>
+                            <ImageBrush x:Name="AvatarBrush"/>
                         </Border.Background>
                     </Border>
 
                     <StackPanel VerticalAlignment="Center">
-                        <TextBlock Text="Toan-Anh Nguyen" FontSize="32" Foreground="White"
+                        <TextBlock x:Name="Firstname"
+                                   Text="Firstname" FontSize="32" Foreground="White"
                                    FontWeight="Light"
                                    Margin="24,0,24,0"/>
-                        <TextBlock Text="Optional additional information" Foreground="LightGray"
+                        <TextBlock x:Name="AdditionalInfo"
+                                   Text="Optional additional information" Foreground="LightGray"
                                    FontWeight="Light"
                                    Margin="24,0,24,0"/>
                     </StackPanel>
@@ -52,9 +54,7 @@
                     <StackPanel>
                         <local:DisplayCard CardTitle="Basic information">
                             <local:DisplayCard.PlaceHolder>
-                                <StackPanel Margin="16,0,16,16">
-                                    <TextBlock Text="Name: Toan-Anh Nguyen"/>
-                                    <TextBlock Text="Birthday: ??/??/????"/>
+                                <StackPanel x:Name="BasicInfo"  Margin="16,0,16,16">
                                 </StackPanel>
                             </local:DisplayCard.PlaceHolder>
                         </local:DisplayCard>

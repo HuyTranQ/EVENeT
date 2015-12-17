@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using EVENeT.EVENeTServiceReference;
 using System.Diagnostics;
+using Windows.UI.Text;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -41,7 +42,7 @@ namespace EVENeT
                 eventCard.EventTitle = e.title;
                 eventCard.EventTime = e.beginTime.ToString("hh:mm tt");
                 eventCard.EventDate = e.beginTime.ToString("d");
-                eventCard.EventDescription = e.description;
+                eventCard.EventDescription.Document.SetText(TextSetOptions.FormatRtf, e.description);
                 eventCard.EventImageSource = e.thumbnail;
                 eventCard.Tapped += EventCard_Tapped;
                 eventCard.IsTapEnabled = true;

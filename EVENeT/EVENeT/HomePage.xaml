@@ -7,14 +7,19 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource PageBackgroundThemeBrush}">
+    <ScrollViewer Background="{ThemeResource PageBackgroundThemeBrush}">
 
         <!-- Move these to another page -->
-        <ScrollViewer Height="Auto">
-            <StackPanel Name="eventPanel">
-              
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+            <StackPanel Name="eventPanel" Grid.Column="1" Margin="0,8,0,8">
             </StackPanel>
-        </ScrollViewer>
+        </Grid>
         <!-- Move these to another page -->
-    </Grid>
+    </ScrollViewer>
 </Page>

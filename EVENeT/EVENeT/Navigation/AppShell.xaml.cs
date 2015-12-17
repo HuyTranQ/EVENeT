@@ -52,14 +52,6 @@ namespace EVENeT.Navigation
                     Label = "Your Profile",
                     DestPage = typeof(ProfilePage),
                     Arguments = DatabaseHelper.CurrentUser
-                },
-
-                new NavPaneItem()
-                {
-                    Symbol = Symbol.Contact,
-                    Label = "Your Profile",
-                    DestPage = typeof(ProfilePage),
-                    Arguments = "ntanh2@apcs.vn"
                 }
             });
 

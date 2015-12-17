@@ -9,10 +9,10 @@
     Loaded="Page_Loaded"
     mc:Ignorable="d">
 
-    <Grid x:Name="PageScrollViewer" Background="{ThemeResource PageBackgroundThemeBrush}">
+    <ScrollViewer x:Name="PageScrollViewer" Background="{ThemeResource PageBackgroundThemeBrush}">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="300"/>
                 <RowDefinition Height="4*"/>
             </Grid.RowDefinitions>
 
@@ -71,12 +71,12 @@
                             <!-- Map -->
                             <local:DisplayCard x:Name="EventLocation" SymbolGlyph="&#xF041;">
                                 <local:DisplayCard.PlaceHolder>
-                                </local:DisplayCard.PlaceHolder>
-                            </local:DisplayCard>
-                            <map:MapControl x:Name="EventMap"
+                                    <map:MapControl x:Name="EventMap"
                                                     Height="500"
                                                     MapServiceToken="cF5vwMLQ8ukFA2enusXa~GdmHipMl9oFpQ5c1jEWMcQ~Akenn-HkeYxYhDE38ERKCc6JmitwAX2KRaHp2K3SfP6-Ib_HnvDDKtu3iOCD9VLd"/>
-                            
+                                </local:DisplayCard.PlaceHolder>
+                            </local:DisplayCard>
+
                         </StackPanel>
                     </ScrollViewer>
                 </PivotItem>
@@ -87,5 +87,5 @@
             </Pivot>
 
         </Grid>
-    </Grid>
+    </ScrollViewer>
 </Page>

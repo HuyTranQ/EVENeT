@@ -8,7 +8,7 @@
     mc:Ignorable="d"
     Name="control"
     d:DesignWidth="160"
-    d:DesignHeight="196" MaxWidth="160" MaxHeight="194">
+    d:DesignHeight="196" MaxWidth="160" MaxHeight="196">
 
     <Border CornerRadius="5" BorderThickness="1" Background="#FFF9F9F9" BorderBrush="LightGray">
         <Grid>
@@ -17,9 +17,9 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <ContentControl x:Name="picture" Grid.Row="0"
-                        Content="{Binding PictorialContent, ElementName=control}"/>
-            <ContentControl x:Name="description" Grid.Row="1"
+            <Image x:Name="picture" Grid.Row="0"
+                   Source="{Binding PictorialContent, Converter={StaticResource stringToImageSourceConverter}, Mode=OneWay, ElementName=control}"/>
+            <ContentPresenter x:Name="description" Grid.Row="1"
                         Content="{Binding DescriptiveContent, ElementName=control}"/>
         </Grid>
     </Border>

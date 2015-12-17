@@ -65,22 +65,19 @@
                     </StackPanel>
                 </PivotItem>
                 <PivotItem Header="Following">
-                    <!--<TextBlock Text="List of people you are following" />-->
-                    <local:ItemCard>
-                        <local:ItemCard.PictorialContent>
-                            <Image Source="Assets/1.png"/>
-                        </local:ItemCard.PictorialContent>
-                        
-                        <local:ItemCard.DescriptiveContent>
-                            <TextBlock Text="Myself" VerticalAlignment="Center"/>
-                        </local:ItemCard.DescriptiveContent>
-                    </local:ItemCard>
+                    <StackPanel>
+                        <TextBlock Text="List of people you are following" />
+                    </StackPanel>
                 </PivotItem>
                 <PivotItem Header="Followers">
-                    <TextBlock Text="List of your followers" />
+                    <StackPanel>
+                        <TextBlock Text="List of your followers" />
+                    </StackPanel>
                 </PivotItem>
                 <PivotItem Header="Posts">
-                    <TextBlock Text="Posts" />
+                    <StackPanel>
+                        <TextBlock Text="Posts" />
+                    </StackPanel>
                 </PivotItem>
             </Pivot>
 

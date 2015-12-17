@@ -41,8 +41,9 @@
                            TextWrapping="WrapWholeWords"
                            Margin="16,16,16,16"/>
             </Grid>
-            <ContentControl Name="itemControl"
-                            Content="{Binding PlaceHolder, ElementName=control}"/>
+            <ContentPresenter Name="itemControl"
+                              Content="{Binding PlaceHolder, ElementName=control}"/>
+            
         </StackPanel>
     </Border>
 

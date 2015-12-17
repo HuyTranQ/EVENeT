@@ -68,7 +68,7 @@ namespace EVENeT
         public DisplayCard()
         {
             this.InitializeComponent();
-            Margin = new Thickness(0, 16, 0, 16);
+            Margin = new Thickness(0, 8, 0, 8);
         }
     }
 }

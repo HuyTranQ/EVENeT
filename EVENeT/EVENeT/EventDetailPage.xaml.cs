@@ -44,8 +44,8 @@ namespace EVENeT
             organizer = _Event.username;
 
             EventDetail.CardTitle = _Event.title;
-            BeginTime.CardTitle = "Begin: " + _Event.beginTime.Date.ToString();
-            EndTime.CardTitle = "End: " + _Event.beginTime.Date.ToString();
+            BeginTime.CardTitle = "Begin: " + _Event.beginTime.ToString();
+            EndTime.CardTitle = "End: " + _Event.beginTime.ToString();
 
             // Add organizer's name
             Run r = new Run();

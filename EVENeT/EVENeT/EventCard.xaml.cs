@@ -61,11 +61,10 @@ namespace EVENeT
             set { SetValue(EventTitleProperty, value); }
         }
 
-        public static readonly DependencyProperty EventDescriptionProperty = DependencyProperty.Register("EventDescrition", typeof(object), typeof(EventCard), new PropertyMetadata(null));
-        public object EventDescription
+
+        public RichEditBox EventDescription
         {
-            get { return GetValue(EventDescriptionProperty); }
-            set { SetValue(EventDescriptionProperty, value); }
+            get { return eventDescription; }
         }
 
         public int EventId { get; set; }

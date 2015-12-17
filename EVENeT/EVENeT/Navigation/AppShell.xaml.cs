@@ -50,8 +50,7 @@ namespace EVENeT.Navigation
                 {
                     Symbol = Symbol.Contact,
                     Label = "Your Profile",
-                    DestPage = typeof(ProfilePage),
-                    Arguments = DatabaseHelper.CurrentUser
+                    DestPage = typeof(ProfilePage)
                 }
             });
 
@@ -188,7 +187,7 @@ namespace EVENeT.Navigation
                     //item.DestPage != this.frame.CurrentSourcePageType)
                 {
                     Header.TitleControl.Content = item.Label;
-                    this.frame.Navigate(item.DestPage, item.Arguments);
+                    this.frame.Navigate(item.DestPage,DatabaseHelper.CurrentUser);
                 }
             }
         }

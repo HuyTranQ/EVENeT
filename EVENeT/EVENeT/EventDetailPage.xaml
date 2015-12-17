@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:map="using:Windows.UI.Xaml.Controls.Maps"
+    Loaded="Page_Loaded"
     mc:Ignorable="d">
 
     <Grid x:Name="PageScrollViewer" Background="{ThemeResource PageBackgroundThemeBrush}">
@@ -32,21 +33,18 @@
                 <PivotItem Header="Detail">
                     <ScrollViewer VerticalScrollBarVisibility="Hidden">
                         <StackPanel x:Name="MainContent" Grid.Row="1" Grid.Column="1">
-                            <local:DisplayCard 
-                                   SymbolGlyph="&#xF073;"
-                                   CardTitle="Nov. 5, 2015 - 5:30 PM">
-                            </local:DisplayCard>
 
                             <local:DisplayCard 
-                                   TitleFontSize="28"
-                                   CardTitle="Understanding U.S. Elections: Presidential and Congressional Electoral Processes">
+                                    x:Name="eventDetail"
+                            
+                                   TitleFontSize="28">
                                 <local:DisplayCard.PlaceHolder>
                                     <StackPanel>
                                         <StackPanel Orientation="Horizontal">
                                             <RichTextBlock Margin="16,-16,16,8">
                                                 <Paragraph>
                                                     <Italic>by</Italic>
-                                                    <Hyperlink Click="Organizer_Hyperlink_Click">American Center HCMC</Hyperlink>
+                                                    <Hyperlink Click="Organizer_Hyperlink_Click"> </Hyperlink>
                                                 </Paragraph>
                                             </RichTextBlock>
                                         </StackPanel>
@@ -76,22 +74,7 @@
                                 </local:DisplayCard.PlaceHolder>
                             </local:DisplayCard>
 
-                            <local:DisplayCard 
-                                   SymbolGlyph="&#xF145;"
-                                   CardTitle="Ticket Information">
-                                <local:DisplayCard.PlaceHolder>
-                                    <TextBlock Text="This is a textblock"
-                                   Margin="16,0,16,16"/>
-                                </local:DisplayCard.PlaceHolder>
-                            </local:DisplayCard>
-
-                            <local:DisplayCard 
-                                   SymbolGlyph="&#xF041;"
-                                   CardTitle="The American Center HCMC - 8th Floor, Diamond Plaza. 34 Le Duan Blv., Ben Nghe Ward, District 1. Ho Chi Minh City VN">
-                                <local:DisplayCard.PlaceHolder>
-                                    <TextBlock x:Name="tmp"/>
-                                </local:DisplayCard.PlaceHolder>
-                            </local:DisplayCard>
+                       
                         </StackPanel>
                     </ScrollViewer>
                 </PivotItem>

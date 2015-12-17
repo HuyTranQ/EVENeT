@@ -134,5 +134,16 @@ namespace EVENeTWcfService
         {
             Data.follow(username, userToFollow);
         }
+
+
+        public IEnumerable<getAllEventResult> getAllEvent()
+        {
+          return  Data.getAllEvent();
+        }
+
+        public getEventFromIDResult GetEventFromId(int id)
+        {
+           return Data.getEventFromID(id).First();
+        }
     }
 }

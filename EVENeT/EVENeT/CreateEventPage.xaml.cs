@@ -53,7 +53,7 @@ namespace EVENeT
             }
         }
 
-        private async void LocationMap_MapTapped(MapControl sender, MapInputEventArgs args)
+        private  void LocationMap_MapTapped(MapControl sender, MapInputEventArgs args)
         {
             //MapIcon icon = new MapIcon();
             //icon.Location = args.Location;

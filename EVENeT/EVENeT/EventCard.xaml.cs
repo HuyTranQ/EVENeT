@@ -68,6 +68,8 @@ namespace EVENeT
             set { SetValue(EventDescriptionProperty, value); }
         }
 
+        public int EventId { get; set; }
+
         public EventCard()
         {
             this.InitializeComponent();

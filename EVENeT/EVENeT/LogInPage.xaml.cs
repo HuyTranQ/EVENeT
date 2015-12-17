@@ -52,7 +52,7 @@ namespace EVENeT
                     frame.Navigate(typeof(AccountSetUpPage), userName.Text);
                 else
                 {
-                    frame.Navigate(typeof(Navigation.AppShell), userName.Text);
+                    frame.Navigate(typeof(Navigation.AppShell));
                 }
                 Window.Current.Activate();
             }
@@ -113,7 +113,7 @@ namespace EVENeT
                     if (await DatabaseHelper.Client.IndividualFullySetUpAsync(sUsername))
                         frame.Navigate(typeof(AccountSetUpPage), sUsername);
                     else
-                        frame.Navigate(typeof(Navigation.AppShell), sUsername);
+                        frame.Navigate(typeof(Navigation.AppShell));
                     Window.Current.Activate();
                 }
                 else

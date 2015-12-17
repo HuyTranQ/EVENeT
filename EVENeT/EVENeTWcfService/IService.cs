@@ -53,5 +53,14 @@ namespace EVENeTWcfService
 
         [OperationContract]
         void GetIndividual(string username, out string FirstName, out string MiddleName, out string LastName, out DateTime DOB, out bool Gender, out string ProfilePic, out string CoverPic);
+
+        [OperationContract]
+        void Follow(string username, string userToFollow);
+
+        [OperationContract]
+        bool IsFollowing(string username, string userToFollow);
+
+        [OperationContract]
+        void Unfollow(string username, string userToFollow);
     }
 }

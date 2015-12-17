@@ -50,9 +50,13 @@
             </Grid>
 
             <CommandBar x:Name="ProfileCommand" Grid.Column="1"
-                        Background="Transparent" RequestedTheme="Dark"
+                        Background="Transparent" Foreground="White"
                         VerticalAlignment="Bottom" HorizontalAlignment="Right">
-                <AppBarButton x:Name="FollowBtn" Icon="AddFriend" Label="Follow"/>
+                <AppBarButton x:Name="FollowBtn" Icon="AddFriend" Label="Follow" Foreground="White" Click="FollowBtn_Click"/>
+                <AppBarButton x:Name="UnfollowBtn" Icon="BlockContact" Label="Unfollow" Foreground="White" Click="UnfollowBtn_Click"/>
+                <CommandBar.SecondaryCommands>
+                    <AppBarButton x:Name="SettingBtn" Icon="Setting" Label="Settings"/>
+                </CommandBar.SecondaryCommands>
             </CommandBar>
 
             <Pivot Grid.Row="1" Grid.Column="1" Margin="0,16,0,0" ScrollViewer.VerticalScrollBarVisibility="Disabled">

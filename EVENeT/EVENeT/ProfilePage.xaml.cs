@@ -41,15 +41,21 @@ namespace EVENeT
             {
                 // Remove follow button
                 FollowBtn.Visibility = Visibility.Collapsed;
+                UnfollowBtn.Visibility = Visibility.Collapsed;
             }
             else
             {
-                
+                // Remove setting button
+                SettingBtn.Visibility = Visibility.Collapsed;
+                if (await DatabaseHelper.Client.IsFollowingAsync(DatabaseHelper.CurrentUser, userName))
+                    FollowBtn.Visibility = Visibility.Collapsed;
+                else
+                    UnfollowBtn.Visibility = Visibility.Collapsed;
             }
 
             userType = await DatabaseHelper.Client.UserTypeAsync(userName);
             
-            GetIndividualRequest a = new EVENeTServiceReference.GetIndividualRequest(userName);
+            GetIndividualRequest a = new GetIndividualRequest(userName);
             GetIndividualResponse r = await DatabaseHelper.Client.GetIndividualAsync(a);
 
             Firstname.Text = r.FirstName;
@@ -76,14 +82,29 @@ namespace EVENeT
             content.Margin = new Thickness(16, 0, 16, 16);
 
             TextBlock info = new TextBlock();
-            info.Text = "Firstname: " + response.FirstName + "\n" +
-                ((response.MiddleName != "") ? "Middlename: " + response.FirstName + "\n" : "") + 
-                "Lastname: " + response.LastName + "\n\n";
-            info.Text += "Birthday: " + response.DOB.Month + "/" + response.DOB.Day + "/" + response.DOB.Year;
+            info.Text = "Firstname:\t" + response.FirstName + "\n" +
+                ((response.MiddleName != "") ? "Middlename:\t" + response.MiddleName + "\n" : "") + 
+                "Lastname:\t" + response.LastName + "\n\n";
+            info.Text += "Birthday:\t\t" + response.DOB.Month + "/" + response.DOB.Day + "/" + response.DOB.Year + "\n";
+            info.Text += "Gender:\t\t" + (response.Gender ? "Male" : "Female");
 
             content.Children.Add(info);
             card.PlaceHolder = content;
             AboutPanel.Children.Add(card);
+        }
+
+        private async void FollowBtn_Click(object sender, RoutedEventArgs e)
+        {
+            await DatabaseHelper.Client.FollowAsync(DatabaseHelper.CurrentUser, userName);
+            FollowBtn.Visibility = Visibility.Collapsed;
+            UnfollowBtn.Visibility = Visibility.Visible;
+        }
+
+        private async void UnfollowBtn_Click(object sender, RoutedEventArgs e)
+        {
+            await DatabaseHelper.Client.UnfollowAsync(DatabaseHelper.CurrentUser, userName);
+            FollowBtn.Visibility = Visibility.Visible;
+            UnfollowBtn.Visibility = Visibility.Collapsed;
         }
     }
 }

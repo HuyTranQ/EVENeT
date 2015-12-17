@@ -29,7 +29,7 @@ namespace EVENeT
 
         private void Organizer_Hyperlink_Click(Windows.UI.Xaml.Documents.Hyperlink sender, Windows.UI.Xaml.Documents.HyperlinkClickEventArgs args)
         {
-            //Navigation.AppShell.RootFrame.Navigate(typeof(ProfilePage));
+            Navigation.AppShell.RootFrame.Navigate(typeof(ProfilePage), "ntanh2@apcs.vn");
         }
     }
 }

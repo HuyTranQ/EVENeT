@@ -50,7 +50,8 @@ namespace EVENeT.Navigation
                 {
                     Symbol = Symbol.Contact,
                     Label = "Your Profile",
-                    DestPage = typeof(ProfilePage)
+                    DestPage = typeof(ProfilePage),
+                    Arguments = DatabaseHelper.CurrentUser
                 },
 
                 new NavPaneItem()
@@ -69,9 +70,6 @@ namespace EVENeT.Navigation
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            string username = e.Parameter.ToString();
-            NavPaneItem profile = (from i in navList where i.Label == "Your Profile" select i).SingleOrDefault();
-            profile.Arguments = username;
         }
 
         public AppShell()
@@ -193,8 +191,8 @@ namespace EVENeT.Navigation
                 //    await dialog.ShowAsync();
                 //}
                 //else 
-                if (item.DestPage != null &&
-                    item.DestPage != this.frame.CurrentSourcePageType)
+                if (item.DestPage != null)// &&
+                    //item.DestPage != this.frame.CurrentSourcePageType)
                 {
                     Header.TitleControl.Content = item.Label;
                     this.frame.Navigate(item.DestPage, item.Arguments);

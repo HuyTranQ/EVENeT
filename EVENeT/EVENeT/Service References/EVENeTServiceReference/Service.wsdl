@@ -90,6 +90,24 @@
   <wsdl:message name="IService_GetIndividual_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetIndividualResponse" />
   </wsdl:message>
+  <wsdl:message name="IService_Follow_InputMessage">
+    <wsdl:part name="parameters" element="tns:Follow" />
+  </wsdl:message>
+  <wsdl:message name="IService_Follow_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FollowResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_IsFollowing_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsFollowing" />
+  </wsdl:message>
+  <wsdl:message name="IService_IsFollowing_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsFollowingResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_Unfollow_InputMessage">
+    <wsdl:part name="parameters" element="tns:Unfollow" />
+  </wsdl:message>
+  <wsdl:message name="IService_Unfollow_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UnfollowResponse" />
+  </wsdl:message>
   <wsdl:portType name="IService">
     <wsdl:operation name="UsernameExists">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/UsernameExists" message="tns:IService_UsernameExists_InputMessage" />
@@ -146,6 +164,18 @@
     <wsdl:operation name="GetIndividual">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/GetIndividual" message="tns:IService_GetIndividual_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService/GetIndividualResponse" message="tns:IService_GetIndividual_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Follow">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/Follow" message="tns:IService_Follow_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/FollowResponse" message="tns:IService_Follow_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IsFollowing">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/IsFollowing" message="tns:IService_IsFollowing_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/IsFollowingResponse" message="tns:IService_IsFollowing_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Unfollow">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/Unfollow" message="tns:IService_Unfollow_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/UnfollowResponse" message="tns:IService_Unfollow_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IService" type="tns:IService">
@@ -269,6 +299,33 @@
     </wsdl:operation>
     <wsdl:operation name="GetIndividual">
       <soap:operation soapAction="http://tempuri.org/IService/GetIndividual" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Follow">
+      <soap:operation soapAction="http://tempuri.org/IService/Follow" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsFollowing">
+      <soap:operation soapAction="http://tempuri.org/IService/IsFollowing" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Unfollow">
+      <soap:operation soapAction="http://tempuri.org/IService/Unfollow" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

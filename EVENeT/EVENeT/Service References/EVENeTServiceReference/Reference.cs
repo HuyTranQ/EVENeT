@@ -60,6 +60,15 @@ namespace EVENeT.EVENeTServiceReference {
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetIndividual", ReplyAction="http://tempuri.org/IService/GetIndividualResponse")]
         System.Threading.Tasks.Task<EVENeT.EVENeTServiceReference.GetIndividualResponse> GetIndividualAsync(EVENeT.EVENeTServiceReference.GetIndividualRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/Follow", ReplyAction="http://tempuri.org/IService/FollowResponse")]
+        System.Threading.Tasks.Task FollowAsync(string username, string userToFollow);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/IsFollowing", ReplyAction="http://tempuri.org/IService/IsFollowingResponse")]
+        System.Threading.Tasks.Task<bool> IsFollowingAsync(string username, string userToFollow);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/Unfollow", ReplyAction="http://tempuri.org/IService/UnfollowResponse")]
+        System.Threading.Tasks.Task UnfollowAsync(string username, string userToFollow);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -215,6 +224,18 @@ namespace EVENeT.EVENeTServiceReference {
         
         public System.Threading.Tasks.Task<EVENeT.EVENeTServiceReference.GetIndividualResponse> GetIndividualAsync(EVENeT.EVENeTServiceReference.GetIndividualRequest request) {
             return base.Channel.GetIndividualAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task FollowAsync(string username, string userToFollow) {
+            return base.Channel.FollowAsync(username, userToFollow);
+        }
+        
+        public System.Threading.Tasks.Task<bool> IsFollowingAsync(string username, string userToFollow) {
+            return base.Channel.IsFollowingAsync(username, userToFollow);
+        }
+        
+        public System.Threading.Tasks.Task UnfollowAsync(string username, string userToFollow) {
+            return base.Channel.UnfollowAsync(username, userToFollow);
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync() {

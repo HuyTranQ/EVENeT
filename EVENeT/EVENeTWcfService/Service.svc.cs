@@ -134,5 +134,43 @@ namespace EVENeTWcfService
         {
             Data.follow(username, userToFollow);
         }
+
+        public bool IsFollowing(string username, string userToFollow)
+        {
+            return (bool)Data.isFollowing(username, userToFollow);
+        }
+
+        public void Unfollow(string username, string userToFollow)
+        {
+            Data.unfollow(username, userToFollow);
+        }
+
+        public void GetIndividualFollowing(string username, out List<string> Usernames, out List<string> DisplayNames, out List<string> ProfilePics, out List<int> Types)
+        {
+            var table = from u in Data.UserUsers
+                        where u.username1 == username
+                        select u;
+
+            Usernames = new List<string>();
+            DisplayNames = new List<string>();
+            ProfilePics = new List<string>();
+            Types = new List<int>();
+
+            foreach (UserUser u in table)
+            {
+                Usernames.Add(u.username2);
+                ProfilePics.Add(u.User1.profilePicture);
+                Types.Add(u.User1.userType);
+
+                if (u.User1.userType == 1)
+                {
+                    DisplayNames.Add(u.User1.Individual.firstName);
+                }
+                else if (u.User1.userType == 2)
+                {
+                    DisplayNames.Add(u.User1.Organization.name);
+                }
+            }
+        }
     }
 }

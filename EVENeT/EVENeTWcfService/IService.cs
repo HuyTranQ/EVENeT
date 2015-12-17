@@ -73,6 +73,9 @@ namespace EVENeTWcfService
         void GetIndividualFollowing(string username, out List<string> Usernames, out List<string> DisplayNames, out List<string> ProfilePics, out List<int> Types);
 
         [OperationContract]
+        IEnumerable<followingListResult> GetFollowingList(string username);
+
+        [OperationContract]
         getLocationFromIdResult GetLocationFromId(int id);
     }
 }

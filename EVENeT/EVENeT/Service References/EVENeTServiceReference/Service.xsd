@@ -36,6 +36,20 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="getEventFromIDResult" nillable="true" type="tns:getEventFromIDResult" />
+  <xs:complexType name="ArrayOffollowingListResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="followingListResult" nillable="true" type="tns:followingListResult" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOffollowingListResult" nillable="true" type="tns:ArrayOffollowingListResult" />
+  <xs:complexType name="followingListResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="profilePicture" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="userType" type="xs:int" />
+      <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="followingListResult" nillable="true" type="tns:followingListResult" />
   <xs:complexType name="getLocationFromIdResult">
     <xs:sequence>
       <xs:element minOccurs="0" name="address" nillable="true" type="xs:string" />

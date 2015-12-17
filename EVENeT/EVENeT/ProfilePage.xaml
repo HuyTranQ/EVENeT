@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:EVENeT"
+    xmlns:dataModel="using:EVENeT.DataModel"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
@@ -64,9 +65,33 @@
                     <StackPanel x:Name="AboutPanel">
                     </StackPanel>
                 </PivotItem>
-                <PivotItem Header="Following">
+                <PivotItem Header="Following" Tapped="PivotFollowing_Tapped">
                     <StackPanel>
                         <TextBlock Text="List of people you are following" />
+                        <ListView Name="followingList" HorizontalAlignment="Stretch" VerticalAlignment="Center" 
+                                  IsTapEnabled="True"
+                                  Tapped="followingList_Tapped"
+                                   ItemsSource="{ x:Bind userListViewModel.users }"  xmlns:a="using:EVENeT.DataModel">
+                            <ListView.ItemTemplate >
+                                <DataTemplate x:DataType="a:User">
+                                    <StackPanel Orientation="Horizontal" Padding="20" RightTapped="StackPanel_RightTapped" >
+                                        <FlyoutBase.AttachedFlyout>
+                                            <MenuFlyout>
+                                                <MenuFlyoutItem x:Name="EditButton"
+                                                            Text="Edit"
+                                                          />
+                                                <MenuFlyoutItem x:Name="DeleteButton"
+                                                            Text="Delete"
+                                                          />
+                                            </MenuFlyout>
+                                        </FlyoutBase.AttachedFlyout>
+                                        <Image Name="avatar" Source="{x:Bind Avatar, Converter= {StaticResource stringToImageSourceConverter}, Mode=OneWay}"/>
+                                        <TextBlock  Margin="10,0,0,0"
+                                                    Name="username" Text="{x:Bind Username, Mode=OneWay}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                            </ListView>
                     </StackPanel>
                 </PivotItem>
                 <PivotItem Header="Followers">

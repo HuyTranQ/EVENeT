@@ -347,6 +347,66 @@ namespace EVENeT.EVENeTServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="followingListResult", Namespace="http://schemas.datacontract.org/2004/07/EVENeTWcfService")]
+    public partial class followingListResult : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string profilePictureField;
+        
+        private int userTypeField;
+        
+        private string usernameField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string profilePicture {
+            get {
+                return this.profilePictureField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.profilePictureField, value) != true)) {
+                    this.profilePictureField = value;
+                    this.RaisePropertyChanged("profilePicture");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int userType {
+            get {
+                return this.userTypeField;
+            }
+            set {
+                if ((this.userTypeField.Equals(value) != true)) {
+                    this.userTypeField = value;
+                    this.RaisePropertyChanged("userType");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string username {
+            get {
+                return this.usernameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.usernameField, value) != true)) {
+                    this.usernameField = value;
+                    this.RaisePropertyChanged("username");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="getLocationFromIdResult", Namespace="http://schemas.datacontract.org/2004/07/EVENeTWcfService")]
     public partial class getLocationFromIdResult : object, System.ComponentModel.INotifyPropertyChanged {
         
@@ -530,6 +590,9 @@ namespace EVENeT.EVENeTServiceReference {
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetIndividualFollowing", ReplyAction="http://tempuri.org/IService/GetIndividualFollowingResponse")]
         System.Threading.Tasks.Task<EVENeT.EVENeTServiceReference.GetIndividualFollowingResponse> GetIndividualFollowingAsync(EVENeT.EVENeTServiceReference.GetIndividualFollowingRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetFollowingList", ReplyAction="http://tempuri.org/IService/GetFollowingListResponse")]
+        System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<EVENeT.EVENeTServiceReference.followingListResult>> GetFollowingListAsync(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetLocationFromId", ReplyAction="http://tempuri.org/IService/GetLocationFromIdResponse")]
         System.Threading.Tasks.Task<EVENeT.EVENeTServiceReference.getLocationFromIdResult> GetLocationFromIdAsync(int id);
@@ -756,6 +819,10 @@ namespace EVENeT.EVENeTServiceReference {
         
         public System.Threading.Tasks.Task<EVENeT.EVENeTServiceReference.GetIndividualFollowingResponse> GetIndividualFollowingAsync(EVENeT.EVENeTServiceReference.GetIndividualFollowingRequest request) {
             return base.Channel.GetIndividualFollowingAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<EVENeT.EVENeTServiceReference.followingListResult>> GetFollowingListAsync(string username) {
+            return base.Channel.GetFollowingListAsync(username);
         }
         
         public System.Threading.Tasks.Task<EVENeT.EVENeTServiceReference.getLocationFromIdResult> GetLocationFromIdAsync(int id) {

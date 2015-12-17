@@ -1,4 +1,5 @@
-﻿using EVENeT.EVENeTServiceReference;
+﻿using EVENeT.DataModel;
+using EVENeT.EVENeTServiceReference;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -27,6 +28,7 @@ namespace EVENeT
     {
         string userName;
         int userType;
+        public UserList userListViewModel = new UserList(); 
 
         public ProfilePage()
         {
@@ -62,6 +64,8 @@ namespace EVENeT
             AdditionalInfo.Text = userName;
             AddBasicInfoCard(r);
 
+            //Get User following
+            await userListViewModel.getUserList();
 
             //StorageFile file = await StorageFile.GetFileFromPathAsync(r.ProfilePic);
             //BitmapImage bmp = new BitmapImage();
@@ -105,6 +109,26 @@ namespace EVENeT
             await DatabaseHelper.Client.UnfollowAsync(DatabaseHelper.CurrentUser, userName);
             FollowBtn.Visibility = Visibility.Visible;
             UnfollowBtn.Visibility = Visibility.Collapsed;
+        }
+
+
+        private void PivotFollowing_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            
+            
+        }
+
+        private void StackPanel_RightTapped(object sender, RightTappedRoutedEventArgs e)
+        {
+            FrameworkElement senderElement = sender as FrameworkElement;
+            FlyoutBase flyoutBase = FlyoutBase.GetAttachedFlyout(senderElement);
+            flyoutBase.ShowAt(senderElement);
+        }
+
+        private void followingList_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            var listview = (sender as ListView).SelectedIndex;
+            Navigation.AppShell.RootFrame.Navigate(typeof(ProfilePage), userListViewModel.users.ElementAt(listview).Username);
         }
     }
 }

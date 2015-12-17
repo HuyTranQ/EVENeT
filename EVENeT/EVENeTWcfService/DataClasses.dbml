@@ -322,6 +322,20 @@
       <Column Name="userType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
+  <Function Name="dbo.getAllEvent" Method="getAllEvent">
+    <ElementType Name="getAllEventResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="beginTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="endTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="NVarChar(1024) NOT NULL" CanBeNull="false" />
+      <Column Name="thumbnail" Type="System.String" DbType="VarChar(256)" CanBeNull="true" />
+      <Column Name="title" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
+      <Column Name="ticket" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="location" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="username" Type="System.String" DbType="VarChar(32) NOT NULL" CanBeNull="false" />
+      <Column Name="publishDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </ElementType>
+  </Function>
   <Function Name="dbo.getComments" Method="getComments">
     <Parameter Name="eventId" Type="System.Int32" DbType="Int" />
     <ElementType Name="getCommentsResult">
@@ -556,5 +570,20 @@
   <Function Name="dbo.isTypeExisted" Method="isTypeExisted" IsComposable="true">
     <Parameter Name="name" Type="System.String" DbType="VarChar(32)" />
     <Return Type="System.Boolean" />
+  </Function>
+  <Function Name="dbo.getEventFromID" Method="getEventFromID">
+    <Parameter Name="eventid" Type="System.Int32" DbType="Int" />
+    <ElementType Name="getEventFromIDResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="beginTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="endTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="NVarChar(1024) NOT NULL" CanBeNull="false" />
+      <Column Name="thumbnail" Type="System.String" DbType="VarChar(256)" CanBeNull="true" />
+      <Column Name="title" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
+      <Column Name="ticket" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="location" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="username" Type="System.String" DbType="VarChar(32) NOT NULL" CanBeNull="false" />
+      <Column Name="publishDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </ElementType>
   </Function>
 </Database>

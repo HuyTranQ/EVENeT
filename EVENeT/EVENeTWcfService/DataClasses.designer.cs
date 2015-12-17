@@ -406,6 +406,13 @@ namespace EVENeTWcfService
 			return ((ISingleResult<followingListResult>)(result.ReturnValue));
 		}
 		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getAllEvent")]
+		public ISingleResult<getAllEventResult> getAllEvent()
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((ISingleResult<getAllEventResult>)(result.ReturnValue));
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getComments")]
 		public ISingleResult<getCommentsResult> getComments([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> eventId)
 		{
@@ -622,6 +629,13 @@ namespace EVENeTWcfService
 		public System.Nullable<bool> isTypeExisted([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string name)
 		{
 			return ((System.Nullable<bool>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), name).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getEventFromID")]
+		public ISingleResult<getEventFromIDResult> getEventFromID([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> eventid)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), eventid);
+			return ((ISingleResult<getEventFromIDResult>)(result.ReturnValue));
 		}
 	}
 	
@@ -4309,6 +4323,194 @@ namespace EVENeTWcfService
 		}
 	}
 	
+	public partial class getAllEventResult
+	{
+		
+		private int _id;
+		
+		private System.DateTime _beginTime;
+		
+		private System.DateTime _endTime;
+		
+		private string _description;
+		
+		private string _thumbnail;
+		
+		private string _title;
+		
+		private System.Nullable<int> _ticket;
+		
+		private int _location;
+		
+		private string _username;
+		
+		private System.Nullable<System.DateTime> _publishDate;
+		
+		public getAllEventResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL")]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this._id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_beginTime", DbType="DateTime NOT NULL")]
+		public System.DateTime beginTime
+		{
+			get
+			{
+				return this._beginTime;
+			}
+			set
+			{
+				if ((this._beginTime != value))
+				{
+					this._beginTime = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_endTime", DbType="DateTime NOT NULL")]
+		public System.DateTime endTime
+		{
+			get
+			{
+				return this._endTime;
+			}
+			set
+			{
+				if ((this._endTime != value))
+				{
+					this._endTime = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_description", DbType="NVarChar(1024) NOT NULL", CanBeNull=false)]
+		public string description
+		{
+			get
+			{
+				return this._description;
+			}
+			set
+			{
+				if ((this._description != value))
+				{
+					this._description = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_thumbnail", DbType="VarChar(256)")]
+		public string thumbnail
+		{
+			get
+			{
+				return this._thumbnail;
+			}
+			set
+			{
+				if ((this._thumbnail != value))
+				{
+					this._thumbnail = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="NVarChar(128) NOT NULL", CanBeNull=false)]
+		public string title
+		{
+			get
+			{
+				return this._title;
+			}
+			set
+			{
+				if ((this._title != value))
+				{
+					this._title = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ticket", DbType="Int")]
+		public System.Nullable<int> ticket
+		{
+			get
+			{
+				return this._ticket;
+			}
+			set
+			{
+				if ((this._ticket != value))
+				{
+					this._ticket = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_location", DbType="Int NOT NULL")]
+		public int location
+		{
+			get
+			{
+				return this._location;
+			}
+			set
+			{
+				if ((this._location != value))
+				{
+					this._location = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_username", DbType="VarChar(32) NOT NULL", CanBeNull=false)]
+		public string username
+		{
+			get
+			{
+				return this._username;
+			}
+			set
+			{
+				if ((this._username != value))
+				{
+					this._username = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_publishDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> publishDate
+		{
+			get
+			{
+				return this._publishDate;
+			}
+			set
+			{
+				if ((this._publishDate != value))
+				{
+					this._publishDate = value;
+				}
+			}
+		}
+	}
+	
 	public partial class getCommentsResult
 	{
 		
@@ -5374,6 +5576,194 @@ namespace EVENeTWcfService
 				if ((this._userType != value))
 				{
 					this._userType = value;
+				}
+			}
+		}
+	}
+	
+	public partial class getEventFromIDResult
+	{
+		
+		private int _id;
+		
+		private System.DateTime _beginTime;
+		
+		private System.DateTime _endTime;
+		
+		private string _description;
+		
+		private string _thumbnail;
+		
+		private string _title;
+		
+		private System.Nullable<int> _ticket;
+		
+		private int _location;
+		
+		private string _username;
+		
+		private System.Nullable<System.DateTime> _publishDate;
+		
+		public getEventFromIDResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL")]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this._id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_beginTime", DbType="DateTime NOT NULL")]
+		public System.DateTime beginTime
+		{
+			get
+			{
+				return this._beginTime;
+			}
+			set
+			{
+				if ((this._beginTime != value))
+				{
+					this._beginTime = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_endTime", DbType="DateTime NOT NULL")]
+		public System.DateTime endTime
+		{
+			get
+			{
+				return this._endTime;
+			}
+			set
+			{
+				if ((this._endTime != value))
+				{
+					this._endTime = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_description", DbType="NVarChar(1024) NOT NULL", CanBeNull=false)]
+		public string description
+		{
+			get
+			{
+				return this._description;
+			}
+			set
+			{
+				if ((this._description != value))
+				{
+					this._description = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_thumbnail", DbType="VarChar(256)")]
+		public string thumbnail
+		{
+			get
+			{
+				return this._thumbnail;
+			}
+			set
+			{
+				if ((this._thumbnail != value))
+				{
+					this._thumbnail = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="NVarChar(128) NOT NULL", CanBeNull=false)]
+		public string title
+		{
+			get
+			{
+				return this._title;
+			}
+			set
+			{
+				if ((this._title != value))
+				{
+					this._title = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ticket", DbType="Int")]
+		public System.Nullable<int> ticket
+		{
+			get
+			{
+				return this._ticket;
+			}
+			set
+			{
+				if ((this._ticket != value))
+				{
+					this._ticket = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_location", DbType="Int NOT NULL")]
+		public int location
+		{
+			get
+			{
+				return this._location;
+			}
+			set
+			{
+				if ((this._location != value))
+				{
+					this._location = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_username", DbType="VarChar(32) NOT NULL", CanBeNull=false)]
+		public string username
+		{
+			get
+			{
+				return this._username;
+			}
+			set
+			{
+				if ((this._username != value))
+				{
+					this._username = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_publishDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> publishDate
+		{
+			get
+			{
+				return this._publishDate;
+			}
+			set
+			{
+				if ((this._publishDate != value))
+				{
+					this._publishDate = value;
 				}
 			}
 		}

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EVENeT.EVENeTServiceReference;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -38,7 +39,8 @@ namespace EVENeT
             userName = e.Parameter.ToString();
             if (userName == DatabaseHelper.CurrentUser)
             {
-                // Remove follow button, blah blah
+                // Remove follow button
+                FollowBtn.Visibility = Visibility.Collapsed;
             }
             else
             {
@@ -47,20 +49,41 @@ namespace EVENeT
 
             userType = await DatabaseHelper.Client.UserTypeAsync(userName);
             
-            EVENeTServiceReference.GetIndividualRequest a = new EVENeTServiceReference.GetIndividualRequest(userName);
-            EVENeTServiceReference.GetIndividualResponse r = await DatabaseHelper.Client.GetIndividualAsync(a);
+            GetIndividualRequest a = new EVENeTServiceReference.GetIndividualRequest(userName);
+            GetIndividualResponse r = await DatabaseHelper.Client.GetIndividualAsync(a);
 
             Firstname.Text = r.FirstName;
-            AdditionalInfo.Text = r.MiddleName + " " + r.LastName;
+            AdditionalInfo.Text = userName;
+            AddBasicInfoCard(r);
 
-            StorageFile file = await StorageFile.GetFileFromPathAsync(r.ProfilePic);
-            BitmapImage bmp = new BitmapImage();
-            await bmp.SetSourceAsync(await file.OpenAsync(FileAccessMode.Read));
-            AvatarBrush.ImageSource = bmp;
 
-            file = await StorageFile.GetFileFromPathAsync(r.CoverPic);
-            await bmp.SetSourceAsync(await file.OpenAsync(FileAccessMode.Read));
-            CoverImage.Source = bmp;
+            //StorageFile file = await StorageFile.GetFileFromPathAsync(r.ProfilePic);
+            //BitmapImage bmp = new BitmapImage();
+            //await bmp.SetSourceAsync(await file.OpenAsync(FileAccessMode.Read));
+            //AvatarBrush.ImageSource = bmp;
+
+            //file = await StorageFile.GetFileFromPathAsync(r.CoverPic);
+            //await bmp.SetSourceAsync(await file.OpenAsync(FileAccessMode.Read));
+            //CoverImage.Source = bmp;
+        }
+
+        private void AddBasicInfoCard(GetIndividualResponse response)
+        {
+            DisplayCard card = new DisplayCard();
+            StackPanel content = new StackPanel();
+
+            card.CardTitle = "Basic information";
+            content.Margin = new Thickness(16, 0, 16, 16);
+
+            TextBlock info = new TextBlock();
+            info.Text = "Firstname: " + response.FirstName + "\n" +
+                ((response.MiddleName != "") ? "Middlename: " + response.FirstName + "\n" : "") + 
+                "Lastname: " + response.LastName + "\n\n";
+            info.Text += "Birthday: " + response.DOB.Month + "/" + response.DOB.Day + "/" + response.DOB.Year;
+
+            content.Children.Add(info);
+            card.PlaceHolder = content;
+            AboutPanel.Children.Add(card);
         }
     }
 }

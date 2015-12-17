@@ -129,5 +129,10 @@ namespace EVENeTWcfService
                 CoverPic = "";
             }
         }
+
+        public void Follow(string username, string userToFollow)
+        {
+            Data.follow(username, userToFollow);
+        }
     }
 }

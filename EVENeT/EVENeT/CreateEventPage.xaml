@@ -72,6 +72,7 @@
                 <!-- Tickets -->
                 <StackPanel Margin="0,0,0,32">
                     <TextBlock Text="Tickets" FontSize="24" Margin="0,16" FontWeight="Light"/>
+                    <TextBox x:Name="TicketNumberTbx" PlaceholderText="Number of tickets" InputScope="Number"/>
                 </StackPanel>
 
                 <!-- Gallery -->

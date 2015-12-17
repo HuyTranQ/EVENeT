@@ -38,6 +38,19 @@ namespace EVENeT
             m_highlightedWords = new List<ITextRange>();
             LocationMap.Loaded += LocationMap_Loaded;
             LocationMap.MapTapped += LocationMap_MapTapped;
+            TicketNumberTbx.TextChanging += TicketNumberTbx_TextChanging;
+        }
+
+        private void TicketNumberTbx_TextChanging(TextBox sender, TextBoxTextChangingEventArgs args)
+        {
+            for (int i = 0; i < sender.Text.Length; ++i)
+            {
+                if (!char.IsNumber(sender.Text[i]))
+                {
+                    sender.Text = sender.Text.Remove(i, 1);
+                    --i;
+                }
+            }
         }
 
         private async void LocationMap_MapTapped(MapControl sender, MapInputEventArgs args)
@@ -122,7 +135,7 @@ namespace EVENeT
                     await DatabaseHelper.Client.CreateLocationAsync("", "", location.Address.FormattedAddress, location.Point.Position.Longitude, location.Point.Position.Latitude, "");
                     locationId = await DatabaseHelper.Client.GetLocationFromAddressAsync(location.Address.FormattedAddress);
                 }
-                if (await DatabaseHelper.Client.CreateEventAsync(beginDate, endDate, description, "", EventTitle.Text, 10000, locationId, DatabaseHelper.CurrentUser))
+                if (await DatabaseHelper.Client.CreateEventAsync(beginDate, endDate, description, "", EventTitle.Text, int.Parse(TicketNumberTbx.Text), locationId, DatabaseHelper.CurrentUser))
                 {
                     MessageDialog dialog = new MessageDialog("Event created successfully!");
                     await dialog.ShowAsync();

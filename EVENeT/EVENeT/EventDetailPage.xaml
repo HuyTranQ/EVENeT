@@ -8,11 +8,11 @@
     xmlns:map="using:Windows.UI.Xaml.Controls.Maps"
     mc:Ignorable="d">
 
-    <ScrollViewer Background="{ThemeResource PageBackgroundThemeBrush}">
+    <Grid x:Name="PageScrollViewer" Background="{ThemeResource PageBackgroundThemeBrush}">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="300"/>
-                <RowDefinition Height="3*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="4*"/>
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
@@ -28,71 +28,72 @@
                 <!--<Grid Background="#99000000"/>-->
             </Grid>
 
-            <Pivot Grid.Column="1" Grid.Row="1">
+            <Pivot x:Name="PagePivot" Grid.Column="1" Grid.Row="1" Margin="0,16,0,0">
                 <PivotItem Header="Detail">
-                    <StackPanel x:Name="MainContent" Grid.Row="1" Grid.Column="1" Margin="0,16,0,0">
-                        <local:DisplayCard 
+                    <ScrollViewer VerticalScrollBarVisibility="Hidden">
+                        <StackPanel x:Name="MainContent" Grid.Row="1" Grid.Column="1">
+                            <local:DisplayCard 
                                    SymbolGlyph="&#xF073;"
                                    CardTitle="Nov. 5, 2015 - 5:30 PM">
+                            </local:DisplayCard>
 
-                        </local:DisplayCard>
-
-                        <local:DisplayCard 
+                            <local:DisplayCard 
                                    TitleFontSize="28"
                                    CardTitle="Understanding U.S. Elections: Presidential and Congressional Electoral Processes">
-                            <local:DisplayCard.PlaceHolder>
-                                <StackPanel>
-                                    <StackPanel Orientation="Horizontal">
-                                        <RichTextBlock Margin="16,-16,16,8">
-                                            <Paragraph>
-                                                <Italic>by</Italic>
-                                                <Hyperlink Click="Organizer_Hyperlink_Click">American Center HCMC</Hyperlink>
-                                            </Paragraph>
-                                        </RichTextBlock>
-                                    </StackPanel>
+                                <local:DisplayCard.PlaceHolder>
+                                    <StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <RichTextBlock Margin="16,-16,16,8">
+                                                <Paragraph>
+                                                    <Italic>by</Italic>
+                                                    <Hyperlink Click="Organizer_Hyperlink_Click">American Center HCMC</Hyperlink>
+                                                </Paragraph>
+                                            </RichTextBlock>
+                                        </StackPanel>
 
 
-                                    <RichTextBlock x:Name="rtbDesc" IsTextSelectionEnabled="True" TextAlignment="Justify"
+                                        <RichTextBlock x:Name="rtbDesc" IsTextSelectionEnabled="True" TextAlignment="Justify"
                                            FontSize="16" FontFamily="Segoe UI" Foreground="#2a2a2a" Margin="16">
-                                        <Paragraph Margin="0,0,0,16">
-                                            <Bold>Understanding U.S. Elections Series:</Bold>
-                                            Did you know that the United States will select its next president 
+                                            <Paragraph Margin="0,0,0,16">
+                                                <Bold>Understanding U.S. Elections Series:</Bold>
+                                                Did you know that the United States will select its next president 
                                     in 2016? Are you curious about how the U.S. president is selected? Come learn about the elections process 
                                     in the United States through a series of talks with our consulate officers. Bring your friends!
-                                        </Paragraph>
-                                        <Paragraph Margin="0,0,0,16">
-                                            <Bold>Understanding U.S. Elections:</Bold>
-                                            Presidential and Congressional Electoral Processes 
+                                            </Paragraph>
+                                            <Paragraph Margin="0,0,0,16">
+                                                <Bold>Understanding U.S. Elections:</Bold>
+                                                Presidential and Congressional Electoral Processes 
                                     Time: Thursday, November 5, 5:30-7:00pm
                                     Speaker: Andrew Riplinger, Consulate Officer
-                                        </Paragraph>
-                                        <Paragraph Margin="0,0,0,16">
-                                            Come join the first session of our elections series, where you will learn about the U.S. federal elections system. 
+                                            </Paragraph>
+                                            <Paragraph Margin="0,0,0,16">
+                                                Come join the first session of our elections series, where you will learn about the U.S. federal elections system. 
                                     Bring your friends and questions!
-                                        </Paragraph>
-                                    </RichTextBlock>
+                                            </Paragraph>
+                                        </RichTextBlock>
 
-                                </StackPanel>
-                            </local:DisplayCard.PlaceHolder>
-                        </local:DisplayCard>
+                                    </StackPanel>
+                                </local:DisplayCard.PlaceHolder>
+                            </local:DisplayCard>
 
-                        <local:DisplayCard 
+                            <local:DisplayCard 
                                    SymbolGlyph="&#xF145;"
                                    CardTitle="Ticket Information">
-                            <local:DisplayCard.PlaceHolder>
-                                <TextBlock Text="This is a textblock"
+                                <local:DisplayCard.PlaceHolder>
+                                    <TextBlock Text="This is a textblock"
                                    Margin="16,0,16,16"/>
-                            </local:DisplayCard.PlaceHolder>
-                        </local:DisplayCard>
+                                </local:DisplayCard.PlaceHolder>
+                            </local:DisplayCard>
 
-                        <local:DisplayCard 
+                            <local:DisplayCard 
                                    SymbolGlyph="&#xF041;"
                                    CardTitle="The American Center HCMC - 8th Floor, Diamond Plaza. 34 Le Duan Blv., Ben Nghe Ward, District 1. Ho Chi Minh City VN">
-                            <local:DisplayCard.PlaceHolder>
-                                <TextBlock x:Name="tmp"/>
-                            </local:DisplayCard.PlaceHolder>
-                        </local:DisplayCard>
-                    </StackPanel>
+                                <local:DisplayCard.PlaceHolder>
+                                    <TextBlock x:Name="tmp"/>
+                                </local:DisplayCard.PlaceHolder>
+                            </local:DisplayCard>
+                        </StackPanel>
+                    </ScrollViewer>
                 </PivotItem>
 
                 <PivotItem Header="Review">
@@ -101,5 +102,5 @@
             </Pivot>
             
         </Grid>
-    </ScrollViewer>
+    </Grid>
 </Page>

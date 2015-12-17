@@ -49,15 +49,15 @@
                 </StackPanel>
             </Grid>
 
+            <CommandBar x:Name="ProfileCommand" Grid.Column="1"
+                        Background="Transparent" RequestedTheme="Dark"
+                        VerticalAlignment="Bottom" HorizontalAlignment="Right">
+                <AppBarButton x:Name="FollowBtn" Icon="AddFriend" Label="Follow"/>
+            </CommandBar>
+
             <Pivot Grid.Row="1" Grid.Column="1" Margin="0,16,0,0" ScrollViewer.VerticalScrollBarVisibility="Disabled">
                 <PivotItem Header="About">
-                    <StackPanel>
-                        <local:DisplayCard CardTitle="Basic information">
-                            <local:DisplayCard.PlaceHolder>
-                                <StackPanel x:Name="BasicInfo"  Margin="16,0,16,16">
-                                </StackPanel>
-                            </local:DisplayCard.PlaceHolder>
-                        </local:DisplayCard>
+                    <StackPanel x:Name="AboutPanel">
                     </StackPanel>
                 </PivotItem>
                 <PivotItem Header="Following">

@@ -38,20 +38,20 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <ContentPresenter x:Name="userName" Content="{Binding UserName}" FontSize="18" FontWeight="SemiBold"
+                    <ContentPresenter x:Name="userName" Content="{x:Bind UserName, Mode=OneWay}" FontSize="18" FontWeight="SemiBold"
                           IsHitTestVisible="false" TextWrapping="NoWrap" Margin="16,16,16,0" Height="24" VerticalContentAlignment="Center" Grid.Row="0"/>
                     <StackPanel Orientation="Horizontal" Grid.Row="1">
                         <TextBlock Text="&#xE163;" FontFamily="Segoe MDL2 Assets" FontSize="24" VerticalAlignment="Center"
                                        Margin="16,16,16,16"/>
-                        <ContentPresenter x:Name="eventDate" Content="{Binding EventDate}" FontSize="16" FontWeight="Light"
+                        <ContentPresenter x:Name="eventDate" Content="{x:Bind EventDate, Mode=OneWay}" FontSize="16" FontWeight="Light"
                                               IsHitTestVisible="false" TextWrapping="NoWrap" Margin="0,16,16,16" Height="24" VerticalContentAlignment="Center"/>
                         <TextBlock Text="&#xE121;" FontFamily="Segoe MDL2 Assets" FontSize="24" VerticalAlignment="Center"
                                        Margin="16,16,16,16"/>
-                        <ContentPresenter x:Name="eventTime" Content="{Binding EventTime}" FontSize="16" FontWeight="Light"
+                        <ContentPresenter x:Name="eventTime" Content="{x:Bind EventTime,Mode=OneWay}" FontSize="16" FontWeight="Light"
                                               IsHitTestVisible="false" TextWrapping="NoWrap" Margin="0,16,16,16" Height="24" VerticalContentAlignment="Center"/>
                     </StackPanel>
-                    <Image x:Name="eventImages" Source="{Binding EventImageSource, Converter={StaticResource stringToImageSourceConverter}, Mode=OneWay}" Stretch="UniformToFill" Height="300" Grid.Row="2"/>
-                    <ContentPresenter x:Name="eventTitle" Content="{Binding EventTitle}" FontSize="26" FontWeight="Light"
+                    <Image x:Name="eventImages" Source="{x:Bind EventImageSource,Converter={StaticResource stringToImageSourceConverter}, Mode=OneWay}" Stretch="UniformToFill" Height="300" Grid.Row="2"/>
+                    <ContentPresenter x:Name="eventTitle" Content="{x:Bind EventTitle, Mode=OneWay}" FontSize="26" FontWeight="Light"
                                       IsHitTestVisible="false" TextWrapping="Wrap" Margin="16,8,16,0" Height="Auto" VerticalContentAlignment="Center" Grid.Row="3"/>
                     <RichEditBox x:Name="eventDescription" FontSize="16"
                                  IsHitTestVisible="false" TextWrapping="Wrap" Margin="16,16,16,0" Height="Auto" VerticalContentAlignment="Center" Grid.Row="4"

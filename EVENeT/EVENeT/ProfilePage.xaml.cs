@@ -85,7 +85,7 @@ namespace EVENeT
             info.Text = "Firstname:\t" + response.FirstName + "\n" +
                 ((response.MiddleName != "") ? "Middlename:\t" + response.MiddleName + "\n" : "") + 
                 "Lastname:\t" + response.LastName + "\n\n";
-            info.Text += "Birthday:\t\t" + response.DOB.Month + "/" + response.DOB.Day + "/" + response.DOB.Year + "\n";
+            info.Text += "Birthday:\t\t" + response.DOB.ToString("d") + "\n";
             info.Text += "Gender:\t\t" + (response.Gender ? "Male" : "Female");
 
             content.Children.Add(info);

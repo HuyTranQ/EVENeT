@@ -62,7 +62,8 @@
 
                                         <!-- Description -->
                                         <RichEditBox x:Name="EventDescription" 
-                                                     Margin="0,16,0,0"
+                                                     Margin="16" Style="{StaticResource NormalDisabled}"
+                                                     IsEnabled="False"
                                                      HorizontalAlignment="Stretch"/>
                                     </StackPanel>
                                 </local:DisplayCard.PlaceHolder>

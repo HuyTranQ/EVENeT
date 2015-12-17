@@ -41,7 +41,7 @@ namespace EVENeT
                 EventCard eventCard = new EventCard();
                 eventCard.EventTitle = e.title;
                 eventCard.EventTime = e.beginTime.ToString("hh:mm tt");
-                eventCard.EventDate = e.beginTime.ToString("d");
+                eventCard.EventDate = e.beginTime.ToString("MMM. dd, yyyy");
                 eventCard.EventDescription.Document.SetText(TextSetOptions.FormatRtf, e.description);
                 eventCard.EventImageSource = e.thumbnail;
                 eventCard.Tapped += EventCard_Tapped;

@@ -7,7 +7,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     d:DesignHeight="550"
-    d:DesignWidth="400">
+    d:DesignWidth="400"
+    MaxWidth="768">
 
 
     <Grid Margin="0,8,0,8">
@@ -37,23 +38,24 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <ContentPresenter x:Name="userName" Content="{x:Bind UserName}" FontSize="18" FontWeight="SemiBold"
+                    <ContentPresenter x:Name="userName" Content="{Binding UserName}" FontSize="18" FontWeight="SemiBold"
                           IsHitTestVisible="false" TextWrapping="NoWrap" Margin="16,16,16,0" Height="24" VerticalContentAlignment="Center" Grid.Row="0"/>
                     <StackPanel Orientation="Horizontal" Grid.Row="1">
                         <TextBlock Text="&#xE163;" FontFamily="Segoe MDL2 Assets" FontSize="24" VerticalAlignment="Center"
                                        Margin="16,16,16,16"/>
-                        <ContentPresenter x:Name="eventDate" Content="{x:Bind EventDate}" FontSize="16" FontWeight="Light"
+                        <ContentPresenter x:Name="eventDate" Content="{Binding EventDate}" FontSize="16" FontWeight="Light"
                                               IsHitTestVisible="false" TextWrapping="NoWrap" Margin="0,16,16,16" Height="24" VerticalContentAlignment="Center"/>
                         <TextBlock Text="&#xE121;" FontFamily="Segoe MDL2 Assets" FontSize="24" VerticalAlignment="Center"
                                        Margin="16,16,16,16"/>
-                        <ContentPresenter x:Name="eventTime" Content="{x:Bind EventTime}" FontSize="16" FontWeight="Light"
+                        <ContentPresenter x:Name="eventTime" Content="{Binding EventTime}" FontSize="16" FontWeight="Light"
                                               IsHitTestVisible="false" TextWrapping="NoWrap" Margin="0,16,16,16" Height="24" VerticalContentAlignment="Center"/>
                     </StackPanel>
-                    <Image x:Name="eventImages" Source="{x:Bind EventImageSource, Converter={StaticResource stringToImageSourceConverter}, Mode=OneWay}" Stretch="UniformToFill" Height="300" Grid.Row="2"/>
-                    <ContentPresenter x:Name="eventTitle" Content="{x:Bind EventTitle}" FontSize="26" FontWeight="Light"
-                          IsHitTestVisible="false" TextWrapping="Wrap" Margin="16,8,16,0" Height="Auto" VerticalContentAlignment="Center" Grid.Row="3"/>
-                    <RichEditBox x:Name="eventDescription" FontSize="16" FontWeight="Light"
-                          IsHitTestVisible="false" TextWrapping="Wrap" Margin="16,16,16,16" Height="Auto" VerticalContentAlignment="Center" Grid.Row="4"/>
+                    <Image x:Name="eventImages" Source="{Binding EventImageSource, Converter={StaticResource stringToImageSourceConverter}, Mode=OneWay}" Stretch="UniformToFill" Height="300" Grid.Row="2"/>
+                    <ContentPresenter x:Name="eventTitle" Content="{Binding EventTitle}" FontSize="26" FontWeight="Light"
+                                      IsHitTestVisible="false" TextWrapping="Wrap" Margin="16,8,16,0" Height="Auto" VerticalContentAlignment="Center" Grid.Row="3"/>
+                    <RichEditBox x:Name="eventDescription" FontSize="16"
+                                 IsHitTestVisible="false" TextWrapping="Wrap" Margin="16,16,16,0" Height="Auto" VerticalContentAlignment="Center" Grid.Row="4"
+                                 Style="{StaticResource NormalDisabled}" IsEnabled="False"/>
                 </Grid>
             </Border>
         </Grid>

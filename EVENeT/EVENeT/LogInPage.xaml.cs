@@ -78,6 +78,8 @@ namespace EVENeT
                 else
                     await DatabaseHelper.Client.CreateOrganizationAsync(dialogUsername.Text, dialogPassword.Password, "", "", "", "", "", "", "");
 
+                var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+                var check = localSettings.Values["Autologin"] = "false";
                 // Navigate to set up page
                 Frame frame = Window.Current.Content as Frame;
                 frame.Navigate(typeof(AccountSetUpPage), dialogUsername.Text);

@@ -4,6 +4,8 @@
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:24293/Service.svc?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://localhost:24293/Service.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:24293/Service.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/EVENeTWcfService" />
+      <xsd:import schemaLocation="http://localhost:24293/Service.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IService_UsernameExists_InputMessage">
@@ -90,6 +92,18 @@
   <wsdl:message name="IService_GetIndividual_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetIndividualResponse" />
   </wsdl:message>
+  <wsdl:message name="IService_getAllEvent_InputMessage">
+    <wsdl:part name="parameters" element="tns:getAllEvent" />
+  </wsdl:message>
+  <wsdl:message name="IService_getAllEvent_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getAllEventResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetEventFromId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetEventFromId" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetEventFromId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetEventFromIdResponse" />
+  </wsdl:message>
   <wsdl:message name="IService_Follow_InputMessage">
     <wsdl:part name="parameters" element="tns:Follow" />
   </wsdl:message>
@@ -107,6 +121,18 @@
   </wsdl:message>
   <wsdl:message name="IService_Unfollow_OutputMessage">
     <wsdl:part name="parameters" element="tns:UnfollowResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetIndividualFollowing_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetIndividualFollowing" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetIndividualFollowing_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetIndividualFollowingResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetLocationFromId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetLocationFromId" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetLocationFromId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetLocationFromIdResponse" />
   </wsdl:message>
   <wsdl:portType name="IService">
     <wsdl:operation name="UsernameExists">
@@ -165,6 +191,14 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IService/GetIndividual" message="tns:IService_GetIndividual_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService/GetIndividualResponse" message="tns:IService_GetIndividual_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="getAllEvent">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/getAllEvent" message="tns:IService_getAllEvent_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/getAllEventResponse" message="tns:IService_getAllEvent_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEventFromId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/GetEventFromId" message="tns:IService_GetEventFromId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/GetEventFromIdResponse" message="tns:IService_GetEventFromId_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="Follow">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/Follow" message="tns:IService_Follow_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService/FollowResponse" message="tns:IService_Follow_OutputMessage" />
@@ -176,6 +210,14 @@
     <wsdl:operation name="Unfollow">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/Unfollow" message="tns:IService_Unfollow_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService/UnfollowResponse" message="tns:IService_Unfollow_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetIndividualFollowing">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/GetIndividualFollowing" message="tns:IService_GetIndividualFollowing_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/GetIndividualFollowingResponse" message="tns:IService_GetIndividualFollowing_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLocationFromId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/GetLocationFromId" message="tns:IService_GetLocationFromId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/GetLocationFromIdResponse" message="tns:IService_GetLocationFromId_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IService" type="tns:IService">
@@ -306,6 +348,24 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="getAllEvent">
+      <soap:operation soapAction="http://tempuri.org/IService/getAllEvent" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEventFromId">
+      <soap:operation soapAction="http://tempuri.org/IService/GetEventFromId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="Follow">
       <soap:operation soapAction="http://tempuri.org/IService/Follow" style="document" />
       <wsdl:input>
@@ -326,6 +386,24 @@
     </wsdl:operation>
     <wsdl:operation name="Unfollow">
       <soap:operation soapAction="http://tempuri.org/IService/Unfollow" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIndividualFollowing">
+      <soap:operation soapAction="http://tempuri.org/IService/GetIndividualFollowing" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLocationFromId">
+      <soap:operation soapAction="http://tempuri.org/IService/GetLocationFromId" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

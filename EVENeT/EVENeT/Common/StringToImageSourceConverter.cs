@@ -8,9 +8,9 @@ namespace EVENeT.Common
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            if (value is string)
+            if (value is string && ((string)value) != "")
             {
-                Uri uri = new Uri(AppContext.BaseDirectory + value as string);
+                Uri uri = new Uri(value as string);
                 BitmapImage bmp = new BitmapImage(uri);
                 return bmp;
             }

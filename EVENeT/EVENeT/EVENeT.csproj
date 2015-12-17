@@ -93,7 +93,19 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Service References\EVENeTServiceReference\EVENeT.EVENeTServiceReference.getAllEventResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\EVENeTServiceReference\EVENeT.EVENeTServiceReference.getEventFromIDResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\EVENeTServiceReference\EVENeT.EVENeTServiceReference.GetIndividualFollowingResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\EVENeTServiceReference\EVENeT.EVENeTServiceReference.GetIndividualResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\EVENeTServiceReference\EVENeT.EVENeTServiceReference.getLocationFromIdResult.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\EVENeTServiceReference\Reference.svcmap">
@@ -110,6 +122,12 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\EVENeTServiceReference\Service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\EVENeTServiceReference\Service2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\EVENeTServiceReference\Service3.xsd">
       <SubType>Designer</SubType>
     </None>
     <PRIResource Include="Strings\en-US\Resources.resw" />

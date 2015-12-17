@@ -53,7 +53,7 @@ namespace EVENeT
             }
         }
 
-        private async void LocationMap_MapTapped(MapControl sender, MapInputEventArgs args)
+        private  void LocationMap_MapTapped(MapControl sender, MapInputEventArgs args)
         {
             //MapIcon icon = new MapIcon();
             //icon.Location = args.Location;
@@ -132,7 +132,7 @@ namespace EVENeT
                 int locationId = await DatabaseHelper.Client.GetLocationFromAddressAsync(location.Address.FormattedAddress);
                 if (locationId == -1)
                 {
-                    await DatabaseHelper.Client.CreateLocationAsync("", "", location.Address.FormattedAddress, location.Point.Position.Longitude, location.Point.Position.Latitude, "");
+                    await DatabaseHelper.Client.CreateLocationAsync("", "", location.Address.FormattedAddress, location.Point.Position.Latitude, location.Point.Position.Longitude, "");
                     locationId = await DatabaseHelper.Client.GetLocationFromAddressAsync(location.Address.FormattedAddress);
                 }
                 if (await DatabaseHelper.Client.CreateEventAsync(beginDate, endDate, description, "", EventTitle.Text, int.Parse(TicketNumberTbx.Text), locationId, DatabaseHelper.CurrentUser))

@@ -89,6 +89,11 @@ namespace EVENeTWcfService
             }
         }
 
+        public getLocationFromIdResult GetLocationFromId(int id)
+        {
+            return Data.getLocationFromId(id).First();
+        }
+
         public int GetLocationFromAddress(string address)
         {
             var result = Data.getLocationFromAddress(address);

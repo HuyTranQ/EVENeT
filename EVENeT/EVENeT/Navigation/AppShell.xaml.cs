@@ -56,9 +56,10 @@ namespace EVENeT.Navigation
 
                 new NavPaneItem()
                 {
-                    Symbol = Symbol.Bookmarks,
-                    Label = "Events",
-                    DestPage = typeof(EventDetailPage)
+                    Symbol = Symbol.Contact,
+                    Label = "Your Profile",
+                    DestPage = typeof(ProfilePage),
+                    Arguments = "ntanh2@apcs.vn"
                 }
             });
 

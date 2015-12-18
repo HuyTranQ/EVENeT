@@ -19,20 +19,6 @@ namespace EVENeT
 {
     public sealed partial class EventCard : UserControl
     {
-        public static readonly DependencyProperty AvatarImageSourceProperty = DependencyProperty.Register("AvatarImageSource", typeof(object), typeof(EventCard), new PropertyMetadata(null));
-        public object AvatarImageSource
-        {
-            get { return GetValue(AvatarImageSourceProperty); }
-            set { SetValue(AvatarImageSourceProperty, value); }
-        }
-
-        public static readonly DependencyProperty UserNameProperty = DependencyProperty.Register("UserName", typeof(object), typeof(EventCard), new PropertyMetadata(null));
-        public object UserName
-        {
-            get { return GetValue(UserNameProperty); }
-            set { SetValue(UserNameProperty, value); }
-        }
-
         public static readonly DependencyProperty EventDateProperty = DependencyProperty.Register("EventDate", typeof(object), typeof(EventCard), new PropertyMetadata(null));
         public object EventDate
         {
@@ -59,6 +45,16 @@ namespace EVENeT
         {
             get { return GetValue(EventTitleProperty); }
             set { SetValue(EventTitleProperty, value); }
+        }
+
+        public ImageBrush AvatarImage
+        {
+            get { return avatarImage; }
+        }
+
+        public TextBlock UserName
+        {
+            get { return userName; }
         }
 
 

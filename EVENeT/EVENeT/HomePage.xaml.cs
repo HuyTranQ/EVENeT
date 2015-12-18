@@ -15,6 +15,8 @@ using Windows.UI.Xaml.Navigation;
 using EVENeT.EVENeTServiceReference;
 using System.Diagnostics;
 using Windows.UI.Text;
+using Windows.Storage;
+using Windows.UI.Xaml.Media.Imaging;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -47,6 +49,14 @@ namespace EVENeT
                 eventCard.Tapped += EventCard_Tapped;
                 eventCard.IsTapEnabled = true;
                 eventCard.EventId = e.id;
+                var request = new GetNameAndAvatarRequest(e.username);
+                var response = await DatabaseHelper.Client.GetNameAndAvatarAsync(request);
+                StorageFile file = await StorageFile.GetFileFromPathAsync(response.Avatar);
+                BitmapImage bmp = new BitmapImage();
+                await bmp.SetSourceAsync(await file.OpenAsync(FileAccessMode.Read));
+                eventCard.AvatarImage.ImageSource = bmp;
+                eventCard.UserName.Text = response.Name;
+                eventCard.UserName.Tapped += (sender, args) => { Frame.Navigate(typeof(ProfilePage), e.username); };
                 eventPanel.Children.Add(eventCard);
             }
         }

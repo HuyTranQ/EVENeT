@@ -392,20 +392,6 @@ namespace EVENeTWcfService
 			return ((int)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.followerList")]
-		public ISingleResult<followerListResult> followerList([global::System.Data.Linq.Mapping.ParameterAttribute(Name="this", DbType="VarChar(32)")] string @this)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), @this);
-			return ((ISingleResult<followerListResult>)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.followingList")]
-		public ISingleResult<followingListResult> followingList([global::System.Data.Linq.Mapping.ParameterAttribute(Name="this", DbType="VarChar(32)")] string @this)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), @this);
-			return ((ISingleResult<followingListResult>)(result.ReturnValue));
-		}
-		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getAllEvent")]
 		public ISingleResult<getAllEventResult> getAllEvent()
 		{
@@ -636,6 +622,20 @@ namespace EVENeTWcfService
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), eventid);
 			return ((ISingleResult<getEventFromIDResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.followerList")]
+		public ISingleResult<followerListResult> followerList([global::System.Data.Linq.Mapping.ParameterAttribute(Name="this", DbType="VarChar(32)")] string @this)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), @this);
+			return ((ISingleResult<followerListResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.followingList")]
+		public ISingleResult<followingListResult> followingList([global::System.Data.Linq.Mapping.ParameterAttribute(Name="this", DbType="VarChar(32)")] string @this)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), @this);
+			return ((ISingleResult<followingListResult>)(result.ReturnValue));
 		}
 	}
 	
@@ -4199,130 +4199,6 @@ namespace EVENeTWcfService
 		}
 	}
 	
-	public partial class followerListResult
-	{
-		
-		private string _username;
-		
-		private string _profilePicture;
-		
-		private int _userType;
-		
-		public followerListResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_username", DbType="VarChar(32) NOT NULL", CanBeNull=false)]
-		public string username
-		{
-			get
-			{
-				return this._username;
-			}
-			set
-			{
-				if ((this._username != value))
-				{
-					this._username = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_profilePicture", DbType="VarChar(256)")]
-		public string profilePicture
-		{
-			get
-			{
-				return this._profilePicture;
-			}
-			set
-			{
-				if ((this._profilePicture != value))
-				{
-					this._profilePicture = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_userType", DbType="Int NOT NULL")]
-		public int userType
-		{
-			get
-			{
-				return this._userType;
-			}
-			set
-			{
-				if ((this._userType != value))
-				{
-					this._userType = value;
-				}
-			}
-		}
-	}
-	
-	public partial class followingListResult
-	{
-		
-		private string _username;
-		
-		private string _profilePicture;
-		
-		private int _userType;
-		
-		public followingListResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_username", DbType="VarChar(32) NOT NULL", CanBeNull=false)]
-		public string username
-		{
-			get
-			{
-				return this._username;
-			}
-			set
-			{
-				if ((this._username != value))
-				{
-					this._username = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_profilePicture", DbType="VarChar(256)")]
-		public string profilePicture
-		{
-			get
-			{
-				return this._profilePicture;
-			}
-			set
-			{
-				if ((this._profilePicture != value))
-				{
-					this._profilePicture = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_userType", DbType="Int NOT NULL")]
-		public int userType
-		{
-			get
-			{
-				return this._userType;
-			}
-			set
-			{
-				if ((this._userType != value))
-				{
-					this._userType = value;
-				}
-			}
-		}
-	}
-	
 	public partial class getAllEventResult
 	{
 		
@@ -5764,6 +5640,166 @@ namespace EVENeTWcfService
 				if ((this._publishDate != value))
 				{
 					this._publishDate = value;
+				}
+			}
+		}
+	}
+	
+	public partial class followerListResult
+	{
+		
+		private string _username;
+		
+		private string _profilePicture;
+		
+		private string _Name;
+		
+		private int _userType;
+		
+		public followerListResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_username", DbType="VarChar(32) NOT NULL", CanBeNull=false)]
+		public string username
+		{
+			get
+			{
+				return this._username;
+			}
+			set
+			{
+				if ((this._username != value))
+				{
+					this._username = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_profilePicture", DbType="VarChar(256)")]
+		public string profilePicture
+		{
+			get
+			{
+				return this._profilePicture;
+			}
+			set
+			{
+				if ((this._profilePicture != value))
+				{
+					this._profilePicture = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(64) NOT NULL", CanBeNull=false)]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this._Name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_userType", DbType="Int NOT NULL")]
+		public int userType
+		{
+			get
+			{
+				return this._userType;
+			}
+			set
+			{
+				if ((this._userType != value))
+				{
+					this._userType = value;
+				}
+			}
+		}
+	}
+	
+	public partial class followingListResult
+	{
+		
+		private string _username;
+		
+		private string _profilePicture;
+		
+		private string _Name;
+		
+		private int _userType;
+		
+		public followingListResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_username", DbType="VarChar(32) NOT NULL", CanBeNull=false)]
+		public string username
+		{
+			get
+			{
+				return this._username;
+			}
+			set
+			{
+				if ((this._username != value))
+				{
+					this._username = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_profilePicture", DbType="VarChar(256)")]
+		public string profilePicture
+		{
+			get
+			{
+				return this._profilePicture;
+			}
+			set
+			{
+				if ((this._profilePicture != value))
+				{
+					this._profilePicture = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(64) NOT NULL", CanBeNull=false)]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this._Name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_userType", DbType="Int NOT NULL")]
+		public int userType
+		{
+			get
+			{
+				return this._userType;
+			}
+			set
+			{
+				if ((this._userType != value))
+				{
+					this._userType = value;
 				}
 			}
 		}

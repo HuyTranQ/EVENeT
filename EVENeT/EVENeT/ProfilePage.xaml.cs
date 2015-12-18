@@ -67,14 +67,15 @@ namespace EVENeT
             //Get User following
             await userListViewModel.getUserList();
 
-            //StorageFile file = await StorageFile.GetFileFromPathAsync(r.ProfilePic);
-            //BitmapImage bmp = new BitmapImage();
-            //await bmp.SetSourceAsync(await file.OpenAsync(FileAccessMode.Read));
-            //AvatarBrush.ImageSource = bmp;
+            StorageFile file = await StorageFile.GetFileFromPathAsync(r.ProfilePic);
+            BitmapImage bmp = new BitmapImage();
+            await bmp.SetSourceAsync(await file.OpenAsync(FileAccessMode.Read));
+            AvatarBrush.ImageSource = bmp;
 
-            //file = await StorageFile.GetFileFromPathAsync(r.CoverPic);
-            //await bmp.SetSourceAsync(await file.OpenAsync(FileAccessMode.Read));
-            //CoverImage.Source = bmp;
+            file = await StorageFile.GetFileFromPathAsync(r.CoverPic);
+            bmp = new BitmapImage();
+            await bmp.SetSourceAsync(await file.OpenAsync(FileAccessMode.Read));
+            CoverImage.Source = bmp;
         }
 
         private void AddBasicInfoCard(GetIndividualResponse response)

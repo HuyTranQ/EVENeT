@@ -219,5 +219,38 @@ namespace EVENeTWcfService
                 }
             }
         }
+
+        public void GetNameAndAvatar(string username, out string Name, out string Avatar)
+        {
+            var user = (from u in Data.Users
+                        where u.username == username
+                        select u).First();
+
+            if (user != null)
+            {
+                Avatar = user.profilePicture;
+                if (user.userType == 1)
+                {
+                    var ind = (from i in Data.Individuals
+                               where i.username == username
+                               select i).First();
+                    Name = ind.firstName + " " + ind.midName + " " + ind.lastName;
+                }
+                else if (user.userType == 2)
+                {
+                    var org = (from o in Data.Organizations
+                               where o.username == username
+                               select o).First();
+                    Name = org.name;
+                }
+                else
+                    Name = "";
+            }
+            else
+            {
+                Avatar = "";
+                Name = "";
+            }
+        }
     }
 }

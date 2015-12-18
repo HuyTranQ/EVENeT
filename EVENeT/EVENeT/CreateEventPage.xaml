@@ -21,7 +21,7 @@
                 <StackPanel Margin="0,0,0,32">
                     <TextBlock Text="Basic information" FontSize="24" Margin="0,0,0,16" FontWeight="Light"/>
                     <TextBox x:Name="EventTitle" Header="Title" Margin="0,0,0,16"/>
-                    <ComboBox x:Name="EventCategory" Header="Category" MinWidth="296" Margin="0,0,0,16"/>
+                    <!--<ComboBox x:Name="EventCategory" Header="Category" MinWidth="296" Margin="0,0,0,16"/>-->
                     <RichEditBox x:Name="EventDescription" Height="280">
                         <RichEditBox.Header>
                             <Grid>

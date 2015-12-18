@@ -350,11 +350,26 @@ namespace EVENeT.EVENeTServiceReference {
     [System.Runtime.Serialization.DataContractAttribute(Name="followingListResult", Namespace="http://schemas.datacontract.org/2004/07/EVENeTWcfService")]
     public partial class followingListResult : object, System.ComponentModel.INotifyPropertyChanged {
         
+        private string NameField;
+        
         private string profilePictureField;
         
         private int userTypeField;
         
         private string usernameField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public string profilePicture {
@@ -596,6 +611,10 @@ namespace EVENeT.EVENeTServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetLocationFromId", ReplyAction="http://tempuri.org/IService/GetLocationFromIdResponse")]
         System.Threading.Tasks.Task<EVENeT.EVENeTServiceReference.getLocationFromIdResult> GetLocationFromIdAsync(int id);
+        
+        // CODEGEN: Generating message contract since the operation has multiple return values.
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetNameAndAvatar", ReplyAction="http://tempuri.org/IService/GetNameAndAvatarResponse")]
+        System.Threading.Tasks.Task<EVENeT.EVENeTServiceReference.GetNameAndAvatarResponse> GetNameAndAvatarAsync(EVENeT.EVENeTServiceReference.GetNameAndAvatarRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -695,6 +714,42 @@ namespace EVENeT.EVENeTServiceReference {
             this.DisplayNames = DisplayNames;
             this.ProfilePics = ProfilePics;
             this.Types = Types;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetNameAndAvatar", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class GetNameAndAvatarRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        public string username;
+        
+        public GetNameAndAvatarRequest() {
+        }
+        
+        public GetNameAndAvatarRequest(string username) {
+            this.username = username;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetNameAndAvatarResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class GetNameAndAvatarResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        public string Name;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=1)]
+        public string Avatar;
+        
+        public GetNameAndAvatarResponse() {
+        }
+        
+        public GetNameAndAvatarResponse(string Name, string Avatar) {
+            this.Name = Name;
+            this.Avatar = Avatar;
         }
     }
     
@@ -827,6 +882,10 @@ namespace EVENeT.EVENeTServiceReference {
         
         public System.Threading.Tasks.Task<EVENeT.EVENeTServiceReference.getLocationFromIdResult> GetLocationFromIdAsync(int id) {
             return base.Channel.GetLocationFromIdAsync(id);
+        }
+        
+        public System.Threading.Tasks.Task<EVENeT.EVENeTServiceReference.GetNameAndAvatarResponse> GetNameAndAvatarAsync(EVENeT.EVENeTServiceReference.GetNameAndAvatarRequest request) {
+            return base.Channel.GetNameAndAvatarAsync(request);
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync() {

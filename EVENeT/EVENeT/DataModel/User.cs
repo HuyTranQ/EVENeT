@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace EVENeT.DataModel
 {
-  public  class User
+  public class User
     {
         public string Username { get; set; }
         public string Avatar { get; set; }
+        public string Name { get; set; }
 
-        public User(String Username, String Avatar)
+        public User(string Username, string Avatar, string Name)
         {
             this.Username = Username;
             this.Avatar = Avatar;
+            this.Name = Name;
         }
     }
-
-
 }

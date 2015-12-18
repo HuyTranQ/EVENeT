@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using EVENeT.EVENeTServiceReference;
+
 namespace EVENeT.DataModel
 {
-  public  class UserList
+  public class UserList
     {
         public ObservableCollection<User> users = new ObservableCollection<User>();
-
 
         public void addUser(User user)
         {
@@ -22,13 +22,12 @@ namespace EVENeT.DataModel
             //GetIndividualFollowingRequest followingre = new GetIndividualFollowingRequest(DatabaseHelper.CurrentUser);
             //GetIndividualFollowingResponse r = await DatabaseHelper.Client.GetIndividualFollowingAsync(followingre);
             //    IEnumerable<getFollowingResult>  DatabaseHelper.C.getFollowingList(DatabaseHelper.CurrentUser);
-            IEnumerable<followingListResult>  list =  await DatabaseHelper.Client.GetFollowingListAsync(DatabaseHelper.CurrentUser);
+            IEnumerable<followingListResult> list =  await DatabaseHelper.Client.GetFollowingListAsync(DatabaseHelper.CurrentUser);
             foreach (followingListResult userlist in list)
             {
-                User user = new User(userlist.username, userlist.profilePicture);
+                User user = new User(userlist.username, userlist.profilePicture, userlist.Name);
                 addUser(user);
             }
-                      
         }
 
     }

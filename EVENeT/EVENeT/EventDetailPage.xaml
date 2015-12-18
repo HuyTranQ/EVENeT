@@ -23,9 +23,9 @@
             </Grid.ColumnDefinitions>
 
             <!-- Example -->
-            <Grid x:Name="imgGrid"
+            <Grid x:Name="imgGrid" Background="{ThemeResource NavigationPaneThemeBrush}"
                   Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="1">
-                <Image Source="/Assets/original.jpg" Stretch="UniformToFill" VerticalAlignment="Center"/>
+                <Image x:Name="EventThumbnail" Stretch="UniformToFill" VerticalAlignment="Center"/>
                 <!--<Grid Background="#99000000"/>-->
             </Grid>
 

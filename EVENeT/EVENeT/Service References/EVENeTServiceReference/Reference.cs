@@ -531,6 +531,10 @@ namespace EVENeT.EVENeTServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetIndividualFollowing", ReplyAction="http://tempuri.org/IService/GetIndividualFollowingResponse")]
         System.Threading.Tasks.Task<EVENeT.EVENeTServiceReference.GetIndividualFollowingResponse> GetIndividualFollowingAsync(EVENeT.EVENeTServiceReference.GetIndividualFollowingRequest request);
         
+        // CODEGEN: Generating message contract since the operation has multiple return values.
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetIndividualFollower", ReplyAction="http://tempuri.org/IService/GetIndividualFollowerResponse")]
+        System.Threading.Tasks.Task<EVENeT.EVENeTServiceReference.GetIndividualFollowerResponse> GetIndividualFollowerAsync(EVENeT.EVENeTServiceReference.GetIndividualFollowerRequest request);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetLocationFromId", ReplyAction="http://tempuri.org/IService/GetLocationFromIdResponse")]
         System.Threading.Tasks.Task<EVENeT.EVENeTServiceReference.getLocationFromIdResult> GetLocationFromIdAsync(int id);
     }
@@ -628,6 +632,50 @@ namespace EVENeT.EVENeTServiceReference {
         }
         
         public GetIndividualFollowingResponse(System.Collections.ObjectModel.ObservableCollection<string> Usernames, System.Collections.ObjectModel.ObservableCollection<string> DisplayNames, System.Collections.ObjectModel.ObservableCollection<string> ProfilePics, System.Collections.ObjectModel.ObservableCollection<int> Types) {
+            this.Usernames = Usernames;
+            this.DisplayNames = DisplayNames;
+            this.ProfilePics = ProfilePics;
+            this.Types = Types;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetIndividualFollower", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class GetIndividualFollowerRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        public string username;
+        
+        public GetIndividualFollowerRequest() {
+        }
+        
+        public GetIndividualFollowerRequest(string username) {
+            this.username = username;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetIndividualFollowerResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class GetIndividualFollowerResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        public System.Collections.ObjectModel.ObservableCollection<string> Usernames;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=1)]
+        public System.Collections.ObjectModel.ObservableCollection<string> DisplayNames;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=2)]
+        public System.Collections.ObjectModel.ObservableCollection<string> ProfilePics;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=3)]
+        public System.Collections.ObjectModel.ObservableCollection<int> Types;
+        
+        public GetIndividualFollowerResponse() {
+        }
+        
+        public GetIndividualFollowerResponse(System.Collections.ObjectModel.ObservableCollection<string> Usernames, System.Collections.ObjectModel.ObservableCollection<string> DisplayNames, System.Collections.ObjectModel.ObservableCollection<string> ProfilePics, System.Collections.ObjectModel.ObservableCollection<int> Types) {
             this.Usernames = Usernames;
             this.DisplayNames = DisplayNames;
             this.ProfilePics = ProfilePics;
@@ -756,6 +804,10 @@ namespace EVENeT.EVENeTServiceReference {
         
         public System.Threading.Tasks.Task<EVENeT.EVENeTServiceReference.GetIndividualFollowingResponse> GetIndividualFollowingAsync(EVENeT.EVENeTServiceReference.GetIndividualFollowingRequest request) {
             return base.Channel.GetIndividualFollowingAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<EVENeT.EVENeTServiceReference.GetIndividualFollowerResponse> GetIndividualFollowerAsync(EVENeT.EVENeTServiceReference.GetIndividualFollowerRequest request) {
+            return base.Channel.GetIndividualFollowerAsync(request);
         }
         
         public System.Threading.Tasks.Task<EVENeT.EVENeTServiceReference.getLocationFromIdResult> GetLocationFromIdAsync(int id) {

@@ -99,6 +99,9 @@
     <None Include="Service References\EVENeTServiceReference\EVENeT.EVENeTServiceReference.getEventFromIDResult.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\EVENeTServiceReference\EVENeT.EVENeTServiceReference.GetIndividualFollowerResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\EVENeTServiceReference\EVENeT.EVENeTServiceReference.GetIndividualFollowingResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

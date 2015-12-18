@@ -187,5 +187,33 @@ namespace EVENeTWcfService
                 }
             }
         }
+
+        public void GetIndividualFollower(string username, out List<string> Usernames, out List<string> DisplayNames, out List<string> ProfilePics, out List<int> Types)
+        {
+            var table = from u in Data.UserUsers
+                        where u.username2 == username
+                        select u;
+
+            Usernames = new List<string>();
+            DisplayNames = new List<string>();
+            ProfilePics = new List<string>();
+            Types = new List<int>();
+
+            foreach (UserUser u in table)
+            {
+                Usernames.Add(u.username1);
+                ProfilePics.Add(u.User.profilePicture);
+                Types.Add(u.User.userType);
+
+                if (u.User.userType == 1)
+                {
+                    DisplayNames.Add(u.User.Individual.firstName);
+                }
+                else if (u.User.userType == 2)
+                {
+                    DisplayNames.Add(u.User.Organization.name);
+                }
+            }
+        }
     }
 }

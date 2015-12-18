@@ -315,6 +315,23 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetIndividualFollower">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetIndividualFollowerResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Usernames" nillable="true" type="q7:ArrayOfstring" />
+        <xs:element xmlns:q8="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="DisplayNames" nillable="true" type="q8:ArrayOfstring" />
+        <xs:element xmlns:q9="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ProfilePics" nillable="true" type="q9:ArrayOfstring" />
+        <xs:element xmlns:q10="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Types" nillable="true" type="q10:ArrayOfint" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="GetLocationFromId">
     <xs:complexType>
       <xs:sequence>
@@ -325,7 +342,7 @@
   <xs:element name="GetLocationFromIdResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/EVENeTWcfService" minOccurs="0" name="GetLocationFromIdResult" nillable="true" type="q7:getLocationFromIdResult" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/EVENeTWcfService" minOccurs="0" name="GetLocationFromIdResult" nillable="true" type="q11:getLocationFromIdResult" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

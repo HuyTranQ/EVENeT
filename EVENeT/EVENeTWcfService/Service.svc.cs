@@ -160,6 +160,10 @@ namespace EVENeTWcfService
             Data.unfollow(username, userToFollow);
         }
 
+        public IEnumerable<followingListResult> GetFollowingList(string username)
+        {
+            return Data.followingList(username);
+        }
         public void GetIndividualFollowing(string username, out List<string> Usernames, out List<string> DisplayNames, out List<string> ProfilePics, out List<int> Types)
         {
             var table = from u in Data.UserUsers

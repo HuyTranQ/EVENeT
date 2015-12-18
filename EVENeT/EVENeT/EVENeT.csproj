@@ -93,13 +93,13 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Service References\EVENeTServiceReference\EVENeT.EVENeTServiceReference.followingListResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\EVENeTServiceReference\EVENeT.EVENeTServiceReference.getAllEventResult.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\EVENeTServiceReference\EVENeT.EVENeTServiceReference.getEventFromIDResult.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\EVENeTServiceReference\EVENeT.EVENeTServiceReference.GetIndividualFollowerResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\EVENeTServiceReference\EVENeT.EVENeTServiceReference.GetIndividualFollowingResponse.datasource">
@@ -148,6 +148,8 @@
       <DependentUpon>CreateEventPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="DatabaseHelper.cs" />
+    <Compile Include="DataModel\User.cs" />
+    <Compile Include="DataModel\UserList.cs" />
     <Compile Include="DisplayCard.xaml.cs">
       <DependentUpon>DisplayCard.xaml</DependentUpon>
     </Compile>

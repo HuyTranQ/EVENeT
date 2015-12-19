@@ -33,7 +33,7 @@
                     <Border CornerRadius="64" BorderThickness="3" BorderBrush="#77AAAAAA"
                             Width="128" Height="128" VerticalAlignment="Top" Grid.Row="1" Grid.RowSpan="2">
                         <Border.Background>
-                            <ImageBrush x:Name="AvatarBrush"/>
+                            <ImageBrush x:Name="AvatarBrush" Stretch="UniformToFill"/>
                         </Border.Background>
                     </Border>
 
@@ -67,28 +67,21 @@
                 </PivotItem>
                 <PivotItem Header="Following" Tapped="PivotFollowing_Tapped">
                     <StackPanel>
-                        <TextBlock Text="List of people you are following" />
-
                         <GridView 
                             Name="followingList"
                             IsTapEnabled="True"
                             Tapped="followingList_Tapped"
                             ItemsSource="{ x:Bind followingListViewModel.users }">
-                         
+
                             <GridView.ItemTemplate>
                                 <DataTemplate x:DataType="dataModel:User">
-                                    <StackPanel Background="Gray" CornerRadius="10">
-                                        <Border CornerRadius="64" BorderThickness="3" BorderBrush="#77AAAAAA"
-                            Width="128" Height="128" VerticalAlignment="Top" >
-                                            <Border.Background>
-                                                <ImageBrush x:Name="AvatarBrush" ImageSource="{x:Bind ImageAvatar, Mode=OneWay}"/>
-                                            </Border.Background>
-                                        </Border>
-                                        <TextBlock  Margin="10,0,0,0"
-                                                    Foreground="White"
-                                                    Name="username" Text="{x:Bind Username, Mode=OneWay}"/>
+                                    <StackPanel Background="White">
+                                        <Image Width="136" Height="136"
+                                               x:Name="AvatarBrush" Source="{x:Bind ImageAvatar, Mode=OneWay}"/>
+                                        <TextBlock  Padding="0,8,0,8" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                    Name="username" Text="{x:Bind Name, Mode=OneWay}"/>
                                     </StackPanel>
-                                </DataTemplate>                             
+                                </DataTemplate>
                             </GridView.ItemTemplate>
                         </GridView>
                     
@@ -96,7 +89,6 @@
                 </PivotItem>
                 <PivotItem Header="Followers">
                     <StackPanel>
-                        <TextBlock Text="List of your followers" />
                         <GridView 
                             Name="followerList"
                             IsTapEnabled="True"
@@ -104,16 +96,11 @@
                             ItemsSource="{ x:Bind followerListViewModel.users }">
                             <GridView.ItemTemplate>
                                 <DataTemplate x:DataType="dataModel:User">
-                                    <StackPanel Background="Gray" CornerRadius="10">
-                                        <Border CornerRadius="64" BorderThickness="3" BorderBrush="#77AAAAAA"
-                            Width="128" Height="128" VerticalAlignment="Top" >
-                                            <Border.Background>
-                                                <ImageBrush x:Name="AvatarBrush" ImageSource="{x:Bind ImageAvatar, Mode=OneWay}"/>
-                                            </Border.Background>
-                                        </Border>
-                                        <TextBlock  Margin="10,0,0,0"
-                                                    Foreground="White"
-                                                    Name="username" Text="{x:Bind Username, Mode=OneWay}"/>
+                                    <StackPanel Background="White">
+                                        <Image Width="136" Height="136"
+                                               x:Name="AvatarBrush" Source="{x:Bind ImageAvatar, Mode=OneWay}"/>
+                                        <TextBlock  Padding="8,8,8,8" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                                    Name="username" Text="{x:Bind Name, Mode=OneWay}"/>
                                     </StackPanel>
                                 </DataTemplate>
                             </GridView.ItemTemplate>

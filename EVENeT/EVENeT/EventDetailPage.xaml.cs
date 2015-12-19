@@ -90,5 +90,20 @@ namespace EVENeT
             getEvent();
             //   Debug.WriteLine(eventId.ToString());
         }
+
+        //private void PivotItem_PointerWheelChanged(object sender, PointerRoutedEventArgs e)
+        //{
+        //  //  PageScrollViewer.VerticalScrollBarVisibility = ScrollBarVisibility.Hidden;
+        //}
+
+        //private void PagePivot_PointerEntered(object sender, PointerRoutedEventArgs e)
+        //{
+        //    PageScrollViewer.VerticalScrollBarVisibility = ScrollBarVisibility.Disabled;
+        //}
+
+        //private void PagePivot_PointerExited(object sender, PointerRoutedEventArgs e)
+        //{
+        //    PageScrollViewer.VerticalScrollBarVisibility = ScrollBarVisibility.Hidden;
+        //}
     }
 }

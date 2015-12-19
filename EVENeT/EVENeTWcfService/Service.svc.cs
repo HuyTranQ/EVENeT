@@ -257,5 +257,10 @@ namespace EVENeTWcfService
         {
             return  Data.followerList(username);
         }
+
+        public IEnumerable<getUserResult> GetUser(string username)
+        {
+           return Data.getUser(username);
+        }
     }
 }

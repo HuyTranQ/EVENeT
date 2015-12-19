@@ -9,7 +9,10 @@
     Loaded="Page_Loaded"
     mc:Ignorable="d">
 
-    <ScrollViewer x:Name="PageScrollViewer" Background="{ThemeResource PageBackgroundThemeBrush}">
+    <ScrollViewer x:Name="PageScrollViewer" 
+              
+                
+                  Background="{ThemeResource PageBackgroundThemeBrush}">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="300"/>
@@ -29,9 +32,16 @@
                 <!--<Grid Background="#99000000"/>-->
             </Grid>
 
-            <Pivot x:Name="PagePivot" Grid.Column="1" Grid.Row="1" Margin="0,16,0,16">
-                <PivotItem Header="Detail">
-                    <ScrollViewer VerticalScrollBarVisibility="Hidden">
+            <Pivot x:Name="PagePivot" Grid.Column="1" Grid.Row="1" Margin="0,16,0,16"
+              
+                   >
+                <PivotItem Header="Detail" 
+                           
+                          >
+                   
+                    <ScrollViewer  VerticalScrollBarVisibility="Hidden"
+                                   
+                                   >
                         <StackPanel x:Name="MainContent" Grid.Row="1" Grid.Column="1">
 
                             <!-- Date and Time -->
@@ -80,6 +90,7 @@
 
                         </StackPanel>
                     </ScrollViewer>
+               
                 </PivotItem>
 
                 <PivotItem Header="Review">

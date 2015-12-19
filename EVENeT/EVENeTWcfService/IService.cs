@@ -84,6 +84,7 @@ namespace EVENeTWcfService
         [OperationContract]
         void GetNameAndAvatar(string username, out string Name, out string Avatar);
 
-       
+        [OperationContract]
+        IEnumerable<getUserResult> GetUser(string username);
     }
 }

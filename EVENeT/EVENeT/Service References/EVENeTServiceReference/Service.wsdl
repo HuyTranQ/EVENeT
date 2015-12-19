@@ -152,6 +152,12 @@
   <wsdl:message name="IService_GetNameAndAvatar_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetNameAndAvatarResponse" />
   </wsdl:message>
+  <wsdl:message name="IService_GetUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUser" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserResponse" />
+  </wsdl:message>
   <wsdl:portType name="IService">
     <wsdl:operation name="UsernameExists">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/UsernameExists" message="tns:IService_UsernameExists_InputMessage" />
@@ -248,6 +254,10 @@
     <wsdl:operation name="GetNameAndAvatar">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/GetNameAndAvatar" message="tns:IService_GetNameAndAvatar_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService/GetNameAndAvatarResponse" message="tns:IService_GetNameAndAvatar_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/GetUser" message="tns:IService_GetUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/GetUserResponse" message="tns:IService_GetUser_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IService" type="tns:IService">
@@ -461,6 +471,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetNameAndAvatar">
       <soap:operation soapAction="http://tempuri.org/IService/GetNameAndAvatar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUser">
+      <soap:operation soapAction="http://tempuri.org/IService/GetUser" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

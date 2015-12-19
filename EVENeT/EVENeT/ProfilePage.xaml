@@ -8,7 +8,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <ScrollViewer Background="{ThemeResource PageBackgroundThemeBrush}">
+    <ScrollViewer Background="{ThemeResource PageBackgroundThemeBrush}"
+                  >
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="300"/>
@@ -56,7 +57,7 @@
                 <AppBarButton x:Name="FollowBtn" Icon="AddFriend" Label="Follow" Foreground="White" Click="FollowBtn_Click"/>
                 <AppBarButton x:Name="UnfollowBtn" Icon="BlockContact" Label="Unfollow" Foreground="White" Click="UnfollowBtn_Click"/>
                 <CommandBar.SecondaryCommands>
-                    <AppBarButton x:Name="SettingBtn" Icon="Setting" Label="Settings"/>
+                    <AppBarButton x:Name="SettingBtn" Icon="Setting" Label="Settings" Click="SettingBtn_Click"/>
                 </CommandBar.SecondaryCommands>
             </CommandBar>
 

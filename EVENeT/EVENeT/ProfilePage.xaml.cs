@@ -149,5 +149,9 @@ namespace EVENeT
             Navigation.AppShell.RootFrame.Navigate(typeof(ProfilePage), followerListViewModel.users.ElementAt(listview).Username);
         }
 
+        private void SettingBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(SettingPage));
+        }
     }
 }

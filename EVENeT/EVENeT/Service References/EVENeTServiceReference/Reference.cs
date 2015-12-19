@@ -615,6 +615,111 @@ namespace EVENeT.EVENeTServiceReference {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="getUserResult", Namespace="http://schemas.datacontract.org/2004/07/EVENeTWcfService")]
+    public partial class getUserResult : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string coverPictureField;
+        
+        private string passwordField;
+        
+        private string profilePictureField;
+        
+        private System.DateTime registerDateField;
+        
+        private int userTypeField;
+        
+        private string usernameField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string coverPicture {
+            get {
+                return this.coverPictureField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.coverPictureField, value) != true)) {
+                    this.coverPictureField = value;
+                    this.RaisePropertyChanged("coverPicture");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string password {
+            get {
+                return this.passwordField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.passwordField, value) != true)) {
+                    this.passwordField = value;
+                    this.RaisePropertyChanged("password");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string profilePicture {
+            get {
+                return this.profilePictureField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.profilePictureField, value) != true)) {
+                    this.profilePictureField = value;
+                    this.RaisePropertyChanged("profilePicture");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime registerDate {
+            get {
+                return this.registerDateField;
+            }
+            set {
+                if ((this.registerDateField.Equals(value) != true)) {
+                    this.registerDateField = value;
+                    this.RaisePropertyChanged("registerDate");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int userType {
+            get {
+                return this.userTypeField;
+            }
+            set {
+                if ((this.userTypeField.Equals(value) != true)) {
+                    this.userTypeField = value;
+                    this.RaisePropertyChanged("userType");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string username {
+            get {
+                return this.usernameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.usernameField, value) != true)) {
+                    this.usernameField = value;
+                    this.RaisePropertyChanged("username");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="EVENeTServiceReference.IService")]
     public interface IService {
@@ -693,6 +798,9 @@ namespace EVENeT.EVENeTServiceReference {
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetNameAndAvatar", ReplyAction="http://tempuri.org/IService/GetNameAndAvatarResponse")]
         System.Threading.Tasks.Task<EVENeT.EVENeTServiceReference.GetNameAndAvatarResponse> GetNameAndAvatarAsync(EVENeT.EVENeTServiceReference.GetNameAndAvatarRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetUser", ReplyAction="http://tempuri.org/IService/GetUserResponse")]
+        System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<EVENeT.EVENeTServiceReference.getUserResult>> GetUserAsync(string username);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -968,6 +1076,10 @@ namespace EVENeT.EVENeTServiceReference {
         
         public System.Threading.Tasks.Task<EVENeT.EVENeTServiceReference.GetNameAndAvatarResponse> GetNameAndAvatarAsync(EVENeT.EVENeTServiceReference.GetNameAndAvatarRequest request) {
             return base.Channel.GetNameAndAvatarAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<EVENeT.EVENeTServiceReference.getUserResult>> GetUserAsync(string username) {
+            return base.Channel.GetUserAsync(username);
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync() {

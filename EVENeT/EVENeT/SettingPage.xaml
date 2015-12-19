@@ -1,0 +1,97 @@
+﻿<Page
+    x:Class="EVENeT.SettingPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:EVENeT"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <ScrollViewer>
+        <StackPanel Margin="15,0,30,0">
+            <TextBox x:Name="userName" Header="Email" Margin="0,16,0,8" TextChanged="userName_TextChanged" LostFocus="userName_LostFocus" IsSpellCheckEnabled="False"/>
+
+            <PasswordBox x:Name="password" Header="Password" Margin="0,0,0,8" PasswordChanged="password_PasswordChanged"/>
+
+            <ComboBox x:Name="userType" Header="User type" SelectedIndex="0" HorizontalAlignment="Stretch" Margin="0,0,0,8">
+                <x:String>Individual</x:String>
+                <x:String>Organization</x:String>
+            </ComboBox>
+
+            <StackPanel x:Name="IndividualPanel">
+                <!-- Personal Information -->
+                <StackPanel Margin="0,0,0,32">
+                    <TextBlock Text="Personal information" FontSize="24" FontWeight="Light" Margin="0,0,0,16"/>
+                    <TextBox x:Name="FirstNameTbx" Header="Firstname*" Margin="0,0,0,16" ToolTipService.ToolTip="Your firstname. This field is required"/>
+                    <TextBox x:Name="MidNameTbx" Header="Middlename" Margin="0,0,0,16" ToolTipService.ToolTip="Your middlename. Leave this field blank if you don't have one"/>
+                    <TextBox x:Name="LastnameTbx" Header="Lastname*" Margin="0,0,0,16" ToolTipService.ToolTip="Your lastname. This field is required"/>
+                    <DatePicker x:Name="BirthdayPicker" Header="Birthday" Margin="0,0,0,16" ToolTipService.ToolTip="Your birthday. Please enter your real birthday, or at least a reasonable one"
+                                    MinWidth="300"/>
+                    <ComboBox x:Name="GenderCbx" Header="Gender*" MinWidth="300" ToolTipService.ToolTip="Your gender. This field is required">
+                        <x:String>Male</x:String>
+                        <x:String>Female</x:String>
+                    </ComboBox>
+                </StackPanel>
+
+                <!-- Profile Photo -->
+                <StackPanel Margin="0,0,0,32">
+                    <TextBlock Text="Profile Photo" FontSize="24" FontWeight="Light" Margin="0,0,0,16"/>
+                    <Button x:Name="ChooseAvatarBtn" Content="Change your avatar" Click="ChooseAvatarBtn_Click"/>
+                    <Image x:Name="indAvatar" Width="200" Height="200" HorizontalAlignment="Left" Margin="0,0,0,16"/>
+                    <Button x:Name="ChooseCoverBtn" Content="Change your cover photo" Click="ChooseCoverBtn_Click"/>
+                    <Image x:Name="indCover" Height="300" HorizontalAlignment="Left"/>
+                    <!-- Interests -->
+                </StackPanel>
+            </StackPanel>
+        
+
+
+        <!-- Organization -->
+        <StackPanel x:Name="OrganizationPanel">
+            <!-- Company Information -->
+            <StackPanel Margin="0,0,0,32">
+                <TextBlock Text="Company information" FontSize="24" FontWeight="Light" Margin="0,0,0,16"/>
+                <TextBox x:Name="CompanyName" Header="Company name" Margin="0,0,0,16"/>
+                <TextBox x:Name="CompanyDescription" Header="Company description" Margin="0,0,0,16"/>
+                <TextBox x:Name="CompanyType" Header="Company type" Margin="0,0,0,16"/>
+                <!--<TextBox x:Name="CompanySlogan" Header="Slogan" Margin="0,0,0,16"/>-->
+                <TextBox x:Name="CompanyPhone" Header="Phone" Margin="0,0,0,16"/>
+                <!--<TextBox x:Name="CompanyEmail" Header="Contact Email" Margin="0,0,0,16"/>-->
+                <!--<TextBox x:Name="CompanyFax" Header="Fax" Margin="0,0,0,16"/>-->
+                <TextBox x:Name="CompanySite" Header="Web page" Margin="0,0,0,16"/>
+            </StackPanel>
+
+            <!-- Company Profile Photo -->
+            <StackPanel Margin="0,0,0,32">
+                <TextBlock Text="Company Profile Photo" FontSize="24" FontWeight="Light" Margin="0,0,0,16"/>
+                <Button x:Name="ChooseCompLogoBtn" Content="Choose your logo"/>
+                <Image x:Name="CompLogo" Width="300" Height="300" HorizontalAlignment="Left"/>
+                <Button x:Name="ChooseCompCoverBtn" Content="Choose your company's cover photo"/>
+                <Image x:Name="CompCover" Height="300" HorizontalAlignment="Left"/>
+                <!-- Interests -->
+            </StackPanel>
+
+
+
+                </StackPanel>
+
+
+                <TextBlock x:Name="error" Foreground="Red"/>
+
+
+
+                <StackPanel Orientation="Horizontal"
+                            VerticalAlignment="Bottom" HorizontalAlignment="Center"
+                            Margin="0,0,0,20"
+                            >
+                    <Button Name="Save" Content="Save" Click="Save_Click" Margin="0,0,20,0"/>
+                    <Button Name="Cancel" Content="Cancel"  Click="Cancel_Click" Margin="20,0,0,0"/>
+
+                </StackPanel>
+
+
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

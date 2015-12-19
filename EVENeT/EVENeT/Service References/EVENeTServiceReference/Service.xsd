@@ -78,4 +78,21 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="getLocationFromIdResult" nillable="true" type="tns:getLocationFromIdResult" />
+  <xs:complexType name="ArrayOfgetUserResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="getUserResult" nillable="true" type="tns:getUserResult" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfgetUserResult" nillable="true" type="tns:ArrayOfgetUserResult" />
+  <xs:complexType name="getUserResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="coverPicture" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="profilePicture" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="registerDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="userType" type="xs:int" />
+      <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="getUserResult" nillable="true" type="tns:getUserResult" />
 </xs:schema>

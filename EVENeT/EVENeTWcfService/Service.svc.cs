@@ -234,7 +234,7 @@ namespace EVENeTWcfService
                     var ind = (from i in Data.Individuals
                                where i.username == username
                                select i).First();
-                    Name = ind.firstName + " " + ind.midName + " " + ind.lastName;
+                    Name = ind.firstName + " " + (ind.midName == "" ? "" : ind.midName + " ") + ind.lastName;
                 }
                 else if (user.userType == 2)
                 {

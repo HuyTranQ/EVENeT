@@ -45,7 +45,6 @@ namespace EVENeT
                 eventCard.EventTime = e.beginTime.ToString("hh:mm tt");
                 eventCard.EventDate = e.beginTime.ToString("MMM. dd, yyyy");
                 eventCard.EventDescription.Document.SetText(TextSetOptions.FormatRtf, e.description);
-                eventCard.EventImageSource = e.thumbnail;
                 eventCard.Tapped += EventCard_Tapped;
                 eventCard.IsTapEnabled = true;
                 eventCard.EventId = e.id;
@@ -57,6 +56,14 @@ namespace EVENeT
                 eventCard.AvatarImage.ImageSource = bmp;
                 eventCard.UserName.Text = response.Name;
                 eventCard.UserName.Tapped += (sender, args) => { Frame.Navigate(typeof(ProfilePage), e.username); };
+
+                if (e.thumbnail != "")
+                {
+                    file = await StorageFile.GetFileFromPathAsync(e.thumbnail);
+                    bmp = new BitmapImage();
+                    await bmp.SetSourceAsync(await file.OpenAsync(FileAccessMode.Read));
+                    eventCard.EventImage.Source = bmp;
+                }
                 eventPanel.Children.Add(eventCard);
             }
         }

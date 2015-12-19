@@ -199,11 +199,6 @@
     <None Include="EVENeT_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\1.png" />
-    <Content Include="Assets\AC HCMC 256.jpg" />
-    <Content Include="Assets\AC HCMC.jpg" />
-    <Content Include="Assets\Cover.png" />
-    <Content Include="Assets\original.jpg" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />

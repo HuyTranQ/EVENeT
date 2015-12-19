@@ -33,13 +33,6 @@ namespace EVENeT
             set { SetValue(EventTimeProperty, value); }
         }
 
-        public static readonly DependencyProperty EventImageSourceProperty = DependencyProperty.Register("EventImageSource", typeof(object), typeof(EventCard), new PropertyMetadata(null));
-        public object EventImageSource
-        {
-            get { return GetValue(EventImageSourceProperty); }
-            set { SetValue(EventImageSourceProperty, value); }
-        }
-
         public static readonly DependencyProperty EventTitleProperty = DependencyProperty.Register("EventTitle", typeof(object), typeof(EventCard), new PropertyMetadata(null));
         public object EventTitle
         {
@@ -52,11 +45,15 @@ namespace EVENeT
             get { return avatarImage; }
         }
 
+        public Image EventImage
+        {
+            get { return eventImages; }
+        }
+
         public TextBlock UserName
         {
             get { return userName; }
         }
-
 
         public RichEditBox EventDescription
         {

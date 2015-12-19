@@ -422,6 +422,81 @@ namespace EVENeT.EVENeTServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="followerListResult", Namespace="http://schemas.datacontract.org/2004/07/EVENeTWcfService")]
+    public partial class followerListResult : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string NameField;
+        
+        private string profilePictureField;
+        
+        private int userTypeField;
+        
+        private string usernameField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string profilePicture {
+            get {
+                return this.profilePictureField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.profilePictureField, value) != true)) {
+                    this.profilePictureField = value;
+                    this.RaisePropertyChanged("profilePicture");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int userType {
+            get {
+                return this.userTypeField;
+            }
+            set {
+                if ((this.userTypeField.Equals(value) != true)) {
+                    this.userTypeField = value;
+                    this.RaisePropertyChanged("userType");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string username {
+            get {
+                return this.usernameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.usernameField, value) != true)) {
+                    this.usernameField = value;
+                    this.RaisePropertyChanged("username");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="getLocationFromIdResult", Namespace="http://schemas.datacontract.org/2004/07/EVENeTWcfService")]
     public partial class getLocationFromIdResult : object, System.ComponentModel.INotifyPropertyChanged {
         
@@ -608,6 +683,9 @@ namespace EVENeT.EVENeTServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetFollowingList", ReplyAction="http://tempuri.org/IService/GetFollowingListResponse")]
         System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<EVENeT.EVENeTServiceReference.followingListResult>> GetFollowingListAsync(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetFollowerList", ReplyAction="http://tempuri.org/IService/GetFollowerListResponse")]
+        System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<EVENeT.EVENeTServiceReference.followerListResult>> GetFollowerListAsync(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetLocationFromId", ReplyAction="http://tempuri.org/IService/GetLocationFromIdResponse")]
         System.Threading.Tasks.Task<EVENeT.EVENeTServiceReference.getLocationFromIdResult> GetLocationFromIdAsync(int id);
@@ -878,6 +956,10 @@ namespace EVENeT.EVENeTServiceReference {
         
         public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<EVENeT.EVENeTServiceReference.followingListResult>> GetFollowingListAsync(string username) {
             return base.Channel.GetFollowingListAsync(username);
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<EVENeT.EVENeTServiceReference.followerListResult>> GetFollowerListAsync(string username) {
+            return base.Channel.GetFollowerListAsync(username);
         }
         
         public System.Threading.Tasks.Task<EVENeT.EVENeTServiceReference.getLocationFromIdResult> GetLocationFromIdAsync(int id) {

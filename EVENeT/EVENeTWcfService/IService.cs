@@ -76,9 +76,14 @@ namespace EVENeTWcfService
         IEnumerable<followingListResult> GetFollowingList(string username);
 
         [OperationContract]
+        IEnumerable<followerListResult> GetFollowerList(string username);
+
+        [OperationContract]
         getLocationFromIdResult GetLocationFromId(int id);
 
         [OperationContract]
         void GetNameAndAvatar(string username, out string Name, out string Avatar);
+
+       
     }
 }

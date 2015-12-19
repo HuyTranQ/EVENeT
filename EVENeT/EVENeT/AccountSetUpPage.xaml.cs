@@ -64,6 +64,7 @@ namespace EVENeT
 
                 await DatabaseHelper.Client.SetProfilePictureAsync(username, profile);
                 await DatabaseHelper.Client.SetCoverPictureAsync(username, cover);
+                DatabaseHelper.CurrentUser = username;
                 Frame frame = Window.Current.Content as Frame;
                 frame.Navigate(typeof(AppShell), username);
                 Window.Current.Activate();

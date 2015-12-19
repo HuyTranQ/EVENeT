@@ -28,7 +28,8 @@ namespace EVENeT
     {
         string userName;
         int userType;
-        public UserList userListViewModel = new UserList(); 
+        public UserList followingListViewModel = new UserList();
+        public UserList followerListViewModel = new UserList();
 
         public ProfilePage()
         {
@@ -64,18 +65,28 @@ namespace EVENeT
             AdditionalInfo.Text = userName;
             AddBasicInfoCard(r);
 
-            //Get User following
-            await userListViewModel.getUserList();
+            //Get User following and follwers
+            await followingListViewModel.getFollowingList(userName);
+            await followerListViewModel.getFollowerList(userName);
 
-            StorageFile file = await StorageFile.GetFileFromPathAsync(r.ProfilePic);
-            BitmapImage bmp = new BitmapImage();
-            await bmp.SetSourceAsync(await file.OpenAsync(FileAccessMode.Read));
-            AvatarBrush.ImageSource = bmp;
+            StorageFile file;
+            BitmapImage bmp;
+            if (r.ProfilePic != null)
+            {
+                file = await StorageFile.GetFileFromPathAsync(r.ProfilePic);
+                bmp = new BitmapImage();
+                await bmp.SetSourceAsync(await file.OpenAsync(FileAccessMode.Read));
+                AvatarBrush.ImageSource = bmp;
+            }
+            
+            if (r.CoverPic != null)
+            {
+                file = await StorageFile.GetFileFromPathAsync(r.CoverPic);
+                bmp = new BitmapImage();
+                await bmp.SetSourceAsync(await file.OpenAsync(FileAccessMode.Read));
+                CoverImage.Source = bmp;
+            }
 
-            file = await StorageFile.GetFileFromPathAsync(r.CoverPic);
-            bmp = new BitmapImage();
-            await bmp.SetSourceAsync(await file.OpenAsync(FileAccessMode.Read));
-            CoverImage.Source = bmp;
         }
 
         private void AddBasicInfoCard(GetIndividualResponse response)
@@ -128,8 +139,15 @@ namespace EVENeT
 
         private void followingList_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            var listview = (sender as ListView).SelectedIndex;
-            Navigation.AppShell.RootFrame.Navigate(typeof(ProfilePage), userListViewModel.users.ElementAt(listview).Username);
+            var listview = (sender as GridView).SelectedIndex;
+            Navigation.AppShell.RootFrame.Navigate(typeof(ProfilePage), followingListViewModel.users.ElementAt(listview).Username);
         }
+
+        private void followerList_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            var listview = (sender as GridView).SelectedIndex;
+            Navigation.AppShell.RootFrame.Navigate(typeof(ProfilePage), followerListViewModel.users.ElementAt(listview).Username);
+        }
+
     }
 }

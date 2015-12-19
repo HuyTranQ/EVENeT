@@ -17,13 +17,23 @@ namespace EVENeT.DataModel
             users.Add(user);
         }
 
-        public async Task getUserList()
+        public async Task getFollowingList(string username)
         {
             //GetIndividualFollowingRequest followingre = new GetIndividualFollowingRequest(DatabaseHelper.CurrentUser);
             //GetIndividualFollowingResponse r = await DatabaseHelper.Client.GetIndividualFollowingAsync(followingre);
             //    IEnumerable<getFollowingResult>  DatabaseHelper.C.getFollowingList(DatabaseHelper.CurrentUser);
-            IEnumerable<followingListResult> list =  await DatabaseHelper.Client.GetFollowingListAsync(DatabaseHelper.CurrentUser);
+            IEnumerable<followingListResult> list =  await DatabaseHelper.Client.GetFollowingListAsync(username);
             foreach (followingListResult userlist in list)
+            {
+                User user = new User(userlist.username, userlist.profilePicture, userlist.Name);
+                addUser(user);
+            }
+        }
+
+        public async Task getFollowerList(string username)
+        {
+            IEnumerable<followerListResult> list = await DatabaseHelper.Client.GetFollowerListAsync(username);
+            foreach (followerListResult userlist in list)
             {
                 User user = new User(userlist.username, userlist.profilePicture, userlist.Name);
                 addUser(user);

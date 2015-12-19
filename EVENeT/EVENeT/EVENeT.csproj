@@ -93,6 +93,9 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Service References\EVENeTServiceReference\EVENeT.EVENeTServiceReference.followerListResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\EVENeTServiceReference\EVENeT.EVENeTServiceReference.followingListResult.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -147,6 +150,7 @@
     </Compile>
     <Compile Include="Common\StringToDoubleConverter.cs" />
     <Compile Include="Common\StringToImageSourceConverter.cs" />
+    <Compile Include="Common\TaskCompletionNotifier.cs" />
     <Compile Include="CreateEventPage.xaml.cs">
       <DependentUpon>CreateEventPage.xaml</DependentUpon>
     </Compile>

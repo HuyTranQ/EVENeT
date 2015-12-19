@@ -25,7 +25,7 @@
             
             <!-- Cover photo -->
             <Grid x:Name="imgGrid" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
-                <Image x:Name="CoverImage" Stretch="UniformToFill" VerticalAlignment="Center"/>
+                <Image x:Name="CoverImage" Stretch="None" VerticalAlignment="Center"/>
                 <Grid Background="#99000000"/>
                 
                 <!-- Avatar -->
@@ -68,35 +68,51 @@
                 <PivotItem Header="Following" Tapped="PivotFollowing_Tapped">
                     <StackPanel>
                         <TextBlock Text="List of people you are following" />
-                        <ListView Name="followingList" HorizontalAlignment="Stretch" VerticalAlignment="Center" 
-                                  IsTapEnabled="True"
-                                  Tapped="followingList_Tapped"
-                                   ItemsSource="{ x:Bind userListViewModel.users }"  xmlns:a="using:EVENeT.DataModel">
-                            <ListView.ItemTemplate >
-                                <DataTemplate x:DataType="a:User">
-                                    <StackPanel Orientation="Horizontal" Padding="20" RightTapped="StackPanel_RightTapped" >
-                                        <FlyoutBase.AttachedFlyout>
-                                            <MenuFlyout>
-                                                <MenuFlyoutItem x:Name="EditButton"
-                                                            Text="Edit"
-                                                          />
-                                                <MenuFlyoutItem x:Name="DeleteButton"
-                                                            Text="Delete"
-                                                          />
-                                            </MenuFlyout>
-                                        </FlyoutBase.AttachedFlyout>
-                                        <Image Name="avatar" Source="{x:Bind Avatar, Converter= {StaticResource stringToImageSourceConverter}, Mode=OneWay}"/>
+
+                        <GridView 
+                            Name="followingList"
+                            IsTapEnabled="True"
+                            Tapped="followingList_Tapped"
+                            ItemsSource="{ x:Bind followingListViewModel.users }">
+                         
+                            <GridView.ItemTemplate>
+                                <DataTemplate x:DataType="dataModel:User">
+                                    <StackPanel>
+                                        <Image Name="avatar"
+                                               VerticalAlignment="Center"
+                                               Stretch="UniformToFill" 
+                                               Source="{x:Bind Avatar,  Converter= {StaticResource stringToImageSourceConverter}, Mode=OneWay}"/>
                                         <TextBlock  Margin="10,0,0,0"
                                                     Name="username" Text="{x:Bind Username, Mode=OneWay}"/>
                                     </StackPanel>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                            </ListView>
+                                </DataTemplate>                             
+                            </GridView.ItemTemplate>
+                        </GridView>
+                    
                     </StackPanel>
                 </PivotItem>
                 <PivotItem Header="Followers">
                     <StackPanel>
                         <TextBlock Text="List of your followers" />
+                        <GridView 
+                            Name="followerList"
+                            IsTapEnabled="True"
+                            Tapped="followerList_Tapped"
+                            ItemsSource="{ x:Bind followerListViewModel.users }">
+
+                            <GridView.ItemTemplate>
+                                <DataTemplate x:DataType="dataModel:User">
+                                    <StackPanel>
+                                        <Image Name="avatar"
+                                               VerticalAlignment="Center"
+                                               Stretch="UniformToFill" 
+                                               Source="{x:Bind Avatar,  Converter= {StaticResource stringToImageSourceConverter}, Mode=OneWay}"/>
+                                        <TextBlock  Margin="10,0,0,0"
+                                                    Name="username" Text="{x:Bind Username, Mode=OneWay}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </GridView.ItemTemplate>
+                        </GridView>
                     </StackPanel>
                 </PivotItem>
                 <PivotItem Header="Posts">

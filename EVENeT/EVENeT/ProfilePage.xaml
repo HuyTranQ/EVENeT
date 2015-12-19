@@ -25,7 +25,7 @@
             
             <!-- Cover photo -->
             <Grid x:Name="imgGrid" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
-                <Image x:Name="CoverImage" Stretch="None" VerticalAlignment="Center"/>
+                <Image x:Name="CoverImage" Stretch="UniformToFill" VerticalAlignment="Center"/>
                 <Grid Background="#99000000"/>
                 
                 <!-- Avatar -->
@@ -77,12 +77,15 @@
                          
                             <GridView.ItemTemplate>
                                 <DataTemplate x:DataType="dataModel:User">
-                                    <StackPanel>
-                                        <Image Name="avatar"
-                                               VerticalAlignment="Center"
-                                               Stretch="UniformToFill" 
-                                               Source="{x:Bind Avatar,  Converter= {StaticResource stringToImageSourceConverter}, Mode=OneWay}"/>
+                                    <StackPanel Background="Gray" CornerRadius="10">
+                                        <Border CornerRadius="64" BorderThickness="3" BorderBrush="#77AAAAAA"
+                            Width="128" Height="128" VerticalAlignment="Top" >
+                                            <Border.Background>
+                                                <ImageBrush x:Name="AvatarBrush" ImageSource="{x:Bind ImageAvatar, Mode=OneWay}"/>
+                                            </Border.Background>
+                                        </Border>
                                         <TextBlock  Margin="10,0,0,0"
+                                                    Foreground="White"
                                                     Name="username" Text="{x:Bind Username, Mode=OneWay}"/>
                                     </StackPanel>
                                 </DataTemplate>                             
@@ -99,15 +102,17 @@
                             IsTapEnabled="True"
                             Tapped="followerList_Tapped"
                             ItemsSource="{ x:Bind followerListViewModel.users }">
-
                             <GridView.ItemTemplate>
                                 <DataTemplate x:DataType="dataModel:User">
-                                    <StackPanel>
-                                        <Image Name="avatar"
-                                               VerticalAlignment="Center"
-                                               Stretch="UniformToFill" 
-                                               Source="{x:Bind Avatar,  Converter= {StaticResource stringToImageSourceConverter}, Mode=OneWay}"/>
+                                    <StackPanel Background="Gray" CornerRadius="10">
+                                        <Border CornerRadius="64" BorderThickness="3" BorderBrush="#77AAAAAA"
+                            Width="128" Height="128" VerticalAlignment="Top" >
+                                            <Border.Background>
+                                                <ImageBrush x:Name="AvatarBrush" ImageSource="{x:Bind ImageAvatar, Mode=OneWay}"/>
+                                            </Border.Background>
+                                        </Border>
                                         <TextBlock  Margin="10,0,0,0"
+                                                    Foreground="White"
                                                     Name="username" Text="{x:Bind Username, Mode=OneWay}"/>
                                     </StackPanel>
                                 </DataTemplate>

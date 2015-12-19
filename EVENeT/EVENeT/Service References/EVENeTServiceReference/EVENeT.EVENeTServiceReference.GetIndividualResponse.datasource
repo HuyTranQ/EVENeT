@@ -6,5 +6,5 @@
     cause the file to be unrecognizable by the program.
 -->
 <GenericObjectDataSource DisplayName="GetIndividualResponse" Version="1.0" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
-   <TypeInfo>EVENeT.EVENeTServiceReference.GetIndividualResponse</TypeInfo>
+   <TypeInfo>EVENeT.EVENeTServiceReference.GetIndividualResponse, EVENeT, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</TypeInfo>
 </GenericObjectDataSource>

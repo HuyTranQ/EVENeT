@@ -8,13 +8,18 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
         <ScrollViewer>
         <StackPanel Margin="15,0,30,0">
-            <TextBox x:Name="userName" Header="Email" Margin="0,16,0,8" TextChanged="userName_TextChanged" LostFocus="userName_LostFocus" IsSpellCheckEnabled="False"/>
+                <TextBox x:Name="userName" IsEnabled="False"  Header="Email" Margin="0,16,0,8" TextChanged="userName_TextChanged" LostFocus="userName_LostFocus" IsSpellCheckEnabled="False"/>
 
-            <PasswordBox x:Name="password" Header="Password" Margin="0,0,0,8" PasswordChanged="password_PasswordChanged"/>
+                <PasswordBox x:Name="password" IsEnabled="False" Header="Password" Margin="0,0,0,8" PasswordChanged="password_PasswordChanged">
+                </PasswordBox>
 
-            <ComboBox x:Name="userType" Header="User type" SelectedIndex="0" HorizontalAlignment="Stretch" Margin="0,0,0,8">
+                <ComboBox x:Name="userType" Header="User type" SelectedIndex="0" HorizontalAlignment="Stretch" Margin="0,0,0,8">
                 <x:String>Individual</x:String>
                 <x:String>Organization</x:String>
             </ComboBox>
@@ -23,9 +28,9 @@
                 <!-- Personal Information -->
                 <StackPanel Margin="0,0,0,32">
                     <TextBlock Text="Personal information" FontSize="24" FontWeight="Light" Margin="0,0,0,16"/>
-                    <TextBox x:Name="FirstNameTbx" Header="Firstname*" Margin="0,0,0,16" ToolTipService.ToolTip="Your firstname. This field is required"/>
+                    <TextBox x:Name="FirstNameTbx" Header="Firstname*" Margin="0,0,0,16" TextChanged="FirstNameTbx_TextChanged" ToolTipService.ToolTip="Your firstname. This field is required"/>
                     <TextBox x:Name="MidNameTbx" Header="Middlename" Margin="0,0,0,16" ToolTipService.ToolTip="Your middlename. Leave this field blank if you don't have one"/>
-                    <TextBox x:Name="LastnameTbx" Header="Lastname*" Margin="0,0,0,16" ToolTipService.ToolTip="Your lastname. This field is required"/>
+                    <TextBox x:Name="LastnameTbx" Header="Lastname*" TextChanged="LastnameTbx_TextChanged"  Margin="0,0,0,16" ToolTipService.ToolTip="Your lastname. This field is required"/>
                     <DatePicker x:Name="BirthdayPicker" Header="Birthday" Margin="0,0,0,16" ToolTipService.ToolTip="Your birthday. Please enter your real birthday, or at least a reasonable one"
                                     MinWidth="300"/>
                     <ComboBox x:Name="GenderCbx" Header="Gender*" MinWidth="300" ToolTipService.ToolTip="Your gender. This field is required">
@@ -71,19 +76,23 @@
                         <Image x:Name="CompCover" Height="300" HorizontalAlignment="Left"/>
                         <!-- Interests -->
                     </StackPanel>
+
                 </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
 
-                <TextBlock x:Name="error" Foreground="Red"/>
+        <StackPanel Grid.Row="1">
+            <TextBlock x:Name="error" Foreground="Red" HorizontalAlignment="Center"/>
 
-                <StackPanel Orientation="Horizontal"
+            <StackPanel Orientation="Horizontal"
                             VerticalAlignment="Bottom" HorizontalAlignment="Center"
                             Margin="0,0,0,20"
                             >
-                    <Button Name="Save" Content="Save" Click="Save_Click" Margin="0,0,20,0"/>
-                    <Button Name="Cancel" Content="Cancel"  Click="Cancel_Click" Margin="20,0,0,0"/>
-                </StackPanel>
-            
+                <Button Name="Save" Content="Save" Click="Save_Click" Margin="0,0,20,0"/>
+                <Button Name="Reset" Content="Reset"  Click="Reset_Click" Margin="20,0,0,0"/>
+
             </StackPanel>
-        </ScrollViewer>
+        </StackPanel>
+        
     </Grid>
 </Page>

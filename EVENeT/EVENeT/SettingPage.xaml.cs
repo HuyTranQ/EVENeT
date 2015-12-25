@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage;
@@ -30,6 +31,12 @@ namespace EVENeT
         {
             this.InitializeComponent();
         }
+        string errorName = "Error!";
+
+        string cover, profile;
+        int userTypeValue;
+        bool informationFilled = false;
+
 
         private void password_PasswordChanged(object sender, RoutedEventArgs e)
         {
@@ -46,63 +53,175 @@ namespace EVENeT
 
         }
 
-        private void ChooseAvatarBtn_Click(object sender, RoutedEventArgs e)
+        private async void ChooseAvatarBtn_Click(object sender, RoutedEventArgs e)
         {
+            FileOpenPicker openPicker = new FileOpenPicker();
+            openPicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
+            openPicker.FileTypeFilter.Add(".png");
+            openPicker.FileTypeFilter.Add(".jpg");
+            openPicker.FileTypeFilter.Add(".bmp");
 
+            StorageFile file = await openPicker.PickSingleFileAsync();
+            profile = file.Path;
+            // Some magic, because I can only display the files directly on computer
+            if (file != null)
+            {
+                BitmapImage image = new BitmapImage();
+                await image.SetSourceAsync(await file.OpenAsync(FileAccessMode.Read));
+                indAvatar.Source = image;
+            }
         }
 
-        private void ChooseCoverBtn_Click(object sender, RoutedEventArgs e)
-        {
 
+        private async void ChooseCoverBtn_Click(object sender, RoutedEventArgs e)
+        {
+            FileOpenPicker openPicker = new FileOpenPicker();
+            openPicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
+            openPicker.FileTypeFilter.Add(".png");
+            openPicker.FileTypeFilter.Add(".jpg");
+            openPicker.FileTypeFilter.Add(".bmp");
+
+            StorageFile file = await openPicker.PickSingleFileAsync();
+            cover = file.Path;
+            // Some magic, because I can only display the files directly on computer
+            if (file != null)
+            {
+                BitmapImage image = new BitmapImage();
+                await image.SetSourceAsync(await file.OpenAsync(FileAccessMode.Read));
+                indCover.Source = image;
+            }
         }
 
-        private void Save_Click(object sender, RoutedEventArgs e)
+        private async void Save_Click(object sender, RoutedEventArgs e)
         {
-
+            await saveValue();
         }
 
-        private void Cancel_Click(object sender, RoutedEventArgs e)
+        private async void Reset_Click(object sender, RoutedEventArgs e)
         {
-
+            error.Visibility = Visibility.Collapsed;
+            await resetValue();
         }
 
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-          
-            int userType = await DatabaseHelper.Client.UserTypeAsync(DatabaseHelper.CurrentUser);
-            if (userType == 2)
+             userTypeValue = await DatabaseHelper.Client.UserTypeAsync(DatabaseHelper.CurrentUser);
+            await resetValue();
+        }
+
+
+        private async Task saveValue()
+        {
+           
+            CheckForError();
+            if (informationFilled)
+            {
+                error.Visibility = Visibility.Collapsed; 
+                if (userTypeValue == 1)
+                    await DatabaseHelper.Client.SetIndividualInfoAsync(DatabaseHelper.CurrentUser, FirstNameTbx.Text, MidNameTbx.Text, LastnameTbx.Text, BirthdayPicker.Date.Date, GenderCbx.SelectedIndex == 0);
+                else if (userTypeValue == 2)
+                    await DatabaseHelper.Client.SetOrganizationInfoAsync(DatabaseHelper.CurrentUser, CompanyName.Text, CompanyDescription.Text, CompanyType.Text, CompanyPhone.Text, CompanySite.Text);
+
+                await DatabaseHelper.Client.SetProfilePictureAsync(DatabaseHelper.CurrentUser, profile);
+                await DatabaseHelper.Client.SetCoverPictureAsync(DatabaseHelper.CurrentUser, cover);
+            }
+            else
+            {
+                error.Text = errorName;
+                error.Visibility = Visibility.Visible;
+            }
+              
+        }
+
+
+
+        private void CheckForError()
+        {
+            if ( userTypeValue == 1)
+            {
+                if (string.IsNullOrEmpty(FirstNameTbx.Text) ||
+                    string.IsNullOrEmpty(LastnameTbx.Text) ||
+                    BirthdayPicker.Date.CompareTo(DateTime.Now) >= 0 ||
+                    GenderCbx.SelectedIndex == -1)
+                {
+                    informationFilled = false;
+                }
+                else
+                    informationFilled = true;
+            }
+            else if ( userTypeValue == 2)
+            {
+                informationFilled = false;
+            }
+        }
+
+
+        private async Task resetValue()
+        {
+            if ( userTypeValue == 2)
             {
                 IndividualPanel.Visibility = Visibility.Collapsed;
 
-              
-
             }
-            else if (userType == 1)
+            else if ( userTypeValue == 1)
             {
                 OrganizationPanel.Visibility = Visibility.Collapsed;
                 GetIndividualRequest a = new GetIndividualRequest(DatabaseHelper.CurrentUser);
                 GetIndividualResponse r = await DatabaseHelper.Client.GetIndividualAsync(a);
-                getUserResult user =  (await DatabaseHelper.Client.GetUserAsync(DatabaseHelper.CurrentUser)).First();
+                getUserResult user = (await DatabaseHelper.Client.GetUserAsync(DatabaseHelper.CurrentUser)).First();
+                await setIndividualValue(r, user);
+            }
+        }
 
-                userName.Text = DatabaseHelper.CurrentUser;
-                password.Password = user.password;
-                FirstNameTbx.Text = r.FirstName;
-                MidNameTbx.Text = r.MiddleName;
-                LastnameTbx.Text = r.LastName;
-                BirthdayPicker.Date = r.DOB.Date;
-                GenderCbx.SelectedIndex = r.Gender ? 0 : 1;
+        private void FirstNameTbx_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (FirstNameTbx.Text == "")
+                errorName = "First name cannot be empty!";
+        }
 
-                StorageFile file = await StorageFile.GetFileFromPathAsync(user.profilePicture);
-                BitmapImage bmp = new BitmapImage();
-                await bmp.SetSourceAsync(await file.OpenAsync(FileAccessMode.Read));
-                indAvatar.Source = bmp;
+        private void LastnameTbx_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (LastnameTbx.Text == "")
+                errorName = "Last name cannot be empty!";
+        }
 
-                file = await StorageFile.GetFileFromPathAsync(user.coverPicture);
-                bmp = new BitmapImage();
-                await bmp.SetSourceAsync(await file.OpenAsync(FileAccessMode.Read));
-                indCover.Source = bmp;
+        private async void ChooseAvatarBtn_Click(object sender, RoutedEventArgs e)
+        {
+            FileOpenPicker openPicker = new FileOpenPicker();
+            openPicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
+            openPicker.FileTypeFilter.Add(".png");
+            openPicker.FileTypeFilter.Add(".jpg");
+            openPicker.FileTypeFilter.Add(".bmp");
+
+            StorageFile file = await openPicker.PickSingleFileAsync();
+            profile = file.Path;
+            // Some magic, because I can only display the files directly on computer
+            if (file != null)
+            {
+                BitmapImage image = new BitmapImage();
+                await image.SetSourceAsync(await file.OpenAsync(FileAccessMode.Read));
+                indAvatar.Source = image;
+            }
+        }
+
+        private async void ChooseCoverBtn_Click(object sender, RoutedEventArgs e)
+        {
+            FileOpenPicker openPicker = new FileOpenPicker();
+            openPicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
+            openPicker.FileTypeFilter.Add(".png");
+            openPicker.FileTypeFilter.Add(".jpg");
+            openPicker.FileTypeFilter.Add(".bmp");
+
+            StorageFile file = await openPicker.PickSingleFileAsync();
+            cover = file.Path;
+            // Some magic, because I can only display the files directly on computer
+            if (file != null)
+            {
+                BitmapImage image = new BitmapImage();
+                await image.SetSourceAsync(await file.OpenAsync(FileAccessMode.Read));
+                indCover.Source = image;
             }
         }
 
@@ -142,6 +261,28 @@ namespace EVENeT
                 await image.SetSourceAsync(await file.OpenAsync(FileAccessMode.Read));
                 CompCover.Source = image;
             }
+        }
+
+        private async Task setIndividualValue(GetIndividualResponse r, getUserResult user)
+        {
+            userName.Text = DatabaseHelper.CurrentUser;
+            password.Password = user.password;
+            FirstNameTbx.Text = r.FirstName;
+            MidNameTbx.Text = r.MiddleName;
+            LastnameTbx.Text = r.LastName;
+            BirthdayPicker.Date = r.DOB.Date;
+            GenderCbx.SelectedIndex = r.Gender ? 0 : 1;
+
+            StorageFile file = await StorageFile.GetFileFromPathAsync(user.profilePicture);
+            BitmapImage bmp = new BitmapImage();
+            await bmp.SetSourceAsync(await file.OpenAsync(FileAccessMode.Read));
+            indAvatar.Source = bmp;
+            cover = user.coverPicture;
+            profile = user.profilePicture;
+            file = await StorageFile.GetFileFromPathAsync(user.coverPicture);
+            bmp = new BitmapImage();
+            await bmp.SetSourceAsync(await file.OpenAsync(FileAccessMode.Read));
+            indCover.Source = bmp;
         }
     }
 }

@@ -31,6 +31,7 @@ namespace EVENeT
         {
             this.InitializeComponent();
         }
+        string errorName = "Error!";
 
         string cover, profile;
         int userTypeValue;
@@ -98,6 +99,7 @@ namespace EVENeT
 
         private async void Reset_Click(object sender, RoutedEventArgs e)
         {
+            error.Visibility = Visibility.Collapsed;
             await resetValue();
         }
 
@@ -116,14 +118,21 @@ namespace EVENeT
             CheckForError();
             if (informationFilled)
             {
-                if ( userTypeValue == 1)
+                error.Visibility = Visibility.Collapsed; 
+                if (userTypeValue == 1)
                     await DatabaseHelper.Client.SetIndividualInfoAsync(DatabaseHelper.CurrentUser, FirstNameTbx.Text, MidNameTbx.Text, LastnameTbx.Text, BirthdayPicker.Date.Date, GenderCbx.SelectedIndex == 0);
-                else if ( userTypeValue == 2)
+                else if (userTypeValue == 2)
                     await DatabaseHelper.Client.SetOrganizationInfoAsync(DatabaseHelper.CurrentUser, CompanyName.Text, CompanyDescription.Text, CompanyType.Text, CompanyPhone.Text, CompanySite.Text);
 
                 await DatabaseHelper.Client.SetProfilePictureAsync(DatabaseHelper.CurrentUser, profile);
                 await DatabaseHelper.Client.SetCoverPictureAsync(DatabaseHelper.CurrentUser, cover);
             }
+            else
+            {
+                error.Text = errorName;
+                error.Visibility = Visibility.Visible;
+            }
+              
         }
 
 
@@ -166,9 +175,20 @@ namespace EVENeT
             }
         }
 
+        private void FirstNameTbx_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (FirstNameTbx.Text == "")
+                errorName = "First name cannot be empty!";
+        }
+
+        private void LastnameTbx_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (LastnameTbx.Text == "")
+                errorName = "Last name cannot be empty!";
+        }
+
         private async Task setIndividualValue(GetIndividualResponse r, getUserResult user)
         {
-
             userName.Text = DatabaseHelper.CurrentUser;
             password.Password = user.password;
             FirstNameTbx.Text = r.FirstName;

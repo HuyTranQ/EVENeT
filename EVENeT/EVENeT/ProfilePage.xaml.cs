@@ -57,39 +57,72 @@ namespace EVENeT
             }
 
             userType = await DatabaseHelper.Client.UserTypeAsync(userName);
-            
-            GetIndividualRequest a = new GetIndividualRequest(userName);
-            GetIndividualResponse r = await DatabaseHelper.Client.GetIndividualAsync(a);
-
-            Firstname.Text = r.FirstName;
-            AdditionalInfo.Text = userName;
-            AddBasicInfoCard(r);
 
             //Get User following and follwers
             await followingListViewModel.getFollowingList(userName);
             await followerListViewModel.getFollowerList(userName);
 
-            StorageFile file;
-            BitmapImage bmp;
-            if (r.ProfilePic != null)
+            if (userType == 1)
             {
-                file = await StorageFile.GetFileFromPathAsync(r.ProfilePic);
-                bmp = new BitmapImage();
-                await bmp.SetSourceAsync(await file.OpenAsync(FileAccessMode.Read));
-                AvatarBrush.ImageSource = bmp;
-            }
-            
-            if (r.CoverPic != null)
-            {
-                file = await StorageFile.GetFileFromPathAsync(r.CoverPic);
-                bmp = new BitmapImage();
-                await bmp.SetSourceAsync(await file.OpenAsync(FileAccessMode.Read));
-                CoverImage.Source = bmp;
-            }
+                GetIndividualRequest a = new GetIndividualRequest(userName);
+                GetIndividualResponse r = await DatabaseHelper.Client.GetIndividualAsync(a);
 
+                Firstname.Text = r.FirstName;
+                AdditionalInfo.Text = userName;
+                AddBasicInfoCard(userName, r);
+
+                // Set profile picture
+                StorageFile file;
+                BitmapImage bmp;
+                if (r.ProfilePic != null)
+                {
+                    file = await StorageFile.GetFileFromPathAsync(r.ProfilePic);
+                    bmp = new BitmapImage();
+                    await bmp.SetSourceAsync(await file.OpenAsync(FileAccessMode.Read));
+                    AvatarBrush.ImageSource = bmp;
+                }
+
+                // Set cover picture
+                if (r.CoverPic != null)
+                {
+                    file = await StorageFile.GetFileFromPathAsync(r.CoverPic);
+                    bmp = new BitmapImage();
+                    await bmp.SetSourceAsync(await file.OpenAsync(FileAccessMode.Read));
+                    CoverImage.Source = bmp;
+                }
+            }
+            else if (userType == 2)
+            {
+                GetOrganizationRequest a = new GetOrganizationRequest(userName);
+                GetOrganizationResponse r = await DatabaseHelper.Client.GetOrganizationAsync(a);
+
+                Firstname.Text = r.Name;
+                AdditionalInfo.Text = r.Type;
+                AddBasicInfoCard(userName, r);
+
+                // Set profile picture
+                StorageFile file;
+                BitmapImage bmp;
+                if (r.ProfilePic != null)
+                {
+                    file = await StorageFile.GetFileFromPathAsync(r.ProfilePic);
+                    bmp = new BitmapImage();
+                    await bmp.SetSourceAsync(await file.OpenAsync(FileAccessMode.Read));
+                    AvatarBrush.ImageSource = bmp;
+                }
+
+                // Set cover picture
+                if (r.CoverPic != null)
+                {
+                    file = await StorageFile.GetFileFromPathAsync(r.CoverPic);
+                    bmp = new BitmapImage();
+                    await bmp.SetSourceAsync(await file.OpenAsync(FileAccessMode.Read));
+                    CoverImage.Source = bmp;
+                }
+            }
         }
 
-        private void AddBasicInfoCard(GetIndividualResponse response)
+        private void AddBasicInfoCard(string username, GetIndividualResponse response)
         {
             DisplayCard card = new DisplayCard();
             StackPanel content = new StackPanel();
@@ -105,6 +138,37 @@ namespace EVENeT
             info.Text += "Gender:\t\t" + (response.Gender ? "Male" : "Female");
 
             content.Children.Add(info);
+            card.PlaceHolder = content;
+            AboutPanel.Children.Add(card);
+        }
+
+        private void AddBasicInfoCard(string username, GetOrganizationResponse response)
+        {
+            DisplayCard card = new DisplayCard();
+            StackPanel content = new StackPanel();
+
+            card.CardTitle = "About";
+            content.Margin = new Thickness(16, 0, 16, 16);
+
+            TextBlock info = new TextBlock();
+            info.Text = response.Description;
+            info.TextWrapping = TextWrapping.WrapWholeWords;
+
+            content.Children.Add(info);
+            card.PlaceHolder = content;
+            AboutPanel.Children.Add(card);
+
+            card = new DisplayCard();
+            content = new StackPanel();
+            card.CardTitle = "Contact";
+            content.Margin = new Thickness(16, 0, 16, 16);
+
+            TextBlock contactInfo = new TextBlock();
+            contactInfo.Text = "Phone: " + response.Phone + "\n";
+            contactInfo.Text += "Email: " + userName + "\n";
+            contactInfo.Text += "Website: " + response.Website;
+
+            content.Children.Add(contactInfo);
             card.PlaceHolder = content;
             AboutPanel.Children.Add(card);
         }

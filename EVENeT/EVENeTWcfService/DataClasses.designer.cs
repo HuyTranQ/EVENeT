@@ -504,24 +504,10 @@ namespace EVENeTWcfService
 			return ((int)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.setIndividual")]
-		public int setIndividual([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(16)")] string firstName, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(16)")] string midName, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(16)")] string lastName, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Date")] System.Nullable<System.DateTime> dob, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Bit")] System.Nullable<bool> gender)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), id, firstName, midName, lastName, dob, gender);
-			return ((int)(result.ReturnValue));
-		}
-		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.setLocation")]
 		public int setLocation([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(32)")] string name, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(1024)")] string description, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(64)")] string address, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Float")] System.Nullable<double> latitude, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Float")] System.Nullable<double> longitude, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(256)")] string thumbnail)
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), id, name, description, address, latitude, longitude, thumbnail);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.setOrganization")]
-		public int setOrganization([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(64)")] string name, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(1024)")] string description, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(32)")] string type, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(16)")] string phone, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(256)")] string website)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), id, name, description, type, phone, website);
 			return ((int)(result.ReturnValue));
 		}
 		
@@ -636,6 +622,33 @@ namespace EVENeTWcfService
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), @this);
 			return ((ISingleResult<followingListResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getOrganization")]
+		public ISingleResult<getOrganizationResult> getOrganization([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string id)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), id);
+			return ((ISingleResult<getOrganizationResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.isOrganizationFullySetUp", IsComposable=true)]
+		public System.Nullable<bool> isOrganizationFullySetUp([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string username)
+		{
+			return ((System.Nullable<bool>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), username).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.setIndividual")]
+		public int setIndividual([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(16)")] string firstName, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(16)")] string midName, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(16)")] string lastName, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Date")] System.Nullable<System.DateTime> dob, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Bit")] System.Nullable<bool> gender)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), id, firstName, midName, lastName, dob, gender);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.setOrganization")]
+		public int setOrganization([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(64)")] string name, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(1024)")] string description, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(32)")] string type, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(16)")] string phone, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(256)")] string website)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), id, name, description, type, phone, website);
+			return ((int)(result.ReturnValue));
 		}
 	}
 	
@@ -5800,6 +5813,122 @@ namespace EVENeTWcfService
 				if ((this._userType != value))
 				{
 					this._userType = value;
+				}
+			}
+		}
+	}
+	
+	public partial class getOrganizationResult
+	{
+		
+		private string _username;
+		
+		private string _name;
+		
+		private string _description;
+		
+		private string _type;
+		
+		private string _phone;
+		
+		private string _website;
+		
+		public getOrganizationResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_username", DbType="VarChar(32) NOT NULL", CanBeNull=false)]
+		public string username
+		{
+			get
+			{
+				return this._username;
+			}
+			set
+			{
+				if ((this._username != value))
+				{
+					this._username = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="NVarChar(64) NOT NULL", CanBeNull=false)]
+		public string name
+		{
+			get
+			{
+				return this._name;
+			}
+			set
+			{
+				if ((this._name != value))
+				{
+					this._name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_description", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string description
+		{
+			get
+			{
+				return this._description;
+			}
+			set
+			{
+				if ((this._description != value))
+				{
+					this._description = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_type", DbType="NVarChar(32) NOT NULL", CanBeNull=false)]
+		public string type
+		{
+			get
+			{
+				return this._type;
+			}
+			set
+			{
+				if ((this._type != value))
+				{
+					this._type = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_phone", DbType="VarChar(16)")]
+		public string phone
+		{
+			get
+			{
+				return this._phone;
+			}
+			set
+			{
+				if ((this._phone != value))
+				{
+					this._phone = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_website", DbType="VarChar(256)")]
+		public string website
+		{
+			get
+			{
+				return this._website;
+			}
+			set
+			{
+				if ((this._website != value))
+				{
+					this._website = value;
 				}
 			}
 		}

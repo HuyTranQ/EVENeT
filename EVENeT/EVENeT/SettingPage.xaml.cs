@@ -7,6 +7,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage;
+using Windows.Storage.Pickers;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -103,9 +104,44 @@ namespace EVENeT
                 await bmp.SetSourceAsync(await file.OpenAsync(FileAccessMode.Read));
                 indCover.Source = bmp;
             }
+        }
 
+        private async void ChooseCompLogoBtn_Click(object sender, RoutedEventArgs e)
+        {
+            FileOpenPicker openPicker = new FileOpenPicker();
+            openPicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
+            openPicker.FileTypeFilter.Add(".png");
+            openPicker.FileTypeFilter.Add(".jpg");
+            openPicker.FileTypeFilter.Add(".bmp");
 
+            StorageFile file = await openPicker.PickSingleFileAsync();
+            profile = file.Path;
+            // Some magic, because I can only display the files directly on computer
+            if (file != null)
+            {
+                BitmapImage image = new BitmapImage();
+                await image.SetSourceAsync(await file.OpenAsync(FileAccessMode.Read));
+                CompLogo.Source = image;
+            }
+        }
 
+        private async void ChooseCompCoverBtn_Click(object sender, RoutedEventArgs e)
+        {
+            FileOpenPicker openPicker = new FileOpenPicker();
+            openPicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
+            openPicker.FileTypeFilter.Add(".png");
+            openPicker.FileTypeFilter.Add(".jpg");
+            openPicker.FileTypeFilter.Add(".bmp");
+
+            StorageFile file = await openPicker.PickSingleFileAsync();
+            cover = file.Path;
+            // Some magic, because I can only display the files directly on computer
+            if (file != null)
+            {
+                BitmapImage image = new BitmapImage();
+                await image.SetSourceAsync(await file.OpenAsync(FileAccessMode.Read));
+                CompCover.Source = image;
+            }
         }
     }
 }

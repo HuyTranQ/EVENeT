@@ -45,6 +45,20 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="OrganizationFullySetUp">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="OrganizationFullySetUpResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="OrganizationFullySetUpResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="SetIndividualInfo">
     <xs:complexType>
       <xs:sequence>
@@ -117,6 +131,22 @@
       <xs:sequence>
         <xs:element minOccurs="0" name="UserTypeResult" type="xs:int" />
       </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateUser">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="profilePic" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="cover" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="userType" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateUserResponse">
+    <xs:complexType>
+      <xs:sequence />
     </xs:complexType>
   </xs:element>
   <xs:element name="CreateIndividual">
@@ -226,6 +256,26 @@
         <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="DOB" type="xs:dateTime" />
         <xs:element minOccurs="0" name="Gender" type="xs:boolean" />
+        <xs:element minOccurs="0" name="ProfilePic" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="CoverPic" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetOrganization">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetOrganizationResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Type" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Phone" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Website" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="ProfilePic" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="CoverPic" nillable="true" type="xs:string" />
       </xs:sequence>
@@ -398,6 +448,18 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="RegisterTicketResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetOrganizationType">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetOrganizationTypeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q11="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetOrganizationTypeResult" nillable="true" type="q11:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

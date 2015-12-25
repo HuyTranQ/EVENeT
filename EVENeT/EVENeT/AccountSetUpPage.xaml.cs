@@ -18,6 +18,7 @@ using Windows.UI.Popups;
 using Windows.Storage.Pickers;
 using Windows.Storage;
 using Windows.UI.Xaml.Media.Imaging;
+using System.Collections.ObjectModel;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -44,7 +45,11 @@ namespace EVENeT
             username = e.Parameter.ToString();
             userType = await DatabaseHelper.Client.UserTypeAsync(username);
             if (userType == 2)
+            {
                 IndividualPanel.Visibility = Visibility.Collapsed;
+                ObservableCollection<string> types = await DatabaseHelper.Client.GetOrganizationTypeAsync();
+                CompanyType.ItemsSource = types;
+            }
             else if (userType == 1)
                 OrganizationPanel.Visibility = Visibility.Collapsed;
 
@@ -60,7 +65,7 @@ namespace EVENeT
                 if (userType == 1)
                     await DatabaseHelper.Client.SetIndividualInfoAsync(username, FirstNameTbx.Text, MidNameTbx.Text, LastnameTbx.Text, BirthdayPicker.Date.Date, GenderCbx.SelectedIndex == 0);
                 else if (userType == 2)
-                    await DatabaseHelper.Client.SetOrganizationInfoAsync(username, CompanyName.Text, CompanyDescription.Text, CompanyType.Text, CompanyPhone.Text, CompanySite.Text);
+                    await DatabaseHelper.Client.SetOrganizationInfoAsync(username, CompanyName.Text, CompanyDescription.Text, CompanyType.SelectedValue.ToString(), CompanyPhone.Text, CompanySite.Text);
 
                 await DatabaseHelper.Client.SetProfilePictureAsync(username, profile);
                 await DatabaseHelper.Client.SetCoverPictureAsync(username, cover);
@@ -87,7 +92,14 @@ namespace EVENeT
             }
             else if (userType == 2)
             {
-                informationFilled = false;
+                if (string.IsNullOrEmpty(CompanyName.Text) ||
+                    string.IsNullOrEmpty(CompanyDescription.Text) ||
+                    CompanyType.SelectedIndex < 0)
+                {
+                    informationFilled = false;
+                }
+                else
+                    informationFilled = true;
             }
         }
 
@@ -126,6 +138,44 @@ namespace EVENeT
                 BitmapImage image = new BitmapImage();
                 await image.SetSourceAsync(await file.OpenAsync(FileAccessMode.Read));
                 indCover.Source = image;
+            }
+        }
+
+        private async void ChooseCompLogoBtn_Click(object sender, RoutedEventArgs e)
+        {
+            FileOpenPicker openPicker = new FileOpenPicker();
+            openPicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
+            openPicker.FileTypeFilter.Add(".png");
+            openPicker.FileTypeFilter.Add(".jpg");
+            openPicker.FileTypeFilter.Add(".bmp");
+
+            StorageFile file = await openPicker.PickSingleFileAsync();
+            profile = file.Path;
+            // Some magic, because I can only display the files directly on computer
+            if (file != null)
+            {
+                BitmapImage image = new BitmapImage();
+                await image.SetSourceAsync(await file.OpenAsync(FileAccessMode.Read));
+                CompLogo.Source = image;
+            }
+        }
+
+        private async void ChooseCompCoverBtn_Click(object sender, RoutedEventArgs e)
+        {
+            FileOpenPicker openPicker = new FileOpenPicker();
+            openPicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
+            openPicker.FileTypeFilter.Add(".png");
+            openPicker.FileTypeFilter.Add(".jpg");
+            openPicker.FileTypeFilter.Add(".bmp");
+
+            StorageFile file = await openPicker.PickSingleFileAsync();
+            cover = file.Path;
+            // Some magic, because I can only display the files directly on computer
+            if (file != null)
+            {
+                BitmapImage image = new BitmapImage();
+                await image.SetSourceAsync(await file.OpenAsync(FileAccessMode.Read));
+                CompCover.Source = image;
             }
         }
     }

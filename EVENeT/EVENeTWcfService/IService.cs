@@ -22,6 +22,9 @@ namespace EVENeTWcfService
         bool IndividualFullySetUp(string username);
 
         [OperationContract]
+        bool OrganizationFullySetUp(string username);
+
+        [OperationContract]
         void SetIndividualInfo(string username, string firstName, string midName, string lastName, DateTime dob, bool gender);
 
         [OperationContract]
@@ -35,6 +38,9 @@ namespace EVENeTWcfService
 
         [OperationContract]
         int UserType(string username);
+
+        [OperationContract]
+        void CreateUser(string username, string password, string profilePic, string cover, int userType);
 
         [OperationContract]
         void CreateIndividual(string username, string password, string profilePic, string cover, string firstName, string midName, string lastName, DateTime dob, bool gender);
@@ -53,6 +59,9 @@ namespace EVENeTWcfService
 
         [OperationContract]
         void GetIndividual(string username, out string FirstName, out string MiddleName, out string LastName, out DateTime DOB, out bool Gender, out string ProfilePic, out string CoverPic);
+
+        [OperationContract]
+        void GetOrganization(string username, out string Name, out string Description, out string Type, out string Phone, out string Website, out string ProfilePic, out string CoverPic);
 
         [OperationContract]
         IEnumerable<getAllEventResult> getAllEvent();
@@ -89,5 +98,8 @@ namespace EVENeTWcfService
 
         [OperationContract]
         bool RegisterTicket(string username, string eventId);
+
+        [OperationContract]
+        List<string> GetOrganizationType();
     }
 }

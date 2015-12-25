@@ -48,38 +48,32 @@
 
 
         <!-- Organization -->
-        <StackPanel x:Name="OrganizationPanel">
-            <!-- Company Information -->
-            <StackPanel Margin="0,0,0,32">
-                <TextBlock Text="Company information" FontSize="24" FontWeight="Light" Margin="0,0,0,16"/>
-                <TextBox x:Name="CompanyName" Header="Company name" Margin="0,0,0,16"/>
-                <TextBox x:Name="CompanyDescription" Header="Company description" Margin="0,0,0,16"/>
-                <TextBox x:Name="CompanyType" Header="Company type" Margin="0,0,0,16"/>
-                <!--<TextBox x:Name="CompanySlogan" Header="Slogan" Margin="0,0,0,16"/>-->
-                <TextBox x:Name="CompanyPhone" Header="Phone" Margin="0,0,0,16"/>
-                <!--<TextBox x:Name="CompanyEmail" Header="Contact Email" Margin="0,0,0,16"/>-->
-                <!--<TextBox x:Name="CompanyFax" Header="Fax" Margin="0,0,0,16"/>-->
-                <TextBox x:Name="CompanySite" Header="Web page" Margin="0,0,0,16"/>
-            </StackPanel>
+                <StackPanel x:Name="OrganizationPanel">
+                    <!-- Company Information -->
+                    <StackPanel Margin="0,0,0,32">
+                        <TextBlock Text="Company information" FontSize="24" FontWeight="Light" Margin="0,0,0,16"/>
+                        <TextBox x:Name="CompanyName" Header="Company name" Margin="0,0,0,16"/>
+                        <TextBox x:Name="CompanyDescription" Header="Company description" Margin="0,0,0,16"/>
+                        <TextBox x:Name="CompanyType" Header="Company type" Margin="0,0,0,16"/>
+                        <!--<TextBox x:Name="CompanySlogan" Header="Slogan" Margin="0,0,0,16"/>-->
+                        <TextBox x:Name="CompanyPhone" Header="Phone" Margin="0,0,0,16"/>
+                        <!--<TextBox x:Name="CompanyEmail" Header="Contact Email" Margin="0,0,0,16"/>-->
+                        <!--<TextBox x:Name="CompanyFax" Header="Fax" Margin="0,0,0,16"/>-->
+                        <TextBox x:Name="CompanySite" Header="Web page" Margin="0,0,0,16"/>
+                    </StackPanel>
 
-            <!-- Company Profile Photo -->
-            <StackPanel Margin="0,0,0,32">
-                <TextBlock Text="Company Profile Photo" FontSize="24" FontWeight="Light" Margin="0,0,0,16"/>
-                <Button x:Name="ChooseCompLogoBtn" Content="Choose your logo"/>
-                <Image x:Name="CompLogo" Width="300" Height="300" HorizontalAlignment="Left"/>
-                <Button x:Name="ChooseCompCoverBtn" Content="Choose your company's cover photo"/>
-                <Image x:Name="CompCover" Height="300" HorizontalAlignment="Left"/>
-                <!-- Interests -->
-            </StackPanel>
-
-
-
+                    <!-- Company Profile Photo -->
+                    <StackPanel Margin="0,0,0,32">
+                        <TextBlock Text="Company Profile Photo" FontSize="24" FontWeight="Light" Margin="0,0,0,16"/>
+                        <Button x:Name="ChooseCompLogoBtn" Content="Choose your logo" Click="ChooseCompLogoBtn_Click"/>
+                        <Image x:Name="CompLogo" Width="300" Height="300" HorizontalAlignment="Left"/>
+                        <Button x:Name="ChooseCompCoverBtn" Content="Choose your company's cover photo" Click="ChooseCompCoverBtn_Click"/>
+                        <Image x:Name="CompCover" Height="300" HorizontalAlignment="Left"/>
+                        <!-- Interests -->
+                    </StackPanel>
                 </StackPanel>
 
-
                 <TextBlock x:Name="error" Foreground="Red"/>
-
-
 
                 <StackPanel Orientation="Horizontal"
                             VerticalAlignment="Bottom" HorizontalAlignment="Center"
@@ -87,10 +81,8 @@
                             >
                     <Button Name="Save" Content="Save" Click="Save_Click" Margin="0,0,20,0"/>
                     <Button Name="Cancel" Content="Cancel"  Click="Cancel_Click" Margin="20,0,0,0"/>
-
                 </StackPanel>
-
-
+            
             </StackPanel>
         </ScrollViewer>
     </Grid>

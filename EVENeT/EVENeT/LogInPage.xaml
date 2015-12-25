@@ -33,7 +33,7 @@
                      Margin="0,4,0,4"
                      PlaceholderText="Password"/>
             <CheckBox Name="remember" Content="Remember me"
-                     RelativePanel.Below="password" RelativePanel.AlignLeftWith="password"/>
+                     RelativePanel.Below="password" RelativePanel.AlignLeftWith="password" Checked="remember_Checked" Unchecked="remember_Unchecked"/>
 
             <Button x:Name="signInButton"
                 Width="300"

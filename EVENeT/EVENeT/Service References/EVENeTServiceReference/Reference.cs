@@ -733,6 +733,9 @@ namespace EVENeT.EVENeTServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/IndividualFullySetUp", ReplyAction="http://tempuri.org/IService/IndividualFullySetUpResponse")]
         System.Threading.Tasks.Task<bool> IndividualFullySetUpAsync(string username);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/OrganizationFullySetUp", ReplyAction="http://tempuri.org/IService/OrganizationFullySetUpResponse")]
+        System.Threading.Tasks.Task<bool> OrganizationFullySetUpAsync(string username);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/SetIndividualInfo", ReplyAction="http://tempuri.org/IService/SetIndividualInfoResponse")]
         System.Threading.Tasks.Task SetIndividualInfoAsync(string username, string firstName, string midName, string lastName, System.DateTime dob, bool gender);
         
@@ -747,6 +750,9 @@ namespace EVENeT.EVENeTServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/UserType", ReplyAction="http://tempuri.org/IService/UserTypeResponse")]
         System.Threading.Tasks.Task<int> UserTypeAsync(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/CreateUser", ReplyAction="http://tempuri.org/IService/CreateUserResponse")]
+        System.Threading.Tasks.Task CreateUserAsync(string username, string password, string profilePic, string cover, int userType);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/CreateIndividual", ReplyAction="http://tempuri.org/IService/CreateIndividualResponse")]
         System.Threading.Tasks.Task CreateIndividualAsync(string username, string password, string profilePic, string cover, string firstName, string midName, string lastName, System.DateTime dob, bool gender);
@@ -766,6 +772,10 @@ namespace EVENeT.EVENeTServiceReference {
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetIndividual", ReplyAction="http://tempuri.org/IService/GetIndividualResponse")]
         System.Threading.Tasks.Task<EVENeT.EVENeTServiceReference.GetIndividualResponse> GetIndividualAsync(EVENeT.EVENeTServiceReference.GetIndividualRequest request);
+        
+        // CODEGEN: Generating message contract since the operation has multiple return values.
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetOrganization", ReplyAction="http://tempuri.org/IService/GetOrganizationResponse")]
+        System.Threading.Tasks.Task<EVENeT.EVENeTServiceReference.GetOrganizationResponse> GetOrganizationAsync(EVENeT.EVENeTServiceReference.GetOrganizationRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/getAllEvent", ReplyAction="http://tempuri.org/IService/getAllEventResponse")]
         System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<EVENeT.EVENeTServiceReference.getAllEventResult>> getAllEventAsync();
@@ -804,6 +814,9 @@ namespace EVENeT.EVENeTServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/RegisterTicket", ReplyAction="http://tempuri.org/IService/RegisterTicketResponse")]
         System.Threading.Tasks.Task<bool> RegisterTicketAsync(string username, string eventId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetOrganizationType", ReplyAction="http://tempuri.org/IService/GetOrganizationTypeResponse")]
+        System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<string>> GetOrganizationTypeAsync();
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -857,6 +870,62 @@ namespace EVENeT.EVENeTServiceReference {
             this.LastName = LastName;
             this.DOB = DOB;
             this.Gender = Gender;
+            this.ProfilePic = ProfilePic;
+            this.CoverPic = CoverPic;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetOrganization", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class GetOrganizationRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        public string username;
+        
+        public GetOrganizationRequest() {
+        }
+        
+        public GetOrganizationRequest(string username) {
+            this.username = username;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetOrganizationResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class GetOrganizationResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        public string Name;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=1)]
+        public string Description;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=2)]
+        public string Type;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=3)]
+        public string Phone;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=4)]
+        public string Website;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=5)]
+        public string ProfilePic;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=6)]
+        public string CoverPic;
+        
+        public GetOrganizationResponse() {
+        }
+        
+        public GetOrganizationResponse(string Name, string Description, string Type, string Phone, string Website, string ProfilePic, string CoverPic) {
+            this.Name = Name;
+            this.Description = Description;
+            this.Type = Type;
+            this.Phone = Phone;
+            this.Website = Website;
             this.ProfilePic = ProfilePic;
             this.CoverPic = CoverPic;
         }
@@ -997,6 +1066,10 @@ namespace EVENeT.EVENeTServiceReference {
             return base.Channel.IndividualFullySetUpAsync(username);
         }
         
+        public System.Threading.Tasks.Task<bool> OrganizationFullySetUpAsync(string username) {
+            return base.Channel.OrganizationFullySetUpAsync(username);
+        }
+        
         public System.Threading.Tasks.Task SetIndividualInfoAsync(string username, string firstName, string midName, string lastName, System.DateTime dob, bool gender) {
             return base.Channel.SetIndividualInfoAsync(username, firstName, midName, lastName, dob, gender);
         }
@@ -1015,6 +1088,10 @@ namespace EVENeT.EVENeTServiceReference {
         
         public System.Threading.Tasks.Task<int> UserTypeAsync(string username) {
             return base.Channel.UserTypeAsync(username);
+        }
+        
+        public System.Threading.Tasks.Task CreateUserAsync(string username, string password, string profilePic, string cover, int userType) {
+            return base.Channel.CreateUserAsync(username, password, profilePic, cover, userType);
         }
         
         public System.Threading.Tasks.Task CreateIndividualAsync(string username, string password, string profilePic, string cover, string firstName, string midName, string lastName, System.DateTime dob, bool gender) {
@@ -1039,6 +1116,10 @@ namespace EVENeT.EVENeTServiceReference {
         
         public System.Threading.Tasks.Task<EVENeT.EVENeTServiceReference.GetIndividualResponse> GetIndividualAsync(EVENeT.EVENeTServiceReference.GetIndividualRequest request) {
             return base.Channel.GetIndividualAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<EVENeT.EVENeTServiceReference.GetOrganizationResponse> GetOrganizationAsync(EVENeT.EVENeTServiceReference.GetOrganizationRequest request) {
+            return base.Channel.GetOrganizationAsync(request);
         }
         
         public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<EVENeT.EVENeTServiceReference.getAllEventResult>> getAllEventAsync() {
@@ -1087,6 +1168,10 @@ namespace EVENeT.EVENeTServiceReference {
         
         public System.Threading.Tasks.Task<bool> RegisterTicketAsync(string username, string eventId) {
             return base.Channel.RegisterTicketAsync(username, eventId);
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<string>> GetOrganizationTypeAsync() {
+            return base.Channel.GetOrganizationTypeAsync();
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync() {

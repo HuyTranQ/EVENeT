@@ -26,6 +26,11 @@ namespace EVENeTWcfService
             return (bool)Data.isUserExisted(username);
         }
 
+        public void CreateUser(string username, string password, string profilePic, string cover, int userType)
+        {
+            Data.createUser(username, password, profilePic, cover, userType);
+        }
+
         public void CreateIndividual(string username, string password, string profilePic, string cover, string firstName, string midName, string lastName, DateTime dob, bool gender)
         {
             Data.createIndividual(username, password, profilePic, cover, firstName, midName, lastName, dob, gender);
@@ -45,6 +50,11 @@ namespace EVENeTWcfService
         public bool IndividualFullySetUp(string username)
         {
             return (bool)Data.isIndividualFullySetUp(username);
+        }
+
+        public bool OrganizationFullySetUp(string username)
+        {
+            return (bool)Data.isOrganizationFullySetUp(username);
         }
 
         public void SetIndividualInfo(string username, string firstName, string midName, string lastName, DateTime dob, bool gender)
@@ -133,6 +143,45 @@ namespace EVENeTWcfService
                 ProfilePic = "";
                 CoverPic = "";
             }
+        }
+
+        public void GetOrganization(string username, out string Name, out string Description, out string Type, out string Phone, out string Website, out string ProfilePic, out string CoverPic)
+        {
+            ISingleResult<getOrganizationResult> result1 = Data.getOrganization(username);
+            ISingleResult<getUserResult> result2 = Data.getUser(username);
+            if (result1 != null && result2 != null)
+            {
+                getOrganizationResult o = result1.First();
+                getUserResult u = result2.First();
+                Name = o.name;
+                Description = o.description;
+                Type = o.type;
+                Phone = o.phone;
+                Website = o.website;
+                ProfilePic = u.profilePicture;
+                CoverPic = u.coverPicture;
+            }
+            else
+            {
+                Name = "";
+                Description = "";
+                Type = "";
+                Phone = "";
+                Website = "";
+                ProfilePic = "";
+                CoverPic = "";
+            }
+        }
+
+        public List<string> GetOrganizationType()
+        {
+            var types = from t in Data.Types select t;
+            List<string> result = new List<string>();
+            foreach (Type t in types)
+            {
+                result.Add(t.name);
+            }
+            return result;
         }
 
         public IEnumerable<getAllEventResult> getAllEvent()

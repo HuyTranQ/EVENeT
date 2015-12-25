@@ -460,15 +460,6 @@
     <Parameter Name="location" Type="System.Int32" DbType="Int" />
     <Return Type="System.Int32" />
   </Function>
-  <Function Name="dbo.setIndividual" Method="setIndividual">
-    <Parameter Name="id" Type="System.String" DbType="VarChar(32)" />
-    <Parameter Name="firstName" Type="System.String" DbType="NVarChar(16)" />
-    <Parameter Name="midName" Type="System.String" DbType="NVarChar(16)" />
-    <Parameter Name="lastName" Type="System.String" DbType="NVarChar(16)" />
-    <Parameter Name="dob" Type="System.DateTime" DbType="Date" />
-    <Parameter Name="gender" Type="System.Boolean" DbType="Bit" />
-    <Return Type="System.Int32" />
-  </Function>
   <Function Name="dbo.setLocation" Method="setLocation">
     <Parameter Name="id" Type="System.Int32" DbType="Int" />
     <Parameter Name="name" Type="System.String" DbType="NVarChar(32)" />
@@ -477,15 +468,6 @@
     <Parameter Name="latitude" Type="System.Double" DbType="Float" />
     <Parameter Name="longitude" Type="System.Double" DbType="Float" />
     <Parameter Name="thumbnail" Type="System.String" DbType="VarChar(256)" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.setOrganization" Method="setOrganization">
-    <Parameter Name="id" Type="System.String" DbType="VarChar(32)" />
-    <Parameter Name="name" Type="System.String" DbType="NVarChar(64)" />
-    <Parameter Name="description" Type="System.String" DbType="NVarChar(1024)" />
-    <Parameter Name="type" Type="System.String" DbType="NVarChar(32)" />
-    <Parameter Name="phone" Type="System.String" DbType="VarChar(16)" />
-    <Parameter Name="website" Type="System.String" DbType="VarChar(256)" />
     <Return Type="System.Int32" />
   </Function>
   <Function Name="dbo.setPassword" Method="setPassword">
@@ -587,5 +569,38 @@
       <Column Name="Name" Type="System.String" DbType="NVarChar(64) NOT NULL" CanBeNull="false" />
       <Column Name="userType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </ElementType>
+  </Function>
+  <Function Name="dbo.getOrganization" Method="getOrganization">
+    <Parameter Name="id" Type="System.String" DbType="VarChar(32)" />
+    <ElementType Name="getOrganizationResult">
+      <Column Name="username" Type="System.String" DbType="VarChar(32) NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="NVarChar(64) NOT NULL" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="type" Type="System.String" DbType="NVarChar(32) NOT NULL" CanBeNull="false" />
+      <Column Name="phone" Type="System.String" DbType="VarChar(16)" CanBeNull="true" />
+      <Column Name="website" Type="System.String" DbType="VarChar(256)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.isOrganizationFullySetUp" Method="isOrganizationFullySetUp" IsComposable="true">
+    <Parameter Name="username" Type="System.String" DbType="VarChar(32)" />
+    <Return Type="System.Boolean" />
+  </Function>
+  <Function Name="dbo.setIndividual" Method="setIndividual">
+    <Parameter Name="id" Type="System.String" DbType="VarChar(32)" />
+    <Parameter Name="firstName" Type="System.String" DbType="NVarChar(16)" />
+    <Parameter Name="midName" Type="System.String" DbType="NVarChar(16)" />
+    <Parameter Name="lastName" Type="System.String" DbType="NVarChar(16)" />
+    <Parameter Name="dob" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="gender" Type="System.Boolean" DbType="Bit" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.setOrganization" Method="setOrganization">
+    <Parameter Name="id" Type="System.String" DbType="VarChar(32)" />
+    <Parameter Name="name" Type="System.String" DbType="NVarChar(64)" />
+    <Parameter Name="description" Type="System.String" DbType="NVarChar(1024)" />
+    <Parameter Name="type" Type="System.String" DbType="NVarChar(32)" />
+    <Parameter Name="phone" Type="System.String" DbType="VarChar(16)" />
+    <Parameter Name="website" Type="System.String" DbType="VarChar(256)" />
+    <Return Type="System.Int32" />
   </Function>
 </Database>

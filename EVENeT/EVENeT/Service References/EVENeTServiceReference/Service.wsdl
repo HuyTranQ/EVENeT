@@ -26,6 +26,12 @@
   <wsdl:message name="IService_IndividualFullySetUp_OutputMessage">
     <wsdl:part name="parameters" element="tns:IndividualFullySetUpResponse" />
   </wsdl:message>
+  <wsdl:message name="IService_OrganizationFullySetUp_InputMessage">
+    <wsdl:part name="parameters" element="tns:OrganizationFullySetUp" />
+  </wsdl:message>
+  <wsdl:message name="IService_OrganizationFullySetUp_OutputMessage">
+    <wsdl:part name="parameters" element="tns:OrganizationFullySetUpResponse" />
+  </wsdl:message>
   <wsdl:message name="IService_SetIndividualInfo_InputMessage">
     <wsdl:part name="parameters" element="tns:SetIndividualInfo" />
   </wsdl:message>
@@ -55,6 +61,12 @@
   </wsdl:message>
   <wsdl:message name="IService_UserType_OutputMessage">
     <wsdl:part name="parameters" element="tns:UserTypeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_CreateUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateUser" />
+  </wsdl:message>
+  <wsdl:message name="IService_CreateUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateUserResponse" />
   </wsdl:message>
   <wsdl:message name="IService_CreateIndividual_InputMessage">
     <wsdl:part name="parameters" element="tns:CreateIndividual" />
@@ -91,6 +103,12 @@
   </wsdl:message>
   <wsdl:message name="IService_GetIndividual_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetIndividualResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetOrganization_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrganization" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetOrganization_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrganizationResponse" />
   </wsdl:message>
   <wsdl:message name="IService_getAllEvent_InputMessage">
     <wsdl:part name="parameters" element="tns:getAllEvent" />
@@ -164,6 +182,12 @@
   <wsdl:message name="IService_RegisterTicket_OutputMessage">
     <wsdl:part name="parameters" element="tns:RegisterTicketResponse" />
   </wsdl:message>
+  <wsdl:message name="IService_GetOrganizationType_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrganizationType" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetOrganizationType_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrganizationTypeResponse" />
+  </wsdl:message>
   <wsdl:portType name="IService">
     <wsdl:operation name="UsernameExists">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/UsernameExists" message="tns:IService_UsernameExists_InputMessage" />
@@ -176,6 +200,10 @@
     <wsdl:operation name="IndividualFullySetUp">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/IndividualFullySetUp" message="tns:IService_IndividualFullySetUp_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService/IndividualFullySetUpResponse" message="tns:IService_IndividualFullySetUp_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="OrganizationFullySetUp">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/OrganizationFullySetUp" message="tns:IService_OrganizationFullySetUp_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/OrganizationFullySetUpResponse" message="tns:IService_OrganizationFullySetUp_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="SetIndividualInfo">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/SetIndividualInfo" message="tns:IService_SetIndividualInfo_InputMessage" />
@@ -196,6 +224,10 @@
     <wsdl:operation name="UserType">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/UserType" message="tns:IService_UserType_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService/UserTypeResponse" message="tns:IService_UserType_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/CreateUser" message="tns:IService_CreateUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/CreateUserResponse" message="tns:IService_CreateUser_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="CreateIndividual">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/CreateIndividual" message="tns:IService_CreateIndividual_InputMessage" />
@@ -220,6 +252,10 @@
     <wsdl:operation name="GetIndividual">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/GetIndividual" message="tns:IService_GetIndividual_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService/GetIndividualResponse" message="tns:IService_GetIndividual_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrganization">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/GetOrganization" message="tns:IService_GetOrganization_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/GetOrganizationResponse" message="tns:IService_GetOrganization_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="getAllEvent">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/getAllEvent" message="tns:IService_getAllEvent_InputMessage" />
@@ -269,6 +305,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IService/RegisterTicket" message="tns:IService_RegisterTicket_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService/RegisterTicketResponse" message="tns:IService_RegisterTicket_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="GetOrganizationType">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/GetOrganizationType" message="tns:IService_GetOrganizationType_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/GetOrganizationTypeResponse" message="tns:IService_GetOrganizationType_OutputMessage" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IService" type="tns:IService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -292,6 +332,15 @@
     </wsdl:operation>
     <wsdl:operation name="IndividualFullySetUp">
       <soap:operation soapAction="http://tempuri.org/IService/IndividualFullySetUp" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OrganizationFullySetUp">
+      <soap:operation soapAction="http://tempuri.org/IService/OrganizationFullySetUp" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -337,6 +386,15 @@
     </wsdl:operation>
     <wsdl:operation name="UserType">
       <soap:operation soapAction="http://tempuri.org/IService/UserType" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateUser">
+      <soap:operation soapAction="http://tempuri.org/IService/CreateUser" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -391,6 +449,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetIndividual">
       <soap:operation soapAction="http://tempuri.org/IService/GetIndividual" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrganization">
+      <soap:operation soapAction="http://tempuri.org/IService/GetOrganization" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -499,6 +566,15 @@
     </wsdl:operation>
     <wsdl:operation name="RegisterTicket">
       <soap:operation soapAction="http://tempuri.org/IService/RegisterTicket" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrganizationType">
+      <soap:operation soapAction="http://tempuri.org/IService/GetOrganizationType" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

@@ -48,11 +48,12 @@ namespace EVENeT
                     localSettings.Values["Remember"] = "Checked";
                 }
 
-                if (await DatabaseHelper.Client.IndividualFullySetUpAsync(userName.Text))
-                    frame.Navigate(typeof(AccountSetUpPage), userName.Text);
+                if ((await DatabaseHelper.Client.IndividualFullySetUpAsync(userName.Text) && DatabaseHelper.CurrentUserType == 1) ||
+                    (await DatabaseHelper.Client.OrganizationFullySetUpAsync(userName.Text) && DatabaseHelper.CurrentUserType == 2))
+                    frame.Navigate(typeof(Navigation.AppShell));
                 else
                 {
-                    frame.Navigate(typeof(Navigation.AppShell));
+                    frame.Navigate(typeof(AccountSetUpPage), userName.Text);
                 }
                 Window.Current.Activate();
             }
@@ -74,9 +75,9 @@ namespace EVENeT
                 ComboBox dialogUserType = ((ComboBox)dialog.FindName("userType"));
 
                 if (dialogUserType.SelectedIndex == 0)
-                    await DatabaseHelper.Client.CreateIndividualAsync(dialogUsername.Text, dialogPassword.Password, "", "", "", "", "", new DateTime(1900, 1, 1), false);
+                    await DatabaseHelper.Client.CreateUserAsync(dialogUsername.Text, dialogPassword.Password, "", "", 1);
                 else
-                    await DatabaseHelper.Client.CreateOrganizationAsync(dialogUsername.Text, dialogPassword.Password, "", "", "", "", "", "", "");
+                    await DatabaseHelper.Client.CreateUserAsync(dialogUsername.Text, dialogPassword.Password, "", "", 2);
 
                 var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
                 var check = localSettings.Values["Autologin"] = "false";
@@ -108,14 +109,17 @@ namespace EVENeT
 
                 string sUsername = localSettings.Values["Username"].ToString();
                 string sPassword = localSettings.Values["Password"].ToString();
+                DatabaseHelper.CurrentUserType = await DatabaseHelper.Client.UserTypeAsync(sUsername);
+
                 DatabaseHelper.CurrentUser = sUsername;
                 if (await DatabaseHelper.Client.CorrectUserNameAndPasswordAsync(sUsername, sPassword))
                 {
                     Frame frame = Window.Current.Content as Frame;
-                    if (await DatabaseHelper.Client.IndividualFullySetUpAsync(sUsername))
-                        frame.Navigate(typeof(AccountSetUpPage), sUsername);
-                    else
+                    if ((await DatabaseHelper.Client.IndividualFullySetUpAsync(sUsername) && DatabaseHelper.CurrentUserType == 1) ||
+                        (await DatabaseHelper.Client.OrganizationFullySetUpAsync(sUsername) && DatabaseHelper.CurrentUserType == 2))
                         frame.Navigate(typeof(Navigation.AppShell));
+                    else
+                        frame.Navigate(typeof(AccountSetUpPage), sUsername);
                     Window.Current.Activate();
                 }
                 else
@@ -126,6 +130,18 @@ namespace EVENeT
                 }
                 loading.Visibility = Visibility.Collapsed;
             }
+        }
+
+        private void remember_Checked(object sender, RoutedEventArgs e)
+        {
+            var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+            localSettings.Values["Remember"] = "Checked";
+        }
+
+        private void remember_Unchecked(object sender, RoutedEventArgs e)
+        {
+            var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+            localSettings.Values["Remember"] = "UnChecked";
         }
     }
 }

@@ -108,11 +108,11 @@
                         </GridView>
                     </StackPanel>
                 </PivotItem>
-                <PivotItem Header="Posts">
+                <!--<PivotItem Header="Posts">
                     <StackPanel>
                         <TextBlock Text="Posts" />
                     </StackPanel>
-                </PivotItem>
+                </PivotItem>-->
             </Pivot>
 
         </Grid>

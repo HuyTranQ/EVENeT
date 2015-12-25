@@ -50,7 +50,7 @@ namespace EVENeT
             get { return eventImages; }
         }
 
-        public TextBlock UserName
+        public HyperlinkButton UserName
         {
             get { return userName; }
         }
@@ -58,6 +58,11 @@ namespace EVENeT
         public RichEditBox EventDescription
         {
             get { return eventDescription; }
+        }
+
+        public HyperlinkButton MoreDetail
+        {
+            get { return moreDetail; }
         }
 
         public int EventId { get; set; }

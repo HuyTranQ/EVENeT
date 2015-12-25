@@ -17,8 +17,8 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.Column="0" Margin="0,0,12,0">
-            <Border x:Name="userAvatar" CornerRadius="5" BorderThickness="1" BorderBrush="LightGray"
+        <Grid Grid.Column="0" Margin="0,0,12,0" x:Name="UserAvatarGrid">
+            <Border CornerRadius="5" BorderThickness="1" BorderBrush="LightGray"
                     Width="96" Height="96" VerticalAlignment="Top" Grid.Row="0" Grid.RowSpan="2">
                 <Border.Background>
                     <ImageBrush x:Name="avatarImage" Stretch="UniformToFill"/>
@@ -27,36 +27,29 @@
 
         </Grid>
 
-        <Grid Grid.Column="1">
+        <Grid Grid.Column="1" x:Name="EventGrid">
             <Border CornerRadius="5" BorderThickness="1" BorderBrush="LightGray" Background="#FFF9F9F9" Grid.Row="0" Grid.RowSpan="2">
-                <Grid Background="Transparent">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-
-                    <TextBlock x:Name="userName" FontSize="18" FontWeight="SemiBold"
-                          IsHitTestVisible="false" TextWrapping="NoWrap" Margin="16,16,16,0" Height="24" Grid.Row="0"/>
-                    <StackPanel Orientation="Horizontal" Grid.Row="1">
+                <StackPanel Orientation="Vertical">
+                    <HyperlinkButton x:Name="userName" FontWeight="SemiBold" Foreground="DarkBlue"
+                                         Margin="16,16,16,0" Height="Auto"/>
+                    <StackPanel Orientation="Horizontal">
                         <TextBlock Text="&#xE163;" FontFamily="Segoe MDL2 Assets" FontSize="24" VerticalAlignment="Center"
-                                       Margin="16,16,16,16"/>
+                                   Margin="16,8,16,16"/>
                         <ContentPresenter x:Name="eventDate" Content="{x:Bind EventDate, Mode=OneWay}" FontSize="16" FontWeight="Light"
-                                              IsHitTestVisible="false" TextWrapping="NoWrap" Margin="0,16,16,16" Height="24" VerticalContentAlignment="Center"/>
+                                          IsHitTestVisible="false" TextWrapping="NoWrap" Margin="0,8,16,16" Height="24" VerticalContentAlignment="Center"/>
                         <TextBlock Text="&#xE121;" FontFamily="Segoe MDL2 Assets" FontSize="24" VerticalAlignment="Center"
-                                       Margin="16,16,16,16"/>
+                                   Margin="16,8,16,16"/>
                         <ContentPresenter x:Name="eventTime" Content="{x:Bind EventTime,Mode=OneWay}" FontSize="16" FontWeight="Light"
-                                              IsHitTestVisible="false" TextWrapping="NoWrap" Margin="0,16,16,16" Height="24" VerticalContentAlignment="Center"/>
+                                          IsHitTestVisible="false" TextWrapping="NoWrap" Margin="0,8,16,16" Height="24" VerticalContentAlignment="Center"/>
                     </StackPanel>
-                    <Image x:Name="eventImages" Stretch="UniformToFill" MaxHeight="300" Grid.Row="2"/>
+                    <Image x:Name="eventImages" Stretch="UniformToFill" MaxHeight="300"/>
                     <ContentPresenter x:Name="eventTitle" Content="{x:Bind EventTitle, Mode=OneWay}" FontSize="26" FontWeight="Light"
-                                      IsHitTestVisible="false" TextWrapping="Wrap" Margin="16,8,16,0" Height="Auto" VerticalContentAlignment="Center" Grid.Row="3"/>
+                                      IsHitTestVisible="false" TextWrapping="Wrap" Margin="16,8,16,0" Height="Auto" VerticalContentAlignment="Center"/>
                     <RichEditBox x:Name="eventDescription" FontSize="16"
-                                 IsHitTestVisible="false" TextWrapping="Wrap" Margin="16,16,16,0" Height="Auto" VerticalContentAlignment="Center" Grid.Row="4"
-                                 Style="{StaticResource NormalDisabled}" IsEnabled="False"/>
-                </Grid>
+                                     IsHitTestVisible="false" TextWrapping="Wrap" Margin="16,16,16,0" MaxHeight="108" VerticalContentAlignment="Center"
+                                     Style="{StaticResource NormalDisabled}" IsEnabled="False"/>
+                    <HyperlinkButton x:Name="moreDetail" Content="More Detail" HorizontalAlignment="Right" Margin="16,0,16,16"/>
+                </StackPanel>
             </Border>
         </Grid>
     </Grid>

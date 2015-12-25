@@ -158,6 +158,12 @@
   <wsdl:message name="IService_GetUser_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetUserResponse" />
   </wsdl:message>
+  <wsdl:message name="IService_RegisterTicket_InputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterTicket" />
+  </wsdl:message>
+  <wsdl:message name="IService_RegisterTicket_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterTicketResponse" />
+  </wsdl:message>
   <wsdl:portType name="IService">
     <wsdl:operation name="UsernameExists">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/UsernameExists" message="tns:IService_UsernameExists_InputMessage" />
@@ -258,6 +264,10 @@
     <wsdl:operation name="GetUser">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/GetUser" message="tns:IService_GetUser_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService/GetUserResponse" message="tns:IService_GetUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RegisterTicket">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/RegisterTicket" message="tns:IService_RegisterTicket_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/RegisterTicketResponse" message="tns:IService_RegisterTicket_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IService" type="tns:IService">
@@ -480,6 +490,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetUser">
       <soap:operation soapAction="http://tempuri.org/IService/GetUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegisterTicket">
+      <soap:operation soapAction="http://tempuri.org/IService/RegisterTicket" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

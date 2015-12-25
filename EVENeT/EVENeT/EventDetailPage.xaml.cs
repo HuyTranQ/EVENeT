@@ -19,6 +19,10 @@ using Windows.UI.Xaml.Documents;
 using Windows.UI.Text;
 using Windows.Devices.Geolocation;
 using Windows.UI.Xaml.Controls.Maps;
+using Windows.Storage;
+using Windows.UI.Xaml.Media.Imaging;
+using Windows.UI;
+using Windows.UI.Popups;
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace EVENeT
@@ -52,8 +56,26 @@ namespace EVENeT
             r.Text = _Event.username; // get the name instead of the username
             OrganizerName.Inlines.Add(r);
 
+            // Display thumbnail
+            if (!string.IsNullOrEmpty(_Event.thumbnail))
+            {
+                StorageFile file = await StorageFile.GetFileFromPathAsync(_Event.thumbnail);
+                BitmapImage bmp = new BitmapImage();
+                await bmp.SetSourceAsync(await file.OpenReadAsync());
+                EventThumbnail.Source = bmp;
+            }
+
             // Set descripiton
             EventDescription.Document.SetText(TextSetOptions.FormatRtf, _Event.description);
+
+            // Set number of tickets left
+            ticketLeft.Text = _Event.ticket + " left";
+            if (_Event.ticket == 0)
+            {
+                ticketType.Foreground = new SolidColorBrush(Colors.LightGray);
+                ticketLeft.Foreground = new SolidColorBrush(Colors.LightGray);
+                ticketRegister.IsEnabled = false;
+            }
 
             // Set location
             var location = await Client.GetLocationFromIdAsync(_Event.location);
@@ -89,6 +111,27 @@ namespace EVENeT
             CurrentEvent = eventId;
             getEvent();
             //   Debug.WriteLine(eventId.ToString());
+        }
+
+        private async void ticketRegister_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            bool check = await Client.RegisterTicketAsync("a", "a");
+            if (check)
+            {
+                MessageDialog dialog = new MessageDialog("Ticket registered successfully.", "Registered!");
+                await dialog.ShowAsync();
+
+                // Disable the register button
+                ticketRegister.IsEnabled = false;
+
+                // Update number of tickets left
+                ticketLeft.Text = " left";
+            }
+            else
+            {
+                MessageDialog dialog = new MessageDialog("An error has occured during registration.", "Error");
+                await dialog.ShowAsync();
+            }
         }
 
         //private void PivotItem_PointerWheelChanged(object sender, PointerRoutedEventArgs e)

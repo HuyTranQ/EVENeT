@@ -262,5 +262,10 @@ namespace EVENeTWcfService
         {
            return Data.getUser(username);
         }
+
+        public bool RegisterTicket(string username, string eventId)
+        {
+            return true;
+        }
     }
 }

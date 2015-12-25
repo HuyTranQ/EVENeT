@@ -45,17 +45,26 @@ namespace EVENeT
                 eventCard.EventTime = e.beginTime.ToString("hh:mm tt");
                 eventCard.EventDate = e.beginTime.ToString("MMM. dd, yyyy");
                 eventCard.EventDescription.Document.SetText(TextSetOptions.FormatRtf, e.description);
-                eventCard.Tapped += EventCard_Tapped;
+                //eventCard.Tapped += EventCard_Tapped;
                 eventCard.IsTapEnabled = true;
                 eventCard.EventId = e.id;
+
+                // Get poster's name and avatar
                 var request = new GetNameAndAvatarRequest(e.username);
                 var response = await DatabaseHelper.Client.GetNameAndAvatarAsync(request);
+
+                // Set poster avatar
                 StorageFile file = await StorageFile.GetFileFromPathAsync(response.Avatar);
                 BitmapImage bmp = new BitmapImage();
                 await bmp.SetSourceAsync(await file.OpenAsync(FileAccessMode.Read));
                 eventCard.AvatarImage.ImageSource = bmp;
-                eventCard.UserName.Text = response.Name;
-                eventCard.UserName.Tapped += (sender, args) => { Frame.Navigate(typeof(ProfilePage), e.username); };
+
+                // Set poster's name
+                eventCard.UserName.Content = response.Name;
+                eventCard.UserName.Click += (sender, args) => { Frame.Navigate(typeof(ProfilePage), e.username); };
+
+                // Set tapped event for the "More detail" hyperlink
+                eventCard.MoreDetail.Click += (sender, args) => { Frame.Navigate(typeof(EventDetailPage), e.id); };
 
                 if (e.thumbnail != "")
                 {

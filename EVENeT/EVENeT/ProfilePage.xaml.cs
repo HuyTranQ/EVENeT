@@ -127,7 +127,6 @@ namespace EVENeT
         private void PivotFollowing_Tapped(object sender, TappedRoutedEventArgs e)
         {
             
-            
         }
 
         private void StackPanel_RightTapped(object sender, RightTappedRoutedEventArgs e)
@@ -139,14 +138,16 @@ namespace EVENeT
 
         private void followingList_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            var listview = (sender as GridView).SelectedIndex;
-            Navigation.AppShell.RootFrame.Navigate(typeof(ProfilePage), followingListViewModel.users.ElementAt(listview).Username);
+            int listview = (sender as GridView).SelectedIndex;
+            if (listview >= 0)
+                Navigation.AppShell.RootFrame.Navigate(typeof(ProfilePage), followingListViewModel.users.ElementAt(listview).Username);
         }
 
         private void followerList_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            var listview = (sender as GridView).SelectedIndex;
-            Navigation.AppShell.RootFrame.Navigate(typeof(ProfilePage), followerListViewModel.users.ElementAt(listview).Username);
+            int listview = (sender as GridView).SelectedIndex;
+            if (listview >= 0)
+                Navigation.AppShell.RootFrame.Navigate(typeof(ProfilePage), followerListViewModel.users.ElementAt(listview).Username);
         }
 
         private void SettingBtn_Click(object sender, RoutedEventArgs e)

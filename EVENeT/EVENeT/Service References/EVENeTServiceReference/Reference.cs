@@ -801,6 +801,9 @@ namespace EVENeT.EVENeTServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetUser", ReplyAction="http://tempuri.org/IService/GetUserResponse")]
         System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<EVENeT.EVENeTServiceReference.getUserResult>> GetUserAsync(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/RegisterTicket", ReplyAction="http://tempuri.org/IService/RegisterTicketResponse")]
+        System.Threading.Tasks.Task<bool> RegisterTicketAsync(string username, string eventId);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -1080,6 +1083,10 @@ namespace EVENeT.EVENeTServiceReference {
         
         public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<EVENeT.EVENeTServiceReference.getUserResult>> GetUserAsync(string username) {
             return base.Channel.GetUserAsync(username);
+        }
+        
+        public System.Threading.Tasks.Task<bool> RegisterTicketAsync(string username, string eventId) {
+            return base.Channel.RegisterTicketAsync(username, eventId);
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync() {

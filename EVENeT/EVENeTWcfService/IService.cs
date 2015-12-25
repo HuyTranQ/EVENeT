@@ -86,5 +86,8 @@ namespace EVENeTWcfService
 
         [OperationContract]
         IEnumerable<getUserResult> GetUser(string username);
+
+        [OperationContract]
+        bool RegisterTicket(string username, string eventId);
     }
 }

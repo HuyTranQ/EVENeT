@@ -107,5 +107,10 @@ namespace EVENeT
                 this.MyEventInt = index;
             }
         }
+
+        private void eventsSearchBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
+        {
+            AppShell.RootFrame.Navigate(typeof(SearchResultPage), args.QueryText);
+        }
     }
 }

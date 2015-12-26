@@ -316,5 +316,15 @@ namespace EVENeTWcfService
         {
             return true;
         }
+
+        public IEnumerable<getUserFromNameResult> GetUsersByName(string name)
+        {
+            return Data.getUserFromName(name);
+        }
+
+        public IEnumerable<getEventFromNameResult> GetEventsByName(string name)
+        {
+            return Data.getEventFromName(name);
+        }
     }
 }

@@ -105,6 +105,9 @@
     <None Include="Service References\EVENeTServiceReference\EVENeT.EVENeTServiceReference.getEventFromIDResult.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\EVENeTServiceReference\EVENeT.EVENeTServiceReference.getEventFromNameResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\EVENeTServiceReference\EVENeT.EVENeTServiceReference.GetIndividualFollowingResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -118,6 +121,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\EVENeTServiceReference\EVENeT.EVENeTServiceReference.GetOrganizationResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\EVENeTServiceReference\EVENeT.EVENeTServiceReference.getUserFromNameResult.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\EVENeTServiceReference\EVENeT.EVENeTServiceReference.getUserResult.datasource">
@@ -161,8 +167,11 @@
       <DependentUpon>CreateEventPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="DatabaseHelper.cs" />
+    <Compile Include="DataModel\Event.cs" />
+    <Compile Include="DataModel\EventSearchResults.cs" />
     <Compile Include="DataModel\User.cs" />
     <Compile Include="DataModel\UserList.cs" />
+    <Compile Include="DataModel\UserSearchResults.cs" />
     <Compile Include="DisplayCard.xaml.cs">
       <DependentUpon>DisplayCard.xaml</DependentUpon>
     </Compile>
@@ -193,6 +202,9 @@
       <DependentUpon>ProfilePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SearchResultPage.xaml.cs">
+      <DependentUpon>SearchResultPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Service References\EVENeTServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -267,6 +279,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ProfilePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SearchResultPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

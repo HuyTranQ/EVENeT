@@ -36,7 +36,7 @@ namespace EVENeT.DataModel
         {
            StorageFile file = await StorageFile.GetFileFromPathAsync(avatar);
            ImageAvatar = new BitmapImage();
-            await ImageAvatar.SetSourceAsync(await file.OpenAsync(FileAccessMode.Read));
+           await ImageAvatar.SetSourceAsync(await file.OpenAsync(FileAccessMode.Read));
         }
     }
 }

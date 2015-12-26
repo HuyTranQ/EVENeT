@@ -1,0 +1,48 @@
+﻿<Page
+    x:Class="EVENeT.SearchResultPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:EVENeT"
+    xmlns:dataModel="using:EVENeT.DataModel"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <StackPanel Background="{ThemeResource PageBackgroundThemeBrush}">
+        <TextBlock FontSize="24" Text="Users" Margin="16,16,16,0" FontWeight="Light"/>
+        <GridView Margin="16"
+            Name="searchResultUsers"
+            IsTapEnabled="True"
+            ItemsSource="{ x:Bind SearchResult_Users.users }" Tapped="searchResultUsers_Tapped">
+            <GridView.ItemTemplate>
+                <DataTemplate x:DataType="dataModel:User">
+                    <StackPanel Background="White">
+                        <Image Width="136" Height="136" Stretch="UniformToFill"
+                               x:Name="AvatarBrush" Source="{x:Bind ImageAvatar, Mode=OneWay}"/>
+                        <TextBlock  Padding="8,8,8,8" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                    MaxWidth="120"
+                                    Name="username" Text="{x:Bind Name, Mode=OneWay}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+        </GridView>
+
+        <TextBlock FontSize="24" Text="Events" Margin="16,16,16,0" FontWeight="Light"/>
+        <GridView Margin="16"
+            Name="searchResultEvents"
+            IsTapEnabled="True"
+            ItemsSource="{ x:Bind SearchResult_Events.events }" Tapped="searchResultEvents_Tapped">
+            <GridView.ItemTemplate>
+                <DataTemplate x:DataType="dataModel:Event">
+                    <StackPanel Background="White">
+                        <Image Width="136" Height="136" Stretch="UniformToFill"
+                               x:Name="AvatarBrush" Source="{x:Bind ImageThumbnail, Mode=OneWay}"/>
+                        <TextBlock  Padding="8,8,8,8" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                    MaxWidth="120"
+                                    Name="username" Text="{x:Bind Title, Mode=OneWay}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+        </GridView>
+    </StackPanel>
+</Page>

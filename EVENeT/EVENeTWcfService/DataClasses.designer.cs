@@ -650,6 +650,20 @@ namespace EVENeTWcfService
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), id, name, description, type, phone, website);
 			return ((int)(result.ReturnValue));
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getEventFromName")]
+		public ISingleResult<getEventFromNameResult> getEventFromName([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(128)")] string name)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), name);
+			return ((ISingleResult<getEventFromNameResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getUserFromName")]
+		public ISingleResult<getUserFromNameResult> getUserFromName([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(64)")] string name)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), name);
+			return ((ISingleResult<getUserFromNameResult>)(result.ReturnValue));
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Admin")]
@@ -5929,6 +5943,130 @@ namespace EVENeTWcfService
 				if ((this._website != value))
 				{
 					this._website = value;
+				}
+			}
+		}
+	}
+	
+	public partial class getEventFromNameResult
+	{
+		
+		private int _id;
+		
+		private string _title;
+		
+		private string _thumbnail;
+		
+		public getEventFromNameResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL")]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this._id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="NVarChar(128) NOT NULL", CanBeNull=false)]
+		public string title
+		{
+			get
+			{
+				return this._title;
+			}
+			set
+			{
+				if ((this._title != value))
+				{
+					this._title = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_thumbnail", DbType="VarChar(256)")]
+		public string thumbnail
+		{
+			get
+			{
+				return this._thumbnail;
+			}
+			set
+			{
+				if ((this._thumbnail != value))
+				{
+					this._thumbnail = value;
+				}
+			}
+		}
+	}
+	
+	public partial class getUserFromNameResult
+	{
+		
+		private string _username;
+		
+		private string _profilePicture;
+		
+		private string _Name;
+		
+		public getUserFromNameResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_username", DbType="VarChar(32) NOT NULL", CanBeNull=false)]
+		public string username
+		{
+			get
+			{
+				return this._username;
+			}
+			set
+			{
+				if ((this._username != value))
+				{
+					this._username = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_profilePicture", DbType="VarChar(256)")]
+		public string profilePicture
+		{
+			get
+			{
+				return this._profilePicture;
+			}
+			set
+			{
+				if ((this._profilePicture != value))
+				{
+					this._profilePicture = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(64) NOT NULL", CanBeNull=false)]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this._Name = value;
 				}
 			}
 		}

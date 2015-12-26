@@ -603,4 +603,20 @@
     <Parameter Name="website" Type="System.String" DbType="VarChar(256)" />
     <Return Type="System.Int32" />
   </Function>
+  <Function Name="dbo.getEventFromName" Method="getEventFromName">
+    <Parameter Name="name" Type="System.String" DbType="NVarChar(128)" />
+    <ElementType Name="getEventFromNameResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
+      <Column Name="thumbnail" Type="System.String" DbType="VarChar(256)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.getUserFromName" Method="getUserFromName">
+    <Parameter Name="name" Type="System.String" DbType="NVarChar(64)" />
+    <ElementType Name="getUserFromNameResult">
+      <Column Name="username" Type="System.String" DbType="VarChar(32) NOT NULL" CanBeNull="false" />
+      <Column Name="profilePicture" Type="System.String" DbType="VarChar(256)" CanBeNull="true" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(64) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
 </Database>

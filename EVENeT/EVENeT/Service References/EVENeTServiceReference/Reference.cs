@@ -720,6 +720,126 @@ namespace EVENeT.EVENeTServiceReference {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="getUserFromNameResult", Namespace="http://schemas.datacontract.org/2004/07/EVENeTWcfService")]
+    public partial class getUserFromNameResult : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string NameField;
+        
+        private string profilePictureField;
+        
+        private string usernameField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string profilePicture {
+            get {
+                return this.profilePictureField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.profilePictureField, value) != true)) {
+                    this.profilePictureField = value;
+                    this.RaisePropertyChanged("profilePicture");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string username {
+            get {
+                return this.usernameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.usernameField, value) != true)) {
+                    this.usernameField = value;
+                    this.RaisePropertyChanged("username");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="getEventFromNameResult", Namespace="http://schemas.datacontract.org/2004/07/EVENeTWcfService")]
+    public partial class getEventFromNameResult : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private int idField;
+        
+        private string thumbnailField;
+        
+        private string titleField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int id {
+            get {
+                return this.idField;
+            }
+            set {
+                if ((this.idField.Equals(value) != true)) {
+                    this.idField = value;
+                    this.RaisePropertyChanged("id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string thumbnail {
+            get {
+                return this.thumbnailField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.thumbnailField, value) != true)) {
+                    this.thumbnailField = value;
+                    this.RaisePropertyChanged("thumbnail");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string title {
+            get {
+                return this.titleField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.titleField, value) != true)) {
+                    this.titleField = value;
+                    this.RaisePropertyChanged("title");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="EVENeTServiceReference.IService")]
     public interface IService {
@@ -817,6 +937,12 @@ namespace EVENeT.EVENeTServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetOrganizationType", ReplyAction="http://tempuri.org/IService/GetOrganizationTypeResponse")]
         System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<string>> GetOrganizationTypeAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetUsersByName", ReplyAction="http://tempuri.org/IService/GetUsersByNameResponse")]
+        System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<EVENeT.EVENeTServiceReference.getUserFromNameResult>> GetUsersByNameAsync(string name);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetEventsByName", ReplyAction="http://tempuri.org/IService/GetEventsByNameResponse")]
+        System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<EVENeT.EVENeTServiceReference.getEventFromNameResult>> GetEventsByNameAsync(string name);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -1172,6 +1298,14 @@ namespace EVENeT.EVENeTServiceReference {
         
         public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<string>> GetOrganizationTypeAsync() {
             return base.Channel.GetOrganizationTypeAsync();
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<EVENeT.EVENeTServiceReference.getUserFromNameResult>> GetUsersByNameAsync(string name) {
+            return base.Channel.GetUsersByNameAsync(name);
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<EVENeT.EVENeTServiceReference.getEventFromNameResult>> GetEventsByNameAsync(string name) {
+            return base.Channel.GetEventsByNameAsync(name);
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync() {

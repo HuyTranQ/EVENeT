@@ -14,7 +14,7 @@
         </Grid.RowDefinitions>
         <ScrollViewer>
         <StackPanel Margin="15,0,30,0">
-                <TextBox x:Name="userName" IsEnabled="False"  Header="Email" Margin="0,16,0,8" TextChanged="userName_TextChanged" LostFocus="userName_LostFocus" IsSpellCheckEnabled="False"/>
+                <!--<TextBox x:Name="userName" IsEnabled="False"  Header="Email" Margin="0,16,0,8" TextChanged="userName_TextChanged" LostFocus="userName_LostFocus" IsSpellCheckEnabled="False"/>
 
                 <PasswordBox x:Name="password" IsEnabled="False" Header="Password" Margin="0,0,0,8" PasswordChanged="password_PasswordChanged">
                 </PasswordBox>
@@ -22,7 +22,7 @@
                 <ComboBox x:Name="userType" Header="User type" SelectedIndex="0" HorizontalAlignment="Stretch" Margin="0,0,0,8">
                 <x:String>Individual</x:String>
                 <x:String>Organization</x:String>
-            </ComboBox>
+            </ComboBox>-->
 
             <StackPanel x:Name="IndividualPanel">
                 <!-- Personal Information -->
@@ -70,9 +70,9 @@
                     <!-- Company Profile Photo -->
                     <StackPanel Margin="0,0,0,32">
                         <TextBlock Text="Company Profile Photo" FontSize="24" FontWeight="Light" Margin="0,0,0,16"/>
-                        <Button x:Name="ChooseCompLogoBtn" Content="Choose your logo" Click="ChooseCompLogoBtn_Click"/>
+                        <Button x:Name="ChooseCompLogoBtn" Content="Choose your logo"/>
                         <Image x:Name="CompLogo" Width="300" Height="300" HorizontalAlignment="Left"/>
-                        <Button x:Name="ChooseCompCoverBtn" Content="Choose your company's cover photo" Click="ChooseCompCoverBtn_Click"/>
+                        <Button x:Name="ChooseCompCoverBtn" Content="Choose your company's cover photo"/>
                         <Image x:Name="CompCover" Height="300" HorizontalAlignment="Left"/>
                         <!-- Interests -->
                     </StackPanel>

@@ -79,7 +79,8 @@
                                     <StackPanel Background="White">
                                         <Image Width="136" Height="136" Stretch="UniformToFill"
                                                x:Name="AvatarBrush" Source="{x:Bind ImageAvatar, Mode=OneWay}"/>
-                                        <TextBlock  Padding="16,8,16,8" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                        <TextBlock  Padding="8,8,16,8" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                                    MaxWidth="120"
                                                     Name="username" Text="{x:Bind Name, Mode=OneWay}"/>
                                     </StackPanel>
                                 </DataTemplate>
@@ -101,6 +102,7 @@
                                         <Image Width="136" Height="136" Stretch="UniformToFill"
                                                x:Name="AvatarBrush" Source="{x:Bind ImageAvatar, Mode=OneWay}"/>
                                         <TextBlock  Padding="8,8,8,8" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                                    MaxWidth="120"
                                                     Name="username" Text="{x:Bind Name, Mode=OneWay}"/>
                                     </StackPanel>
                                 </DataTemplate>

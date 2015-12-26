@@ -188,6 +188,18 @@
   <wsdl:message name="IService_GetOrganizationType_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetOrganizationTypeResponse" />
   </wsdl:message>
+  <wsdl:message name="IService_GetUsersByName_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUsersByName" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetUsersByName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUsersByNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetEventsByName_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetEventsByName" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetEventsByName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetEventsByNameResponse" />
+  </wsdl:message>
   <wsdl:portType name="IService">
     <wsdl:operation name="UsernameExists">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/UsernameExists" message="tns:IService_UsernameExists_InputMessage" />
@@ -308,6 +320,14 @@
     <wsdl:operation name="GetOrganizationType">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/GetOrganizationType" message="tns:IService_GetOrganizationType_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService/GetOrganizationTypeResponse" message="tns:IService_GetOrganizationType_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUsersByName">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/GetUsersByName" message="tns:IService_GetUsersByName_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/GetUsersByNameResponse" message="tns:IService_GetUsersByName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEventsByName">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/GetEventsByName" message="tns:IService_GetEventsByName_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/GetEventsByNameResponse" message="tns:IService_GetEventsByName_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IService" type="tns:IService">
@@ -575,6 +595,24 @@
     </wsdl:operation>
     <wsdl:operation name="GetOrganizationType">
       <soap:operation soapAction="http://tempuri.org/IService/GetOrganizationType" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUsersByName">
+      <soap:operation soapAction="http://tempuri.org/IService/GetUsersByName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEventsByName">
+      <soap:operation soapAction="http://tempuri.org/IService/GetEventsByName" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

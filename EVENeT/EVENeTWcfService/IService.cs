@@ -101,5 +101,11 @@ namespace EVENeTWcfService
 
         [OperationContract]
         List<string> GetOrganizationType();
+
+        [OperationContract]
+        IEnumerable<getUserFromNameResult> GetUsersByName(string name);
+
+        [OperationContract]
+        IEnumerable<getEventFromNameResult> GetEventsByName(string name);
     }
 }

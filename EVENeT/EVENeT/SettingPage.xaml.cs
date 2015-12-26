@@ -187,86 +187,10 @@ namespace EVENeT
                 errorName = "Last name cannot be empty!";
         }
 
-        private async void ChooseAvatarBtn_Click(object sender, RoutedEventArgs e)
-        {
-            FileOpenPicker openPicker = new FileOpenPicker();
-            openPicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
-            openPicker.FileTypeFilter.Add(".png");
-            openPicker.FileTypeFilter.Add(".jpg");
-            openPicker.FileTypeFilter.Add(".bmp");
-
-            StorageFile file = await openPicker.PickSingleFileAsync();
-            profile = file.Path;
-            // Some magic, because I can only display the files directly on computer
-            if (file != null)
-            {
-                BitmapImage image = new BitmapImage();
-                await image.SetSourceAsync(await file.OpenAsync(FileAccessMode.Read));
-                indAvatar.Source = image;
-            }
-        }
-
-        private async void ChooseCoverBtn_Click(object sender, RoutedEventArgs e)
-        {
-            FileOpenPicker openPicker = new FileOpenPicker();
-            openPicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
-            openPicker.FileTypeFilter.Add(".png");
-            openPicker.FileTypeFilter.Add(".jpg");
-            openPicker.FileTypeFilter.Add(".bmp");
-
-            StorageFile file = await openPicker.PickSingleFileAsync();
-            cover = file.Path;
-            // Some magic, because I can only display the files directly on computer
-            if (file != null)
-            {
-                BitmapImage image = new BitmapImage();
-                await image.SetSourceAsync(await file.OpenAsync(FileAccessMode.Read));
-                indCover.Source = image;
-            }
-        }
-
-        private async void ChooseCompLogoBtn_Click(object sender, RoutedEventArgs e)
-        {
-            FileOpenPicker openPicker = new FileOpenPicker();
-            openPicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
-            openPicker.FileTypeFilter.Add(".png");
-            openPicker.FileTypeFilter.Add(".jpg");
-            openPicker.FileTypeFilter.Add(".bmp");
-
-            StorageFile file = await openPicker.PickSingleFileAsync();
-            profile = file.Path;
-            // Some magic, because I can only display the files directly on computer
-            if (file != null)
-            {
-                BitmapImage image = new BitmapImage();
-                await image.SetSourceAsync(await file.OpenAsync(FileAccessMode.Read));
-                CompLogo.Source = image;
-            }
-        }
-
-        private async void ChooseCompCoverBtn_Click(object sender, RoutedEventArgs e)
-        {
-            FileOpenPicker openPicker = new FileOpenPicker();
-            openPicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
-            openPicker.FileTypeFilter.Add(".png");
-            openPicker.FileTypeFilter.Add(".jpg");
-            openPicker.FileTypeFilter.Add(".bmp");
-
-            StorageFile file = await openPicker.PickSingleFileAsync();
-            cover = file.Path;
-            // Some magic, because I can only display the files directly on computer
-            if (file != null)
-            {
-                BitmapImage image = new BitmapImage();
-                await image.SetSourceAsync(await file.OpenAsync(FileAccessMode.Read));
-                CompCover.Source = image;
-            }
-        }
-
         private async Task setIndividualValue(GetIndividualResponse r, getUserResult user)
         {
-            userName.Text = DatabaseHelper.CurrentUser;
-            password.Password = user.password;
+            //userName.Text = DatabaseHelper.CurrentUser;
+            //password.Password = user.password;
             FirstNameTbx.Text = r.FirstName;
             MidNameTbx.Text = r.MiddleName;
             LastnameTbx.Text = r.LastName;

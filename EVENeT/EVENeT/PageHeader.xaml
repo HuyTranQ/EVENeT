@@ -59,7 +59,7 @@
                         PlaceholderText="Events, people, or categories"
                         QueryIcon="Find"
                         RelativePanel.AlignRightWithPanel="True"
-                        RequestedTheme="Light"/>
+                        RequestedTheme="Light" QuerySubmitted="eventsSearchBox_QuerySubmitted"/>
 
     </RelativePanel>
 </UserControl>
